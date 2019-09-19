@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.ejo.petwalk.dao.SitterMapper">
+
+ <update id="updateSitter" parameterType="SitterVO">
+       	UPDATE sitter_tb
+		SET st_pw=#{st_pw}, st_email=#{st_email}, st_lineid=#{st_lineid}, st_loc1=#{st_loc1}, st_loc2=#{st_loc2}, st_info=#{st_info}
+		WHERE st_id=#{st_id}
+ </update>
+ 
+ <select id="selectOneSitter" parameterType="SitterVO" resultType="SitterVO">
+   	    SELECT *
+		FROM sitter_tb
+		WHERE st_id=#{st_id}
+ </select>
+ 
+  <select id="selectSitter" parameterType="SitterVO" resultType="SitterVO">
+       SELECT *
+		FROM sitter_tb
+		WHERE st_id=#{st_id}
+		AND st_pw=#{st_pw}
+ </select>
+
+ 
+<!--  Manager이 모든 시터의 목록을 가져오게 하는 것 -->
+ <select id="selectAllSitter" resultType="SitterVO">
+ 		SELECT * FROM sitter_tb;
+ </select>
+ 
+ <insert id="insertSitterImage" parameterType="FileVO">
+		INSERT INTO file_tb (file_sav,file_org,file_type,file_no)
+		VALUE(
+			#{file_sav},
+			#{file_org},
+			#{file_type},
+			#{file_no}
+		)
+ </insert>
+ 
+
+</mapper>
