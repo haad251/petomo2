@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ejo.petwalk.service.AwsS3Service;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
+import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -32,38 +33,42 @@ public class SitterController {
 		sitter.setSt_id("st1");
 		sitter.setSt_pw("st1");
 		SitterVO result = null;
-		try {
-			result = ssv.selectSitter(sitter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result = ssv.selectSitter(sitter);
 		session.setAttribute("loginId",result.getSt_id());
+		return "redirect:/home";
+	}
+	
+	@RequestMapping(value="/signupsitter")
+	public void signupsitter(){ 
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/sitterSignup" , method = RequestMethod.POST)
+	public String sitterSignup (HttpSession session,Model model,SitterVO sitter) throws Exception{
+		System.out.println(sitter);
+		int result = ssv.insertSitter(sitter);
+		if(result == 1) {
+			session.setAttribute("loginid", sitter.getSt_id());
+		}
 		return "home";
 	}
 	
 	
 	@RequestMapping(value="/goSitterInfoModi", method=RequestMethod.GET)
 	public String goSitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
-		try {
-			sitter = ssv.selectOneSitter(sitter);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
 		model.addAttribute("sitter",sitter);
 		return "sitterInfoModi";
 	}
 	
 	@RequestMapping(value="/goSitterList", method=RequestMethod.GET)
 	public String goSitterList(Model model){ 
-		List<SitterVO> result = null;
-		try {
-			result = ssv.selectAllSitter();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		List<SitterVO> result = ssv.selectAllSitter();
 		model.addAttribute("result", result);
-		
 		return "sitterList";
 	}
 	
@@ -72,8 +77,6 @@ public class SitterController {
 	public String updateSitter(SitterVO sitter,MultipartFile uploadfile) throws IOException{ 
 		try {
 			ssv.updateSitter(sitter);
-			System.out.println(sitter);
-			
 			
 			if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
 				String file_org = uploadfile.getOriginalFilename();
@@ -96,17 +99,7 @@ public class SitterController {
 		
 	@RequestMapping(value="/goSitterDetail", method=RequestMethod.GET)
 	public String goSitterDetail(SitterVO st_id, Model model){ 
-			
-		try {
-			model.addAttribute("sitter", ssv.selectOneSitter(st_id));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
 		return "sitterDetail";
-		
-		
-		
 	}
 }

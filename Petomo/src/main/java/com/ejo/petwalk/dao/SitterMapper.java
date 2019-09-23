@@ -8,10 +8,10 @@ import com.ejo.petwalk.vo.SitterVO;
 
 public interface SitterMapper {
 	
-	public int updateSitter(SitterVO sitter) throws Exception;
-	public SitterVO selectOneSitter(SitterVO st) throws Exception;
-	public ArrayList<SitterVO> selectAllSitter() throws Exception; // ������ �������� Manager�� ��� sitter�� ����� ������ �� ����ϴ� �޼��� 
-	public int insertSitterImage(FileVO sitterFile) throws Exception;
-    public SitterVO selectSitter(SitterVO sitter) throws Exception;
-
+	public int updateSitter(SitterVO sitter);
+	public SitterVO selectOneSitter(String st_id);
+	public ArrayList<SitterVO> selectAllSitter(); // ������ �������� Manager�� ��� sitter�� ����� ������ �� ����ϴ� �޼��� 
+	public int insertSitterImage(FileVO sitterFile);
+    public SitterVO selectSitter(SitterVO sitter);
+	public int insertSitter(SitterVO sitter);
 }

@@ -36,7 +36,7 @@
 			  $("#sendMessageBtn").click(function() {   //클릭시 전송
 		    	  var sender="${sessionScope.loginId}";
 		    	  var content=$("#sendMessageText").val();
-		    	  var receiver='mb1';  //나중에수정
+		    	  var receiver="${sitter.st_id}"; 
 		    	  var res='res1';      //나중에수정
 		    		  stompClient.send('/app/chatin', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 		      });

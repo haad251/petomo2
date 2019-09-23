@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<mapper namespace="com.ejo.petwalk.dao.ChatMapper">
+<mapper namespace="com.ejo.petwalk.dao.ReservationMapper">
 
 <!-- 예약번호 기준 채팅 불러오기 -->
  <select id="selectAllChat"  parameterType="String" resultType="HashMap">
@@ -22,5 +22,13 @@
 		#{chat_date}
 	)
 </insert>
+
+<!-- 예약번호로 예약불러오기 -->
+ <select id="selectOneRes"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM reservation_tb
+		WHERE res_id=#{res_id}
+ </select>
+
 
 </mapper>

@@ -15,28 +15,33 @@ public class SitterService {
 	@Autowired
 	SitterMapper dao;
 	
-	public SitterVO selectSitter(SitterVO sitter) throws Exception{
+	public SitterVO selectSitter(SitterVO sitter){
 		return dao.selectSitter(sitter);
 	}
 	
-	public int updateSitter(SitterVO sitter) throws Exception{
+	
+	public int insertSitter(SitterVO sitter){
+		return dao.insertSitter(sitter);
+	}
+	
+	public int updateSitter(SitterVO sitter){
 		int result = dao.updateSitter(sitter);
 		return result;
 	}
 	
-	public SitterVO selectOneSitter(SitterVO st_id) throws Exception{
+	public SitterVO selectOneSitter(String st_id){
 		SitterVO result = dao.selectOneSitter(st_id);
 		return result;
 	}
 
 
-	public int insertSitterImage(FileVO sitterFile) throws Exception {
+	public int insertSitterImage(FileVO sitterFile){
 		int result = dao.insertSitterImage(sitterFile);
 		return result;
 	}
 
 	
-	public List<SitterVO> selectAllSitter() throws Exception{
+	public List<SitterVO> selectAllSitter(){
 		List<SitterVO> result = dao.selectAllSitter();
 		return result;
 	}

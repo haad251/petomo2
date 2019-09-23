@@ -97,7 +97,7 @@
                                                                 <a href="goSitterInfoModi">정보수정</a>
                                                             </li>
                                                             <li>
-                                                                <a href="goChattest">채팅창</a>
+                                                                <a href="goStreamingService">채팅창</a>
                                                             </li>
                                                         </ul>
                                                         <ul>

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ejo.petwalk.service.MemberService;
+import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.MemberVO;
-import com.ejo.petwalk.vo.SitterVO;
  
 
 @Controller
@@ -19,6 +19,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberService msv;
+	@Autowired
+	SitterService ssv;
+	
 	
 	@RequestMapping("/")
 	public String home() { 
@@ -78,7 +81,6 @@ public class MemberController {
 		if(result == 1) {
 			session.setAttribute("loginid", member.getMb_id());
 		}
-	
 		return "home";
 	}
 	@RequestMapping(value = "/duplchck", method = RequestMethod.POST)

@@ -6,14 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ejo.petwalk.dao.ChatMapper;
+import com.ejo.petwalk.dao.ReservationMapper;
 import com.ejo.petwalk.vo.ChatVO;
+import com.ejo.petwalk.vo.ReservationVO;
 
 @Service
-public class ChatService {
+public class ReservationService {
 
 	@Autowired
-	ChatMapper dao;
+	ReservationMapper dao;
 	
 	public int insertChat(ChatVO chat) throws Exception {
 		return dao.insertChat(chat);
@@ -22,4 +23,8 @@ public class ChatService {
 	public List<HashMap<String,String>> selectAllChat(String res_id) throws Exception{
 		return dao.selectAllChat(res_id);
 	}
+	
+    public ReservationVO selectOneRes(String res_id) throws Exception{
+    	return dao.selectOneRes(res_id);
+    }
 }

@@ -54,7 +54,7 @@
                                                 <span style ="float:left">
                                                 <button type="submit" class="search-btn btn--lg btn-primary"  >일반 회원으로 가입하기</button>
                                                 </span></form>
-                                              <form action = "" method = "GET">
+                                              <form action = "signupsitter" method = "GET">
                                                 <span style ="float:right">
                                                 <button type="submit" class="search-btn btn--lg btn-primary">펫 시터로 가입하기</button>
                                                 </span></form>

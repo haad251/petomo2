@@ -9,7 +9,7 @@
 		WHERE st_id=#{st_id}
  </update>
  
- <select id="selectOneSitter" parameterType="SitterVO" resultType="SitterVO">
+ <select id="selectOneSitter" parameterType="String" resultType="SitterVO">
    	    SELECT *
 		FROM sitter_tb
 		WHERE st_id=#{st_id}
@@ -38,5 +38,23 @@
 		)
  </insert>
  
+  <insert id="insertSitter" parameterType="SitterVO">
+		INSERT INTO sitter_tb 
+		VALUE(
+			#{st_id},
+			#{st_pw},
+			#{st_name},
+			#{st_email},
+			#{st_sex},
+			#{st_lineid},
+			#{st_loc1},
+			#{st_loc2},
+			#{st_info},
+			#{st_license},
+			'bronze',
+			'N',
+			'0'
+		)
+ </insert>
 
 </mapper>

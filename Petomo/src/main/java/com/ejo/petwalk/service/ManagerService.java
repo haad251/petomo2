@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 import com.ejo.petwalk.dao.ManagerMapper;
 import com.ejo.petwalk.vo.ServiceVO;
 
+
 @Service
 public class ManagerService {
 	
 	@Autowired
 	ManagerMapper mdao;
 	
-	/* ¼­ºñ½º CRUD °ü·Ã ¸Þ¼­µå */
+	/* ï¿½ï¿½ï¿½ï¿½ CRUD ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ */
 	public int insertNewService(ServiceVO service) throws Exception {
 		return mdao.insertNewService(service);
 	};
