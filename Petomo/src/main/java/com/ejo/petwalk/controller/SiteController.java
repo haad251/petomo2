@@ -79,7 +79,8 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value="/updateCheck")
-	public void updateCheck(){ 
+	public String updateCheck(){ 
+		return"member/updateCheck";
 	}
 	
 	
@@ -106,7 +107,8 @@ public class SiteController {
 	}
 		
 	@RequestMapping(value="/streamingService")
-	public void streamingService(){ 
+	public String streamingService(){ 
+	return"res/streamingService";
 	}
 	
 	

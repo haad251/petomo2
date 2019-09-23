@@ -93,7 +93,7 @@
                                                                 <a href="goSitterInfoModi">정보수정</a>
                                                             </li>
                                                             <li>
-                                                                <a href="goStreamingService">채팅창</a>
+                                                                <a href="streamingService">채팅창</a>
                                                             </li>
                                                         </ul>
                                                         <ul>
@@ -319,7 +319,7 @@
                                                         <span class="icon-home"></span> Dashboard</a>
                                                 </li>
                                                 <li>
-                                                    <a href="updatecheck">
+                                                    <a href="updateCheck">
                                                         <span class="icon-settings"></span> Setting</a>
                                                 </li>
                                                 <li>
