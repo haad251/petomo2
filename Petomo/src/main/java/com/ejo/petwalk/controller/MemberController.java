@@ -122,4 +122,14 @@ public class MemberController {
 	public String gomemberprofile(MemberVO member) {
 			return "memberProfile";
 	}
+	@RequestMapping(value="/goReservation", method=RequestMethod.GET)
+	public String goReservation(){ 
+		return "reservation";
+	}
+	@RequestMapping(value="/goFavorite", method=RequestMethod.GET)
+	public String goFavorite(){ 
+		return "reservation";
+	}
+	
+	
 }

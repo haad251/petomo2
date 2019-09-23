@@ -102,4 +102,5 @@ public class SitterController {
 			model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
 		return "sitterDetail";
 	}
+
 }
