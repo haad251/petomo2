@@ -2,22 +2,12 @@
     pageEncoding="UTF-8"%>
 <!doctype HTML>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="DigiPro - Digital Products Marketplace ">
-    <meta name="keywords" content="marketplace, easy digital download, digital product, digital, html5">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-
-
 </head>
 
 <body class="preload">
-        <jsp:include page="menuBar.jsp" /> 
-
+<jsp:include page="menuBar.jsp" /> 
     <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
@@ -110,8 +100,7 @@
             </div><!-- end .row -->
         </div><!-- end .container -->
     </section><!-- ends: .signup_area -->
- 
- 
+  
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

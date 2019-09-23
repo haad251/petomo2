@@ -12,10 +12,12 @@ $(function(){
 	alert("작동");
  	$("#idchecking").on('click',idchecking);
  	})
+
 	function idchecking(){/* 아이디 중복check ajax */
-		 var userid = $("#urId").val();
+		
+		 var userid = $("#sessionid").val();
 		 var userpw = $("#urPw").val();
-		 var form = document.getElementById("loginform");
+		 var form = document.getElementById("idpwcheck");
 		$.ajax({
 			url: 'idpwchck',
 			type: 'POST',
@@ -25,7 +27,7 @@ $(function(){
 					},
 			success: function chck(resp){
 				if(resp.length == 0){
-					alert("아이디 혹은 비밀번호가 틀렸습니다");
+					alert("비밀번호가 틀렸습니다");
 					return false;
 				}
 				else{
@@ -34,30 +36,22 @@ $(function(){
 			}
 			}); 
 		}
+	
 </script>
+    
 </head>
 
 <body class="preload">
-        <jsp:include page="menuBar.jsp" /> 
-    
+      <jsp:include page="../menuBar.jsp" /> 
+
     <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Login</h2>
-<!--                         <div class="breadcrumb"> -->
-<!--                             <ul> -->
-<!--                                 <li> -->
-<!--                                     <a href="#">Home</a> -->
-<!--                                 </li> -->
-<!--                                 <li class="active"> -->
-<!--                                     <a href="#">Login</a> -->
-<!--                                 </li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-                    </div>
+                        <h2 class="page-title">회원정보 수정</h2>
+                        </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
         </div><!-- end .container -->
@@ -66,7 +60,7 @@ $(function(){
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                    <form action="loginMember" id = "loginform" method = "POST">
+                    <form action="goupdate" id = "idpwcheck" method = "POST">
                         <div class="cardify login">
                             <div class="login--header">
                                 <h3>Welcome Back</h3>
@@ -74,29 +68,11 @@ $(function(){
                             </div><!-- end .login_header -->
                             <div class="login--form">
                                 <div class="form-group">
-                                    <label for="user_name">Username</label>
-                                    <input id="urId" type="text" class="text_field" name = "mb_id"  placeholder="Enter your username...">
-                                </div>
-                                <div class="form-group">
                                     <label for="pass">Password</label>
                                     <input id="urPw" type="password" class="text_field" name = "mb_pw" placeholder="Enter your password...">
                                 </div>
-                                <div class="form-group">
-                                    <div class="custom_checkbox">
-                                        <input type="checkbox" id="ch2">
-                                        <label for="ch2">
-                                            <span class="shadow_checkbox"></span>
-                                            <span class="label_text">Remember me</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type = "button" class="btn btn--md btn-primary" id = "idchecking" >Login Now</button>
-                                <div class="login_assist">
-                                    <p class="recover">Lost your
-                                        <a href="recover-pass.html">username</a> or
-                                        <a href="recover-pass.html">password</a>?</p>
-                                    <p class="signup">Don't have an
-                                        <a href="gosignup">account</a>?</p>
+                                <input type = "hidden" id = "sessionid" name = "mb_id" value = "${sessionScope.sessionId}">
+                                <button type = "button" class="btn btn--md btn-primary" id = "idchecking" >비밀번호 확인</button>
                                 </div>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->
@@ -105,6 +81,7 @@ $(function(){
             </div><!-- end .row -->
         </div><!-- end .container -->
     </section><!-- ends: .login_area -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

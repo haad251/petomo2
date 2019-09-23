@@ -5,15 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-    <!-- viewport meta -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="DigiPro - Digital Products Marketplace ">
-    <meta name="keywords" content="marketplace, easy digital download, digital product, digital, html5">
- 
-<link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet">
- 
 </head>
 <body>
 
@@ -77,8 +68,6 @@
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
-
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

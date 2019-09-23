@@ -6,12 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
     <jsp:include page="menuBar.jsp" /> 
-    
         <section class="breadcrumb-area breadcrumb--center">
         <div class="container">
             <div class="row">
@@ -126,11 +122,6 @@
             </div>
         </div>
     </section><!-- ends: .cta2 -->
-
-<!--  	footer 불러오기    -->
-    <jsp:include page="footerBar.jsp" /> 
-    
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

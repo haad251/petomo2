@@ -1,28 +1,32 @@
-<!-- ÇØ¾ßÇÒ°Å
-ÀÚ±â¾ÆÀÌµğ ¿À¸¥ÂÊÁ¤·Ä, Ã¢ »çÀÌÁî ÁÙÀÌ±â , css¼öÁ¤, ÇÁ·ÎÇÊ»çÁø À§¿¡¸¸ ³Ö±â?
-Ã¤ÆÃ ¹Ş¾Æ¿Ã¶§ ·ÎÄÉÀÌ¼ÇÀÌ¶û ¿¬µ¿ÇÏ±â>¸ÅÆÛ hashmap ¼öÁ¤,Çàµ¿Àº ¾ÆÀÌÄÜ ³Ö±â µî
+<!-- í•´ì•¼í• ê±°
+ìê¸°ì•„ì´ë”” ì˜¤ë¥¸ìª½ì •ë ¬, ì°½ ì‚¬ì´ì¦ˆ ì¤„ì´ê¸° , cssìˆ˜ì •, í”„ë¡œí•„ì‚¬ì§„ ìœ„ì—ë§Œ ë„£ê¸°?
+ì±„íŒ… ë°›ì•„ì˜¬ë•Œ ë¡œì¼€ì´ì…˜ì´ë‘ ì—°ë™í•˜ê¸°>ë§¤í¼ hashmap ìˆ˜ì •,í–‰ë™ì€ ì•„ì´ì½˜ ë„£ê¸° ë“±
 -->
 
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="/webjars/sockjs-client/sockjs.min.js"></script>
   <script src="/webjars/stomp-websocket/stomp.min.js"></script>
   <script>
   $(function () {
-	  var socket = new SockJS('/websocket');  
+// 		ìŠ¤íŠ¸ë¦¬ë°		
+		var vlc0 = document.getElementById('vlc0');/* ë°”ë¡œë°‘ì—êº¼ê¹Œì§€ ì˜ìƒìŠ¤íŠ¸ë¦¬ë° */
+		vlc0.playlist.playItem( vlc0.playlist.add('rtsp://203.233.196.14:1935/petlive01/myStream') );
+		
+// 		ì†Œì¼“
+		var socket = new SockJS('/websocket');  
 		stompClient = Stomp.over(socket);  
-		stompClient.connect({}, function() { //Á¢¼Ó
-			
-			  stompClient.subscribe('/topic/chatin', function(msg) { //¹Ş¾Æ¿À±â
+		
+		stompClient.connect({}, function() { 
+			  stompClient.subscribe('/topic/chatin', function(msg) { 
 				  var data = JSON.parse(msg.body);
 			  	var str = '<div class="conversation"><div class="head"><div class="chat_avatar">';
 			  	str += '<img src="img/notification_head5.png" alt="Notification avatar">';
@@ -32,12 +36,11 @@
 		        $("#chatForm").append(str);
 			  });			
 			
-			
-			  $("#sendMessageBtn").click(function() {   //Å¬¸¯½Ã Àü¼Û
+			  $("#sendMessageBtn").click(function() {
 		    	  var sender="${sessionScope.loginId}";
 		    	  var content=$("#sendMessageText").val();
 		    	  var receiver="${sitter.st_id}"; 
-		    	  var res='res1';      //³ªÁß¿¡¼öÁ¤
+		    	  var res='res1';      //ë‚˜ì¤‘ì—ìˆ˜ì •
 		    		  stompClient.send('/app/chatin', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 		      });
 			
@@ -49,7 +52,7 @@
 </head>
 
 <body class="preload">
-	<jsp:include page="menuBar.jsp" /> 
+	<jsp:include page="../menuBar.jsp" /> 
 
 
     <section class="message_area">
@@ -82,6 +85,15 @@
                                 </ul><!-- ends: .dropdown -->
                             </div><!-- ends: .message_toolbar -->
                         </div><!-- ends: .chat_area--title -->
+                        
+                        <object type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+    version="VideoLAN.VLCPlugin.2" classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://download.videolan.org/pub/videolan/vlc/0.9.2/win32/axvlc.cab" width="640" height="480" id="vlc0" events="True"> 
+    <param name="Src" value="rtsp://203.233.196.14:1935/petlive01/myStream"></param> <!-- ì˜ìƒ ìŠ¤íŠ¸ë¦¬ë° -->
+    <param name="ShowDisplay" value="True" ></param> 
+    <param name="AutoLoop" value="no"></param> 
+    <param name="AutoPlay" value="yes"></param> 
+    <embed type="application/x-google-vlc-plugin" name="vlcfirefox" autoplay="yes" loop="no" width="400" height="300" target="rtsp://203.233.196.14:1935/petlive01/myStream"></embed> 
+</object>
                         
                         
                         <div class="chat_area--conversation" id="chatForm">

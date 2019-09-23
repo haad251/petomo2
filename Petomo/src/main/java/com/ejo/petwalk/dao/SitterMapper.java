@@ -12,6 +12,6 @@ public interface SitterMapper {
 	public SitterVO selectOneSitter(String st_id);
 	public ArrayList<SitterVO> selectAllSitter(); // ������ �������� Manager�� ��� sitter�� ����� ������ �� ����ϴ� �޼��� 
 	public int insertSitterImage(FileVO sitterFile);
-    public SitterVO selectSitter(SitterVO sitter);
+    public SitterVO loginSitter(SitterVO sitter);
 	public int insertSitter(SitterVO sitter);
 }

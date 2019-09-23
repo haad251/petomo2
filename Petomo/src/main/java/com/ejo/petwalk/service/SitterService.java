@@ -15,10 +15,9 @@ public class SitterService {
 	@Autowired
 	SitterMapper dao;
 	
-	public SitterVO selectSitter(SitterVO sitter){
-		return dao.selectSitter(sitter);
+	public SitterVO loginSitter(SitterVO sitter){
+		return dao.loginSitter(sitter);
 	}
-	
 	
 	public int insertSitter(SitterVO sitter){
 		return dao.insertSitter(sitter);

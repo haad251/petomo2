@@ -6,19 +6,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Petomo123</title>
 </head>
 
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
-    <jsp:include page="menuBar.jsp" /> 
-
-<!-- 서치메뉴바 불러오기 -->
-    <jsp:include page="searchBar.jsp" /> 
-    
-<!--     본문 -->
-
+    <jsp:include page="../menuBar.jsp" /> 
+    <jsp:include page="../searchBar.jsp" /> 
 	<div class="col-md-12 product-list">
 		<div class="row">
 			<c:forEach items="${result}" var="SitterVO">
@@ -87,8 +79,7 @@
 				<c:out value="${nameList[size - i]}" />
 			</p> --%>
 			<%-- </c:forEach> --%>
-
-			<!-- 하단메뉴바 불러오기 -->
-			<jsp:include page="footerBar.jsp" />
+			
+			
 </body>
 </html>

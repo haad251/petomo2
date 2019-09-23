@@ -5,13 +5,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Petomo123</title>
 </head>
-
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
-    <jsp:include page="menuBar.jsp" /> 
+    <jsp:include page="../menuBar.jsp" /> 
 
 </body>
 </html>

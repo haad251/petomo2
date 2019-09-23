@@ -3,20 +3,13 @@
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <title>Petomo123</title>
 </head>
-
-
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
     <jsp:include page="menuBar.jsp" /> 
 
-
-<!--     본문 -->
     <section class="hero-area bgimage">
         <div class="bg_image_holder">
             <img src="img/hero-image01.png" alt="background-image">
@@ -3105,9 +3098,6 @@
         </div>
     </section><!-- ends: .subscribe -->
     
-<!--  	footer 불러오기    -->
-    <jsp:include page="footerBar.jsp" /> 
-    
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
@@ -3133,7 +3123,6 @@
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
     <!-- endinject-->
-    
 </body>
 
 </html>

@@ -8,21 +8,12 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
     <title>Petomo</title>
 </head>
 
-
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
-    <jsp:include page="menuBar.jsp" /> 
-
-<!-- 시터메뉴바 불러오기 -->
+    <jsp:include page="../menuBar.jsp" /> 
     <jsp:include page="sitterMenuBar.jsp" /> 
-
-
-<!--     본문 -->
 
         <div class="dashboard_contents section--padding">
             <div class="container">
@@ -177,10 +168,6 @@
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard-area -->     
      
-<!--  	footer 불러오기    -->
-    <jsp:include page="footerBar.jsp" /> 
-    
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

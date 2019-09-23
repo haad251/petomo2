@@ -7,15 +7,11 @@
 <meta charset="UTR-8">
 <title>Insert title here</title>
 
-
-
-
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="DigiPro - Digital Products Marketplace ">
     <meta name="keywords" content="marketplace, easy digital download, digital product, digital, html5">
-
 
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
     <!-- inject:css-->

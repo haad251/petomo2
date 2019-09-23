@@ -5,14 +5,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Petomo</title>
 </head>
 
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
-    <jsp:include page="menuBar.jsp" />
-
+    <jsp:include page="../menuBar.jsp" />
 <!-- 파란화면 -->
 	<section class="breadcrumb-area">
 		<div class="container">
@@ -138,11 +134,5 @@
             </div><!-- end .row -->
         </div><!-- end .container -->
     </section><!-- ends: .cart_area -->
-
-
-
-
-	<!-- 하단메뉴바 불러오기 -->
-    <jsp:include page="footerBar.jsp" /> 
 </body>
 </html>

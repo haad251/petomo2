@@ -3,17 +3,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
-    <title>Petomo123</title>
 </head>
-
 <body class="preload">
-    
-<!--     상단메뉴 불러오기 -->
-    <jsp:include page="menuBar.jsp" /> 
-
+    <jsp:include page="../menuBar.jsp" /> 
     <!-- 파랑이 시작 -->
     <section class="breadcrumb-area">
         <div class="container">
@@ -463,15 +457,5 @@
 		<!-- ends: .container -->
 	</section>
 	<!-- ends: .single-product-desc -->
-
-
-
-
-
-
-
-	<!-- 하단메뉴바 불러오기 -->
-    <jsp:include page="footerBar.jsp" /> 
-
 </body>
 </html>

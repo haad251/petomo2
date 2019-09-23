@@ -33,18 +33,10 @@ public class SitterController {
 		sitter.setSt_id("st1");
 		sitter.setSt_pw("st1");
 		SitterVO result = null;
-		result = ssv.selectSitter(sitter);
+		result = ssv.loginSitter(sitter);
 		session.setAttribute("loginId",result.getSt_id());
 		return "redirect:/home";
 	}
-	
-	@RequestMapping(value="/signupsitter")
-	public void signupsitter(){ 
-	}
-	
-	
-	
-	
 	
 	
 	@RequestMapping(value = "/sitterSignup" , method = RequestMethod.POST)
@@ -54,24 +46,8 @@ public class SitterController {
 		if(result == 1) {
 			session.setAttribute("loginid", sitter.getSt_id());
 		}
-		return "home";
+		return "redirect:/home";
 	}
-	
-	
-	@RequestMapping(value="/goSitterInfoModi", method=RequestMethod.GET)
-	public String goSitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
-			sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
-		model.addAttribute("sitter",sitter);
-		return "sitterInfoModi";
-	}
-	
-	@RequestMapping(value="/goSitterList", method=RequestMethod.GET)
-	public String goSitterList(Model model){ 
-		List<SitterVO> result = ssv.selectAllSitter();
-		model.addAttribute("result", result);
-		return "sitterList";
-	}
-	
 	
 	@RequestMapping(value="/updateSitter", method=RequestMethod.POST)
 	public String updateSitter(SitterVO sitter,MultipartFile uploadfile) throws IOException{ 
@@ -93,14 +69,7 @@ public class SitterController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "redirect:/goSitterInfoModi";
-	}
-		
-	@RequestMapping(value="/goSitterDetail", method=RequestMethod.GET)
-	public String goSitterDetail(SitterVO st_id, Model model){ 
-			model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
-		return "sitterDetail";
 	}
 
 }
