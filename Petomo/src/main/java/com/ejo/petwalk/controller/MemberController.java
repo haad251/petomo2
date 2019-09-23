@@ -21,13 +21,6 @@ public class MemberController {
 	MemberService msv;
 	@Autowired
 	SitterService ssv;
-	
-	
-	@RequestMapping("/")
-	public String home() { 
-		return "home";
-	}
-	
 	@RequestMapping(value="/memberLogin", method=RequestMethod.GET)
 	public String memberLogin(MemberVO member,HttpSession session){ 
 		member.setMb_id("mb1");
@@ -45,15 +38,7 @@ public class MemberController {
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session){ 
 		session.invalidate();
-		return "home";
-	}
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String gologin(HttpSession session,Model model){ 
-		return "login";
-	}
-	@RequestMapping(value="/gosignup", method=RequestMethod.GET)
-	public String gosignup(HttpSession session,Model model){ 
-		return "signupChoose";
+		return "redirect:/";
 	}
 	@RequestMapping(value="/loginMember", method=RequestMethod.POST)
 	public String loginuser(HttpSession session,Model model, MemberVO member){ 
@@ -61,18 +46,6 @@ public class MemberController {
 		session.setAttribute("sessionId", result.getMb_id());
 		session.setAttribute("sessionName", result.getMb_name());
 		return "redirect:/";
-	}
-	@RequestMapping(value="/updatecheck", method=RequestMethod.GET)
-	public String updatecheck(HttpSession session,Model model){ 
-		return "updateCheck";
-	}
-	@RequestMapping(value="/gosetting", method=RequestMethod.GET)
-	public String gosetting(HttpSession session,Model model){ 
-		return "customerInfo";
-	}
-	@RequestMapping(value="/singupmember", method=RequestMethod.GET)
-	public String singupmember(HttpSession session,Model model){ 
-		return "signup";
 	}
 	@RequestMapping(value = "/memberSignup" , method = RequestMethod.POST)
 	public String memberSignup (HttpSession session,Model model,MemberVO member)
@@ -118,24 +91,8 @@ public class MemberController {
 		int result = msv.memberupdate(member);
 		return "redirect:/";
 	}
-	@RequestMapping(value = "/gomemberprofile", method = RequestMethod.GET)
-	public String gomemberprofile(MemberVO member) {
-			return "memberProfile";
-	}
-	@RequestMapping(value="/goReservation", method=RequestMethod.GET)
-	public String goReservation(){ 
-		return "reservation";
-	}
-	@RequestMapping(value="/goFavorite", method=RequestMethod.GET)
-	public String goFavorite(){ 
-		return "reservation";
-	}
 	
 	
-	@RequestMapping(value = "/gomemberout", method = RequestMethod.GET)
-	public String gomemberout(MemberVO member) {
-			return "deleteAccount";
-	}
 	@RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
 	public String deleteAccount(MemberVO member) {
 		int result = msv.deleteAccount(member);

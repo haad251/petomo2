@@ -20,7 +20,8 @@ public class SiteController {
 	SitterService ssv;
 	
 	@RequestMapping(value="/")
-	public void home() { 
+	public String home() {	
+		return "home";
 	}
 
 	@RequestMapping(value="/introducePetomo")
