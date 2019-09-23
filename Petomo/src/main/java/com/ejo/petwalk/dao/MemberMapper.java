@@ -10,4 +10,5 @@ public interface MemberMapper {
 	public MemberVO login(MemberVO member);
 	public MemberVO idpwchck(MemberVO member);
 	public int memberupdate(MemberVO member);
+	public int deleteAccount(MemberVO member);
 }

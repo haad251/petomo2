@@ -105,7 +105,7 @@ function update(){
                             <li class="active">
                                 <a href="gosetting"><span class="lnr icon-settings"></span>Account Info</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a href="gomemberout"><span class="icon-logout"></span>회원 탈퇴</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->

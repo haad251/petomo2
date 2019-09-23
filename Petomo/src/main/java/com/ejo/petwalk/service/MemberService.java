@@ -36,4 +36,8 @@ public class MemberService {
 	public int memberupdate(MemberVO member) {
 		return dao.memberupdate(member);
 	}
+
+	public int deleteAccount(MemberVO member) {
+		return dao.deleteAccount(member);
+	}
 }

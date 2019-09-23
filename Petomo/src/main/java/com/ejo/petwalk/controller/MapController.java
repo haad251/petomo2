@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MapController {
 
-	//[TEST] Streaming Service ÆäÀÌÁö
+	//[TEST] Streaming Service ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value="/mapTesting",method=RequestMethod.GET)
 		public String gotoMapTesting() {
 			return "mapTesting";
