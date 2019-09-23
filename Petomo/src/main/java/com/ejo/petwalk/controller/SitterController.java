@@ -105,8 +105,6 @@ public class SitterController {
 		}
 		
 		return "sitterDetail";
-		
-		
-		
 	}
+
 }
