@@ -65,5 +65,8 @@
  	,mb_lineid = #{mb_lineid}
  	WHERE mb_id = #{mb_id}
  </update>
-
+<delete id = "deleteAccount" parameterType = "MemberVO">
+	DELETE FROM member_tb
+	WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw}
+</delete>
 </mapper>

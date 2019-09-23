@@ -109,7 +109,7 @@ public class MemberController {
 		model.addAttribute("mbaddress", result.getMb_addr());
 		model.addAttribute("mbemailaddress",result.getMb_email());
 		model.addAttribute("mblineid", result.getMb_lineid());
-		return "customerinfo";
+		return "customerInfo";
 	}
 	@RequestMapping(value = "/memberupdate", method = RequestMethod.POST)
 	public String memberupdate(MemberVO member) {
@@ -119,5 +119,14 @@ public class MemberController {
 	@RequestMapping(value = "/gomemberprofile", method = RequestMethod.GET)
 	public String gomemberprofile(MemberVO member) {
 			return "memberProfile";
+	}
+	@RequestMapping(value = "/gomemberout", method = RequestMethod.GET)
+	public String gomemberout(MemberVO member) {
+			return "deleteAccount";
+	}
+	@RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
+	public String deleteAccount(MemberVO member) {
+		int result = msv.deleteAccount(member);
+			return "redirect:/logout";
 	}
 }

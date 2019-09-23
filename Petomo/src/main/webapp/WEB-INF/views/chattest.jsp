@@ -20,6 +20,8 @@
   $(function () {
 	  var socket = new SockJS('/websocket');  
 		stompClient = Stomp.over(socket);  
+		var vlc0 = document.getElementById('vlc0');/* 바로밑에꺼까지 영상스트리밍 */
+	vlc0.playlist.playItem( vlc0.playlist.add('rtsp://203.233.196.14:1935/petlive01/myStream') );
 		stompClient.connect({}, function() { //접속
 			
 			  stompClient.subscribe('/topic/chatin', function(msg) { //받아오기
@@ -83,9 +85,16 @@
                             </div><!-- ends: .message_toolbar -->
                         </div><!-- ends: .chat_area--title -->
                         
-                        
+                        <object type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+    version="VideoLAN.VLCPlugin.2" classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://download.videolan.org/pub/videolan/vlc/0.9.2/win32/axvlc.cab" width="640" height="480" id="vlc0" events="True"> 
+    <param name="Src" value="rtsp://203.233.196.14:1935/petlive01/myStream"></param> <!-- 영상 스트리밍 -->
+    <param name="ShowDisplay" value="True" ></param> 
+    <param name="AutoLoop" value="no"></param> 
+    <param name="AutoPlay" value="yes"></param> 
+    <embed type="application/x-google-vlc-plugin" name="vlcfirefox" autoplay="yes" loop="no" width="400" height="300" target="rtsp://203.233.196.14:1935/petlive01/myStream"></embed> 
+</object>
                         <div class="chat_area--conversation" id="chatForm">
-                        
+
                         <c:forEach items="${cList}" var="chat">
                             <div class="conversation">
                                 <div class="head">
