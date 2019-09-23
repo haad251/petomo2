@@ -51,7 +51,7 @@
 </head>
 
 <body class="preload">
-	<jsp:include page="menuBar.jsp" /> 
+	<jsp:include page="../menuBar.jsp" /> 
 
 
     <section class="message_area">
