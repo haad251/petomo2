@@ -13,14 +13,5 @@ public class MapController {
 			return "mapTesting";
 		}
 		
-		@RequestMapping(value="/mapTesting2",method=RequestMethod.GET)
-		public String gotoMapTesting2() {
-			return "mapTestingTwo";
-		}
-		
-		@RequestMapping(value="/mapTesting3",method=RequestMethod.GET)
-		public String gotoMapTesting3() {
-			return "mapTestingThree";
-		}
 		
 }
