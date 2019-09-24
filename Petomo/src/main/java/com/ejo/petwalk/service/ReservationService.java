@@ -1,5 +1,6 @@
 package com.ejo.petwalk.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.ReservationMapper;
 import com.ejo.petwalk.vo.ChatVO;
+import com.ejo.petwalk.vo.LocationVO;
 import com.ejo.petwalk.vo.ReservationVO;
 
 @Service
@@ -26,5 +28,16 @@ public class ReservationService {
 	
     public ReservationVO selectOneRes(String res_id) throws Exception{
     	return dao.selectOneRes(res_id);
+    }
+    
+	/* [map] CRUD */
+    // location 정보 저장
+    public  int insertLoc(LocationVO loc) throws Exception{
+    	return dao.insertLoc(loc);
+    }
+    
+    // 모든 loaction 정보 가져오기
+    public ArrayList<LocationVO> selectLocationInfoAll(String res_id) throws Exception{
+    	return dao.selectLocationInfoAll(res_id);
     }
 }

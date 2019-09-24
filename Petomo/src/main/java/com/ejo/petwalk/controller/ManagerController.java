@@ -18,28 +18,7 @@ public class ManagerController {
 	@Autowired
 	ManagerService mservice;
 	
-	/**/
-	
-	/*------페이지 이동 관련 Controller------*/
-	//ManagerPage로 이동 (임시로 지정해놓음)
-	@RequestMapping(value="/manager",method=RequestMethod.GET)
-	public String gotoManagerPage() {
-		return "managerMyPage";
-	}
-	
-	//Service 관리 페이지로 이동
-	@RequestMapping(value="/manageService",method=RequestMethod.GET)
-	public String gotoManageServicePage() {
-		return "manageService";
-	}
-	
-	//Service 등록 / 수정(update) 페이지로 이동
-	@RequestMapping(value="/registerService",method=RequestMethod.GET)
-	public String gotoRegisterServiceePage() {
-		return "registerService";
-	}
-	
-	
+
 	/*------Service CRUD관련 Controller------*/
 	
 	// 신규 Service 등록
