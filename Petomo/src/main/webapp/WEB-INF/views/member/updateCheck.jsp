@@ -60,7 +60,7 @@ $(function(){
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                    <form action="goupdate" id = "idpwcheck" method = "POST">
+                    <form action="memberInfo" id = "idpwcheck" method = "POST">
                         <div class="cardify login">
                             <div class="login--header">
                                 <h3>Welcome Back</h3>

@@ -62,42 +62,6 @@
                                     </div>
                                 </div><!-- ends: .author-desc -->
                             </div><!-- ends: .col-lg-5 -->
-                            <div class="col-lg-4 order-lg-1 col-md-12 order-md-2">
-                                <div class="author-social social social--color--filled">
-                                    <ul>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-facebook"></span> Facebook
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-twitter"></span> Twitter
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span> Dribble
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-facebook"></span> Facebook
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-twitter"></span> Twitter
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <span class="fa fa-dribbble"></span> Dribble
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div><!-- ends: .author-social -->
-                            </div><!-- ends: .col-lg-3 -->
                             <div class="col-lg-3 order-lg-2 col-md-5 order-md-1">
                                 <div class="author-stats">
                                     <ul>

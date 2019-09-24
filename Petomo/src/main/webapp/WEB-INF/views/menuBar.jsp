@@ -311,7 +311,7 @@
                                             </div>
                                             <ul>
                                                 <li>
-                                                    <a href="author.html">
+                                                    <a href="memberResList">
                                                         <span class="icon-user"></span>Profile</a>
                                                 </li>
                                                 <li>

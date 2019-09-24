@@ -71,11 +71,13 @@ public class SiteController {
 //	member
 	
 	@RequestMapping(value="/memberInfo")
-	public void memberInfo(){ 
+	public String memberInfo(){ 
+	return"member/memberInfo";
 	}
 
 	@RequestMapping(value="/memberProfile")
-	public void memberProfile(){ 
+	public String memberProfile(){ 
+	return "member/memberProfile";
 	}
 	
 	@RequestMapping(value="/updateCheck")
@@ -122,6 +124,10 @@ public class SiteController {
 	
 	@RequestMapping(value="/sitterResList")
 	public void sitterResList(){ 
+	}
+	@RequestMapping(value="/memberResList")
+	public String memberResList(){
+		return"member/memberResList";
 	}
 	
 }
