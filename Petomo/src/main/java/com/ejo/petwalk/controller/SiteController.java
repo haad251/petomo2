@@ -51,27 +51,30 @@ public class SiteController {
 	
 //	manager
 	@RequestMapping(value="/managerMyPage")
-	public void managerMyPage(){ 
+	public String managerMyPage(){ 
+		return "manager/managerMyPage";
 	}
 	
 	@RequestMapping(value="/managerService")
-	public void managerService(){ 
+	public String managerService(){ 
+		return "manager/managerMyPage";
 	}
 	
 	@RequestMapping(value="/registerService")
-	public void registerService(){ 
+	public String registerService(){
+		return "manager/registerService";
 	}
 	
 	@RequestMapping(value="/serviceDetail")
-	public void serviceDetail(){ 
+	public String serviceDetail(){ 
+		return "manager/serviceDetail";
 	}
 	
 	
-	
 //	member
-	
 	@RequestMapping(value="/memberInfo")
 	public void memberInfo(){ 
+		
 	}
 
 	@RequestMapping(value="/memberProfile")
@@ -82,6 +85,7 @@ public class SiteController {
 	public String updateCheck(){ 
 		return"member/updateCheck";
 	}
+	
 	
 	
 //	res
@@ -110,7 +114,7 @@ public class SiteController {
 		
 	@RequestMapping(value="/streamingService")
 	public String streamingService(){ 
-	return"res/streamingService";
+		return"redirect:/goStreamingService";
 	}
 	
 	

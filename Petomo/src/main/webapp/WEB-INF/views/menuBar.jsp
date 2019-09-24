@@ -90,7 +90,7 @@
                                                     <div class="dropdown dropdown--menu">
                                                         <ul>
                                                             <li>
-                                                                <a href="goSitterInfoModi">정보수정</a>
+                                                                <a href="sitterInfoModi">정보수정</a>
                                                             </li>
                                                             <li>
                                                                 <a href="streamingService">채팅창</a>
@@ -98,7 +98,7 @@
                                                         </ul>
                                                         <ul>
                                                             <li>
-                                                                <a href="goSitterList">시터리스트</a>
+                                                                <a href="sitterList">시터리스트</a>
                                                             </li>
                                                         </ul>
                                                     </div>

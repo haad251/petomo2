@@ -60,7 +60,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name">NAME
+                                                <label for="name">名前
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="text" name="st_name" class="text_field s_readonly" placeholder="Name" value="${sitter.st_name}" readonly>
@@ -68,7 +68,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="emailad">Email Address
+                                                <label for="emailad">メールアドレス
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="text" name="st_email" class="text_field" placeholder="Email address" value="${sitter.st_email}">
@@ -76,13 +76,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="sex">Sex</label>
+                                                <label for="sex">性別</label>
                                                 <input type="text" name="st_sex" class="text_field s_readonly" placeholder="Sex" value="${sitter.st_sex}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="password">Password
+                                                <label for="password">パスワード
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="password" name="st_pw" class="text_field" placeholder="Enter Password" value="${sitter.st_pw}">
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="conpassword">Confirm Password
+                                                <label for="conpassword">パスワード(確認）
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="password" id="conpassword" class="text_field" placeholder="re-enter password" value="${sitter.st_pw}">
@@ -101,7 +101,7 @@
 <!--                                       보류: 로딩시 기존위치 선택되게 selectbox 커스텀데이터+JS -->
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="loc1">Location1
+                                                <label for="loc1">位置1
                                                     <sup>*</sup>
                                                 </label>
                                                 <div class="select-wrap select-wrap2">
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="loc2">Location2
+                                                <label for="loc2">位置2
                                                     <sup>*</sup>
                                                 </label>
                                                 <div class="select-wrap select-wrap2">
@@ -131,7 +131,7 @@
                                         </div>
  										<div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="license">License
+                                                <label for="license">ライセンス
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="text" name="st_license" class="text_field s_readonly" placeholder="License Number" value="${sitter.st_license}" readonly>
@@ -139,7 +139,7 @@
                                         </div> 
                                 		<div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="lineid">LineID
+                                                <label for="lineid">Line ID
                                                     <sup>*</sup>
                                                 </label>
                                                 <input type="text" name="st_lineid" class="text_field" placeholder="Line ID" value="${sitter.st_lineid}">
@@ -147,7 +147,7 @@
                                         </div>                                        
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="info">Sitter Info</label>
+                                                <label for="info">紹介文</label>
                                                 <textarea name="st_info" id="st_info" class="text_field" placeholder="Info">${sitter.st_info}</textarea>
                                             </div>
                                         </div>
@@ -157,8 +157,8 @@
                         </div><!-- ends: .col-md-12 -->
                          <div class="col-md-12">
                             <div class="dashboard_setting_btn">
-                                <button type="submit" class="btn btn--md btn-primary">Save Change</button>
-                                <button type="reset" class="btn btn-md btn-danger">Cancel</button>
+                                <button type="submit" class="btn btn--md btn-primary">セーブ</button>
+                                <button type="reset" class="btn btn-md btn-danger">キャンセル</button>
                             </div>
                         </div><!-- ends: .col-md-12 -->
                     </div><!-- ends: .row -->
