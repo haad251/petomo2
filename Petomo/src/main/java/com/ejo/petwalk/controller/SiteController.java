@@ -86,24 +86,26 @@ public class SiteController {
 	
 //	res
 	@RequestMapping(value="/reservation")
-	public void reservation(){ 
+	public String reservation(){ 
+		return "res/reservation";
 	}
 	
 	@RequestMapping(value="/selectAllSitter")
-	public void selectAllSitter(){ 
+	public String selectAllSitter(){ 
+		return "res/selectAllSitter";
 	}
 	
 	@RequestMapping(value="/sitterDetail")
 	public String sitterDetail(SitterVO st_id, Model model){ 
 		model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
-		return "sitterDetail";
+		return "res/sitterDetail";
 	}
 	 
 	@RequestMapping(value="/sitterList")
 	public String sitterList(Model model){ 
 		List<SitterVO> result = ssv.selectAllSitter();
 		model.addAttribute("result", result);
-		return "sitterList";
+		return "res/sitterList";
 	}
 		
 	@RequestMapping(value="/streamingService")
@@ -117,11 +119,12 @@ public class SiteController {
 	public String sitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
 		sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
 		model.addAttribute("sitter",sitter);
-		return "sitterInfoModi";
-	}
+		return "sitter/sitterInfoModi";
+	}		
 	
 	@RequestMapping(value="/sitterResList")
-	public void sitterResList(){ 
+	public String sitterResList(){ 
+		return "siter/sitterResList";
 	}
 	
 }
