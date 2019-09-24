@@ -23,11 +23,6 @@ public class MemberController {
 	SitterService ssv;
 	
 	
-	@RequestMapping("/")
-	public String home() { 
-		return "home";
-	}
-	
 	@RequestMapping(value="/memberLogin", method=RequestMethod.GET)
 	public String memberLogin(MemberVO member,HttpSession session){ 
 		member.setMb_id("mb1");

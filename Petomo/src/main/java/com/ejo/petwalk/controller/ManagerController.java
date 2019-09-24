@@ -18,9 +18,7 @@ public class ManagerController {
 	@Autowired
 	ManagerService mservice;
 	
-	
-		
-	
+
 	/*------Service CRUD관련 Controller------*/
 	
 	// 신규 Service 등록
