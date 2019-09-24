@@ -1,4 +1,4 @@
-## ペットモ  
+## PeTomo (ペットモ)  
 
 
 ### SC IT MASTER 3rd Project
