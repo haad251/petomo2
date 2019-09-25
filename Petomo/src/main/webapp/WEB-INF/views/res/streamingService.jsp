@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="/webjars/sockjs-client/sockjs.min.js"></script>
   <script src="/webjars/stomp-websocket/stomp.min.js"></script>
   <script>
@@ -47,7 +47,6 @@
 		});
   });
   </script>
-  
   
 </head>
 

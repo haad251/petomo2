@@ -20,7 +20,7 @@ public class DatabaseConfig {
         final SqlSessionFactoryBean sessionFactory =new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         PathMatchingResourcePatternResolver resolver =new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources("classpath:com/ejo/petwalk/dao/*.xml"));
+        sessionFactory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
         sessionFactory.setTypeAliasesPackage("com.ejo.petwalk.vo");
         return sessionFactory.getObject();
     }

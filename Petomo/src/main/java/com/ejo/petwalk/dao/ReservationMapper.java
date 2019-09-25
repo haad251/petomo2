@@ -9,11 +9,22 @@ import com.ejo.petwalk.vo.LocationVO;
 import com.ejo.petwalk.vo.ReservationVO;
 
 public interface ReservationMapper {
-    public int insertChat(ChatVO chat) throws Exception;
-    public List<HashMap<String,String>> selectAllChat(String res_id) throws Exception;
-    public ReservationVO selectOneRes(String res_id) throws Exception;
+    public int insertChat(ChatVO chat);
+    public List<HashMap<String,String>> selectChatAll(String res_id);
+
     
-	/* map°ü·Ã CRUD */
-    public int insertLoc(LocationVO loc) throws Exception;
-    public ArrayList<LocationVO> selectLocationInfoAll(String res_id) throws Exception;
+    public int insertReservation(ReservationVO res);
+    public ReservationVO selectOneRes(String res_id);
+    public ArrayList<ReservationVO> selectResAllBySt_id(String st_id);
+    public ArrayList<ReservationVO> selectResAllByMb_id(String mb_id);
+    
+    
+	/* mapï¿½ï¿½ï¿½ï¿½ CRUD */
+    public int insertLoc(LocationVO loc);
+    public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
+    
+    
+    
+    
+    
 }

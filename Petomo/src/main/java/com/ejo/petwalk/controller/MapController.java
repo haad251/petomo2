@@ -17,13 +17,11 @@ public class MapController {
 	@Autowired
 	ReservationService rservice;
 
-	//[TEST] Streaming Service ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		@RequestMapping(value="/mapTesting",method=RequestMethod.GET)
 		public String gotoMapTesting() {
-			return "mapTesting";
+			return "manager/mapTesting";
 		}
 		
-		//À§Ä¡ DB¿¡ ³Ö±â
 		@RequestMapping(value="/setWalkingLoc",method=RequestMethod.POST)
 		public @ResponseBody int setWalkingLoc(LocationVO loc) {
 			System.out.println(loc);
@@ -36,7 +34,6 @@ public class MapController {
 			return result;  
 		}
 		
-		//¿¹¾à¹øÈ£¿¡ µû¸¥ ¸ðµç À§Ä¡ Á¤º¸ °¡Á®¿À±â
 		@RequestMapping(value="/allLocData",method=RequestMethod.POST)
 		public @ResponseBody ArrayList<LocationVO> setWalkingLoc(String res_id) {
 			ArrayList<LocationVO> result = null;

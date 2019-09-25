@@ -1,8 +1,8 @@
 package com.ejo.petwalk.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ejo.petwalk.service.AwsS3Service;
+import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
-import com.ejo.petwalk.vo.MemberVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -27,6 +28,9 @@ public class SitterController {
 
 	@Autowired
 	AwsS3Service aws3sv;
+	
+	@Autowired
+	ReservationService rsv;
 	
 	//간이 로그인용
 	@RequestMapping(value="/sitterLogin", method=RequestMethod.GET)
@@ -74,6 +78,24 @@ public class SitterController {
 			e.printStackTrace();
 		}
 		return "redirect:/sitterInfoModi";
+	}
+	
+	
+	@RequestMapping(value="/sitterInfoModi")
+	public String sitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
+		sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
+		model.addAttribute("sitter",sitter);
+		return "sitter/sitterInfoModi";
+	}		
+	
+	
+	@RequestMapping(value = "/sitterResList")
+	public String sitterResList (HttpSession session,Model model){
+		System.out.println((String)session.getAttribute("loginId"));
+		ArrayList<ReservationVO> rList = rsv.selectResAllBySt_id((String)session.getAttribute("loginId"));
+		System.out.println(rList);
+		model.addAttribute("rList",rList);
+		return "sitter/sitterResList";
 	}
 
 }

@@ -34,14 +34,9 @@ public class ReservationController {
 		SitterVO sitter = null;
 		List<HashMap<String,String>> cList = null;
 		ReservationVO res = null;
-		
-		try {
 			sitter = ssv.selectOneSitter("st1"); //시터정보가져오기
-			cList = rsv.selectAllChat("res1"); //예약번호기준 채팅가져오기
+			cList = rsv.selectChatAll("res1"); //예약번호기준 채팅가져오기
 			res = rsv.selectOneRes("res1");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);
@@ -61,6 +56,10 @@ public class ReservationController {
 //		Thread.sleep(100); // delay
 		return chat;
 	}
+	
+	
+	
+	
 }
 
 

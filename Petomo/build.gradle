@@ -44,5 +44,8 @@ dependencies {
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.633'
  	  
+ 	  
+ 	//WAR    
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')  
 } 
  
