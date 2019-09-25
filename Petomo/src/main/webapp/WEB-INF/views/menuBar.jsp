@@ -46,7 +46,8 @@
                         <div class="menu-fullwidth">
                             <div class="logo-wrapper">
                                 <div class="logo logo-top">
-                                    <a href="/"><img src="img/logo.png" alt="logo image" class="img-fluid"></a>
+                                    <a href="/"><img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo_small.png
+" alt="logo image" class="img-fluid" height="50px"></a>
                                 		<br><a href="memberLogin">mb1</a>
                                             <a href="sitterLogin">st1</a>
                                             <a href="logout">out</a>

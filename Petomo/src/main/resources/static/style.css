@@ -10945,7 +10945,7 @@ this file contains style for different social sharing option and icon style
   START SINGLE PRODUCT DESCRIPTION AREA
 ****************************************/
 .single-product-desc {
-  padding: 100px 0;
+  padding: 30px 0;
 }
 
 .single-product-desc2 .item-navigation {
@@ -16526,8 +16526,6 @@ span.counter {
 /*# sourceMappingURL=maps/style.css.map */
 
 
-<<<<<<< HEAD
-=======
 /* /////////승은쓰////////// */
 
 .s_readonly{
@@ -16539,7 +16537,11 @@ span.counter {
 	font-weight: 600;
 }
 
+.s_chatlist{
+	overflow-y:auto;
+	height:400px;
+}
+
 /* //////////////////////// */
->>>>>>> refs/remotes/origin/master
 
 

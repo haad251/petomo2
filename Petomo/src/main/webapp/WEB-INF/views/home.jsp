@@ -12,7 +12,8 @@
 
     <section class="hero-area bgimage">
         <div class="bg_image_holder">
-            <img src="img/hero-image01.png" alt="background-image">
+            <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/head_1.jpg
+" alt="background-image">
         </div>
         <div class="hero-content content_above">
             <div class="content-wrapper">
