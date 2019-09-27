@@ -41,7 +41,7 @@
                         <div class="menu-fullwidth">
                             <div class="logo-wrapper">
                                 <div class="logo logo-top">
-                                    <a href="/">
+                                    <a href="/petomo/">
                                     <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo_small.png"
 											alt="logo image" class="img-fluid" height="50px"></a>
                                 		<br><a href="memberLogin">mb1</a>
@@ -404,4 +404,3 @@
 
 </body>
 </html>
-

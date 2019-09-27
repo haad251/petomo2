@@ -16544,20 +16544,34 @@ span.counter {
 
 
 .s_mychat{
-	text-align:right;
 	background-color: #feffe5;
     border-radius: 10px;
-    padding: 8px;
+    padding: 6px;
     word-wrap: break-word;
+    font-size:13px;
+    margin:0px;
+    max-width:190px;
+    width:fit-content;
+    line-height: 1.3em
 }
 
 .s_yourchat{
-	text-align:left;
-	background-color: #b7fff1;
+	background-color: #ddfff5;
     border-radius: 10px;
     padding: 8px;
     word-wrap: break-word;
+    font-size:13px;
+    margin:0px;
+    max-width:220px;
+    width:fit-content;
+    line-height: 1.3em
 }
+
+.s_chatdate{
+	font-size:10px;
+	margin-bottom:0px;
+}
+
 
 /* //////////////////////// */
 

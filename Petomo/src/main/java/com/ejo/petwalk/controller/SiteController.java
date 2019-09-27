@@ -2,14 +2,12 @@ package com.ejo.petwalk.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ejo.petwalk.service.ReservationService;
+import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -18,7 +16,9 @@ public class SiteController {
 	
 	@Autowired
 	SitterService ssv;
-
+	
+	@Autowired
+	MemberService msv;
 	
 	@RequestMapping(value="/")
 	public String home() {	
@@ -74,17 +74,27 @@ public class SiteController {
 	
 //	member
 	@RequestMapping(value="/memberInfo")
-	public void memberInfo(){ 
-		
-	}
+	public String memberInfo(){ 
+	return"member/memberInfo";}
+	
 
 	@RequestMapping(value="/memberProfile")
-	public void memberProfile(){ 
+	public String memberProfile(){ 
+	return "member/memberProfile";
 	}
 	
 	@RequestMapping(value="/updateCheck")
 	public String updateCheck(){ 
 		return"member/updateCheck";
+	}
+	@RequestMapping(value="/memberResList")
+	public String memberResList(){
+		return"member/memberResList";
+	}
+	
+	@RequestMapping(value="/signupPet")
+	public String signupPet(){
+		return"member/signupPet";
 	}
 	
 	

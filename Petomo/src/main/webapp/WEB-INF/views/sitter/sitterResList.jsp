@@ -12,7 +12,6 @@
 
 <body class="preload">
 	<jsp:include page="../menuBar.jsp" /> 
-
     <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">

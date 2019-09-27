@@ -1,10 +1,13 @@
 package com.ejo.petwalk.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.MemberMapper;
 import com.ejo.petwalk.vo.MemberVO;
+import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Service
@@ -43,5 +46,17 @@ public class MemberService {
 
 	public int deleteAccount(MemberVO member) {
 		return dao.deleteAccount(member);
+	}
+
+	public MemberVO dogIdCheck(PetVO pet) {
+		return dao.selectDogId(pet);
+	}
+
+	public int petSignup(PetVO pet) {
+		return dao.insertPet(pet);
+	}
+
+	public List<PetVO> dogList(PetVO pet) {
+		return dao.selectDogByMemberId(pet);
 	}
 }
