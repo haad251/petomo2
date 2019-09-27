@@ -96,7 +96,7 @@ $(function(){
                                         <a href="recover-pass.html">username</a> or
                                         <a href="recover-pass.html">password</a>?</p>
                                     <p class="signup">Don't have an
-                                        <a href="gosignup">account</a>?</p>
+                                        <a href="signupChoose">account</a>?</p>
                                 </div>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->

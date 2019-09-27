@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -18,6 +20,7 @@ public class SiteController {
 	
 	@Autowired
 	SitterService ssv;
+	MemberService msv;
 	
 	@RequestMapping(value="/")
 	public String home() {	
@@ -51,29 +54,31 @@ public class SiteController {
 	
 //	manager
 	@RequestMapping(value="/managerMyPage")
-	public void managerMyPage(){ 
+	public String managerMyPage(){ 
+		return "manager/managerMyPage";
 	}
 	
 	@RequestMapping(value="/managerService")
-	public void managerService(){ 
+	public String managerService(){ 
+		return "manager/managerMyPage";
 	}
 	
 	@RequestMapping(value="/registerService")
-	public void registerService(){ 
+	public String registerService(){
+		return "manager/registerService";
 	}
 	
 	@RequestMapping(value="/serviceDetail")
-	public void serviceDetail(){ 
+	public String serviceDetail(){ 
+		return "manager/serviceDetail";
 	}
-	
 	
 	
 //	member
-	
 	@RequestMapping(value="/memberInfo")
 	public String memberInfo(){ 
-	return"member/memberInfo";
-	}
+	return"member/memberInfo";}
+	
 
 	@RequestMapping(value="/memberProfile")
 	public String memberProfile(){ 
@@ -84,33 +89,45 @@ public class SiteController {
 	public String updateCheck(){ 
 		return"member/updateCheck";
 	}
+	@RequestMapping(value="/memberResList")
+	public String memberResList(){
+		return"member/memberResList";
+	}
+	
+	@RequestMapping(value="/signupPet")
+	public String signupPet(){
+		return"member/signupPet";
+	}
+	
 	
 	
 //	res
 	@RequestMapping(value="/reservation")
-	public void reservation(){ 
+	public String reservation(){ 
+		return "res/reservation";
 	}
 	
 	@RequestMapping(value="/selectAllSitter")
-	public void selectAllSitter(){ 
+	public String selectAllSitter(){ 
+		return "res/selectAllSitter";
 	}
 	
 	@RequestMapping(value="/sitterDetail")
 	public String sitterDetail(SitterVO st_id, Model model){ 
 		model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
-		return "sitterDetail";
+		return "res/sitterDetail";
 	}
 	 
 	@RequestMapping(value="/sitterList")
 	public String sitterList(Model model){ 
 		List<SitterVO> result = ssv.selectAllSitter();
 		model.addAttribute("result", result);
-		return "sitterList";
+		return "res/sitterList";
 	}
 		
 	@RequestMapping(value="/streamingService")
 	public String streamingService(){ 
-	return"res/streamingService";
+		return"redirect:/goStreamingService";
 	}
 	
 	
@@ -119,15 +136,12 @@ public class SiteController {
 	public String sitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
 		sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
 		model.addAttribute("sitter",sitter);
-		return "sitterInfoModi";
-	}
+		return "sitter/sitterInfoModi";
+	}		
 	
 	@RequestMapping(value="/sitterResList")
-	public void sitterResList(){ 
-	}
-	@RequestMapping(value="/memberResList")
-	public String memberResList(){
-		return"member/memberResList";
+	public String sitterResList(){ 
+		return "siter/sitterResList";
 	}
 	
 }

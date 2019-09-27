@@ -28,14 +28,18 @@ public class SitterController {
 	@Autowired
 	AwsS3Service aws3sv;
 	
+	//간이 로그인용
 	@RequestMapping(value="/sitterLogin", method=RequestMethod.GET)
 	public String sitterLogin(SitterVO sitter,HttpSession session){ 
-		sitter.setSt_id("st1");
-		sitter.setSt_pw("st1");
 		SitterVO result = null;
-		result = ssv.loginSitter(sitter);
+		sitter.setSt_pw("st1");
+		sitter.setSt_id("st1");
+		try {
+			result = ssv.loginSitter(sitter);
+		} catch (Exception e) {
+		}
 		session.setAttribute("loginId",result.getSt_id());
-		return "redirect:/home";
+		return "home";
 	}
 	
 	
@@ -46,7 +50,7 @@ public class SitterController {
 		if(result == 1) {
 			session.setAttribute("loginid", sitter.getSt_id());
 		}
-		return "redirect:/home";
+		return "home";
 	}
 	
 	@RequestMapping(value="/updateSitter", method=RequestMethod.POST)
@@ -69,7 +73,7 @@ public class SitterController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/goSitterInfoModi";
+		return "redirect:/sitterInfoModi";
 	}
 
 }

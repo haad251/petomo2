@@ -1,5 +1,7 @@
 package com.ejo.petwalk.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.MemberVO;
+import com.ejo.petwalk.vo.PetVO;
  
 
 @Controller
@@ -98,4 +101,25 @@ public class MemberController {
 		int result = msv.deleteAccount(member);
 			return "redirect:/logout";
 	}
+	@RequestMapping(value = "/dogIdCheck", method = RequestMethod.POST)
+	public @ResponseBody MemberVO dogIdCheck(PetVO pet,Model model){
+		MemberVO result = msv.dogIdCheck(pet);
+		if(result == null){
+		return result;
+		}
+		else{
+			return result;
+		}
+	}
+	@RequestMapping(value = "/petSignup", method = RequestMethod.POST)
+	public String petSignup(PetVO pet) {
+		int result = msv.petSignup(pet);
+		return "member/memberProfile";
+	}
+	@RequestMapping(value = "/dogList", method = RequestMethod.GET)
+	public @ResponseBody List<PetVO> dogList(PetVO pet) {
+		List<PetVO> list = msv.dogList(pet);
+		return list;
+	}
+	
 }

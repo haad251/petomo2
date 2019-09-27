@@ -7,11 +7,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
 
 <html>
 <head>
 <meta charset="UTF-8">
-
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="/webjars/sockjs-client/sockjs.min.js"></script>
   <script src="/webjars/stomp-websocket/stomp.min.js"></script>
@@ -19,8 +19,6 @@
   $(function () {
 // 		스트리밍		
 		var vlc0 = document.getElementById('vlc0');/* 바로밑에꺼까지 영상스트리밍 */
-		vlc0.playlist.playItem( vlc0.playlist.add('rtsp://203.233.196.14:1935/petlive01/myStream') );
-		
 // 		소켓
 		var socket = new SockJS('/websocket');  
 		stompClient = Stomp.over(socket);  
@@ -46,15 +44,41 @@
 			
 		});
   });
+
   </script>
-  
   
 </head>
 
 <body class="preload">
 	<jsp:include page="../menuBar.jsp" /> 
-
-
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<!-- Or if you want a more recent canary version -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
+<video id="video" SRC ="http://203.233.196.14:1935/'+${sessionScope.loginId}+'/myStream/playlist.m3u8"></video>
+<script>
+  var video = document.getElementById('video');
+  if(Hls.isSupported()) {
+    var hls = new Hls();
+    hls.loadSource('http://203.233.196.14:1935/petlive01/myStream/playlist.m3u8');
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+ }
+ // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+ // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
+ // This is using the built-in support of the plain video element, without using hls.js.
+ // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+ // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.addEventListener('loadedmetadata',function() {
+      video.play();
+    });
+  }
+  
+  
+</script>
+   
     <section class="message_area">
         <div class="container">
             <div class="row">
@@ -85,17 +109,7 @@
                                 </ul><!-- ends: .dropdown -->
                             </div><!-- ends: .message_toolbar -->
                         </div><!-- ends: .chat_area--title -->
-                        
-                        <object type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
-    version="VideoLAN.VLCPlugin.2" classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://download.videolan.org/pub/videolan/vlc/0.9.2/win32/axvlc.cab" width="640" height="480" id="vlc0" events="True"> 
-    <param name="Src" value="rtsp://203.233.196.14:1935/petlive01/myStream"></param> <!-- 영상 스트리밍 -->
-    <param name="ShowDisplay" value="True" ></param> 
-    <param name="AutoLoop" value="no"></param> 
-    <param name="AutoPlay" value="yes"></param> 
-    <embed type="application/x-google-vlc-plugin" name="vlcfirefox" autoplay="yes" loop="no" width="400" height="300" target="rtsp://203.233.196.14:1935/petlive01/myStream"></embed> 
-</object>
-                        
-                        
+
                         <div class="chat_area--conversation" id="chatForm">
                         
                         <c:forEach items="${cList}" var="chat">
@@ -118,8 +132,6 @@
                             
                         </c:forEach>
                         </div><!-- ends: .chat_area--conversation -->
-                        
-                        
                         <div class="message_composer">
                             <div class="composer_field" id="trumbowyg-demo"></div><!-- ends: .trumbowyg-demo -->
                             <div class="attached"></div>

@@ -90,7 +90,7 @@
                                                     <div class="dropdown dropdown--menu">
                                                         <ul>
                                                             <li>
-                                                                <a href="goSitterInfoModi">정보수정</a>
+                                                                <a href="sitterInfoModi">정보수정</a>
                                                             </li>
                                                             <li>
                                                                 <a href="streamingService">채팅창</a>
@@ -98,7 +98,7 @@
                                                         </ul>
                                                         <ul>
                                                             <li>
-                                                                <a href="goSitterList">시터리스트</a>
+                                                                <a href="sitterList">시터리스트</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -109,16 +109,6 @@
                                                         <ul>
                                                             <li>
                                                                 <a href="manager">매니져마이페이지</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                 <li class="has_dropdown">
-                                                    <a href="all-products.html">User★</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="goSitterInfoModi">유저 마이페이지</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -311,7 +301,7 @@
                                             </div>
                                             <ul>
                                                 <li>
-                                                    <a href="memberResList">
+                                                    <a href="memberProfile">
                                                         <span class="icon-user"></span>Profile</a>
                                                 </li>
                                                 <li>

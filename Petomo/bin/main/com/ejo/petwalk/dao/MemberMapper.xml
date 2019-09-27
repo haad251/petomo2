@@ -69,4 +69,40 @@
 	DELETE FROM member_tb
 	WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw}
 </delete>
+<select id = "selectDogId" parameterType = "PetVO" resultType = "PetVO">
+	SELECT *
+	FROM pet_tb
+	WHERE pet_id = #{pet_id}
+</select>
+<insert id="insertPet" parameterType="PetVO">
+	insert into pet_tb
+	(
+		mb_id
+		,pet_name
+		,pet_sex
+		,pet_birth
+		,pet_weight
+		,pet_type
+		,pet_breed
+		,pet_neuter
+		,pet_status
+	)
+	values
+	(
+		#{mb_id}
+		,#{pet_name}
+		,#{pet_sex}
+		,#{pet_birth}
+		,#{pet_weight}
+		,#{pet_type}
+		,#{pet_breed}
+		,#{pet_neuter}
+		,#{pet_status}
+	)
+</insert>
+<select id = "selectDogByMemberId" parameterType = "PetVO" resultType = "PetVO">
+	SELECT *
+	FROM pet_tb
+	WHERE mb_id = #{mb_id}
+</select>
 </mapper>

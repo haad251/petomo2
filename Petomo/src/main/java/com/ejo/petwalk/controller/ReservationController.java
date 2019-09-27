@@ -30,6 +30,7 @@ public class ReservationController {
 	
 	@RequestMapping(value="/goStreamingService",method=RequestMethod.GET)
 	public String goStreamingService(Model model) {
+		System.out.println("test");
 		SitterVO sitter = null;
 		List<HashMap<String,String>> cList = null;
 		ReservationVO res = null;
@@ -45,7 +46,7 @@ public class ReservationController {
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);
 		model.addAttribute("res",res);
-		return "streamingService";
+		return "res/streamingService";
 	}
 	
 	@MessageMapping("/chatin")
@@ -61,3 +62,5 @@ public class ReservationController {
 		return chat;
 	}
 }
+
+
