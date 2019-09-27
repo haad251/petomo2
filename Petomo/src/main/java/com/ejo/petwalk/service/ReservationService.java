@@ -39,11 +39,11 @@ public class ReservationService {
     	return dao.selectOneRes(res_id);
     }
 
-    public ArrayList<ReservationVO> selectResAllByMb_id(String mb_id){
+    public List<HashMap<String,String>> selectResAllByMb_id(String mb_id){
     	return dao.selectResAllByMb_id(mb_id);
     }
 
-    public ArrayList<ReservationVO> selectResAllBySt_id(String st_id){
+    public List<HashMap<String,String>> selectResAllBySt_id(String st_id){
     	return dao.selectResAllBySt_id(st_id);
     }
 

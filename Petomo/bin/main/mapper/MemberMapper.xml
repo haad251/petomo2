@@ -54,6 +54,13 @@
 		WHERE mb_id=#{mb_id} AND mb_pw = #{mb_pw}
  </select>
  
+ <select id="idpwchckSitter"  parameterType="SitterVO" resultType="SitterVO">
+       SELECT *
+		FROM sitter_tb
+		WHERE st_id=#{st_id} AND st_pw = #{st_pw}
+ </select>
+ 
+ 
  <update id ="memberupdate" parameterType = "MemberVO">
  	UPDATE member_tb
  	SET

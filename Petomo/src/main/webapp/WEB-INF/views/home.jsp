@@ -5,7 +5,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Petomo123</title>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 </head>
 <body class="preload">
     <jsp:include page="menuBar.jsp" /> 
@@ -22,12 +23,9 @@
                         <div class="col-md-12">
                             <div class="hero__content__title">
                                 <h1 class="display-3">
-                                    Build A Better
-                                    <br />
-                                    Digital Product Marketplace
+                                    PETOMO
                                 </h1>
-                                <p class="tagline">DigiPro is the most powerful, & customizable template for Easy Digital
-                                    Downloads Products</p>
+                                <p class="tagline">安心安全のペットシッターマッチング</p>
                             </div>
                             <!-- end .hero__btn-area-->
                             <div class="search-area">

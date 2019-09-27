@@ -28,15 +28,14 @@ public class ReservationController {
 	SitterService ssv;
 	
 	
-	@RequestMapping(value="/goStreamingService",method=RequestMethod.GET)
-	public String goStreamingService(Model model) {
-		System.out.println("test");
+	@RequestMapping(value="/streamingService",method=RequestMethod.GET)
+	public String goStreamingService(Model model,String res_id) {
 		SitterVO sitter = null;
 		List<HashMap<String,String>> cList = null;
 		ReservationVO res = null;
-			sitter = ssv.selectOneSitter("st1"); //시터정보가져오기
-			cList = rsv.selectChatAll("res1"); //예약번호기준 채팅가져오기
-			res = rsv.selectOneRes("res1");
+		res = rsv.selectOneRes("8"); //테스트용으로 고정
+		sitter = ssv.selectOneSitter(res.getSt_id());
+		cList = rsv.selectChatAll(res.getRes_id());
 		
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);
@@ -44,8 +43,8 @@ public class ReservationController {
 		return "res/streamingService";
 	}
 	
-	@MessageMapping("/chatin")
-	@SendTo("/topic/chatin")
+	@MessageMapping("/hello")
+	@SendTo("/topic/chats")
 	public ChatVO chatin(ChatVO chat) throws Exception {
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date time = new Date();
@@ -53,6 +52,11 @@ public class ReservationController {
 		chat.setChat_date(chattime);   //채팅에 현재시간넣어주기
 		
 		rsv.insertChat(chat);   //채팅 디비로 전송
+		
+		
+		SimpleDateFormat sdf2 =new SimpleDateFormat("MM/dd HH:mm");
+		String chattime2 = sdf2.format(time);
+		chat.setChat_date(chattime2);
 //		Thread.sleep(100); // delay
 		return chat;
 	}

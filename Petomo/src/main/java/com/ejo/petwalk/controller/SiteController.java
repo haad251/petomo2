@@ -112,10 +112,4 @@ public class SiteController {
 		model.addAttribute("result", result);
 		return "res/sitterList";
 	}
-		
-	@RequestMapping(value="/streamingService")
-	public String streamingService(){ 
-		return"redirect:/goStreamingService";
-	}
-	
 }

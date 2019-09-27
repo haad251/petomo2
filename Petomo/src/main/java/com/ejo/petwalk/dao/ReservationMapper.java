@@ -15,8 +15,8 @@ public interface ReservationMapper {
     
     public int insertReservation(ReservationVO res);
     public ReservationVO selectOneRes(String res_id);
-    public ArrayList<ReservationVO> selectResAllBySt_id(String st_id);
-    public ArrayList<ReservationVO> selectResAllByMb_id(String mb_id);
+    public List<HashMap<String,String>> selectResAllBySt_id(String st_id);
+    public List<HashMap<String,String>> selectResAllByMb_id(String mb_id);
     
     
 	/* map���� CRUD */
