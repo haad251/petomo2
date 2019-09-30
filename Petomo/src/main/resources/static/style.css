@@ -4588,9 +4588,9 @@ changing this file will result on change of menu containing modifier class .menu
 }
 
 .author__notification_area {
-  padding: 0 45px 0 35px;
+  padding: 0 35px 0 35px;
   border-right: 1px solid #ebedf2;
-  border-left: 1px solid #ebedf2;
+/*   border-left: 1px solid #ebedf2; */
 }
 
 .author__notification_area ul {
@@ -10945,7 +10945,7 @@ this file contains style for different social sharing option and icon style
   START SINGLE PRODUCT DESCRIPTION AREA
 ****************************************/
 .single-product-desc {
-  padding: 100px 0;
+  padding: 30px 0;
 }
 
 .single-product-desc2 .item-navigation {
@@ -16526,8 +16526,6 @@ span.counter {
 /*# sourceMappingURL=maps/style.css.map */
 
 
-<<<<<<< HEAD
-=======
 /* /////////승은쓰////////// */
 
 .s_readonly{
@@ -16539,7 +16537,42 @@ span.counter {
 	font-weight: 600;
 }
 
+#chatForm{
+	overflow-y:auto;
+	height:500px;
+}
+
+
+.s_mychat{
+	background-color: #feffe5;
+    border-radius: 10px;
+    padding: 6px;
+    word-wrap: break-word;
+    font-size:13px;
+    margin:0px;
+    max-width:190px;
+    width:fit-content;
+    line-height: 1.3em
+}
+
+.s_yourchat{
+	background-color: #ddfff5;
+    border-radius: 10px;
+    padding: 8px;
+    word-wrap: break-word;
+    font-size:13px;
+    margin:0px;
+    max-width:220px;
+    width:fit-content;
+    line-height: 1.3em
+}
+
+.s_chatdate{
+	font-size:10px;
+	margin-bottom:0px;
+}
+
+
 /* //////////////////////// */
->>>>>>> refs/remotes/origin/master
 
 

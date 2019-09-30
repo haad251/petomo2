@@ -29,11 +29,11 @@
                                     <div class="col-lg-8 offset-lg-2">
                                             <form action  = "signupMember" method = "GET">
                                                 <span style ="float:left">
-                                                <button type="submit" class="search-btn btn--lg btn-primary"  >일반 회원으로 가입하기</button>
+                                                <button type="submit" class="search-btn btn--lg btn-primary"  >PETOMO</button>
                                                 </span></form>
                                               <form action = "signupSitter" method = "GET">
                                                 <span style ="float:right">
-                                                <button type="submit" class="search-btn btn--lg btn-primary">펫 시터로 가입하기</button>
+                                                <button type="submit" class="search-btn btn--lg btn-primary">安心安全のペットシッターマッチング</button>
                                                 </span></form>
                                    
                                     </div>

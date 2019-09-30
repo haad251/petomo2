@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.MemberVO;
+
 import com.ejo.petwalk.vo.PetVO;
+import com.ejo.petwalk.vo.SitterVO;
  
 
 @Controller
@@ -22,8 +24,8 @@ public class MemberController {
 	
 	@Autowired
 	MemberService msv;
-	@Autowired
-	SitterService ssv;
+	
+//	테스트용
 	@RequestMapping(value="/memberLogin", method=RequestMethod.GET)
 	public String memberLogin(MemberVO member,HttpSession session){ 
 		member.setMb_id("mb1");
@@ -34,7 +36,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		session.setAttribute("loginId",result.getMb_id());
+		session.setAttribute("sessionId",result.getMb_id());
 		return "home";
 	}
 	
@@ -50,12 +52,13 @@ public class MemberController {
 		session.setAttribute("sessionName", result.getMb_name());
 		return "redirect:/";
 	}
+	
 	@RequestMapping(value = "/memberSignup" , method = RequestMethod.POST)
 	public String memberSignup (HttpSession session,Model model,MemberVO member)
 	{
 		int result = msv.signup(member);
 		if(result == 1) {
-			session.setAttribute("loginid", member.getMb_id());
+			session.setAttribute("sessionId", member.getMb_id());
 		}
 		return "home";
 	}
@@ -70,14 +73,19 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value = "/idpwchck", method = RequestMethod.POST)
-	public @ResponseBody MemberVO idpwchck(MemberVO member,Model model){
-		MemberVO result = msv.idpwchck(member);
-		if(result == null){
-		return result;
+	public @ResponseBody String idpwchck(MemberVO member,SitterVO sitter,Model model){
+		System.out.println(member);
+		System.out.println(sitter);
+		String result = "";
+		if(member!=null) {
+			if(msv.idpwchck(member)!=null) 
+				result = "ok";
 		}
-		else{
+		if(sitter!=null) {
+			if(msv.idpwchckSitter(sitter)!=null) 
+				result = "ok";
+		}
 			return result;
-		}
 	}
 	@RequestMapping(value="/goupdate", method=RequestMethod.POST)
 	public String goupdate(MemberVO member ,HttpSession session ,Model model){ 

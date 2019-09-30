@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype HTML>
@@ -9,23 +9,38 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
-	alert("작동");
- 	$("#idchecking").on('click',idchecking);
- 	})
+ 	$("#idchecking,#idchecking2").on('click',idchecking);
+	$("#memberradio").on('click',function(){
+ 		$("#loginform").show();
+ 		$("#sitterloginform").hide();
+ 	});
+ 	
+	$("#sitterradio").on('click',function(){
+ 		$("#sitterloginform").show();
+ 		$("#loginform").hide();
+ 	});
+	 	
+ 	});
 	function idchecking(){/* 아이디 중복check ajax */
-		 var userid = $("#urId").val();
-		 var userpw = $("#urPw").val();
-		 var form = document.getElementById("loginform");
+		 var radioval = $('input[name="selecttype"]:checked').val();
+		 if(radioval=="member"){		 
+			 var userid = $("#urId").val();
+			 var userpw = $("#urPw").val();
+			 var form = document.getElementById("loginform");
+			 var userdata = {"mb_id" : userid, "mb_pw": userpw};
+	 	 }else {
+	 		 var userid = $("#urId2").val();
+			 var userpw = $("#urPw2").val();
+			 var form = document.getElementById("sitterloginform");
+	 		 var userdata = {"st_id" : userid, "st_pw": userpw};
+	 	 }
 		$.ajax({
 			url: 'idpwchck',
 			type: 'POST',
-			data: { 
-					'mb_id':userid,
-					'mb_pw':userpw
-					},
+			data:userdata,
 			success: function chck(resp){
 				if(resp.length == 0){
-					alert("아이디 혹은 비밀번호가 틀렸습니다");
+					alert("入力されたID、またはパスワードに誤りがあります");
 					return false;
 				}
 				else{
@@ -40,67 +55,65 @@ $(function(){
 <body class="preload">
         <jsp:include page="menuBar.jsp" /> 
     
-    <!-- Breadcrumb Area -->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb-contents">
-                        <h2 class="page-title">Login</h2>
-<!--                         <div class="breadcrumb"> -->
-<!--                             <ul> -->
-<!--                                 <li> -->
-<!--                                     <a href="#">Home</a> -->
-<!--                                 </li> -->
-<!--                                 <li class="active"> -->
-<!--                                     <a href="#">Login</a> -->
-<!--                                 </li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-                    </div>
-                </div><!-- end .col-md-12 -->
-            </div><!-- end .row -->
-        </div><!-- end .container -->
-    </section><!-- ends: .breadcrumb-area -->
     <section class="login_area section--padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2">
-                    <form action="loginMember" id = "loginform" method = "POST">
                         <div class="cardify login">
                             <div class="login--header">
-                                <h3>Welcome Back</h3>
-                                <p>You can sign in with your username</p>
+                                <h3>ログイン</h3>
+                                <input type="radio" name="selecttype" value="member" id="memberradio" checked="checked">ユーザー
+                                <input type="radio" name="selecttype" value="sitter" id="sitterradio">シッター
                             </div><!-- end .login_header -->
                             <div class="login--form">
+                   			 <form action="loginMember" id = "loginform" method = "POST">
                                 <div class="form-group">
-                                    <label for="user_name">Username</label>
+                                    <label for="user_name">ID</label>
                                     <input id="urId" type="text" class="text_field" name = "mb_id"  placeholder="Enter your username...">
                                 </div>
                                 <div class="form-group">
-                                    <label for="pass">Password</label>
+                                    <label for="pass">パスワード</label>
                                     <input id="urPw" type="password" class="text_field" name = "mb_pw" placeholder="Enter your password...">
                                 </div>
-                                <div class="form-group">
-                                    <div class="custom_checkbox">
-                                        <input type="checkbox" id="ch2">
-                                        <label for="ch2">
-                                            <span class="shadow_checkbox"></span>
-                                            <span class="label_text">Remember me</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <button type = "button" class="btn btn--md btn-primary" id = "idchecking" >Login Now</button>
+                                <button type = "button" class="btn btn--md btn-primary" id="idchecking" >ログイン</button>
                                 <div class="login_assist">
+<<<<<<< HEAD
                                     <p class="recover">Lost your
                                         <a href="recover-pass.html">username</a> or
                                         <a href="recover-pass.html">password</a>?</p>
                                     <p class="signup">Don't have an
                                         <a href="signupChoose">account</a>?</p>
+=======
+                                    <p class="signup">
+                                        <a href="signupChoose">新しいアカウントを作成</a></p>
+>>>>>>> refs/remotes/origin/master
                                 </div>
+                  			  </form>
+                  			  
+                  			  
+                  			  
+<!--                   			  시터폼 (처음엔숨겨짐) -->
+                  			  <form action="loginSitter" id = "sitterloginform" method = "POST" style="display:none;">
+                                <div class="form-group">
+                                    <label for="user_name">ID</label>
+                                    <input id="urId2" type="text" class="text_field" name = "st_id"  placeholder="Enter your username...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pass">パスワード</label>
+                                    <input id="urPw2" type="password" class="text_field" name = "st_pw" placeholder="Enter your password...">
+                                </div>
+                                <button type = "button" class="btn btn--md btn-primary" id="idchecking2" >ログイン</button>
+                                <div class="login_assist">
+                                    <p class="signup">
+                                        <a href="signupChoose">新しいアカウントを作成</a></p>
+                                </div>
+                  			  </form>
+                  			  
+                  			  
+                  			  
+                  			  
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->
-                    </form>
                 </div><!-- end .col-md-6 -->
             </div><!-- end .row -->
         </div><!-- end .container -->

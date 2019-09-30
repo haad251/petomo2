@@ -1,7 +1,9 @@
 package com.ejo.petwalk.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ejo.petwalk.service.AwsS3Service;
+import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
-import com.ejo.petwalk.vo.MemberVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -28,9 +31,12 @@ public class SitterController {
 	@Autowired
 	AwsS3Service aws3sv;
 	
+	@Autowired
+	ReservationService rsv;
+	
 	//간이 로그인용
-	@RequestMapping(value="/sitterLogin", method=RequestMethod.GET)
-	public String sitterLogin(SitterVO sitter,HttpSession session){ 
+	@RequestMapping(value="/sitterLoginTest", method=RequestMethod.GET)
+	public String sitterLoginTest(SitterVO sitter,HttpSession session){ 
 		SitterVO result = null;
 		sitter.setSt_pw("st1");
 		sitter.setSt_id("st1");
@@ -38,7 +44,17 @@ public class SitterController {
 			result = ssv.loginSitter(sitter);
 		} catch (Exception e) {
 		}
-		session.setAttribute("loginId",result.getSt_id());
+		session.setAttribute("sessionId",result.getSt_id());
+		session.setAttribute("sessionSitter","on");
+		return "home";
+	}
+	
+	@RequestMapping(value="/loginSitter", method=RequestMethod.POST)
+	public String loginSitter(SitterVO sitter,HttpSession session){ 
+		SitterVO result = ssv.loginSitter(sitter);
+		session.setAttribute("sessionId",result.getSt_id());
+		session.setAttribute("sessionName", result.getSt_name());
+		session.setAttribute("sessionSitter","on");
 		return "home";
 	}
 	
@@ -48,7 +64,7 @@ public class SitterController {
 		System.out.println(sitter);
 		int result = ssv.insertSitter(sitter);
 		if(result == 1) {
-			session.setAttribute("loginid", sitter.getSt_id());
+			session.setAttribute("sessionId", sitter.getSt_id());
 		}
 		return "home";
 	}
@@ -65,8 +81,6 @@ public class SitterController {
 				
 				FileVO sitterFile = new FileVO(file_sav,file_org,"sitter",sitter.getSt_id()); 
 				
-				System.out.println(sitterFile);
-				
 				ssv.insertSitterImage(sitterFile);
 				aws3sv.uploadObject(uploadfile, "sitter/"+file_sav);
 			}
@@ -74,6 +88,24 @@ public class SitterController {
 			e.printStackTrace();
 		}
 		return "redirect:/sitterInfoModi";
+	}
+	
+	
+	@RequestMapping(value="/sitterInfoModi")
+	public String sitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
+		sitter = ssv.selectOneSitter((String)session.getAttribute("sessionId"));
+		model.addAttribute("sitter",sitter);
+		return "sitter/sitterInfoModi";
+	}		
+	
+	
+	@RequestMapping(value = "/sitterResList")
+	public String sitterResList (HttpSession session,Model model){
+		System.out.println((String)session.getAttribute("sessionId"));
+		 List<HashMap<String,String>> rList = rsv.selectResAllBySt_id((String)session.getAttribute("sessionId"));
+		System.out.println(rList);
+		model.addAttribute("rList",rList);
+		return "sitter/sitterResList";
 	}
 
 }

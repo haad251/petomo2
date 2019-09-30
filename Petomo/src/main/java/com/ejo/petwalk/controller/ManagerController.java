@@ -18,31 +18,7 @@ public class ManagerController {
 	@Autowired
 	ManagerService mservice;
 	
-	/**/
-	
-	/*------ÆäÀÌÁö ÀÌµ¿ °ü·Ã Controller------*/
-	//ManagerPage·Î ÀÌµ¿ (ÀÓ½Ã·Î ÁöÁ¤ÇØ³õÀ½)
-	@RequestMapping(value="/manager",method=RequestMethod.GET)
-	public String gotoManagerPage() {
-		return "managerMyPage";
-	}
-	
-	//Service °ü¸® ÆäÀÌÁö·Î ÀÌµ¿
-	@RequestMapping(value="/manageService",method=RequestMethod.GET)
-	public String gotoManageServicePage() {
-		return "manageService";
-	}
-	
-	//Service µî·Ï / ¼öÁ¤(update) ÆäÀÌÁö·Î ÀÌµ¿
-	@RequestMapping(value="/registerService",method=RequestMethod.GET)
-	public String gotoRegisterServiceePage() {
-		return "registerService";
-	}
-	
-	
-	/*------Service CRUD°ü·Ã Controller------*/
-	
-	// ½Å±Ô Service µî·Ï
+
 	@RequestMapping(value="/insertNewService",method=RequestMethod.POST)
 	public String insertNewService(ServiceVO service) {
 		System.out.println(service);
@@ -52,12 +28,11 @@ public class ManagerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if(result == 0) //°ªÀÌ Á¦´ë·Î µî·Ï ¾ÈµÆÀ¸¸é °è¼Ó µî·Ï ÆäÀÌÁö¿¡
+		if(result == 0) //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			return "registerService";
 		return "manageService";
 	}
 	
-	//Service ÀüÃ¼¸ñ·Ï °¡Á®¿À±â
 	@RequestMapping(value = "/selectAllService", method = RequestMethod.POST)
 	public @ResponseBody ArrayList<ServiceVO> selectAllService() throws Exception {
 		ArrayList<ServiceVO> result = mservice.selectAllService();
@@ -65,7 +40,6 @@ public class ManagerController {
 		return result;
 	}
 	
-	//ÇÏ³ªÀÇ Service ¼­ºñ½º »èÁ¦(Ajax)
 	@RequestMapping(value = "/deleteOneService", method = RequestMethod.POST)
 	public @ResponseBody String boardDetail(String service_id) throws Exception {
 		int result = 0 ;
@@ -76,7 +50,6 @@ public class ManagerController {
 			return "no";
 	}
 	
-	// Service »ó¼¼ ÆäÀÌÁö º¸±â
 	@RequestMapping(value = "/serviceDetail", method = RequestMethod.GET)
 	public String serviceDetail(String service_id, Model model) {
 		System.out.println(service_id);
@@ -91,7 +64,6 @@ public class ManagerController {
 	}
 	
 	
-	//Service id¸¦ ÀÌ¿ëÇØ service¸¦ ¼¿·ºÆ® ÇØ ¿Â ´ÙÀ½ Á¤º¸ ¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿
 	@RequestMapping(value = "/modifyService", method = RequestMethod.GET)
 	public String modifyService(String service_id, Model model) {
 		System.out.println(service_id);
@@ -105,7 +77,6 @@ public class ManagerController {
 		return "registerService";
 	}
 	
-	//Service Á¤º¸ ¼öÁ¤
 	@RequestMapping(value = "/updateService", method = RequestMethod.POST)
 	public String updateService(ServiceVO service) {
 		System.out.println(service);

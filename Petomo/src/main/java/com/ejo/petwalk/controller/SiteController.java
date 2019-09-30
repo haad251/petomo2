@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import com.ejo.petwalk.service.MemberService;
+import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
@@ -21,7 +22,7 @@ public class SiteController {
 	@Autowired
 	SitterService ssv;
 	MemberService msv;
-	
+
 	@RequestMapping(value="/")
 	public String home() {	
 		return "home";
@@ -124,24 +125,4 @@ public class SiteController {
 		model.addAttribute("result", result);
 		return "res/sitterList";
 	}
-		
-	@RequestMapping(value="/streamingService")
-	public String streamingService(){ 
-		return"redirect:/goStreamingService";
-	}
-	
-	
-//	sitter
-	@RequestMapping(value="/sitterInfoModi")
-	public String sitterInfoModi(SitterVO sitter,HttpSession session,Model model){ 
-		sitter = ssv.selectOneSitter((String)session.getAttribute("loginId"));
-		model.addAttribute("sitter",sitter);
-		return "sitter/sitterInfoModi";
-	}		
-	
-	@RequestMapping(value="/sitterResList")
-	public String sitterResList(){ 
-		return "siter/sitterResList";
-	}
-	
 }

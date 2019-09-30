@@ -12,6 +12,7 @@ public interface MemberMapper {
 	public int signup(MemberVO member);
 	public MemberVO login(MemberVO member);
 	public MemberVO idpwchck(MemberVO member);
+	public SitterVO idpwchckSitter(SitterVO sitter);
 	public int memberupdate(MemberVO member);
 	public int deleteAccount(MemberVO member);
 	public MemberVO selectDogId(PetVO pet);

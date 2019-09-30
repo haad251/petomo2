@@ -12,13 +12,59 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="/webjars/sockjs-client/sockjs.min.js"></script>
   <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+=======
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+<!-- 스트리밍  -->
+
+
+
   <script>
-  $(function () {
-// 		스트리밍		
-		var vlc0 = document.getElementById('vlc0');/* 바로밑에꺼까지 영상스트리밍 */
+  
+  $(window).on("load",function(){
+// 		소켓
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		stompClient = Stomp.over(socket);  
+		stompClient.connect({}, function() { 
+			  stompClient.subscribe('/topic/chats', function(msg) { 
+				  var data = JSON.parse(msg.body);
+				  var str = '';
+				  if(data.chat_sender == "${sessionScope.sessionId}"){
+					  str += '<div class="body" style= "margin-right:4px; text-align: right;">';
+					  str += '<div style="display:inline-block;"><p class="s_mychat">';
+					  str += data.chat_content + '</p></div><p class="s_chatdate">';
+					  str += data.chat_date + '</p></div>';    
+				  }else {
+					  str += '<div class="body">';
+					  str += '<p class="s_mychat">';
+					  str += data.chat_content + '</p></div><p class="s_chatdate">';
+					  str += data.chat_date + '</p></div>';    
+				  }
+		        $("#chatForm").append(str);
+			  });
+			  
+			  $("#sendMessageBtn").click(function() {
+		    	  var sender="${sessionScope.sessionId}";
+		    	  var content=$("#sendMessageText").val();
+		    	  var receiver="${sitter.st_id}"; 
+		    	  var res='8';      //나중에수정
+		    	  $("#sendMessageText").val('');		     		
+		    	
+		    	  stompClient.send('/app/hello', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
+			  });
+		});
+		
+
+		
+		
 // 		소켓
 		var socket = new SockJS('/websocket');  
 		stompClient = Stomp.over(socket);  
@@ -43,111 +89,106 @@
 		      });
 			
 		});
-  });
 
+  
+  });
+ 
+  
+  
   </script>
   
 </head>
 
 <body class="preload">
 	<jsp:include page="../menuBar.jsp" /> 
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<!-- Or if you want a more recent canary version -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
-<video id="video" SRC ="http://203.233.196.14:1935/'+${sessionScope.loginId}+'/myStream/playlist.m3u8"></video>
-<script>
-  var video = document.getElementById('video');
-  if(Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource('http://203.233.196.14:1935/petlive01/myStream/playlist.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
-  });
- }
- // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
- // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
- // This is using the built-in support of the plain video element, without using hls.js.
- // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
- // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
-  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.addEventListener('loadedmetadata',function() {
-      video.play();
-    });
-  }
-  
-  
-</script>
-   
-    <section class="message_area">
+<section class="single-product-desc">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-12">
-                    <div class="chat_area cardify">
-                        <div class="chat_area--title">
-                            <h3>Message with <span class="name">Codepoet</span></h3>
-                            <div class="message_toolbar">
-                                <a href="#">
-                                    <span class="icon-flag"></span>
-                                </a>
-                                <a href="#">
-                                    <span class="icon-trash"></span>
-                                </a>
-                                <a href="#" id="drop1" class="dropdown-toggle dropdown-trigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="img/menu_icon.png" class="dropdown-trigger" alt="Menu icon">
-                                </a>
-                                <ul class="dropdown dropdown-menu" aria-labelledby="drop1">
-                                    <li>
-                                        <a href="#">Mark as unread</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Dropdown link</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">All Attachments</a>
-                                    </li>
-                                </ul><!-- ends: .dropdown -->
-                            </div><!-- ends: .message_toolbar -->
-                        </div><!-- ends: .chat_area--title -->
+                <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:40%;">
+                    <div class="item-preview" sytle="heigth:60%;">
+<!--                         스트리밍 -->
+                        <div class="item-prev-area">
+                            <div class="preview-img-wrapper">
+                         	
+<div id="playerElement" style="width:1; height:0; padding:0 0 65% 0"></div>
+    <div id="myElement"></div>
+                            </div><!--ends: .preview-img-wrapper-->
+                        </div><!--Ends: .item-prev-area-->
 
-                        <div class="chat_area--conversation" id="chatForm">
-                        
-                        <c:forEach items="${cList}" var="chat">
-                            <div class="conversation">
-                                <div class="head">
-                                    <div class="chat_avatar">
-                                        <img src="img/notification_head5.png" alt="Notification avatar">
-                                    </div>
-                                    <div class="name_time" >
-                                        <div>
-                                            <h5>${chat.chat_sender}</h5>
-                                            <p>${chat.chat_date}<p>
-                                        </div>
-                                    </div> 
-                                </div> 
-                                <div class="body" style="margin-top: 0px;">
-                                      ${chat.chat_content}
-                                </div> 
-                            </div> 
-                            
-                        </c:forEach>
-                        </div><!-- ends: .chat_area--conversation -->
-                        <div class="message_composer">
-                            <div class="composer_field" id="trumbowyg-demo"></div><!-- ends: .trumbowyg-demo -->
-                            <div class="attached"></div>
-                            <div class="btns">
-                            <input type="text" id="sendMessageText" style="width: 70%; border:1px solid #515ef4;">
-                                <button class="btn send btn--sm btn-primary" id="sendMessageBtn">Reply</button>
-<!--                                 <label for="att"> -->
-<!--                                     <input type="file" class="attachment_field" id="att" multiple> -->
-<!--                                     <span class="icon-paper-clip"></span> Attachment -->
-<!--                                 </label> -->
-                            </div><!-- ends: .message_composer -->
-                        </div><!-- ends: .message_composer -->
-                    </div><!-- ends: .chat_area -->
-                </div><!-- ends: .col-md-7 -->
+<!-- 				지도 -->
+                        <div class="item-preview--excerpt">
+                        	<div>
+	                        	<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/Penguins.jpg" alt=""> 
+                        	</div>
+                        </div>
+                    </div><!-- ends: .item-preview-->
+                </div><!-- ends: .col-md-8 -->
+                
+                
+                <div class="col-lg-4 col-md-12" style="flex: 0 0 40%; max-width:40%;">
+                    <aside class="sidebar sidebar--single-product">
+                        <div class="sidebar-card card-pricing">
+	                        <div class="chat_area--conversation" >
+			                 	<div class="conversation" id="chatForm">
+			                        <c:forEach items="${cList}" var="chat">
+				                          		<c:if test="${chat.chat_sender==sessionScope.sessionId}">
+					                                <div class="body" style= "margin-right:4px; text-align: right;">
+					                                <div style="display:inline-block;">
+				                           				<p class="s_mychat" >${chat.chat_content}</p>
+				                           			</div>
+				                           			<p class="s_chatdate">${chat.chat_date}</p>
+				                           			</div>                                                                                                                              
+				                           		</c:if>
+				                           		<c:if test="${chat.chat_sender!=sessionScope.sessionId}">
+				                                    <div class="body">
+													<p class="s_yourchat">${chat.chat_content}</p>
+													<p class="s_chatdate">${chat.chat_date}</p>
+				                           			</div>   
+				                           		</c:if>
+			                        </c:forEach>
+			                	</div> 
+	                        </div><!-- ends: .chat_area--conversation -->
+	                        
+	                     	  <div class="message_composer">
+                           		<div class="btns">
+                       				<input type="text" id="sendMessageText" style="width: 70%; border:1px solid #515ef4;">
+                           		    <button class="btn send btn--sm btn-primary" id="sendMessageBtn">Reply</button>
+                     			 </div> 
+                     		</div> 
+                        </div><!-- end .sidebar--card -->
+                    </aside><!-- ends: .sidebar -->
+                </div><!-- ends: .col-md-4 -->
+>>>>>>> refs/remotes/origin/master
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
-    </section><!-- ends: .message_area -->
+    </section><!-- ends: .single-product-desc -->
+    
+    
+<!--     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script> -->
+    <!-- inject:js-->
+<!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->
+    <script src="vendor_assets/js/jquery/uikit.min.js"></script>
+    <script src="vendor_assets/js/bootstrap/popper.js"></script>
+    <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="vendor_assets/js/chart.bundle.min.js"></script>
+    <script src="vendor_assets/js/grid.min.js"></script>
+    <script src="vendor_assets/js/jquery-ui.min.js"></script>
+    <script src="vendor_assets/js/jquery.barrating.min.js"></script>
+    <script src="vendor_assets/js/jquery.countdown.min.js"></script>
+    <script src="vendor_assets/js/jquery.counterup.min.js"></script>
+    <script src="vendor_assets/js/jquery.easing1.3.js"></script>
+    <script src="vendor_assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="vendor_assets/js/owl.carousel.min.js"></script>
+    <script src="vendor_assets/js/select2.full.min.js"></script>
+    <script src="vendor_assets/js/slick.min.js"></script>
+    <script src="vendor_assets/js/tether.min.js"></script>
+    <script src="vendor_assets/js/trumbowyg.min.js"></script>
+    <script src="vendor_assets/js/venobox.min.js"></script>
+    <script src="vendor_assets/js/waypoints.min.js"></script>
+    <script src="theme_assets/js/dashboard.js"></script>
+    <script src="theme_assets/js/main.js"></script>
+    <script src="theme_assets/js/map.js"></script>
+    <!-- endinject-->
 </body>
+
 </html>

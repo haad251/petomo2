@@ -31,9 +31,13 @@ public class MemberService {
 	public MemberVO login(MemberVO member) {
 		return dao.login(member);
 	}
-
+	
 	public MemberVO idpwchck(MemberVO member) {
 		return dao.idpwchck(member);
+	}
+	
+	public SitterVO idpwchckSitter(SitterVO sitter) {
+		return dao.idpwchckSitter(sitter);
 	}
 
 	public int memberupdate(MemberVO member) {

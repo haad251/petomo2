@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.ejo.petwalk.dao.ReservationMapper">
+
+<!-- Chat -->
+ <select id="selectChatAll"  parameterType="String" resultType="HashMap">
+      	SELECT chat_id,res_id,chat_sender,chat_receiver,chat_content,DATE_FORMAT(chat_date, '%m/%d %H:%i') as chat_date
+		FROM chat_tb
+		WHERE res_id=#{res_id}
+ </select>
+
+<insert id="insertChat" parameterType="ChatVO">
+	INSERT INTO chat_tb ( res_id,chat_sender,chat_receiver,chat_content,chat_date)
+	VALUES(
+ 
+		#{res_id},
+		#{chat_sender},
+		#{chat_receiver},
+		#{chat_content},
+		#{chat_date}
+	)
+</insert>
+
+
+
+<!-- Reservation -->
+<insert id="insertReservation" parameterType="ReservationVO">
+insert into reservation_tb(st_id,service_id,mb_id,res_start,res_end,res_status,res_amount,res_review,res_rate,res_memo)
+values(
+#{st_id},
+#{service_id},
+#{mb_id},
+#{res_start},
+#{res_end},
+#{res_status},
+#{res_amount},
+#{res_review},
+#{res_rate},
+#{res_memo}
+)
+</insert>
+
+<!-- 예약번호로 예약불러오기 -->
+ <select id="selectOneRes"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM reservation_tb
+		WHERE res_id=#{res_id}
+ </select>
+ 
+<!--  시터아이디로 모든예약불러오기 -->
+ <select id="selectResAllBySt_id" parameterType="String" resultType="HashMap">
+ 	SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
+    res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
+	FROM reservation_tb natural join service_tb
+	WHERE reservation_tb.service_id = service_tb.service_id
+	AND st_id=#{st_id}
+</select>
+
+<!--  멤버아이디로 모든예약불러오기 -->
+ <select id="selectResAllByMb_id" parameterType="String" resultType="HashMap">
+ 	SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
+    res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
+	FROM reservation_tb natural join service_tb
+	WHERE reservation_tb.service_id = service_tb.service_id
+	AND mb_id=#{mb_id}
+</select>
+
+
+ 
+ <!--[Map] Location 위치 정보 인서트 -->
+ <insert id="insertLoc" parameterType="LocationVO"> 
+ 	INSERT INTO location_tb
+ 	( 
+ 		res_id
+ 		,loc_long
+ 		,loc_lat
+ 		,loc_time
+ 		,loc_action
+ 	)
+	VALUES
+	(
+		#{res_id}
+		,#{loc_long}
+		,#{loc_lat}
+		,NOW()
+		,#{loc_action}
+	)
+ </insert>
+ 
+ <!--[Map] 예약번호 기준으로 Location 모든 위치 정보 가져 오기 -->
+ <select id="selectLocationInfoAll" parameterType="String" resultType="LocationVO">
+ 	SELECT *
+	FROM location_tb
+	WHERE res_id=#{res_id}
+</select>
+
+</mapper>
