@@ -4576,7 +4576,8 @@ changing this file will result on change of menu containing modifier class .menu
 }
 
 .author__avatar img {
-  max-width: 44px;
+	width: 44px;
+  height:44px;
 }
 
 .author__avatar.online:before {
@@ -7017,7 +7018,8 @@ div#ui-datepicker-div tbody tr td a:hover {
 }
 
 .dropdown.dropdown--author .author-credits .author__avatar img {
-  max-width: 44px;
+  width: 44px;
+  height:  44px; 
 }
 
 .dropdown.dropdown--author .author-credits .autor__info p {

@@ -2,6 +2,7 @@ package com.ejo.petwalk.dao;
 
 import java.util.List;
 
+import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
@@ -18,4 +19,9 @@ public interface MemberMapper {
 	public MemberVO selectDogId(PetVO pet);
 	public int insertPet(PetVO pet);
 	public List<PetVO> selectDogByMemberId(PetVO pet);
+	
+	public int insertMemberImage(FileVO memberFile);
+	public int deleteMemberImage(MemberVO member);
+	public FileVO selectMemberProfileImg(MemberVO member);
+	
 }

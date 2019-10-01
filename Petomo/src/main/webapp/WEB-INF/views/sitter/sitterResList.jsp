@@ -66,14 +66,31 @@
 	                                        <td>${res.service_name}</td>
     	                                    <td>${res.res_amount}</td>
             	                            <td>${res.res_memo}</td>
-            	                           	<td class="action">
-            	                           	<c:if test="${res.res_status=='予約待機'}">
-	            	                           	<a href="#" class="res_status_btn" data-target="#myModal2" 
-    	        	                           	data-toggle="modal" data-res="${res.res_id}">${res.res_status}</a>
-            	                           	</c:if>
-            	                           	<c:if test="${res.res_status!='予約待機'}">
-												${res.res_status}	            	                           	
-            	                           	</c:if>
+            	                           	<td class="type">
+            	                           	 <c:choose>
+										         <c:when test = "${res.res_status=='予約待機'}">
+										           	<span class="sale">
+	            	                           			<a href="#" class="res_status_btn" data-target="#myModal2" 
+    	        	                           			data-toggle="modal" data-res="${res.res_id}"
+    	        	                           			style="color:yellow;">${res.res_status}</a>
+    	        	                           		</span>
+										         </c:when>
+										         <c:when test ="${res.res_status=='キャンセル'}">
+										           <span class="withdrawal">
+													${res.res_status}
+													</span>	   
+										         </c:when>
+										         <c:when test ="${res.res_status=='利用済み'}">
+										           <span class="credited">
+													${res.res_status}
+													</span>	   
+										         </c:when>										         
+										         <c:when test ="${res.res_status=='予約完了'}">
+										           <span class="purchase">
+													${res.res_status}
+													</span>	
+										         </c:when>										         
+										      </c:choose>
             	                           	</td>
 	                                        <td class="action">
 	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
@@ -83,28 +100,6 @@
                                 
                                 </tbody>
                             </table>
-                            <!-- Start Pagination -->
-<!--                             <nav class="pagination-default"> -->
-<!--                                 <ul class="pagination"> -->
-<!--                                     <li class="page-item"> -->
-<!--                                         <a class="page-link" href="#" aria-label="Previous"> -->
-<!--                                             <span aria-hidden="true"><i class="fa fa-long-arrow-left"></i></span> -->
-<!--                                             <span class="sr-only">Previous</span> -->
-<!--                                         </a> -->
-<!--                                     </li> -->
-<!--                                     <li class="page-item active"><a class="page-link" href="#">1</a></li> -->
-<!--                                     <li class="page-item"><a class="page-link" href="#">2</a></li> -->
-<!--                                     <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-<!--                                     <li class="page-item disabled"><a class="page-link" href="#">...</a></li> -->
-<!--                                     <li class="page-item"><a class="page-link" href="#">10</a></li> -->
-<!--                                     <li class="page-item"> -->
-<!--                                         <a class="page-link" href="#" aria-label="Next"> -->
-<!--                                             <span aria-hidden="true"><i class="fa fa-long-arrow-right"></i></span> -->
-<!--                                             <span class="sr-only">Next</span> -->
-<!--                                         </a> -->
-<!--                                     </li> -->
-<!--                                 </ul> -->
-<!--                             </nav>Ends: .pagination-default -->
                         </div><!-- ends: .statement_table -->
                     </div>
                 </div><!-- ends: .row -->

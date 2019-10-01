@@ -18,6 +18,8 @@ public interface ReservationMapper {
     public List<HashMap<String,String>> selectResAllBySt_id(String st_id);
     public List<HashMap<String,String>> selectResAllByMb_id(String mb_id);
     public int updateResStatus(ReservationVO res);
+    public int insertReview(ReservationVO res);
+    
     
 	/* map���� CRUD */
     public int insertLoc(LocationVO loc);

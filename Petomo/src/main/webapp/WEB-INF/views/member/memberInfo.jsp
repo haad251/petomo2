@@ -11,7 +11,13 @@
 $(function(){
 	alert("작동?");
  	$("#confirm").on('click',update);
- 	})
+ 	
+ 	
+//  	프사 업로드하기
+ 	$("#cover_photo").change(function(){
+	 		$("#insertMPI").submit();
+	});
+ })
 function update(){ 
 	var password = $("#mb_pw").val();
 	var con_pass = $("#confirmpw").val();
@@ -89,10 +95,47 @@ function update(){
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
+        
+        
+        
+        
+        
         <div class="dashboard_contents section--padding">
             <div class="container">
-                <form action="memberupdate" class="setting_form" method = "POST" id = "update">
                     <div class="row">
+                    <div class="col-md-12">
+                            <div class="information_module">
+                                <div class="information__set profile_images">
+                                    <div class="information_wrapper">
+                                        <div class="profile_image_area">
+                                            <div>
+                                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
+                                                <div class="img_info">
+                                                     <p class="bold">Profile Image</p>
+                                                    <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
+                                                </div>
+                                            </div>
+                                            <form action="insertMemberImage" id="insertMPI" method="POST" enctype="multipart/form-data">
+                                            <label for="cover_photo" class="upload_btn">
+                                                <input type="file" id="cover_photo" name="uploadfile">
+                                                <span id="MPIuploadBtn" class="btn btn-sm btn-primary" aria-hidden="true">アップロード</span>
+                                                <a href="deleteMemberImage" class="btn btn-sm btn-danger">削除</a>
+                                            </label>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- ends: .information_module -->
+                        </div><!-- ends: .col-md-12 -->
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+           			 <form action="memberupdate" class="setting_form" method = "POST" id = "update">
                         <div class="col-md-12">
                             <div class="information_module">
                                 <a class="toggle_title">
@@ -146,8 +189,8 @@ function update(){
                                 <button type="submit" class="btn btn--md btn-primary" id = "confirm">Save Change</button>
                             </div>
                         </div><!-- ends: .col-md-12 -->
+	                </form><!-- ends: form -->
                     </div><!-- ends: .row -->
-                </form><!-- ends: form -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard_purchase -->

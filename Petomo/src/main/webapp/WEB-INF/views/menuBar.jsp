@@ -41,9 +41,9 @@
                         <div class="menu-fullwidth">
                             <div class="logo-wrapper">
                                 <div class="logo logo-top">
-                                    <a href="/petomo/">
+                                    <a href="/">
                                     <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo_small.png"
-											alt="logo image" class="img-fluid" height="50px"></a>
+											alt="logo image" class="img-fluid" height="50px" width="50px"></a>
                                 		<br><a href="memberLogin">mb1</a>
                                             <a href="sitterLoginTest">st1</a>
                                             <a href="logout">out</a>
@@ -96,16 +96,6 @@
                                                         <ul>
                                                             <li>
                                                                 <a href="manager">매니져마이페이지</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                 <li class="has_dropdown">
-                                                    <a href="all-products.html">User★</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="goSitterInfoModi">유저 마이페이지</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -211,7 +201,9 @@
                                             </div>
                                             <ul>
                                                 <li>
-                                                    <a href="author.html">
+                                                    <a href="memberProfile">
+                                                        <span class="icon-user"></span>Profile</a>
+                                                    <a href="memberInfo">
                                                         <span class="icon-user"></span>マイページ</a>
                                                 </li>
                                                 <li>
@@ -264,103 +256,6 @@
                                     </div>
                                    </c:if>
                                 
-                                <!-- end .author-area -->
-<!--                                 author area restructured for mobile -->
-<!--                                 <div class="mobile_content "> -->
-<!--                                     <span class="icon-user menu_icon"></span> -->
-<!--                                     offcanvas menu -->
-<!--                                     <div class="offcanvas-menu closed"> -->
-<!--                                         <span class="icon-close close_menu"></span> -->
-<!--                                         <div class="author-author__info"> -->
-<!--                                             <div class="author__avatar v_middle"> -->
-<!--                                                 <img src="img/user-avater.png" alt="user avatar"> -->
-<!--                                             </div> -->
-<!--                                         </div> -->
-<!--                                         end /.author-author__info -->
-<!--                                         <div class="author__notification_area"> -->
-<!--                                             <ul> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="notification.html"> -->
-<!--                                                         <div class="icon_wrap"> -->
-<!--                                                             <span class="icon-bell"></span> -->
-<!--                                                             <span class="notification_count noti">25</span> -->
-<!--                                                         </div> -->
-<!--                                                     </a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="message.html"> -->
-<!--                                                         <div class="icon_wrap"> -->
-<!--                                                             <span class="icon-envelope"></span> -->
-<!--                                                             <span class="notification_count msg">6</span> -->
-<!--                                                         </div> -->
-<!--                                                     </a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="cart.html"> -->
-<!--                                                         <div class="icon_wrap"> -->
-<!--                                                             <span class="icon-basket"></span> -->
-<!--                                                             <span class="notification_count purch">2</span> -->
-<!--                                                         </div> -->
-<!--                                                     </a> -->
-<!--                                                 </li> -->
-<!--                                             </ul> -->
-<!--                                         </div> -->
-<!--                                         start .author__notification_area -->
-<!--                                         <div class="dropdown dropdown--author"> -->
-<!--                                             <ul> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="author.html"> -->
-<!--                                                         <span class="icon-user"></span>Profile</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard.html"> -->
-<!--                                                         <span class="icon-home"></span> Dashboard</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="updatecheck"> -->
-<!--                                                         <span class="icon-settings"></span> Setting</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="cart.html"> -->
-<!--                                                         <span class="icon-basket"></span>Purchases</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="favourites.html"> -->
-<!--                                                         <span class="icon-heart"></span> Favourite</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard-add-credit.html"> -->
-<!--                                                         <span class="icon-credit-card"></span>Add Credits</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard-statement.html"> -->
-<!--                                                         <span class="icon-chart"></span>Sale Statement</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard-upload.html"> -->
-<!--                                                         <span class="icon-cloud-upload"></span>Upload Item</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard-manage-item.html"> -->
-<!--                                                         <span class="icon-notebook"></span>Manage Item</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="dashboard-withdrawal.html"> -->
-<!--                                                         <span class="icon-briefcase"></span>Withdrawals</a> -->
-<!--                                                 </li> -->
-<!--                                                 <li> -->
-<!--                                                     <a href="logout"> -->
-<!--                                                         <span class="icon-logout"></span>Logout</a> -->
-<!--                                                 </li> -->
-<!--                                             </ul> -->
-<!--                                         </div> -->
-<!--                                         <div class="text-center"> -->
-<!--                                             <a href="signup.html" class="author-area__seller-btn inline">Become a -->
-<!--                                                 Seller</a> -->
-<!--                                         </div> -->
-<!--                                     </div> -->
-<!--                                 </div> -->
-<!--                                 end /.mobile_content -->
                             </div>
                         </div>
                     </div>
@@ -405,3 +300,4 @@
 
 </body>
 </html>
+

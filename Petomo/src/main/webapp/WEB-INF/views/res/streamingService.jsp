@@ -7,23 +7,21 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+ 
 
 <html>
 <head>
 <meta charset="UTF-8">
-
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
   <script>
   
   $(window).on("load",function(){
-	  
 		$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
-
-		
 // 		소켓
-		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
 			  stompClient.subscribe('/topic/chats', function(msg) { 
@@ -60,16 +58,31 @@
 		    	  stompClient.send('/app/hello', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
 		});
-		
- 
-
-		
-// 		스트리밍		
-		var vlc0 = document.getElementById('vlc0');/* 바로밑에꺼까지 영상스트리밍 */
-		vlc0.playlist.playItem( vlc0.playlist.add('rtsp://203.233.196.14:1935/petlive01/myStream') );
-  
   });
+ 
+  
+  
   </script>
+  <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
+  <script type="text/javascript">/*비디오 스트리밍*/
+ var sessionSitter = "${sessionScope.sessionId}";
+  var url = "http%3A%2F%2F203.233.196.14%3A1935%2F"+sessionSitter+"%2FmyStream%2Fplaylist.m3u8";
+WowzaPlayer.create('playerElement',
+    {
+    "license":"PLAY2-efNfK-A3XXW-kveHU-p3tdP-cc8Za",
+    "title":"",
+    "description":"",
+    "sourceURL": url,
+    "autoPlay":false,
+    "volume":"75",
+    "mute":false,
+    "loop":false,
+    "audioOnly":false,
+    "uiShowQuickRewind":true,
+    "uiQuickRewindSeconds":"30"
+    }
+);
+</script><!--여기까지 비디오 스트리밍  -->
   
 </head>
 
@@ -78,39 +91,18 @@
 <section class="single-product-desc">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:60%;">
+                <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:40%; margin-left: 100px;">
                     <div class="item-preview" sytle="heigth:60%;">
 <!--                         스트리밍 -->
                         <div class="item-prev-area">
                             <div class="preview-img-wrapper">
-                         		<script src="http://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<!-- Or if you want a more recent canary version -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
-<video id="video" SRC ="http://203.233.196.14:1935/'+${sessionScope.sessionId}+'/myStream/playlist.m3u8"></video>
-<script>
-  var video = document.getElementById('video');
-  if(Hls.isSupported()) {
-    var hls = new Hls();
-    hls.loadSource('http://203.233.196.14:1935/petlive01/myStream/playlist.m3u8');
-    hls.attachMedia(video);
-    hls.on(Hls.Events.MANIFEST_PARSED,function() {
-      video.play();
-  });
- }
- // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
- // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
- // This is using the built-in support of the plain video element, without using hls.js.
- // Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
- // white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
-  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.addEventListener('loadedmetadata',function() {
-      video.play();
-    });
-  }
-  
-</script>
+                         	
+<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0"></div>
+
+    <div id="myElement"></div>
                             </div><!--ends: .preview-img-wrapper-->
                         </div><!--Ends: .item-prev-area-->
+
 <!-- 				지도 -->
                         <div class="item-preview--excerpt">
                         	<div>
@@ -119,7 +111,6 @@
                         </div>
                     </div><!-- ends: .item-preview-->
                 </div><!-- ends: .col-md-8 -->
-                
                 
                 <div class="col-lg-4 col-md-12" style="flex: 0 0 40%; max-width:40%;">
                     <aside class="sidebar sidebar--single-product">
@@ -158,9 +149,6 @@
         </div><!-- ends: .container -->
     </section><!-- ends: .single-product-desc -->
     
-    
-<!--     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script> -->
-    <!-- inject:js-->
 <!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>

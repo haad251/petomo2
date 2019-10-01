@@ -71,6 +71,13 @@ values(
 		SET res_status=#{res_status}
 		WHERE res_id=#{res_id}
  </update>
+ 
+  <update id="insertReview"  parameterType="ReservationVO">
+      	UPDATE reservation_tb
+		SET res_rate=#{res_rate}, res_review=#{res_review}
+		WHERE res_id=#{res_id}
+ </update>
+
 
  
  <!--[Map] Location 위치 정보 인서트 -->

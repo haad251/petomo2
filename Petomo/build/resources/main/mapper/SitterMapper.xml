@@ -38,6 +38,13 @@
 		)
  </insert>
  
+ <delete id="deleteSitterImage" parameterType="SitterVO">
+		DELETE 
+		FROM file_tb
+		WHERE file_type = 'sitter' 
+		AND file_no=#{st_id}
+ </delete>
+ 
   <insert id="insertSitter" parameterType="SitterVO">
 		INSERT INTO sitter_tb 
 		VALUE(
@@ -56,5 +63,12 @@
 			'0'
 		)
  </insert>
+ 
+  <select id="selectSitterProfileImg" parameterType="SitterVO" resultType="FileVO">
+   	    SELECT *
+		FROM file_tb
+		WHERE file_type = 'sitter' 
+		AND file_no=#{st_id}
+ </select>
 
 </mapper>

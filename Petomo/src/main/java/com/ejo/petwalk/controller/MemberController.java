@@ -1,5 +1,6 @@
 package com.ejo.petwalk.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -10,17 +11,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ejo.petwalk.service.AwsS3Service;
 import com.ejo.petwalk.service.MemberService;
+import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
+ 
 
 @Controller
 public class MemberController {
 	
 	@Autowired
 	MemberService msv;
+	@Autowired
+	AwsS3Service aws3sv;
+	
 	
 //	테스트용
 	@RequestMapping(value="/memberLogin", method=RequestMethod.GET)
@@ -47,6 +55,13 @@ public class MemberController {
 		MemberVO result = msv.login(member);
 		session.setAttribute("sessionId", result.getMb_id());
 		session.setAttribute("sessionName", result.getMb_name());
+		
+
+		FileVO file = msv.selectMemberProfileImg(result);
+		if(file==null) 	
+			session.setAttribute("sessionProfileImg", "defaultImage.png");
+		else
+			session.setAttribute("sessionProfileImg", file.getFile_sav());
 		return "redirect:/";
 	}
 	
@@ -106,6 +121,7 @@ public class MemberController {
 		int result = msv.deleteAccount(member);
 			return "redirect:/logout";
 	}
+	
 	@RequestMapping(value = "/dogIdCheck", method = RequestMethod.POST)
 	public @ResponseBody MemberVO dogIdCheck(PetVO pet,Model model){
 		MemberVO result = msv.dogIdCheck(pet);
@@ -127,4 +143,39 @@ public class MemberController {
 		return list;
 	}
 	
+	
+//	멤버 사진 삭제/업로드관련
+	
+	@RequestMapping(value = "/deleteMemberImage")
+	public String deleteMemberImage (HttpSession session){
+		MemberVO member = new MemberVO();
+		member.setMb_id((String)session.getAttribute("sessionId"));
+		aws3sv.deleteObject("member", (String)session.getAttribute("sessionProfileImg"));
+		msv.deleteMemberImage(member);
+		session.setAttribute("sessionProfileImg", "defaultImage.png");
+		return "redirect:/memberInfo";
+	}
+	
+	@RequestMapping(value = "/insertMemberImage", method=RequestMethod.POST)
+	public String insertMemberImage (MultipartFile uploadfile,HttpSession session,Model model){
+		if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
+			
+//			있으면 삭제
+			if(session.getAttribute("sessionProfileImg")!=null) {
+				MemberVO member = new MemberVO();
+				member.setMb_id((String)session.getAttribute("sessionId"));
+				aws3sv.deleteObject("member", (String)session.getAttribute("sessionProfileImg"));
+				msv.deleteMemberImage(member);
+			}
+			
+			String file_org = uploadfile.getOriginalFilename();
+			Date date = new Date();
+			String file_sav = date.getTime() + file_org;
+			FileVO memberFile = new FileVO(file_sav,file_org,"member",(String)session.getAttribute("sessionId")); 
+			msv.insertMemberImage(memberFile);
+			aws3sv.uploadObject(uploadfile, "member/"+file_sav);
+			session.setAttribute("sessionProfileImg", file_sav);
+		}
+		return "redirect:/memberInfo";
+	}
 }

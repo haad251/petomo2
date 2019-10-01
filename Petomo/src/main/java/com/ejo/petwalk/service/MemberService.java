@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.MemberMapper;
+import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
@@ -59,4 +60,17 @@ public class MemberService {
 	public List<PetVO> dogList(PetVO pet) {
 		return dao.selectDogByMemberId(pet);
 	}
+
+	public int insertMemberImage(FileVO memberFile){
+		return dao.insertMemberImage(memberFile);
+	}
+
+	public int deleteMemberImage(MemberVO member){
+		return dao.deleteMemberImage(member);
+	}
+
+	public FileVO selectMemberProfileImg(MemberVO member){
+		return dao.selectMemberProfileImg(member);
+	}
+
 }

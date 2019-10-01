@@ -27,8 +27,6 @@ public class ReservationService {
 		return dao.selectChatAll(res_id);
 	}
 	
-	
-	
 //	Reservation
 	
 	public int insertReservation(ReservationVO res)  {
@@ -50,6 +48,11 @@ public class ReservationService {
     public int updateResStatus(ReservationVO res) {
 		return dao.updateResStatus(res);
 	}
+    
+    public int insertReview(ReservationVO res) {
+		return dao.insertReview(res);
+	}
+    
     
     
     

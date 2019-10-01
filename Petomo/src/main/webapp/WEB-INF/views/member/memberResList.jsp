@@ -6,7 +6,17 @@
 
 <head>
     <meta charset="UTF-8">
-   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+<script>
+	$(function(){
+		$(".res_review_btn").on("click",function(){
+			var res = $(this).attr("data-res");
+			$("#hiddenResId").val(res);
+		});
+	});
+</script>
+
 </head>
 
 <body class="preload">
@@ -79,205 +89,119 @@
                     <div class="col-md-12">
                         <div class="statement_table table-responsive">
                             <table class="table">
-                 
                                 <thead>
                                     <tr>
-                                        <th>Date</th>
-                                        <th>Order ID</th>
-                                        <th>Author</th>
-                                        <th>Detail</th>
-                                        <th>Type</th>
-                                        <th>Price</th>
-                                        <th>Earning</th>
-                                        <th>Action</th>
+                                        <th>日付</th>
+                                        <th>時間</th>
+                                        <th>シッター</th>　
+                                        <th>サービス名</th>
+                                        <th>値段</th>
+                                        <th>メモ</th>
+                                        <th>予約状況</th>
+                                        <th>詳細</th>
                                     </tr>
                                 </thead>
-                                <tbody id = "dog">
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">AazzTech</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Visibility Manager Subscriptions</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="sale">Sale</span>
-                                        </td>
-                                        <td class="price">$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>03 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Markober</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">DigiPro Coffee Shop</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="purchase">Purchase</span>
-                                        </td>
-                                        <td class="price">$30</td>
-                                        <td class="earning subtract">-$30</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Themexylum</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">DigiPro Extension Bundle</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="sale">Sale</span>
-                                        </td>
-                                        <td class="price">$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>05 Apr 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">AazzTech</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Stack - Responsive Bootstrap 4 Admin Template</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="sale">Sale</span>
-                                        </td>
-                                        <td class="price">$20</td>
-                                        <td class="earning">$10</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>25 Dec 2016</td>
-                                        <td>MP810394</td>
-                                        <td class="author text-center" colspan="2">Via Payoneer</td>
-                                        <td class="type">
-                                            <span class="credited">Credited</span>
-                                        </td>
-                                        <td class="price">$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author text-center" colspan="2">Via Paypal</td>
-                                        <td class="type">
-                                            <span class="withdrawal">Withdraw</span>
-                                        </td>
-                                        <td class="price">$350</td>
-                                        <td class="earning subtract">-$350</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>0 Feb 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Artcorner</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Rida - Applanding Onepage </a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="purchase">Purchase</span>
-                                        </td>
-                                        <td class="price">$30</td>
-                                        <td class="earning subtract">-$30</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>26 May 2016</td>
-                                        <td>MP81024</td>
-                                        <td class="author">Awesomaiya</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Table Generator extension bundle</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="sale">Sale</span>
-                                        </td>
-                                        <td class="price">$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>26 Aug 2017</td>
-                                        <td>MP810654</td>
-                                        <td class="author">Codepoets</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Kamla One page portfolio</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="sale">Sale</span>
-                                        </td>
-                                        <td class="price">$49</td>
-                                        <td class="earning">$24.50</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>09 Jul 2017</td>
-                                        <td>MP810094</td>
-                                        <td class="author">Designing</td>
-                                        <td class="detail">
-                                            <a href="single-product.html">Ajaxified karma loader</a>
-                                        </td>
-                                        <td class="type">
-                                            <span class="purchase">Purchased</span>
-                                        </td>
-                                        <td class="price">$29</td>
-                                        <td class="earning">-$29</td>
-                                        <td class="action">
-                                            <a href="invoice.html">view</a>
-                                        </td>
-                                    </tr>
+                                <tbody>
+                                	<c:forEach items="${rList}" var="res" >
+	                                    <tr>
+	                                        <td>${res.date}</td>
+	                                        <td>${res.res_start}~${res.res_end}</td>
+	                                        <td>${res.st_id}</td>　
+	                                        <td>${res.service_name}</td>
+    	                                    <td>${res.res_amount}</td>
+            	                            <td>${res.res_memo}</td>
+            	                           	<td class="type">
+            	                           	 <c:choose>
+										         <c:when test = "${res.res_status=='予約待機'}">
+										           	<span class="sale">
+														${res.res_status}
+    	        	                           		</span>
+										         </c:when>
+										         <c:when test ="${res.res_status=='キャンセル'}">
+										           <span class="withdrawal">
+														${res.res_status}
+													</span>	   
+										         </c:when>
+										         <c:when test ="${res.res_status=='予約完了'}">
+										           <span class="purchase">
+														${res.res_status}
+													</span>	
+										         </c:when>										         
+										         <c:when test ="${res.res_status=='利用済み' && res.res_rate==null}">
+										           <span class="credited">
+														<a href="#" class="res_review_btn"
+														data-target="#myModal1" data-toggle="modal"
+														data-res="${res.res_id}" style="color:yellow;">
+														レビュー作成</a>
+													</span>	   
+										         </c:when>
+										         <c:when test ="${res.res_status=='利用済み'  && res.res_rate!=null}">
+										           <span class="credited">
+														レビュー作成済み
+													</span>	   
+										         </c:when>
+										      </c:choose>
+            	                           	</td>
+	                                        <td class="action">
+	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
+	                                        </td>
+	                                    </tr>
+                                    </c:forEach>
+                                
                                 </tbody>
                             </table>
-                            <!-- Start Pagination -->
-                            <!-- Start Pagination -->
-                            <nav class="pagination-default">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true"><i class="fa fa-long-arrow-left"></i></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">10</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true"><i class="fa fa-long-arrow-right"></i></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav><!-- Ends: .pagination-default -->
                         </div><!-- ends: .statement_table -->
                     </div>
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard-area -->
+    
+    <!-- Modal Rating -->
+    <div class="modal fade rating_modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title" id="rating_modal">レビューを作成</h3>
+                </div>
+                <!-- end /.modal-header -->
+                <div class="modal-body">
+                    <form action="insertReview">
+                    <input type="hidden" id="hiddenResId" name="res_id" >
+                        <ul>
+                            <li>
+                                <p>評価</p>
+                                <div class="right_content btn btn--round btn--white btn--md">
+                                    <select name="res_rate" class="give_rating">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="rating_field">
+                            <label for="rating_field">コメント</label>
+                            <textarea name="res_review" id="rating_field" class="text_field" placeholder="コメントを書いてください"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-md btn-primary">登録</button>
+                        <button class="btn modal_close" data-dismiss="modal">キャンセル</button>
+                    </form>
+                    <!-- end /.form -->
+                </div>
+                <!-- end /.modal-body -->
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

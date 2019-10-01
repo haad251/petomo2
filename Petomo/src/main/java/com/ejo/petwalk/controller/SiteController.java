@@ -1,14 +1,20 @@
 package com.ejo.petwalk.controller;
 
+import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.ejo.petwalk.service.MemberService;
+import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -16,10 +22,11 @@ public class SiteController {
 	
 	@Autowired
 	SitterService ssv;
-	
 	@Autowired
 	MemberService msv;
-	
+	@Autowired
+	ReservationService rsv;
+
 	@RequestMapping(value="/")
 	public String home() {	
 		return "home";
@@ -88,7 +95,10 @@ public class SiteController {
 		return"member/updateCheck";
 	}
 	@RequestMapping(value="/memberResList")
-	public String memberResList(){
+	public String memberResList(HttpSession session,Model model){
+		List<HashMap<String,String>> rList = rsv.selectResAllByMb_id((String)session.getAttribute("sessionId"));
+		System.out.println(rList);
+		model.addAttribute("rList",rList);
 		return"member/memberResList";
 	}
 	

@@ -59,6 +59,14 @@ public class ReservationController {
 //		Thread.sleep(100); // delay
 		return chat;
 	}
+	
+	@RequestMapping(value="/insertReview",method=RequestMethod.GET)
+	public String insertReview(Model model,ReservationVO res) {
+		rsv.insertReview(res);
+		return "redirect:/memberResList";
+	}
+	
+	
 }
 
 

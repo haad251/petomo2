@@ -66,6 +66,11 @@ values(
 	AND mb_id=#{mb_id}
 </select>
 
+ <update id="updateResStatus"  parameterType="ReservationVO">
+      	UPDATE reservation_tb
+		SET res_status=#{res_status}
+		WHERE res_id=#{res_id}
+ </update>
 
  
  <!--[Map] Location 위치 정보 인서트 -->

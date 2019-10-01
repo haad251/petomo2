@@ -57,7 +57,7 @@ public class SitterController {
 		
 		FileVO file = ssv.selectSitterProfileImg(sitter);
 		if(file==null) 	
-			session.setAttribute("sessionProfileImg", "defaultImage");
+			session.setAttribute("sessionProfileImg", "defaultImage.png");
 		else
 			session.setAttribute("sessionProfileImg", file.getFile_sav());
 		return "home";
@@ -91,7 +91,6 @@ public class SitterController {
 	
 	@RequestMapping(value = "/sitterResList")
 	public String sitterResList (HttpSession session,Model model){
-		System.out.println((String)session.getAttribute("sessionId"));
 		 List<HashMap<String,String>> rList = rsv.selectResAllBySt_id((String)session.getAttribute("sessionId"));
 		System.out.println(rList);
 		model.addAttribute("rList",rList);
@@ -104,7 +103,7 @@ public class SitterController {
 		sitter.setSt_id((String)session.getAttribute("sessionId"));
 		aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
 		ssv.deleteSitterImage(sitter);
-		session.setAttribute("sessionProfileImg", "defaultImage");
+		session.setAttribute("sessionProfileImg", "defaultImage.png");
 		return "redirect:/sitterInfoModi";
 	}
 	
@@ -112,12 +111,12 @@ public class SitterController {
 	public String insertSitterImage (MultipartFile uploadfile,HttpSession session,Model model){
 		if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
 			
-//			일단삭제
-			SitterVO sitter = new SitterVO();
-			sitter.setSt_id((String)session.getAttribute("sessionId"));
-			aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
-			ssv.deleteSitterImage(sitter);
-
+			if(session.getAttribute("sessionProfileImg")!=null) {
+				SitterVO sitter = new SitterVO();
+				sitter.setSt_id((String)session.getAttribute("sessionId"));
+				aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
+				ssv.deleteSitterImage(sitter);
+			}
 			
 			String file_org = uploadfile.getOriginalFilename();
 			Date date = new Date();
