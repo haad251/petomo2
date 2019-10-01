@@ -100,16 +100,6 @@
                                                         </ul>
                                                     </div>
                                                 </li>
-                                                 <li class="has_dropdown">
-                                                    <a href="all-products.html">User★</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="goSitterInfoModi">유저 마이페이지</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
                                             </ul>
                                         </div>
                                         <!-- /.navbar-collapse -->
@@ -211,7 +201,7 @@
                                             </div>
                                             <ul>
                                                 <li>
-                                                    <a href="author.html">
+                                                    <a href="updateCheck" >
                                                         <span class="icon-user"></span>マイページ</a>
                                                 </li>
                                                 <li>

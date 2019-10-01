@@ -16,7 +16,7 @@ public class MemberService {
 	@Autowired
 	MemberMapper dao;
 
-	public MemberVO selectMember(MemberVO member) throws Exception {
+	public MemberVO selectMember(MemberVO member) {
 		return dao.selectMember(member);
 	}
 

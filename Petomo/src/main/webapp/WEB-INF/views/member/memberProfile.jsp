@@ -30,8 +30,8 @@
     				tag += '<td>'+resp[i].pet_weight+'</td>';
     				tag += '<td>'+resp[i].pet_birth+'</td>';
     				tag += '<td>'+resp[i].pet_neuter+'</td>';
-    				tag += '<td><input class="del" data-value="'+resp[i].pet_id+'" type="button" value="삭제"  />';
-    				tag += '    <input class="update"  data-value="'+resp[i].pet_id+'" type="button" value="수정"  />';
+    				tag += '<td><input class="del" data-value="'+resp[i].pet_id+'" type="button" value="삭제" id = "delete" />';
+    				tag += '    <input class="update"  data-value="'+resp[i].pet_id+'" type="button" value="수정" id = "update" />';
     				tag += '</td>';
     				tag += '</tr>';
     			}
