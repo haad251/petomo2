@@ -201,9 +201,7 @@
                                             </div>
                                             <ul>
                                                 <li>
-                                                    <a href="memberProfile">
-                                                        <span class="icon-user"></span>Profile</a>
-                                                    <a href="memberInfo">
+                                                    <a href="updateCheck" >
                                                         <span class="icon-user"></span>マイページ</a>
                                                 </li>
                                                 <li>

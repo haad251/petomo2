@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
-import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -80,9 +79,12 @@ public class SiteController {
 	
 	
 //	member
-	@RequestMapping(value="/memberInfo")
+
+	
+	@RequestMapping(value="/memberInfo", method=RequestMethod.GET)
 	public String memberInfo(){ 
-	return"member/memberInfo";}
+		return "member/memberInfo";
+	}
 	
 
 	@RequestMapping(value="/memberProfile")

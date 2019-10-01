@@ -99,15 +99,15 @@ public class MemberController {
 		}
 			return result;
 	}
-	@RequestMapping(value="/goupdate", method=RequestMethod.POST)
-	public String goupdate(MemberVO member ,HttpSession session ,Model model){ 
+	@RequestMapping(value="/memberInfo", method=RequestMethod.POST)
+	public String memberInfo(MemberVO member ,HttpSession session ,Model model){ 
 		MemberVO result = msv.login(member);
 		model.addAttribute("mbname", result.getMb_name());
 		model.addAttribute("mbnickname", result.getMb_nickname());
 		model.addAttribute("mbaddress", result.getMb_addr());
 		model.addAttribute("mbemailaddress",result.getMb_email());
 		model.addAttribute("mblineid", result.getMb_lineid());
-		return "customerInfo";
+		return "member/memberInfo";
 	}
 	@RequestMapping(value = "/memberupdate", method = RequestMethod.POST)
 	public String memberupdate(MemberVO member) {
