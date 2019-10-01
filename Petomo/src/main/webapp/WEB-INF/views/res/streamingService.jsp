@@ -12,20 +12,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-  <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-=======
-
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
-
 <!-- 스트리밍  -->
-
-
 
   <script>
   
@@ -96,6 +87,27 @@
   
   
   </script>
+  <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
+  <script type="text/javascript">/*비디오 스트리밍*/
+ var sessionSitter = "${sessionScope.sessionId}";
+  var url = "http%3A%2F%2F203.233.196.14%3A1935%2F"+sessionSitter+"%2FmyStream%2Fplaylist.m3u8";
+WowzaPlayer.create('playerElement',
+    {
+    "license":"PLAY2-efNfK-A3XXW-kveHU-p3tdP-cc8Za",
+    "title":"",
+    "description":"",
+    "sourceURL": url,
+    "autoPlay":false,
+    "volume":"75",
+    "mute":false,
+    "loop":false,
+    "audioOnly":false,
+    "uiShowQuickRewind":true,
+    "uiQuickRewindSeconds":"30"
+    }
+);
+</script><!--여기까지 비디오 스트리밍  -->
+  
   
 </head>
 
@@ -104,13 +116,14 @@
 <section class="single-product-desc">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:40%;">
+                <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:40%; margin-left: 100px;">
                     <div class="item-preview" sytle="heigth:60%;">
 <!--                         스트리밍 -->
                         <div class="item-prev-area">
                             <div class="preview-img-wrapper">
                          	
-<div id="playerElement" style="width:1; height:0; padding:0 0 65% 0"></div>
+<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0"></div>
+
     <div id="myElement"></div>
                             </div><!--ends: .preview-img-wrapper-->
                         </div><!--Ends: .item-prev-area-->
@@ -123,7 +136,6 @@
                         </div>
                     </div><!-- ends: .item-preview-->
                 </div><!-- ends: .col-md-8 -->
-                
                 
                 <div class="col-lg-4 col-md-12" style="flex: 0 0 40%; max-width:40%;">
                     <aside class="sidebar sidebar--single-product">
@@ -158,7 +170,6 @@
                         </div><!-- end .sidebar--card -->
                     </aside><!-- ends: .sidebar -->
                 </div><!-- ends: .col-md-4 -->
->>>>>>> refs/remotes/origin/master
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section><!-- ends: .single-product-desc -->

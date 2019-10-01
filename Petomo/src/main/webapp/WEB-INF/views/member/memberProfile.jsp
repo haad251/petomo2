@@ -10,8 +10,7 @@
   <script>
     $(function(){
    	init();
-	doglist(resp);
-});
+	});
     function init() {
     var memberId = $("#memberId").val();
     var tag = "";
