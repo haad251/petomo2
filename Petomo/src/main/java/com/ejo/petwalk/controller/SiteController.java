@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
@@ -56,9 +57,9 @@ public class SiteController {
 		return "manager/managerMyPage";
 	}
 	
-	@RequestMapping(value="/managerService")
+	@RequestMapping(value="/manageService")
 	public String managerService(){ 
-		return "manager/managerMyPage";
+		return "manager/manageService";
 	}
 	
 	@RequestMapping(value="/registerService")
@@ -69,6 +70,11 @@ public class SiteController {
 	@RequestMapping(value="/serviceDetail")
 	public String serviceDetail(){ 
 		return "manager/serviceDetail";
+	}
+	
+	@RequestMapping(value="/managePetSitter")
+	public String managePetSitter(){
+		return "manager/managePetSitter";
 	}
 	
 	

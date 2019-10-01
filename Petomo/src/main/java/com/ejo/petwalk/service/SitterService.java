@@ -49,6 +49,11 @@ public class SitterService {
 		return dao.selectSitterProfileImg(sitter);
 	}
 	
+	//시터의 활동 가능 여부 상태 업데이트를 위한 메소드-Manager용
+	public int updateSitterCheck(SitterVO sitter) {
+		return dao.updateSitterCheck(sitter);
+	}
+	
 	
 	
 	

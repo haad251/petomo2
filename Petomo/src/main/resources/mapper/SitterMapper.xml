@@ -28,6 +28,18 @@
  		SELECT * FROM sitter_tb;
  </select>
  
+ <!--  Manager이 시터의 활동을 허가 또는 금지 시키는 것-->
+ <update id="updateSitterCheck" parameterType="SitterVO">
+ 		UPDATE sitter_tb
+ 		<if test='st_check=="N"'>
+		SET st_check="Y"
+		</if>
+		<if test='st_check=="Y"'>
+		SET st_check="N"
+		</if>
+		WHERE st_id=#{st_id}
+ </update>
+ 
  <insert id="insertSitterImage" parameterType="FileVO">
 		INSERT INTO file_tb (file_sav,file_org,file_type,file_no)
 		VALUE(

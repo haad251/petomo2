@@ -13,5 +13,4 @@ public interface ManagerMapper {
 	public int deleteOneService(String service_id) throws Exception;
 	public int updateService(ServiceVO service) throws Exception;
 	
-	
 }
