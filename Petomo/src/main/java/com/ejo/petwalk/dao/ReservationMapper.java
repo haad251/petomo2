@@ -17,7 +17,7 @@ public interface ReservationMapper {
     public ReservationVO selectOneRes(String res_id);
     public List<HashMap<String,String>> selectResAllBySt_id(String st_id);
     public List<HashMap<String,String>> selectResAllByMb_id(String mb_id);
-    
+    public int updateResStatus(ReservationVO res);
     
 	/* map���� CRUD */
     public int insertLoc(LocationVO loc);

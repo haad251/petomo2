@@ -1,7 +1,6 @@
 package com.ejo.petwalk.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +54,12 @@ public class SitterController {
 		session.setAttribute("sessionId",result.getSt_id());
 		session.setAttribute("sessionName", result.getSt_name());
 		session.setAttribute("sessionSitter","on");
+		
+		FileVO file = ssv.selectSitterProfileImg(sitter);
+		if(file==null) 	
+			session.setAttribute("sessionProfileImg", "defaultImage");
+		else
+			session.setAttribute("sessionProfileImg", file.getFile_sav());
 		return "home";
 	}
 	
@@ -70,23 +75,8 @@ public class SitterController {
 	}
 	
 	@RequestMapping(value="/updateSitter", method=RequestMethod.POST)
-	public String updateSitter(SitterVO sitter,MultipartFile uploadfile) throws IOException{ 
-		try {
+	public String updateSitter(SitterVO sitter) throws IOException{ 
 			ssv.updateSitter(sitter);
-			
-			if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
-				String file_org = uploadfile.getOriginalFilename();
-				Date date = new Date();
-				String file_sav = date.getTime() + file_org;
-				
-				FileVO sitterFile = new FileVO(file_sav,file_org,"sitter",sitter.getSt_id()); 
-				
-				ssv.insertSitterImage(sitterFile);
-				aws3sv.uploadObject(uploadfile, "sitter/"+file_sav);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return "redirect:/sitterInfoModi";
 	}
 	
@@ -107,5 +97,53 @@ public class SitterController {
 		model.addAttribute("rList",rList);
 		return "sitter/sitterResList";
 	}
+	
+	@RequestMapping(value = "/deleteSitterImage")
+	public String deleteSitterImage (HttpSession session){
+		SitterVO sitter = new SitterVO();
+		sitter.setSt_id((String)session.getAttribute("sessionId"));
+		aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
+		ssv.deleteSitterImage(sitter);
+		session.setAttribute("sessionProfileImg", "defaultImage");
+		return "redirect:/sitterInfoModi";
+	}
+	
+	@RequestMapping(value = "/insertSitterImage", method=RequestMethod.POST)
+	public String insertSitterImage (MultipartFile uploadfile,HttpSession session,Model model){
+		if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
+			
+//			일단삭제
+			SitterVO sitter = new SitterVO();
+			sitter.setSt_id((String)session.getAttribute("sessionId"));
+			aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
+			ssv.deleteSitterImage(sitter);
 
+			
+			String file_org = uploadfile.getOriginalFilename();
+			Date date = new Date();
+			String file_sav = date.getTime() + file_org;
+			FileVO sitterFile = new FileVO(file_sav,file_org,"sitter",(String)session.getAttribute("sessionId")); 
+			ssv.insertSitterImage(sitterFile);
+			aws3sv.uploadObject(uploadfile, "sitter/"+file_sav);
+			session.setAttribute("sessionProfileImg", file_sav);
+		}
+		return "redirect:/sitterInfoModi";
+	}
+
+	@RequestMapping(value="/confirmReservation",method=RequestMethod.POST)
+	public String confirmReservation(ReservationVO res) {
+		res.setRes_status("予約完了");
+		rsv.updateResStatus(res);
+		return "redirect:/sitterResList";
+	}
+	
+	@RequestMapping(value="/cancelReservation",method=RequestMethod.POST)
+	public String cancelReservation(ReservationVO res) {
+		res.setRes_status("キャンセル");
+		rsv.updateResStatus(res);
+		return "redirect:/sitterResList";
+	}
+	
+	
+	
 }

@@ -194,12 +194,13 @@
                                    <c:if test="${sessionScope.sessionId!=null && sessionScope.sessionSitter==null}">
                                      <div class="author-author__info has_dropdown">
                                         <div class="author__avatar online">
-                                            <img src="img/user-avater.png" alt="user avatar" class="rounded-circle">
+                                            <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
+                                            
                                         </div>
                                         <div class="dropdown dropdown--author">
                                             <div class="author-credits d-flex">
                                                 <div class="author__avatar">
-                                                    <img src="img/user-avater.png" alt="user avatar" class="rounded-circle">
+                                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
                                                 </div>
                                                  <div class="autor__info">
                                                     <p class="name">
@@ -231,12 +232,12 @@
                            			<c:if test="${sessionScope.sessionId!=null && sessionScope.sessionSitter!=null}">
                                      <div class="author-author__info has_dropdown">
                                         <div class="author__avatar online">
-                                            <img src="img/user-avater.png" alt="user avatar" class="rounded-circle">
+                                            <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
                                         </div>
                                         <div class="dropdown dropdown--author">
                                             <div class="author-credits d-flex">
                                                 <div class="author__avatar">
-                                                    <img src="img/user-avater.png" alt="user avatar" class="rounded-circle">
+                                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
                                                 </div>
                                                  <div class="autor__info">
                                                     <p class="name">

@@ -24,25 +24,32 @@ public class SitterService {
 	}
 	
 	public int updateSitter(SitterVO sitter){
-		int result = dao.updateSitter(sitter);
-		return result;
+		return dao.updateSitter(sitter);
 	}
 	
 	public SitterVO selectOneSitter(String st_id){
-		SitterVO result = dao.selectOneSitter(st_id);
-		return result;
+		return dao.selectOneSitter(st_id);
 	}
 
 
 	public int insertSitterImage(FileVO sitterFile){
-		int result = dao.insertSitterImage(sitterFile);
-		return result;
+		return dao.insertSitterImage(sitterFile);
 	}
 
+	public int deleteSitterImage(SitterVO sitter){
+		return dao.deleteSitterImage(sitter);
+	}
 	
 	public List<SitterVO> selectAllSitter(){
 		List<SitterVO> result = dao.selectAllSitter();
 		return result;
 	}
+	
+	public FileVO selectSitterProfileImg(SitterVO sitter){
+		return dao.selectSitterProfileImg(sitter);
+	}
+	
+	
+	
 	
 }

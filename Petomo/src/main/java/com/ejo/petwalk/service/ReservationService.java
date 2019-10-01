@@ -47,6 +47,10 @@ public class ReservationService {
     	return dao.selectResAllBySt_id(st_id);
     }
 
+    public int updateResStatus(ReservationVO res) {
+		return dao.updateResStatus(res);
+	}
+    
     
     
     

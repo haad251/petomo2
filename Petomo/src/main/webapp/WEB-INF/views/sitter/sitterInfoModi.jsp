@@ -8,7 +8,17 @@
 <html>
 
 <head>
+
     <title>Petomo</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    $(function(){
+    	$("#cover_photo").change(function(){
+  	 		$("#insertSPI").submit();
+    	});
+    });
+</script>
+    
 </head>
 
 <body class="preload">
@@ -17,7 +27,6 @@
 
         <div class="dashboard_contents section--padding">
             <div class="container">
-                <form action="updateSitter" class="setting_form" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="information_module">
@@ -25,17 +34,19 @@
                                     <div class="information_wrapper">
                                         <div class="profile_image_area">
                                             <div>
-                                                <img src="img/authplc.png" alt="Author profile area">
+                                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="Author profile area">
                                                 <div class="img_info">
                                                      <p class="bold">Profile Image</p>
                                                     <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
                                                 </div>
                                             </div>
+                                            <form action="insertSitterImage" id="insertSPI" method="POST" enctype="multipart/form-data">
                                             <label for="cover_photo" class="upload_btn">
                                                 <input type="file" id="cover_photo" name="uploadfile">
-                                                <span class="btn btn-sm btn-primary" aria-hidden="true">Upload New Image</span>
-                                                <a href="" class="btn btn-sm btn-danger">Delete Image</a>
+                                                <span id="SPIuploadBtn" class="btn btn-sm btn-primary" aria-hidden="true">アップロード</span>
+                                                <a href="deleteSitterImage" class="btn btn-sm btn-danger">削除</a>
                                             </label>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -43,6 +54,7 @@
                         </div><!-- ends: .col-md-12 -->
                        
 <!--                        <form action="updateSitter" class="setting_form" method="POST"> -->
+                      <form action="updateSitter" class="setting_form" method="POST" enctype="multipart/form-data">
                         <div class="col-md-12">
                             <div class="information_module">
                                 <div class="toggle_title">
@@ -161,12 +173,12 @@
                                 <button type="reset" class="btn btn-md btn-danger">キャンセル</button>
                             </div>
                         </div><!-- ends: .col-md-12 -->
-                    </div><!-- ends: .row -->
                   </form>
+                    </div><!-- ends: .row -->
                 <!-- end /form -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
-    </section><!-- ends: .dashboard-area -->     
+<!--     </section>ends: .dashboard-area      -->
      
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
@@ -37,12 +38,10 @@ public class AwsS3Service {
         }
 	}
 
-//	
-//	public void deleteObject(String date, String storedFileName) throws AmazonServiceException {
-//
-//		s3Client.deleteObject(new DeleteObjectRequest(bucketName + "/" + date, storedFileName));
-//
-//	}
+	
+	public void deleteObject(String foldername, String file_sav){
+		s3Client.deleteObject(new DeleteObjectRequest(bucketName + "/" + foldername, file_sav));
+	}
 //
 //	public Resource getObject(String date, String storedFileName) throws IOException {
 //		S3Object o = s3Client.getObject(new GetObjectRequest(bucketName + "/" + date, storedFileName));

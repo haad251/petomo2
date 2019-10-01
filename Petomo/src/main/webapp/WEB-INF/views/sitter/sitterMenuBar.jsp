@@ -15,16 +15,6 @@
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
                         <h2 class="page-title">Sitter Menu</h2>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Author Profile</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -42,14 +32,11 @@
                             <li>
                                 <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
                             </li>
+                            <li>
+                                <a href="sitterResList"><span class="lnr icon-notebook"></span>予約リスト</a>
+                            </li>
                             <li class="active s_jfont">
-                                <a href="goSitterInfoModi"><span class="lnr icon-settings"></span>情報変更</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-purchase.html"><span class="lnr icon-basket"></span>Purchase</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-add-credit.html"><span class="lnr icon-credit-card"></span>Add Credits</a>
+                                <a href="sitterInfoModi"><span class="lnr icon-settings"></span>マイページ</a>
                             </li>
                             <li style="width:200px;">
 <!--                                 <a href="dashboard-statement.html"><span class="lnr icon-chart"></span>Statements</a> -->

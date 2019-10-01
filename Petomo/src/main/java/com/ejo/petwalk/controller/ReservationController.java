@@ -53,17 +53,12 @@ public class ReservationController {
 		
 		rsv.insertChat(chat);   //채팅 디비로 전송
 		
-		
 		SimpleDateFormat sdf2 =new SimpleDateFormat("MM/dd HH:mm");
 		String chattime2 = sdf2.format(time);
 		chat.setChat_date(chattime2);
 //		Thread.sleep(100); // delay
 		return chat;
 	}
-	
-	
-	
-	
 }
 
 

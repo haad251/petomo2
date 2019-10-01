@@ -122,4 +122,12 @@ public class SiteController {
 		model.addAttribute("result", result);
 		return "res/sitterList";
 	}
+	
+	@RequestMapping(value="/sitterMapTest")
+	public String siterMapTest(){ 
+		return "sitter/sitterMapTest";
+	}
+	
+	
+	
 }

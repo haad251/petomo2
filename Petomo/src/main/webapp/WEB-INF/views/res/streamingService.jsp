@@ -18,8 +18,12 @@
   <script>
   
   $(window).on("load",function(){
+	  
+		$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
+
+		
 // 		소켓
-		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
 			  stompClient.subscribe('/topic/chats', function(msg) { 
@@ -37,7 +41,14 @@
 					  str += data.chat_date + '</p></div>';    
 				  }
 		        $("#chatForm").append(str);
+				$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 			  });
+			  
+			  
+			  $("#sendMessageText").keyup(function(e){
+				  if(e.keyCode == 13)  
+					  $("#sendMessageBtn").trigger('click');
+				  });
 			  
 			  $("#sendMessageBtn").click(function() {
 		    	  var sender="${sessionScope.sessionId}";
@@ -51,6 +62,8 @@
 		});
 		
  
+
+		
 // 		스트리밍		
 		var vlc0 = document.getElementById('vlc0');/* 바로밑에꺼까지 영상스트리밍 */
 		vlc0.playlist.playItem( vlc0.playlist.add('rtsp://203.233.196.14:1935/petlive01/myStream') );
