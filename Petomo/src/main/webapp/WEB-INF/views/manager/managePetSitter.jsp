@@ -15,14 +15,6 @@
 	    
 	    $(function(){
 	    	
-	    	//일본지도 클릭 이벤트
-	            $("#map-container").japanMap({
-	                onSelect : function(data){
-	                    alert(data.name);
-	                }
-	            });
-	        
-	    	
 	    	selectAllSitter();
 	    	
 			$(document).on("click","#activityBtn",function(){
@@ -94,13 +86,7 @@
   
      
     <section class="p-top-100 p-bottom-70 bgcolor">
-     <div class="container">
-            <div class="row">
-	             <div id="map-container">
-	             </div>
-            </div>
-     </div>
-            
+  
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -145,10 +131,6 @@
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
     <!-- endinject-->
-    
-    <!-- 일본지도 관련  js-->
-    <script src="theme_assets/js/jquery.japan-map.js"></script>
-    <script src="theme_assets/js/jquery.japan-map.min.js"></script>
 
 </body>
 </html>

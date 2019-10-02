@@ -54,14 +54,16 @@ public class ReservationService {
     
     
     
-	/* [map] CRUD */
-    // location ���� ����
+	/* [Map] CRUD */
+    // 동작이 실행된 location 저장
     public  int insertLoc(LocationVO loc)  {
     	return dao.insertLoc(loc);
     }
     
-    // ��� loaction ���� ��������
+    // 예약번호로 모든 loaction 정보 가져오기 
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id){
     	return dao.selectLocationInfoAll(res_id);
     }
+    
+
 }

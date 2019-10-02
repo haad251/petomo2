@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ejo.petwalk.service.ManagerService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.ServiceVO;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -112,7 +113,7 @@ public class ManagerController {
 	
 	//최근 등록된 5명의 시터 목록만 불러오기
 	@RequestMapping(value = "/selectNewSitterList", method = RequestMethod.POST)
-	public @ResponseBody List<SitterVO> selectNewSitterList() throws Exception {
+	public @ResponseBody ArrayList<SitterVO> selectNewSitterList() throws Exception {
 		ArrayList<SitterVO> newSitterList = new ArrayList <>();
 		List<SitterVO> result = sservice.selectAllSitter();
 		Collections.reverse(result); //저장된 순서대로 가져온 Sitter 리스트 역순으로 바꾸기 
@@ -142,5 +143,77 @@ public class ManagerController {
 		System.out.println(result);
 		return result;
 	}
+	
+	
+	/* MJ - 최근 예약과 지역별 매출 금액관련한 메소드*/
+	
+	//최근에 등록된 5개 예약만을 가져오기
+	@RequestMapping(value = "/selectNewResList", method = RequestMethod.POST)
+	public @ResponseBody ArrayList<ReservationVO> selectNewResList() throws Exception {
+		ArrayList<ReservationVO> newResList = new ArrayList <>();
+		List<ReservationVO> result = mservice.selectAllRes();
+		Collections.reverse(result); //저장된 순서대로 가져온 예약 리스트 역순으로 바꾸기 
+		for(int i = 0 ; i < result.size() ; i++) { //오류가 나는데 아마 예약 수가 5개 이하라서 그런 것 같음
+			if(i==5)
+				break;
+			newResList.add(result.get(i));
+		}
+		System.out.println(newResList);
+		return newResList;
+	}
+	
+	//서비스 이용이 끝난 데이터 바탕으로 서비스 전체 매출 액수
+	@RequestMapping(value = "/selectAllResByComStatus", method = RequestMethod.POST)
+	public @ResponseBody int selectAllResByComStatus() throws Exception {
+		int allAmount = 0;
+		List<ReservationVO> result = mservice.selectAllRes(); // 모든 예약 리스트 가져옴
+		for(int i = 0 ; i < result.size() ; i++) {
+			if(result.get(i).getRes_status().equals("利用済み"))
+				allAmount += Integer.parseInt(result.get(i).getRes_amount());
+		}
+		return allAmount;
+	}
+	
+	
+	//오늘(서버 날짜)의 매출 액수
+	@RequestMapping(value = "/selectResByDate", method = RequestMethod.POST)
+	public @ResponseBody int selectResByDate(String res_start) throws Exception {
+		System.out.println(res_start);
+		int allAmount = 0;
+		List<ReservationVO> result = mservice.selectResByDate(res_start); //오늘의 예약 리스트를 가져옴
+		System.out.println(result);
+		for(int i = 0 ; i < result.size() ; i++) {
+			if(result.get(i).getRes_status().equals("利用済み"))
+				allAmount += Integer.parseInt(result.get(i).getRes_amount());
+		}	
+		return allAmount;
+	}
 
+	//이달의(서버 날짜) 매출 액수
+	@RequestMapping(value = "/selectResByMonth", method = RequestMethod.POST)
+	public @ResponseBody int selectResByMonth(String res_start) throws Exception {
+		System.out.println(res_start);
+		int allAmount = 0;
+		List<ReservationVO> result = mservice.selectResByMonth(res_start); //오늘의 예약 리스트를 가져옴
+		System.out.println(result);
+		for(int i = 0 ; i < result.size() ; i++) {
+			if(result.get(i).getRes_status().equals("利用済み"))
+				allAmount += Integer.parseInt(result.get(i).getRes_amount());
+		}	
+		return allAmount;
+	}
+	
+	// 올해의 매출 액수
+	@RequestMapping(value = "selectResByYear", method = RequestMethod.POST)
+	public @ResponseBody int selectResByYear(String res_start) throws Exception{
+		System.out.println(res_start);
+		int allAmount = 0;
+		List<ReservationVO> result = mservice.selectResByYear(res_start); //오늘의 예약 리스트를 가져옴
+		System.out.println(result);
+		for(int i = 0 ; i < result.size() ; i++) {
+			if(result.get(i).getRes_status().equals("利用済み"))
+				allAmount += Integer.parseInt(result.get(i).getRes_amount());
+		}	
+		return allAmount;
+	}
 }

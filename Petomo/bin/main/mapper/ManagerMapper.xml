@@ -50,5 +50,39 @@
 		where
 			service_id = #{service_id}
 	</update>
+	
+	<!-- [Manger] MangerMyPage에서 쓸 모든 예약불러오기 -->
+ 	<select id="selectAllRes"  resultType="ReservationVO">
+      	SELECT *
+		FROM reservation_tb
+ 	</select>
+ 	
+ 	<!--  [Manger] 오늘의 예약 목록 -->
+ 	<select id="selectResByDate"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM 
+			reservation_tb
+		WHERE
+			DATE_FORMAT(res_start, '%Y-%m') = #{res_start}
+ 	</select>
+ 	
+ 	<!--  [Manger] 이달의 예약 목록-->
+ 	<select id="selectResByMonth"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM 
+			reservation_tb
+		WHERE
+			DATE_FORMAT(res_start, '%Y-%m') = #{res_start}
+ 	</select>
+ 	
+ 	<!--  [Manger] 올해의 예약 목록 -->
+ 	<select id="selectResByYear"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM 
+			reservation_tb
+		WHERE
+			DATE_FORMAT(res_start, '%Y') = #{res_start}
+ 	</select>
+ 	
 
 </mapper>
