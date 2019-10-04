@@ -106,5 +106,8 @@ values(
 	FROM location_tb
 	WHERE res_id=#{res_id}
 </select>
-
+<select id = "selectAllRes" resultType = "ReservationVO">
+	SELECT *
+	FROM reservation_tb
+</select>
 </mapper>

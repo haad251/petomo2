@@ -67,4 +67,9 @@ public class ReservationService {
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id){
     	return dao.selectLocationInfoAll(res_id);
     }
+    // 모든 리스트 불러오기
+	public List<ReservationVO> selectAllRes() {
+		// TODO Auto-generated method stub
+		return dao.selectAllRes();
+	}
 }

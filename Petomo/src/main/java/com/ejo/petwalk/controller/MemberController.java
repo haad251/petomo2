@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ejo.petwalk.service.AwsS3Service;
 import com.ejo.petwalk.service.MemberService;
+import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
@@ -28,7 +29,8 @@ public class MemberController {
 	MemberService msv;
 	@Autowired
 	AwsS3Service aws3sv;
-	
+	@Autowired
+	SitterService ssv;
 	
 //	테스트용
 	@RequestMapping(value="/memberLogin", method=RequestMethod.GET)
@@ -55,7 +57,7 @@ public class MemberController {
 		MemberVO result = msv.login(member);
 		session.setAttribute("sessionId", result.getMb_id());
 		session.setAttribute("sessionName", result.getMb_name());
-		
+		session.setAttribute("streamServer", result.getmb_streamid());
 
 		FileVO file = msv.selectMemberProfileImg(result);
 		if(file==null) 	
@@ -178,4 +180,17 @@ public class MemberController {
 		}
 		return "redirect:/memberInfo";
 	}
+	@RequestMapping(value = "/deletePet", method = RequestMethod.POST)
+	public String deletePet(PetVO pet) {
+		System.out.println(pet.getPet_id());
+		int result = msv.deletePet(pet);
+		return "member/memberProfile";
+	}
+	
+	@RequestMapping(value = "/streamchck", method = RequestMethod.GET)
+	public @ResponseBody String streamchck(MemberVO member) {
+			String resp = msv.streamchck(member);
+			return resp;
+	}
+	
 }

@@ -73,4 +73,18 @@ public class MemberService {
 		return dao.selectMemberProfileImg(member);
 	}
 
+	public int deletePet(PetVO pet) {
+		return dao.deletePet(pet);
+	}
+
+	public List<MemberVO> selectAllMember() {
+		return dao.selectAllMember();
+	}
+
+	public String streamchck(MemberVO member) {
+		return dao.selectStreamId();
+	}
+
+
+
 }

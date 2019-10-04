@@ -65,7 +65,21 @@ public class ReservationController {
 		rsv.insertReview(res);
 		return "redirect:/memberResList";
 	}
-	
+	@RequestMapping(value="/endedService",method=RequestMethod.GET)
+	public String goEndedService(Model model,String res_id) {
+		SitterVO sitter = null;
+		List<HashMap<String,String>> cList = null;
+		ReservationVO res = null;
+		res = rsv.selectOneRes("8"); //테스트용으로 고정
+		sitter = ssv.selectOneSitter(res.getSt_id());
+		cList = rsv.selectChatAll(res.getRes_id());
+		int ressize = rsv.selectAllRes().size(); //테스트용으로 고정
+		model.addAttribute("cList",cList);
+		model.addAttribute("sitter",sitter);
+		model.addAttribute("res",res);
+		model.addAttribute("ressize", ressize);
+		return "res/endedService";
+	}
 	
 }
 

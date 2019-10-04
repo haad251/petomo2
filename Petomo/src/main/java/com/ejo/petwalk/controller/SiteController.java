@@ -48,7 +48,11 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value="/signupChoose")
-	public void signupChoose(){ 
+	public void signupChoose(Model model){ 
+	int member = msv.selectAllMember().size();
+	int sitter = ssv.selectAllSitter().size();
+	model.addAttribute("memberNumber", member);
+	model.addAttribute("sitterNumber", sitter);
 	}
 	
 	@RequestMapping(value="/signupSitter")
@@ -139,7 +143,5 @@ public class SiteController {
 	public String siterMapTest(){ 
 		return "sitter/sitterMapTest";
 	}
-	
-	
-	
+
 }

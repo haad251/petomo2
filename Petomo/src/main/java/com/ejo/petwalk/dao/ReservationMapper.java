@@ -24,6 +24,7 @@ public interface ReservationMapper {
 	/* map���� CRUD */
     public int insertLoc(LocationVO loc);
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
+	public List<ReservationVO> selectAllRes();
     
     
     
