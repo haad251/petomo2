@@ -7,8 +7,9 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+
 <script>
 	$(function(){
 		$(".res_status_btn").on("click",function(){
@@ -48,7 +49,6 @@
                                         <th>日付</th>
                                         <th>時間</th>
                                         <th>ユーザー名</th>　
-<!--                                         멤버가 볼때는 シッター아이디넣기 -->
                                         <th>サービス名</th>
                                         <th>値段</th>
                                         <th>メモ</th>

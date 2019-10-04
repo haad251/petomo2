@@ -5,7 +5,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
@@ -129,14 +130,8 @@ function update(){
                         </div><!-- ends: .col-md-12 -->
                     
                     
-                    
-                    
-                    
-                    
-                    
-                    
-           			 <form action="memberupdate" class="setting_form" method = "POST" id = "update">
                         <div class="col-md-12">
+           			 <form action="memberupdate" class="setting_form" method = "POST" id = "update">
                             <div class="information_module">
                                 <a class="toggle_title">
                                     <h3>Personal Information</h3>
@@ -188,8 +183,8 @@ function update(){
                             <div class="dashboard_setting_btn text-left">
                                 <button type="submit" class="btn btn--md btn-primary" id = "confirm">Save Change</button>
                             </div>
-                        </div><!-- ends: .col-md-12 -->
 	                </form><!-- ends: form -->
+                        </div><!-- ends: .col-md-12 -->
                     </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->

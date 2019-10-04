@@ -7,6 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 <script>
 $(function(){
 	alert("작동");

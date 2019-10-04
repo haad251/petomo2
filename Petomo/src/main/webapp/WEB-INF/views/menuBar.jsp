@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTR-8">
-<title>Insert title here</title>
-
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,8 +28,25 @@
     <link rel="stylesheet" href="vendor_assets/css/venobox.css">
     <link rel="stylesheet" href="style.css">
 <!--     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-32x32.png"> -->
-
 </head>
+
+ <script>
+  
+//   $(window).on("load",function(){
+// 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+// 		stompClient = Stomp.over(socket);  
+// 		stompClient.connect({}, function() { 
+// 			  stompClient.subscribe('/topic/noti', function(msg) { 
+// 				  alert("dz");
+// // 				  var data = JSON.parse(msg.body);
+// // 				  var str = '';
+// // 					  str += data.chat_date + '</p></div>';    
+// // 		        $("#chatForm").append(str);
+// 			  });
+// 		});
+//   });
+  </script>
+
 <body>
 
     <!-- start menu-area -->
@@ -136,7 +153,7 @@
                                                 </div>
                                                 <div class="dropdown notification--dropdown">
                                                     <div class="dropdown_module_header">
-                                                        <h6>My Notifications</h6>
+                                                        <h6>通知</h6>
                                                     </div>
                                                     <div class="notifications_module">
                                                         <div class="notification">
@@ -153,18 +170,18 @@
                                                                 </div>
                                                             </div>
                                                             <!-- end /.notifications -->
-                                                            <div class="notification__icons ">
-                                                                <span class="icon-heart loved noti_icon"></span>
-                                                            </div>
-                                                            <!-- end /.notifications -->
                                                         </div>
                                                         <!-- end /.notifications -->
                                                          
                                                          
                                                          
-                                                        <div class="text-center m-top-30 p-left-20 p-right-20"><a href="notification.html" class="btn btn-primary btn-md btn-block">View
-                                                                All</a></div>
-                                                        <!-- end /.notifications -->
+<!--                                                         <div class="text-center m-top-30 p-left-20 p-right-20"><a href="notification.html" class="btn btn-primary btn-md btn-block">View -->
+<!--                                                                 All</a></div> -->
+<!--                                                         end /.notifications -->
+                                                        
+                                                        
+                                                        
+                                                        
                                                     </div>
                                                     <!-- end /.dropdown -->
                                                 </div>

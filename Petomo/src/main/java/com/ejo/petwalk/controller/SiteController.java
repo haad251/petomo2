@@ -55,6 +55,11 @@ public class SiteController {
 	public void signupSitter(){ 
 	}
 	
+	@RequestMapping(value="/notification")
+	public void notification(){ 
+	}
+	
+	
 	
 //	manager
 	@RequestMapping(value="/managerMyPage")
@@ -139,6 +144,8 @@ public class SiteController {
 	public String siterMapTest(){ 
 		return "sitter/sitterMapTest";
 	}
+	
+	
 	
 	
 	
