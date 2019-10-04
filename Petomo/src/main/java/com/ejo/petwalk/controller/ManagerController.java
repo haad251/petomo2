@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ejo.petwalk.service.ManagerService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.ReservationAddrVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.ServiceVO;
 import com.ejo.petwalk.vo.SitterVO;
@@ -120,7 +121,6 @@ public class ManagerController {
 		for(int i = 0 ; i < 5 ; i++) {
 			newSitterList.add(result.get(i));
 		}
-		System.out.println(newSitterList);
 		return newSitterList;
 	}
 	
@@ -140,7 +140,6 @@ public class ManagerController {
 	@RequestMapping(value = "/selectOneSitter", method = RequestMethod.POST)
 	public @ResponseBody SitterVO selectOneSitter(String st_id) throws Exception {
 		SitterVO result = sservice.selectOneSitter(st_id);
-		System.out.println(result);
 		return result;
 	}
 	
@@ -158,7 +157,6 @@ public class ManagerController {
 				break;
 			newResList.add(result.get(i));
 		}
-		System.out.println(newResList);
 		return newResList;
 	}
 	
@@ -181,7 +179,6 @@ public class ManagerController {
 		System.out.println(res_start);
 		int allAmount = 0;
 		List<ReservationVO> result = mservice.selectResByDate(res_start); //오늘의 예약 리스트를 가져옴
-		System.out.println(result);
 		for(int i = 0 ; i < result.size() ; i++) {
 			if(result.get(i).getRes_status().equals("利用済み"))
 				allAmount += Integer.parseInt(result.get(i).getRes_amount());
@@ -192,10 +189,8 @@ public class ManagerController {
 	//이달의(서버 날짜) 매출 액수
 	@RequestMapping(value = "/selectResByMonth", method = RequestMethod.POST)
 	public @ResponseBody int selectResByMonth(String res_start) throws Exception {
-		System.out.println(res_start);
 		int allAmount = 0;
-		List<ReservationVO> result = mservice.selectResByMonth(res_start); //오늘의 예약 리스트를 가져옴
-		System.out.println(result);
+		List<ReservationVO> result = mservice.selectResByMonth(res_start); //이번달의 예약 리스트를 가져옴
 		for(int i = 0 ; i < result.size() ; i++) {
 			if(result.get(i).getRes_status().equals("利用済み"))
 				allAmount += Integer.parseInt(result.get(i).getRes_amount());
@@ -206,14 +201,45 @@ public class ManagerController {
 	// 올해의 매출 액수
 	@RequestMapping(value = "selectResByYear", method = RequestMethod.POST)
 	public @ResponseBody int selectResByYear(String res_start) throws Exception{
-		System.out.println(res_start);
 		int allAmount = 0;
-		List<ReservationVO> result = mservice.selectResByYear(res_start); //오늘의 예약 리스트를 가져옴
-		System.out.println(result);
+		List<ReservationVO> result = mservice.selectResByYear(res_start); //올해의 예약 리스트를 가져옴
 		for(int i = 0 ; i < result.size() ; i++) {
 			if(result.get(i).getRes_status().equals("利用済み"))
 				allAmount += Integer.parseInt(result.get(i).getRes_amount());
 		}	
 		return allAmount;
+	}
+	
+	//차트에서 연도를 선택할 때마다 보일 데이터 배열을 담는 함수
+	@RequestMapping(value = "selectResBySelectedYear", method = RequestMethod.POST)
+	public @ResponseBody int[] selectResBySelectedYear(String res_start) throws Exception{
+		//int allResCount = 0 ; // 그 해의 전체 예약 수 
+		//int canResCount = 0; // 그 해의 취소된 예약 수
+		System.out.println(res_start);
+		int[] resMonthCountData = new int[12]; //각 월별 예약 수(전체 예약 수 - 취소된 예약 수)를 담기 위한 배열
+		
+		List<ReservationVO> result = mservice.selectResByYear(res_start); //선택한 해의 예약 리스트를 가져옴
+		System.out.println(result);
+		for(int i = 0 ; i < result.size() ; i++) {
+			//allResCount ++; // 그 해의 전체 예약 수 Count 
+			String eachResDate = result.get(i).getRes_start();
+			String[] eachResMonthDate = eachResDate.split("-");
+			String eachResMonth= eachResMonthDate[1]; //예약마다 '월'을 구함
+			
+			if (!result.get(i).getRes_status().equals("キャンセル")) {
+				resMonthCountData[Integer.parseInt(eachResMonth)-1]++;
+			}
+		}
+		
+		System.out.println(resMonthCountData[9]);
+		return resMonthCountData;
+	}
+	
+	@RequestMapping(value = "selectResFromAddr", method = RequestMethod.POST)
+	@ResponseBody
+	public List<ReservationAddrVO> selectResFromAddr(String address) throws Exception {
+		List<ReservationAddrVO> resultList = mservice.selectMemberFromRes(address);
+		
+		return resultList;
 	}
 }

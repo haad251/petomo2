@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.ManagerMapper;
+import com.ejo.petwalk.vo.ReservationAddrVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.ServiceVO;
 
@@ -59,6 +60,11 @@ public class ManagerService {
     //올해 예약 목록
     public List<ReservationVO> selectResByYear(String res_start) throws Exception{
     	return mdao.selectResByYear(res_start);
+    }
+    
+    // 예약한 전체 리스트의 멤버 정보 목록 (Feat. SDY)
+    public List<ReservationAddrVO> selectMemberFromRes(String address) throws Exception{
+    	return mdao.selectMemberFromRes(address);
     }
 	
 }

@@ -51,13 +51,13 @@
 			service_id = #{service_id}
 	</update>
 	
-	<!-- [Manger] MangerMyPage에서 쓸 모든 예약불러오기 -->
+	<!-- [Manager] MangerMyPage에서 쓸 모든 예약불러오기 -->
  	<select id="selectAllRes"  resultType="ReservationVO">
       	SELECT *
 		FROM reservation_tb
  	</select>
  	
- 	<!--  [Manger] 오늘의 예약 목록 -->
+ 	<!--  [Manager] 오늘의 예약 목록 -->
  	<select id="selectResByDate"  parameterType="String" resultType="ReservationVO">
       	SELECT *
 		FROM 
@@ -84,5 +84,32 @@
 			DATE_FORMAT(res_start, '%Y') = #{res_start}
  	</select>
  	
+ 	<!--  [Manager] 예약한 전체 리스트의 멤버 정보 목록 -->
+ 	<select id="selectMemberFromRes" parameterType="String" resultType="ReservationAddrVO">
+ 		SELECT (
+ 			r.res_id as res_id,
+ 			r.st_id as st_id,
+ 			r.service_id as service_id,
+ 			r.mb_id as mb_id,
+ 			r.res_start as res_start,
+ 			r.res_end as res_end,
+ 			r.res_date as res_date,
+ 			r.res_status as res_status,
+ 			r.res_amount as res_amount,
+ 			r.res_review as res_review,
+ 			r.res_rate as res_rate,
+ 			r.res_memo1 as res_momo1,
+ 			m.md_addr as md_addr
+ 		)
+ 		FROM
+ 			reservation_tb r,
+ 			member_tb m
+ 		WHERE
+ 			r.mb_id = m.mb_id
+ 			and
+ 			m.md_addr like '%#{address}%'
+ 		ORDER BY
+ 			res_id
+ 	</select>
 
 </mapper>

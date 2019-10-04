@@ -6,16 +6,25 @@
 <head>
 	<title>Manger Page</title>
     <meta charset="UTF-8">
+    <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    
     
     <script>
    
     $(function(){
     	
-    	var date = new Date(); //오늘의 날짜
-    	var todayDate = getFormatDate(date); //2019-10-02 형식
-    	var thisMonth = getFormatMonth(date); //2019-10 형식
-    	var thisYear = getFormatYear(date); //2019 형식
+    	var date = new Date(); //오늘의 날짜 추출하기 위함
+    	var todayDate = getFormatDate(date); //오늘의 날짜를 2019-10-02 형식으로 추출
+    	var thisMonth = getFormatMonth(date); //오늘의 날짜를 2019-10 형식으로 추출
+    	var thisYear = getFormatYear(date); //오늘의 날짜를 2019 형식으로 추출
+    	
+    	var selectedYear = document.getElementById("period_selector").value; //그래프에서 선택한 연도
+    	//var yearData = new Array(); // chart에 넣을 데이터를 담을 배열
+    	var yearData = [];
+    	
     	
     	//최근에 등록한 Sitter 목록을 가져온다.
     	selectNewSitterList();
@@ -25,6 +34,7 @@
     	
     	//서비스 이용 완료된(利用済み) 모든 매출을 가져온다.
     	selectAllResByComStatus();
+    	
     	
     	// 오늘 날짜(today) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
         selectResByDate();
@@ -73,29 +83,115 @@
     	
     	//최근 시터 목록 새로고침 버튼을 누르면 최근 5개의 목록만 가져옴 
     	$(document).on("click","#sitterListRefresh",function(){
-    		alert("동작중");
     		$('#mj_newRegisterSitter').html("");
     		selectNewSitterList();
     	});
     	
     	$(document).on("click","#resListRefresh",function(){
-    		alert("동작중");
     		$('#mj_newReservation').html("");
     		selectNewResList();
     	});
     	
-    	//일본지도 클릭 이벤트
+    	//일본 simple 지도 클릭 이벤트
         $("#map-container").japanMap({
             onSelect : function(data){
-            alert(data.name);
+           		// alert(data.name);		// SDY -- data.name : 일본 행정구역 이름
+           		
+           		$.ajax({
+           			method : "post",
+           			url : "selectResFromAddr",
+           			data : {
+           				"address" : data.name
+           			},
+           			success : function (resultArray) {
+           				for (var i=0; i<resultArray.length; i++) {
+           					console.log("SDY -- resultArray[" + i +"].md_addr : " + resultArray[i].md_addr);
+           				}
+           			},
+           			error : function () {
+           				
+           			}
+           		});
+           		
             }
         });
     	
-    	/* //차트에서 월 바꿀 때 마다 새로운 데이터 출력
-        $(document).on("change",".period_selector",function(){
-        	console.log(todayDate);
-        }); */
+    	//차트에서 연도를 바꿀 때 마다 새로운 데이터 출력
+        $(document).on("change","#period_selector",function(){
+        	alert(selectedYear); // 다 2019가 들어가는 문제 발생중
+        	selectResBySelectedYear();
+        }); 
     	
+    	//차트에서 연도를 바꿀 때 마다 데이터를 출력할 함수
+        function selectResBySelectedYear(){
+        	var selectAjax = $.ajax({
+        		url:"selectResBySelectedYear"
+        		,type:"post"
+        		,data:{
+        			res_start:selectedYear
+        		}
+        		,success:function(serverData){
+        			console.log("SDY -- serverData.length : " + serverData.length);
+        			yearData = serverData;
+        			
+        			/*
+        			for(var i = 0 ; i < serverData ; i++){
+        				yearData[i] = serverData[i];
+        			}
+        			*/
+        			
+        		}
+        	});
+        	
+        	$.when(selectAjax).done(function () {
+        		console.log(yearData);
+                // 그래프관련 함수
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx,{
+                	type: 'bar',
+                	data:{
+                		labels:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+                		datasets:[{
+                			label:'# of Sales',
+                			data:yearData,
+             				backgroundColor:[
+             					'rgba(255,99,132,0.2)',
+             					'rgba(54,162,235,0.2)',
+             					'rgba(255,206,86,0.2)',
+             					'rgba(75,192,192,0.2)',
+             					'rgba(153,102,255,0.2)',
+             					'rgba(255,159,64,0.2)'
+             				],
+             				borderColor:[
+             					'rgba(255,99,132,1)',
+             					'rgba(54,162,235,1)',
+             					'rgba(255,206,86,1)',
+             					'rgba(75,192,192,1)',
+             					'rgba(153,102,255,1)',
+             					'rgba(255,159,64,1)'
+             				],
+             				borderWidth:1
+                		}]
+                	},
+                	option:{
+                		maintainAspectRatio: true,
+                		scales:{
+                			yAxes:[{
+                				ticks:{
+                					beginAtZero:true
+                				}
+                			}]
+                		}
+                	}
+                });
+        	});
+        	
+        	
+        }
+    	
+    	
+    	//올해의 전체 예약 수를 가져온다.
+    	selectResBySelectedYear();
     	
     });
    
@@ -182,6 +278,7 @@
     		}
     	});
     }
+    
     
     //오늘의 날짜를 원하는 format으로 뽑아내는 함수
     function getFormatDate(date){ 
@@ -314,31 +411,31 @@
                     <div class="col-lg-12">
                         <div class="dashboard_module statistics_module">
                             <div class="dashboard__title">
-                                <h4>Sales and Views Statistics</h4>
-                                <div id="stat_legend" class="legend"></div>
+                                <h4>Sales Statistics</h4>
+                                <!--<div id="stat_legend" class="legend"></div>-->
                                 <div class="select-wrap">
-                                    <select name="mon" class="period_selector">
-                                      	<option value="jan">Jan 2018</option>
-                                        <option value="feb">Feb 2018</option>
-                                        <option value="mar">Mar 2018</option>
+                                    <select name="mon" id="period_selector" class="period_selector">
+                                      	<option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
                                     </select>
-                                    <span class="lnr icon-arrow-down"></span>
+                                    <!-- <span class="lnr icon-arrow-down"></span> -->
                                 </div>
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
-                                <canvas id="mySitterChart"></canvas>
+                                <canvas id="myChart"></canvas>
                                 <div class="statistics_data">
                                     <div class="single_stat_data">
                                         <h4 class="single_stat__title">478</h4>
-                                        <p>Total <span>Sales</span> This Month</p>
+                                        <p>Total <span>Reservation</span> This Year</p>
                                     </div>
                                     <div class="single_stat_data">
                                         <h4 class="single_stat__title color-primary">$2,478</h4>
-                                        <p>Total <span>Earnings</span> This Month</p>
+                                        <p>Total <span>Cancellation</span> This Year</p>
                                     </div>
                                     <div class="single_stat_data align-right">
                                         <h4 class="single_stat__title color-secondary">478</h4>
-                                        <p>Total <span>Sales</span> This Month</p>
+                                        <p>Total <span>Sales</span> This Year</p>
                                     </div>
                                 </div>
                                 
@@ -371,7 +468,7 @@
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
-    <script src="vendor_assets/js/chart.bundle.min.js"></script>
+    <!-- <script src="vendor_assets/js/chart.bundle.min.js"></script>-->
     <script src="vendor_assets/js/grid.min.js"></script>
     <script src="vendor_assets/js/jquery-ui.min.js"></script>
     <script src="vendor_assets/js/jquery.barrating.min.js"></script>
