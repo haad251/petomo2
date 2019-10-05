@@ -16,14 +16,12 @@
    
     $(function(){
     	
-    	var date = new Date(); //오늘의 날짜 추출하기 위함
+    	var date = new Date(); //오늘의 날짜 추출하기 위한 변수
     	var todayDate = getFormatDate(date); //오늘의 날짜를 2019-10-02 형식으로 추출
     	var thisMonth = getFormatMonth(date); //오늘의 날짜를 2019-10 형식으로 추출
     	var thisYear = getFormatYear(date); //오늘의 날짜를 2019 형식으로 추출
-    	
-    	var selectedYear = document.getElementById("period_selector").value; //그래프에서 선택한 연도
-    	//var yearData = new Array(); // chart에 넣을 데이터를 담을 배열
-    	var yearData = [];
+    	var selectedYear = document.getElementById("period_selector").value; // chart에서 선택한 연도를 담을 
+    	var yearData = []; // chart.js에 넣을 데이터(연도별 매출)를 담을 배열
     	
     	
     	//최근에 등록한 Sitter 목록을 가져온다.
@@ -92,11 +90,10 @@
     		selectNewResList();
     	});
     	
-    	//일본 simple 지도 클릭 이벤트
+    	//일본 지도 클릭하면 그 지역의 이름을 바탕으로 모든 예약 데이터를 가져옴(member_tb과 reservation_tb조인해서)
         $("#map-container").japanMap({
             onSelect : function(data){
            		// alert(data.name);		// SDY -- data.name : 일본 행정구역 이름
-           		
            		$.ajax({
            			method : "post",
            			url : "selectResFromAddr",
@@ -106,6 +103,7 @@
            			success : function (resultArray) {
            				for (var i=0; i<resultArray.length; i++) {
            					console.log("SDY -- resultArray[" + i +"].md_addr : " + resultArray[i].md_addr);
+           					
            				}
            			},
            			error : function () {
@@ -116,13 +114,40 @@
             }
         });
     	
+    	//기본으로 올해 예약 차트와 예약 건수 출력
+        selectResBySelectedYear(); // 올해 예약 차트 출력
+        thisYearResCount(); //예약 건수 출력
+    	
     	//차트에서 연도를 바꿀 때 마다 새로운 데이터 출력
         $(document).on("change","#period_selector",function(){
-        	alert(selectedYear); // 다 2019가 들어가는 문제 발생중
+        	selectedYear = document.getElementById("period_selector").value; //그래프에서 선택한 연도
         	selectResBySelectedYear();
+        	$('#thisYearAllResCount').html("");
+        	$('#thisYearCanResCount').html("");
+        	$('#thisYearComResCount').html("");
+        	thisYearResCount();
         }); 
     	
-    	//차트에서 연도를 바꿀 때 마다 데이터를 출력할 함수
+    	//차트에서 연도를 바꿀 때 마다 그 해의 예약 건수에 관한 함수
+    	function thisYearResCount(){
+    		$.ajax({
+        		url:"thisYearResCount"
+        		,type:"post"
+        		,data:{
+        			res_start:selectedYear
+        		}
+        		,success:function(serverData){
+        			var thisYearAllResCount = serverData[0];
+        			var thisYearCanResCount = serverData[1];
+        			var thisYearComResCount = serverData[2];
+        			$("#thisYearAllResCount").append(thisYearAllResCount);
+        			$("#thisYearCanResCount").append(thisYearCanResCount);
+        			$("#thisYearComResCount").append(thisYearComResCount);
+        		}
+    		});
+    	}
+    	
+    	//차트에서 연도를 바꿀 때 마다 그 해의 예약에 관한 통계 표시
         function selectResBySelectedYear(){
         	var selectAjax = $.ajax({
         		url:"selectResBySelectedYear"
@@ -152,9 +177,15 @@
                 	data:{
                 		labels:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
                 		datasets:[{
-                			label:'# of Sales',
+                			label:'# 今月の予約総数',
                 			data:yearData,
              				backgroundColor:[
+             					'rgba(255,99,132,0.2)',
+             					'rgba(54,162,235,0.2)',
+             					'rgba(255,206,86,0.2)',
+             					'rgba(75,192,192,0.2)',
+             					'rgba(153,102,255,0.2)',
+             					'rgba(255,159,64,0.2)',
              					'rgba(255,99,132,0.2)',
              					'rgba(54,162,235,0.2)',
              					'rgba(255,206,86,0.2)',
@@ -168,7 +199,13 @@
              					'rgba(255,206,86,1)',
              					'rgba(75,192,192,1)',
              					'rgba(153,102,255,1)',
-             					'rgba(255,159,64,1)'
+             					'rgba(255,159,64,1)',
+             					'rgba(255,99,132,0.2)',
+             					'rgba(54,162,235,0.2)',
+             					'rgba(255,206,86,0.2)',
+             					'rgba(75,192,192,0.2)',
+             					'rgba(153,102,255,0.2)',
+             					'rgba(255,159,64,0.2)'
              				],
              				borderWidth:1
                 		}]
@@ -189,9 +226,6 @@
         	
         }
     	
-    	
-    	//올해의 전체 예약 수를 가져온다.
-    	selectResBySelectedYear();
     	
     });
    
@@ -315,32 +349,32 @@
     
     
    <section class="dashboard-area">
-        <div class="dashboard_contents p-top-100 p-bottom-70">
+        <div class="dashboard_contents p-top-100 p-bottom-70" style="padding-top:10px">
             <div class="container">
-            <div id="map-container" style="text-align: center"></div>
+            <div id="map-container" style="text-align: center ; margin:30px"></div>
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="primary"></h1>
-                            <p>Today Earnings</p>
+                            <p>今日の収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="secondary"></h1>
-                            <p>Month Earnings</p>
+                            <p>今月の収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="info"></h1>
-                            <p>Yearly Earnings</p>
+                            <p>今年の収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="danger"></h1>
-                            <p>Lifetime Earnings</p>
+                            <p>総収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
                 </div>
@@ -349,9 +383,9 @@
                    	style="flex: 0 0 50%;max-width: 50%;">
                         <div class="dashboard_module recent_sells">
                             <div class="dashboard__title">
-                                <h4>Recent Reservation</h4>
+                                <h4>最近の予約</h4>
                                 <div class="loading">
-                                    <a id="resListRefresh" href="#">Refresh <span class="lnr icon-refresh"></span></a>
+                                    <a id="resListRefresh" href="#">リフレッシュ<span class="lnr icon-refresh"></span></a>
                                 </div>
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
@@ -379,10 +413,10 @@
                     	style="flex: 0 0 50%;max-width: 50%;">
                         <div class="dashboard_module recent_buyers">
                             <div class="dashboard__title">
-                                <h4>Recent Register Sitter</h4>
+                                <h4>最近の登録したペットシッター</h4>
                                 <div class="loading">
                                     <a id="sitterListRefresh" href="#">
-                                        Refresh <span class="lnr icon-refresh"></span>
+                                        	リフレッシュ <span class="lnr icon-refresh"></span>
                                     </a>
                                 </div>
                             </div><!-- ends: .dashboard__title -->
@@ -411,7 +445,7 @@
                     <div class="col-lg-12">
                         <div class="dashboard_module statistics_module">
                             <div class="dashboard__title">
-                                <h4>Sales Statistics</h4>
+                                <h4>予約統計</h4>
                                 <!--<div id="stat_legend" class="legend"></div>-->
                                 <div class="select-wrap">
                                     <select name="mon" id="period_selector" class="period_selector">
@@ -426,16 +460,16 @@
                                 <canvas id="myChart"></canvas>
                                 <div class="statistics_data">
                                     <div class="single_stat_data">
-                                        <h4 class="single_stat__title">478</h4>
-                                        <p>Total <span>Reservation</span> This Year</p>
+                                        <h4 id="thisYearAllResCount" class="single_stat__title"></h4>
+                                        <p>今年の<span>予約</span>総数</p>
                                     </div>
                                     <div class="single_stat_data">
-                                        <h4 class="single_stat__title color-primary">$2,478</h4>
-                                        <p>Total <span>Cancellation</span> This Year</p>
+                                        <h4 id="thisYearCanResCount" class="single_stat__title color-primary"></h4>
+                                        <p>今年の<span>キャンセル</span>総数</p>
                                     </div>
                                     <div class="single_stat_data align-right">
-                                        <h4 class="single_stat__title color-secondary">478</h4>
-                                        <p>Total <span>Sales</span> This Year</p>
+                                        <h4 id="thisYearComResCount" class="single_stat__title color-secondary"></h4>
+                                        <p>今年の<span>利用済み</span>総数</p>
                                     </div>
                                 </div>
                                 

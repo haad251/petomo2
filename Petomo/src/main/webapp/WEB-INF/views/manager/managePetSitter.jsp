@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Manage Pet Sitter</title>
+	<title>ペットシッター管理</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     	
 	<script>
@@ -20,7 +20,6 @@
 			$(document).on("click","#activityBtn",function(){
 	    		st_id =$(this).attr("data-id");
 	    		st_check = $(this).attr("data-check");
-	    		alert("제대로 동작 중");
 	    		console.log(st_id);
 	    		console.log(st_check);
 	    		updateSitterCheck();
@@ -36,7 +35,7 @@
 	    		url:"selectAllSitter"
 	    		,type:"post"
 	    		,success:function(serverData){
-	    			$("#sitterList").html('<thead><tr><th>Sitter ID</th><th>Sitter Name</th><th>Sitter email</th><th>Sitter check</th><th></th></tr></thead>');
+	    			$("#sitterList").html('<thead><tr><th>ID</th><th>名前</th><th>メールアドレス</th><th>ライセンス</th><th></th></tr></thead>');
 	    			for(var i = 0 ; i < serverData.length ; i++){
 	    				var str = "";
 	    				str += '<tbody>';
@@ -44,11 +43,11 @@
 	    				str += '<td><a href="sitterDetail?st_id='+serverData[i].st_id+'">'+serverData[i].st_id+'</a></td>';
 	    				str += '<td>'+serverData[i].st_name+'</td>';
 	    				str += '<td>'+serverData[i].st_email+'</td>';
-	    				str += '<td>'+serverData[i].st_check+'</td>';
+	    				str += '<td>'+serverData[i].st_license+'</td>';
 	    				if(serverData[i].st_check=='N'){
-	    					str += '<td><input type="button" id="activityBtn" name="activityBtn" data-check="'+serverData[i].st_check+'" data-id="'+serverData[i].st_id+' "value="Accept"></td>';
+	    					str += '<td><input type="button" class="btn btn-lg btn-primary m-right-15" id="activityBtn" name="activityBtn" data-check="'+serverData[i].st_check+'" data-id="'+serverData[i].st_id+' "value="許容"></td>';
 	    				}else{
-	    					str += '<td><input type="button" id="activityBtn" name="activityBtn" data-check="'+serverData[i].st_check+'" data-id="'+serverData[i].st_id+' "value="  Ban  "></td>';
+	    					str += '<td><input type="button" class="btn btn-lg btn-danger" id="activityBtn" name="activityBtn" data-check="'+serverData[i].st_check+'" data-id="'+serverData[i].st_id+' "value="禁止"></td>';
 	    				}
 	    				str += '</tr>';
 	    				str += '</tbody>';
@@ -68,9 +67,9 @@
 	    		}
 	    		,success:function(serverData){
 	    			if(serverData=="ok")
-	    				alert("[System] 활동 상태 업데이트에 성공하였습니다.");
+	    				alert("[System] 活動状態のアップデートに成功");
 	    			else
-	    				alert("[System] 활동 상태 업데이트에 실패하였습니다.");
+	    				alert("[Error] 活動状態のアップデートに失敗");
 	    		}
 	    		
 	    	});
@@ -93,7 +92,7 @@
                     <div class="modules__content">
                         <div class="withdraw_module withdraw_history bg-white">
                             <div class="withdraw_table_header">
-                                <h4>Sitter List</h4>
+                                <h4>ペットシッターリスト</h4>
                             </div>
                             <div class="table-responsive">
                                 <table id="sitterList" class="table withdraw__table">

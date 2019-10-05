@@ -102,7 +102,7 @@ public class ManagerController {
 	}
 	
 	
-	/* MJ - Pet Sitter에 관련된 메소드 */
+	/* KMJ - Pet Sitter에 관련된 메소드 */
 	
 	//모든 시터 목록 불러오기
 	@RequestMapping(value = "/selectAllSitter", method = RequestMethod.POST)
@@ -144,7 +144,7 @@ public class ManagerController {
 	}
 	
 	
-	/* MJ - 최근 예약과 지역별 매출 금액관련한 메소드*/
+	/* KMJ - 최근 예약과 지역별 매출 금액관련한 메소드*/
 	
 	//최근에 등록된 5개 예약만을 가져오기
 	@RequestMapping(value = "/selectNewResList", method = RequestMethod.POST)
@@ -160,7 +160,7 @@ public class ManagerController {
 		return newResList;
 	}
 	
-	//서비스 이용이 끝난 데이터 바탕으로 서비스 전체 매출 액수
+	//서비스 이용이 끝난 예약의 전체 매출 액수
 	@RequestMapping(value = "/selectAllResByComStatus", method = RequestMethod.POST)
 	public @ResponseBody int selectAllResByComStatus() throws Exception {
 		int allAmount = 0;
@@ -198,7 +198,7 @@ public class ManagerController {
 		return allAmount;
 	}
 	
-	// 올해의 매출 액수
+	// 올해(서버 날짜)의 매출 액수
 	@RequestMapping(value = "selectResByYear", method = RequestMethod.POST)
 	public @ResponseBody int selectResByYear(String res_start) throws Exception{
 		int allAmount = 0;
@@ -210,36 +210,58 @@ public class ManagerController {
 		return allAmount;
 	}
 	
+	//그 해(chart에서 선택한 연도)의 예약 수, 예약 취소 수, 서비스 이용 완료된 예약 수
+	@RequestMapping(value="/thisYearResCount", method=RequestMethod.POST)
+	public @ResponseBody int[] thisYearResCount(String res_start) throws Exception{
+		System.out.println(res_start);
+		int [] ResCountArray = new int[3]; 
+		//index 0 => 그 해 저체 예약 수 
+		//index 1 =>그 해 전체 예약 취소 수
+		//index 2 => 그 해 전체 서비스 이용 완료된 예약 수
+		List<ReservationVO> result = mservice.selectResByYear(res_start); // 선택된 그 해의 예약 리스트를 가져옴
+		for(int i = 0 ; i < result.size() ; i++) {
+			ResCountArray[0]++;
+			if(result.get(i).getRes_status().equals("キャンセル"))
+				ResCountArray[1]++;
+			if(result.get(i).getRes_status().equals("利用済み"))
+				ResCountArray[2]++;
+		}
+		System.out.println("전체 예약 수"+ResCountArray[0]+"캔슬 수 "+ResCountArray[1]+"완료 수"+ResCountArray[2]);
+		return ResCountArray;
+	}
+	
 	//차트에서 연도를 선택할 때마다 보일 데이터 배열을 담는 함수
 	@RequestMapping(value = "selectResBySelectedYear", method = RequestMethod.POST)
 	public @ResponseBody int[] selectResBySelectedYear(String res_start) throws Exception{
-		//int allResCount = 0 ; // 그 해의 전체 예약 수 
-		//int canResCount = 0; // 그 해의 취소된 예약 수
-		System.out.println(res_start);
-		int[] resMonthCountData = new int[12]; //각 월별 예약 수(전체 예약 수 - 취소된 예약 수)를 담기 위한 배열
 		
+		int[] resMonthCountData = new int[12]; //각 월별 예약 수(전체 예약 수 - 취소된 예약 수)를 담기 위한 배열
 		List<ReservationVO> result = mservice.selectResByYear(res_start); //선택한 해의 예약 리스트를 가져옴
-		System.out.println(result);
+		
 		for(int i = 0 ; i < result.size() ; i++) {
-			//allResCount ++; // 그 해의 전체 예약 수 Count 
 			String eachResDate = result.get(i).getRes_start();
 			String[] eachResMonthDate = eachResDate.split("-");
-			String eachResMonth= eachResMonthDate[1]; //예약마다 '월'을 구함
-			
+			String eachResMonth= eachResMonthDate[1]; //예약마다 '월'을 구함			
 			if (!result.get(i).getRes_status().equals("キャンセル")) {
 				resMonthCountData[Integer.parseInt(eachResMonth)-1]++;
 			}
 		}
-		
 		System.out.println(resMonthCountData[9]);
 		return resMonthCountData;
 	}
 	
+	// 일본 지도에 선택한 지역의 예약 데이터 전체를 가져오는 함수
 	@RequestMapping(value = "selectResFromAddr", method = RequestMethod.POST)
-	@ResponseBody
-	public List<ReservationAddrVO> selectResFromAddr(String address) throws Exception {
+	public @ResponseBody List<ReservationAddrVO> selectResFromAddr(String address) throws Exception {
 		List<ReservationAddrVO> resultList = mservice.selectMemberFromRes(address);
-		
 		return resultList;
 	}
+	
+	
+	/*
+	@RequestMapping(value="", method = RequestMethod.POST)
+	public @ResponseBody int  selectResCountFromAddr()  throws Exception{
+		int result = 0;
+		
+		return result; 
+	}*/
 }

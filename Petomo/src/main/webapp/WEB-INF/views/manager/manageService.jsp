@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   
+   	<title>サービス管理</title>
     <script>
     
     var service_id = 0; 
@@ -29,7 +29,7 @@
     		url:"selectAllService"
     		,type:"post"
     		,success:function(serverData){
-    			$("#serviceList").html('<thead><tr><th>Service ID</th><th>Service Type</th><th>Service Name</th><th>Service Runtime</th><th></th></tr></thead>');
+    			$("#serviceList").html('<thead><tr><th>ナンバー</th><th>タイプ</th><th>サービスの名</th><th>ランタイム</th><th></th></tr></thead>');
     			for(var i = 0 ; i < serverData.length ; i++){
     				var str = "";
     				str += '<tbody>';
@@ -38,7 +38,7 @@
     				str += '<td>'+serverData[i].service_type+'</td>';
     				str += '<td>'+serverData[i].service_name+'</td>';
     				str += '<td>'+serverData[i].service_time+'</td>';
-    				str += '<td><input type="button" id="deleteBtn" name="deleteBtn" data-id="'+serverData[i].service_id+'"value="Delete"></td>';
+    				str += '<td><input type="button" id="deleteBtn" class="btn btn-lg btn-danger" name="deleteBtn" data-id="'+serverData[i].service_id+'"value="Delete"></td>';
     				str += '</tr>';
     				str += '</tbody>';
     				$("#serviceList").append(str);
@@ -56,8 +56,8 @@
     		}
     		,success:function(serverData){
     			if(serverData=="ok")
-    				alert("[System] 삭제에 성공했습니다.");
-    			alert("[System] 삭제에 실패했습니다.");
+    				alert("[System] サービスの削除に成功");
+    			alert("[Error] サービスの削除に失敗");
     		}
     		
     	});
@@ -77,10 +77,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="modules__content">
-                        <a href="/registerService">Register Service</a>
+                        <div style="margin-bottom:60px"><a href="/registerService" class="btn btn-lg btn-primary m-right-15">サービス登録</a></div>
                         <div class="withdraw_module withdraw_history bg-white">
                             <div class="withdraw_table_header">
-                                <h4>Service List</h4>
+                                <h4>サービスリスト</h4>
                             </div>
                             <div class="table-responsive">
                                 <table id="serviceList" class="table withdraw__table">
