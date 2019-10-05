@@ -114,7 +114,7 @@ $(function(){
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
                                                 <li>
-                                                    <a href="streamingService">
+                                                    <a href="sitterStreaming">
                                                         <span class="icon-notebook"></span>ストリーミングサービス
 </a>
                                                 </li>
@@ -198,7 +198,7 @@ $(function(){
                                     <!-- 비로그인시 -->
                                         <c:if test="${sessionScope.sessionId == null }">
 	   					                  <div class="author-author__info">
-                                            <a href="login">login</a>
+                                            <a href="login">ログイン</a>
 	                                      </div>
                                         </c:if>
                                       
@@ -231,7 +231,7 @@ $(function(){
                                                         <span class="icon-home"></span>予約照会</a>
                                                 </li>
                                                 <li>
-                                                <a href = "streamingService" id = "streamService" >스트리밍</a>                                               
+                                                <a href = "streamingService" id = "streamService" >ストリーミング</a>                                               
                                                 <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
@@ -273,6 +273,7 @@ $(function(){
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
+                                            
                                             </ul>
                                         </div>
                                     </div>

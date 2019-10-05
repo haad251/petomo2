@@ -4,7 +4,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	alert("작동?");
+ 	$("#register").on('click',regist);
+ 	$("#idchecking").on('click',idchecking);
+ 	$("#urId").change(function idchange(){
+ 		$("#duplchck").val("unchecked");	
+ 	});	
+ 	})
+function regist(){
+	var chckid = $("#urId").val();
+	if(chckid.length < 3 || chckid.length > 15 ){
+		alert("아이디는 3~15 자리로 해주세요");
+		return false;
+	}
+	 if($("#duplchck").val()!="checked"){
+		alert("아이디 중복확인을 해주세요");
+		return false;
+	} 
+	var password = $("#password").val();
+	var con_pass = $("#con_pass").val();
+	if(password != con_pass){
+		alert("비밀번호와 확인비밀번호는 일치해야합니다");
+		return false;
+	}
+	if(password.length <3 || password.length > 16){
+		alert("비밀번호의 길이는 3~15자리이여야 합니다")
+		return false;
+	}
+	var user_name = $("#user_name").val();
+	if(user_name == ''){
+	alert("이름이 비어있으면 안됩니다");
+	return false;
+	}
+	
+	var chcknickname = $("#nickname").val();
+	if(chcknickname == ''){
+		alert("닉네임을 입력해주세요");
+		return false;
+	}
+	
+	var chckemail = $("#email_ad").val();
+	if(chckemail ==''){
+		alert("이메일을 입력해주세요");
+		return false;
+	}
+	}
+	function idchecking(){/* 아이디 중복check ajax */
+		
+		 var userid = $("#urId").val();
+		$.ajax({
+			url: 'duplsitterchck',
+			type: 'POST',
+			data: { 
+					'st_id':userid,
+					},
+			success: function chck(resp){
+				if(resp.length == 0){
+					$("#duplchck").val("checked");
+					alert("사용 가능한 아이디입니다");
+					return false;
+				}
+				else{
+				$("#duplchck").val("unchecked");
+				alert("중복된 아이디 입니다");
+				return false;
+				}
+				
+			}
+			}); 
+		}
+	
+</script>
 </head>
+
+
 
 <body class="preload">
 <jsp:include page="menuBar.jsp" /> 

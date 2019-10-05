@@ -159,7 +159,7 @@
                      		</div> 
                         </div><!-- end .sidebar--card -->
 <ul><button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "streamingStart" style = "margin-top : 5px;">ストリーミングスタート</button>										                        
-<button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "streamingEnd" style = "margin-top : 5px;">ストリーミン끝</button></ul>									                        
+<button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "streamingEnd" style = "margin-top : 5px;">ストリーミング終り</button></ul>									                        
 <ul><button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "poo" style = "margin-top : 5px;">큰싸기</button>									                        
 <button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "pee" style = "margin-top : 5px;">작은싸기</button></ul>      
 <ul><button type = "button" class="btn btn--sm cancel_btn btn-secondary" id = "meetFriend" style = "margin-top : 5px;">친구만남</button>								                        

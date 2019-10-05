@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype HTML>
@@ -50,7 +50,7 @@ $(function(){
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">회원정보 수정</h2>
+                        <h2 class="page-title">会員情報修正	</h2>
                         </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -63,16 +63,16 @@ $(function(){
                     <form action="memberInfo" id = "idpwcheck" method = "POST">
                         <div class="cardify login">
                             <div class="login--header">
-                                <h3>Welcome Back</h3>
-                                <p>You can sign in with your username</p>
+                                <h3>会員情報修正	</h3>
+                                <p>パスワードの確認のためにもう一度入力してください。</p>
                             </div><!-- end .login_header -->
                             <div class="login--form">
                                 <div class="form-group">
-                                    <label for="pass">Password</label>
-                                    <input id="urPw" type="password" class="text_field" name = "mb_pw" placeholder="Enter your password...">
+                                    <label for="pass">パスワード</label>
+                                    <input id="urPw" type="password" class="text_field" name = "mb_pw" placeholder="パスワード">
                                 </div>
                                 <input type = "hidden" id = "sessionid" name = "mb_id" value = "${sessionScope.sessionId}">
-                                <button type = "button" class="btn btn--md btn-primary" id = "idchecking" >비밀번호 확인</button>
+                                <button type = "button" class="btn btn--md btn-primary" id = "idchecking" >パスワード確認</button>
                                 </div>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->

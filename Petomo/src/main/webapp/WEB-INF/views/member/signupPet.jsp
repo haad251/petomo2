@@ -94,7 +94,7 @@ function regist(){
                         </button>
                         <ul class="dashboard_menu">
                             <li>
-                                <a href="memberProfile"><span class="lnr icon-home"></span>My Profile</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール</a>
                             </li>
                             <li>
                                 <a href="memberResList"><span class="lnr icon-basket"></span>予約確認</a>
@@ -122,27 +122,27 @@ function regist(){
                                     <input type = "hidden" value = "${sessionScope.sessionId}" name = "mb_id">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">PET NAME</label>
+                                    <label for="password">ペットネーム</label>
                                     <input id="password" type="text" name = "pet_name" class="text_field" placeholder="Enter pet name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="con_pass">PET GENDER</label>
+                                    <label for="con_pass">ペット性別</label>
                                     <input id="con_pass" type="text" class="text_field" placeholder="Pet Gender" name = "pet_sex">
                                 </div>
                                   <div class="form-group">
-                                    <label for="user_name">Pet Birth</label>
+                                    <label for="user_name">ペット誕生日</label>
                                     <input id="user_name" type="text" name = "pet_birth" class="text_field" placeholder="Enter Pet Birth">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Weight</label>
+                                    <label for="email_ad">ペット体重</label>
                                     <input id="nickname" type="text" name = "pet_weight" class="text_field" placeholder="Enter Pet Weight">
                                 </div>    
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Type</label>
+                                    <label for="email_ad">ペット種類</label>
                                     <input id="email_ad" type="text" name = "pet_type" class="text_field" placeholder="Enter Pet Type">
                                 </div> 
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Breed</label>
+                                    <label for="email_ad">ペットの大きさ</label>
                                     <input id="email_ad" type="text" name = "pet_breed" class="text_field" placeholder="Enter Pet Breed">
                                 </div>                                                            
                                 <div class="form-group">

@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Member Statement</h2>
+                        <h2 class="page-title">予約確認</h2>
                         <div class="breadcrumb">
                         </div>
                     </div>
@@ -41,11 +41,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="menu-toggler d-md-none">
-                            <span class="icon-menu"></span> Dashboard Menu
+                            <span class="icon-menu"></span> 予約確認
                         </button>
                         <ul class="dashboard_menu">
                              <li>
-                                <a href="memberProfile"><span class="lnr icon-home"></span>Dashboard</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール
+</a>
                                   
                             </li>
                            <li class="active">

@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ejo.petwalk.service.AwsS3Service;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
+import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -142,7 +144,16 @@ public class SitterController {
 		rsv.updateResStatus(res);
 		return "redirect:/sitterResList";
 	}
-	
+	@RequestMapping(value = "/duplsitterchck", method = RequestMethod.POST)
+	public @ResponseBody SitterVO duplcheck(SitterVO sitter,Model model){
+		SitterVO result = ssv.duplcheck(sitter);
+		if(result == null){
+		return result;
+		}
+		else{
+			return result;
+		}
+	}
 	
 	
 }

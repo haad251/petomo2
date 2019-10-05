@@ -59,7 +59,7 @@ function update(){
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Customer Dashboard</h2>
+                        <h2 class="page-title">会員情報</h2>
                         <div class="breadcrumb">
                             <ul>
                                 <li>
@@ -85,10 +85,10 @@ function update(){
                         </button>
                         <ul class="dashboard_menu dashboard_menu--two">
                             <li class="active">
-                                <a href="gosetting"><span class="lnr icon-settings"></span>Account Info</a>
+                                <a href="gosetting"><span class="lnr icon-settings"></span>アカウント情報</a>
                             </li>
                             <li>
-                                <a href="gomemberout"><span class="icon-logout"></span>회원 탈퇴</a>
+                                <a href="gomemberout"><span class="icon-logout"></span>会員脱退</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -139,24 +139,24 @@ function update(){
                         <div class="col-md-12">
                             <div class="information_module">
                                 <a class="toggle_title">
-                                    <h3>Personal Information</h3>
+                                    <h3>個人情報</h3>
                                 </a>
-                                <div class="information__set toggle_module">
+                                <div class="information__set toggle_module" style= "width: 1100px;">
                                     <div class="information_wrapper form--fields">
                                         <div class="form-group">
-                                    <label for="user_name">User name</label>
+                                    <label for="user_name">使用者名</label>
                                     <input id="user_name" type="text" name = "mb_name" class="text_field" id = "name" placeholder="Enter your username" value = "${mbname}">
                               	    </div>
                                        <div class="form-group">
-                                    <label for="email_ad">Nick name</label>
+                                    <label for="email_ad">ニックネーム</label>
                                     <input id="nickname" type="text" name = "mb_nickname" class="text_field" id = "nickname" placeholder="Enter your Nick name" value = "${mbnickname}">
                                     </div>   
                                       <div class="form-group">
-                                    <label for="email_ad">User Address</label>
+                                    <label for="email_ad">住所</label>
                                     <input id="email_ad" type="text" name = "mb_addr" class="text_field"  id = "address" placeholder="Enter your address" value ="${mbaddress}">
                                 </div>           
                                     <div class="form-group">
-                                    <label for="email_ad">Email Address</label>
+                                    <label for="email_ad">メールアドレス</label>
                                     <input id="email_ad" type="text" name = "mb_email" class="text_field" id = "email_ad"placeholder="Enter your email address" value = "${mbemailaddress}">
                                 </div> 
                                   <div class="form-group">
@@ -170,23 +170,23 @@ function update(){
                           
                             <div class="information_module">
                                 <a class="toggle_title">
-                                    <h3>Change Your Password</h3>
+                                    <h3>暗証番号変更</h3>
                                 </a>
                                 <div class="information__set toggle_module">
                                     <div class="information_wrapper form--fields">
                                         <div class="form-group">
-                                    <label for="password">New Password </label>
+                                    <label for="password">新しいパスワード</label>
                                     <input type="password" name = "mb_pw" class="text_field" placeholder="Enter your password" id = "mb_pw">
                                 </div>
                                 <div class="form-group">
-                                    <label for="con_pass">Re-enter Password</label>
+                                    <label for="con_pass">新しいパスワード確認。</label>
                                     <input type="password" class="text_field" placeholder="Confirm password" name = "confirmpw" id = "confirmpw">
                                 </div>
                                     </div><!-- ends: .information_wrapper -->
                                 </div><!-- ends: .information__set -->
                             </div><!-- ends: .information_module -->
                             <div class="dashboard_setting_btn text-left">
-                                <button type="submit" class="btn btn--md btn-primary" id = "confirm">Save Change</button>
+                                <button type="submit" class="btn btn--md btn-primary" id = "confirm">セーブ</button>
                             </div>
                         </div><!-- ends: .col-md-12 -->
 	                </form><!-- ends: form -->
