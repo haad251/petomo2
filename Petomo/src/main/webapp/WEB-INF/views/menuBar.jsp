@@ -231,7 +231,8 @@ $(function(){
                                                         <span class="icon-home"></span>予約照会</a>
                                                 </li>
                                                 <li>
-                                                <a href = "streamingService" id = "streamService" >ストリーミング</a>                                               
+                                                <a href="streamingService">
+                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>                                               
                                                 <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
@@ -268,6 +269,10 @@ $(function(){
                                                 <li>
                                                     <a href="sitterResList">
                                                         <span class="icon-notebook"></span>予約リスト</a>
+                                                </li>
+                                                <li>
+                                                    <a href="sitterStreaming">
+                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>
                                                 </li>
                                                 <li>
                                                     <a href="logout">
