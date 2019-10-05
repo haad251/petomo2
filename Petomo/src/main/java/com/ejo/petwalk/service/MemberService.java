@@ -9,6 +9,7 @@ import com.ejo.petwalk.dao.MemberMapper;
 import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Service
@@ -84,6 +85,7 @@ public class MemberService {
 	public String streamchck(MemberVO member) {
 		return dao.selectStreamId();
 	}
+
 
 
 

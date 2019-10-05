@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Member Profile</h2>
+                        <h2 class="page-title">プロフィール</h2>
                         <div class="breadcrumb">
                            
                         </div>
@@ -80,7 +80,7 @@
                         </button>
                         <ul class="dashboard_menu">
                             <li class="active">
-                                <a href="memberProfile"><span class="lnr icon-home"></span>My Profile</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール</a>
                             </li>
                             <li>
                                 <a href="memberResList"><span class="lnr icon-basket"></span>予約確認</a>
@@ -118,8 +118,8 @@
                                             <p>ペット数</p>
                                         </li>
                                         <li class="t_sells">
-                                            <span>2426</span>
-                                            <p>今までの回数</p>
+                                            <span>${resNumber}</span>
+                                            <p>これまでの利用回数</p>
                                         </li>
                                         <li class="t_reviews">
                                <!--              <div>

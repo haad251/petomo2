@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.ChatVO;
+import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -26,6 +31,8 @@ public class ReservationController {
 	ReservationService rsv;
 	@Autowired
 	SitterService ssv;
+	@Autowired
+	MemberService msv;
 	
 	
 	@RequestMapping(value="/streamingService",method=RequestMethod.GET)
@@ -80,7 +87,33 @@ public class ReservationController {
 		model.addAttribute("ressize", ressize);
 		return "res/endedService";
 	}
-	
+	@RequestMapping(value="/sitterStreaming")
+	public String sitterStreaming(Model model,String res_id){ 
+		SitterVO sitter = null;
+		List<HashMap<String,String>> cList = null;
+		ReservationVO res = null;
+		res = rsv.selectOneRes("8"); //테스트용으로 고정
+		sitter = ssv.selectOneSitter(res.getSt_id());
+		cList = rsv.selectChatAll(res.getRes_id());
+		
+		model.addAttribute("cList",cList);
+		model.addAttribute("sitter",sitter);
+		model.addAttribute("res",res);
+		return "res/sitterStreaming";
+	}
+	@RequestMapping(value = "/streamingStart", method = RequestMethod.GET)
+	public @ResponseBody int streamingStart(ReservationVO res,Model model,HttpSession session){
+		res.setSt_id((String)session.getAttribute("sessionId"));
+		int result = rsv.streamingStart(res);
+		
+		return result;
+	}
+	@RequestMapping(value = "/streamingEnd", method = RequestMethod.GET)
+	public @ResponseBody int StreamingEnd(ReservationVO res,Model model){
+		int result = rsv.StreamingEnd(res);
+		
+		return result;
+	}
 }
 
 

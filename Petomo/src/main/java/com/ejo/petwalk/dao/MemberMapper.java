@@ -25,5 +25,5 @@ public interface MemberMapper {
 	public int deletePet(PetVO pet);
 	public List<MemberVO> selectAllMember();
 	public String selectStreamId();
-	
+	public int insertStreamingId();
 }

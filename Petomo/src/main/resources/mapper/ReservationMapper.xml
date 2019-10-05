@@ -110,4 +110,15 @@ values(
 	SELECT *
 	FROM reservation_tb
 </select>
+<update id = "insertStreamId" parameterType = "ReservationVO">
+	
+UPDATE member_tb 
+SET mb_streamid = #{st_id} 
+WHERE mb_id = #{mb_id}
+</update>
+<update id = "deleteStreamingId" parameterType= "ReservationVO">
+UPDATE member_tb 
+SET mb_streamid = null
+WHERE mb_id = #{mb_id}
+</update>
 </mapper>

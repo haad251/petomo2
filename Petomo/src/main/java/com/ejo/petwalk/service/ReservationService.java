@@ -72,4 +72,12 @@ public class ReservationService {
 		// TODO Auto-generated method stub
 		return dao.selectAllRes();
 	}
+
+	public int streamingStart(ReservationVO res) {
+		return dao.insertStreamId(res);
+	}
+
+	public int StreamingEnd(ReservationVO res) {
+		return dao.deleteStreamingId(res);
+	}
 }
