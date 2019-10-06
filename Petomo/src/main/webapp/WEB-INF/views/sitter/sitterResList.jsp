@@ -7,8 +7,9 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+
 <script>
 	$(function(){
 		$(".res_status_btn").on("click",function(){
@@ -48,7 +49,6 @@
                                         <th>日付</th>
                                         <th>時間</th>
                                         <th>ユーザー名</th>　
-<!--                                         멤버가 볼때는 シッター아이디넣기 -->
                                         <th>サービス名</th>
                                         <th>値段</th>
                                         <th>メモ</th>
@@ -93,7 +93,7 @@
 										      </c:choose>
             	                           	</td>
 	                                        <td class="action">
-	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
+	                                            <a href="sitterStreaming?res_id=${res.res_id}">go</a>
 	                                        </td>
 	                                    </tr>
                                     </c:forEach>
@@ -115,7 +115,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h3 class="modal-title">予約情報</h3>
-                    	대충정보뿌려주기
+        
                 </div>
                		 <div class="modal-body">
 <!-- 		                <div id="res_status_form"> -->

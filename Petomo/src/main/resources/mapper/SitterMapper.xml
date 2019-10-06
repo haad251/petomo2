@@ -71,4 +71,10 @@
 		AND file_no=#{st_id}
  </select>
 
+<select id="selectAllSitterByLoc" resultType="SitterVO">
+ 		SELECT * FROM sitter_tb
+ 		WHERE st_loc1 = #{st_loc1}
+ </select>
+
+
 </mapper>

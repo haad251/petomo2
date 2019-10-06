@@ -59,6 +59,11 @@ public class SiteController {
 	public void signupSitter(){ 
 	}
 	
+	@RequestMapping(value="/notification")
+	public void notification(){ 
+	}
+	
+	
 	
 //	manager
 	@RequestMapping(value="/managerMyPage")
@@ -145,6 +150,11 @@ public class SiteController {
 	public String siterMapTest(){ 
 		return "sitter/sitterMapTest";
 	}
-	
+	@RequestMapping(value = "/selectAllSitterByLoc",method=RequestMethod.GET)
+	public String selectAllSitterByLoc(Model model,String st_loc1) {
+		List<SitterVO> result = ssv.selectAllSitterByLoc(st_loc1);
+		model.addAttribute("result", result);
+		return  "res/sitterList";
+	}
 
 }

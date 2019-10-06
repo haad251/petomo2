@@ -4,10 +4,8 @@
 <html>
 <head>
  <meta charset="UTF-8">
-    <!-- viewport meta -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta charset="UTF-8">
-<title>Service Detail</title>
+        <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 </head>
 <body>
 

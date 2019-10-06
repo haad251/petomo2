@@ -21,6 +21,7 @@ import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.ChatVO;
 import com.ejo.petwalk.vo.MemberVO;
+import com.ejo.petwalk.vo.NotificationVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -50,7 +51,7 @@ public class ReservationController {
 		return "res/streamingService";
 	}
 	
-	@MessageMapping("/hello")
+	@MessageMapping("/chats")
 	@SendTo("/topic/chats")
 	public ChatVO chatin(ChatVO chat) throws Exception {
 		SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -63,7 +64,6 @@ public class ReservationController {
 		SimpleDateFormat sdf2 =new SimpleDateFormat("MM/dd HH:mm");
 		String chattime2 = sdf2.format(time);
 		chat.setChat_date(chattime2);
-//		Thread.sleep(100); // delay
 		return chat;
 	}
 	
@@ -113,6 +113,15 @@ public class ReservationController {
 		int result = rsv.StreamingEnd(res);
 		
 		return result;
+		}
+	
+	@MessageMapping("/noti")
+	@SendTo("/topic/noti")
+	public NotificationVO notiin(NotificationVO noti) throws Exception {
+		System.out.println("노티노티");
+		System.out.println(noti);
+		return noti;
+
 	}
 }
 

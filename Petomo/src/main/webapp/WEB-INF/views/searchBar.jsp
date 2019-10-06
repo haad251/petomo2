@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+
+
+
 
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +35,10 @@
                                 <div class="row">
                                     <div class="col-lg-6 offset-lg-3">
                                         <div class="search_box2">
-                                            <form action="#">
-                                                <input type="text" class="text_field" placeholder="Search your products...">
-                                                <button type="submit" class="search-btn btn--lg btn-primary">Search Now</button>
+                                              <form action="selectAllSitterByLoc" method = "GET">
+                                                <input type="text" class="text_field" placeholder="지역을 넣어주세요" 
+                                                name = "st_loc1" style = "width : 800px;">
+                                                <button type="submit" class="search-btn btn--lg btn-primary">검색</button>
                                             </form>
                                         </div><!-- end .search_box -->
                                     </div>

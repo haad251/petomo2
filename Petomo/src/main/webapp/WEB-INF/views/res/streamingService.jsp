@@ -11,6 +11,8 @@
 
 <html>
 <head>
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 <meta charset="UTF-8">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
@@ -24,7 +26,7 @@
 		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
-			  stompClient.subscribe('/topic/chats', function(msg) { 
+			  stompClient.subscribe('/topic/chats/'+'${res.res_id}', function(msg) { 
 				  var data = JSON.parse(msg.body);
 				  var str = '';
 				  if(data.chat_sender == "${sessionScope.sessionId}"){
@@ -55,7 +57,7 @@
 		    	  var res='8';      //나중에수정
 		    	  $("#sendMessageText").val('');		     		
 		    	
-		    	  stompClient.send('/app/hello', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
+		    	  stompClient.send('/app/chats'+'${res.res_id}', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
 		});
   });

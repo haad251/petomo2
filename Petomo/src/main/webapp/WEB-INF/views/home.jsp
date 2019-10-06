@@ -32,19 +32,10 @@
                                 <div class="row">
                                     <div class="col-md-10 offset-md-1">
                                         <div class="search_box">
-                                            <form action="#">
-                                                <input type="text" class="text_field" placeholder="Search your products...">
-                                                <div class="search__select select-wrap">
-                                                    <select name="category" class="select--field">
-                                                        <option value="">All Categories</option>
-                                                        <option value="">PSD</option>
-                                                        <option value="">HTML</option>
-                                                        <option value="">WordPress</option>
-                                                        <option value="">Plugins</option>
-                                                    </select>
-                                                    <span class="icon-arrow-down"></span>
-                                                </div><!-- ends: .select-wrap -->
-                                                <button type="submit" class="search-btn btn--lg btn-primary">Search Now</button>
+                                            <form action="selectAllSitterByLoc" method = "GET">
+                                                <input type="text" class="text_field" placeholder="지역을 넣어주세요" 
+                                                name = "st_loc1" style = "width : 800px;">
+                                                <button type="submit" class="search-btn btn--lg btn-primary">검색</button>
                                             </form>
                                         </div><!-- end .search_box -->
                                     </div>
@@ -57,212 +48,6 @@
             </div><!-- ends: .contact_wrapper -->
         </div><!-- ends: hero-content -->
     </section><!-- ends: .hero-area -->
-    <section class="featured-area section--padding bgcolor">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h1>Featured Products</h1>
-                        <p>Pellentesque facilisis the ullamcorper sapien interdum magna pellentesque kequis. Phasellus
-                            condimentum eleifend kerat.</p>
-                    </div>
-                </div><!-- Ends: .col-md-12 -->
-                <div class="col-md-12">
-                    <div class="product-slide-area owl-carousel">
-                        <div class="product-single">
-                            <div class="featured-badge">
-                                <span>Featured</span>
-                            </div>
-                            <div class="product-thumb">
-                                <figure>
-                                    <img src="img/fp01.png" alt="" class="img-fluid">
-                                    <figcaption>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="">
-                                                    <span class="icon-basket"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">Live Demo</a>
-                                            </li>
-                                        </ul>
-                                    </figcaption>
-                                </figure>
-                            </div><!-- Ends: .product-thumb -->
-                            <div class="product-excerpt">
-                                <h3>
-                                    <a href="">One Page Resume HTML Template</a>
-                                </h3>
-                                <ul class="titlebtm">
-                                    <li>
-                                        <img class="auth-img" src="img/auth-img.png" alt="author image">
-                                        <p>
-                                            <a href="#">AazzTech</a>
-                                        </p>
-                                    </li>
-                                    <li class="product_cat">
-                                        in
-                                        <a href="#">Template</a>
-                                    </li>
-                                </ul>
-                                <ul class="product-facts clearfix">
-                                    <li class="price"><span>$20</span></li>
-                                    <li class="sells">
-                                        <span class="icon-basket"></span>341
-                                    </li>
-                                    <li class="product-fav">
-                                        <span class="icon-heart" title="Add to collection" data-toggle="tooltip"></span>
-                                    </li>
-                                    <li class="product-rating">
-                                        <ul class="list-unstyled">
-                                            <li class="stars">
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                            </li>
-                                            <li class="total-rating">
-                                                <span>(4)</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div><!-- Ends: .product-excerpt -->
-                        </div><!-- Ends: .product-single -->
-                        <div class="product-single">
-                            <div class="featured-badge">
-                                <span>Featured</span>
-                            </div>
-                            <div class="product-thumb">
-                                <figure>
-                                    <img src="img/fp02.png" alt="" class="img-fluid">
-                                    <figcaption>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="">
-                                                    <span class="icon-basket"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">Live Demo</a>
-                                            </li>
-                                        </ul>
-                                    </figcaption>
-                                </figure>
-                            </div><!-- Ends: .product-thumb -->
-                            <div class="product-excerpt">
-                                <h3>
-                                    <a href="">TheBizz Wordpress Theme</a>
-                                </h3>
-                                <ul class="titlebtm">
-                                    <li>
-                                        <img class="auth-img" src="img/auth-img.png" alt="author image">
-                                        <p>
-                                            <a href="#">AazzTech</a>
-                                        </p>
-                                    </li>
-                                    <li class="product_cat">
-                                        in
-                                        <a href="#">Wordpress</a>
-                                    </li>
-                                </ul>
-                                <ul class="product-facts clearfix">
-                                    <li class="price"><span>$59</span></li>
-                                    <li class="sells">
-                                        <span class="icon-basket"></span>171
-                                    </li>
-                                    <li class="product-fav">
-                                        <span class="icon-heart" title="Add to collection" data-toggle="tooltip"></span>
-                                    </li>
-                                    <li class="product-rating">
-                                        <ul class="list-unstyled">
-                                            <li class="stars">
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                            </li>
-                                            <li class="total-rating">
-                                                <span>(4)</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div><!-- Ends: .product-excerpt -->
-                        </div><!-- Ends: .product-single -->
-                        <div class="product-single">
-                            <div class="featured-badge">
-                                <span>Featured</span>
-                            </div>
-                            <div class="product-thumb">
-                                <figure>
-                                    <img src="img/fp01.png" alt="" class="img-fluid">
-                                    <figcaption>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="">
-                                                    <span class="icon-basket"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="">Live Demo</a>
-                                            </li>
-                                        </ul>
-                                    </figcaption>
-                                </figure>
-                            </div><!-- Ends: .product-thumb -->
-                            <div class="product-excerpt">
-                                <h3>
-                                    <a href="">DigiPro EDD Template</a>
-                                </h3>
-                                <ul class="titlebtm">
-                                    <li>
-                                        <img class="auth-img" src="img/auth-img.png" alt="author image">
-                                        <p>
-                                            <a href="#">AazzTech</a>
-                                        </p>
-                                    </li>
-                                    <li class="product_cat">
-                                        in
-                                        <a href="#">HTML</a>
-                                    </li>
-                                </ul>
-                                <ul class="product-facts clearfix">
-                                    <li class="price"><span>$22</span></li>
-                                    <li class="sells">
-                                        <span class="icon-basket"></span>364
-                                    </li>
-                                    <li class="product-fav">
-                                        <span class="icon-heart" title="Add to collection" data-toggle="tooltip"></span>
-                                    </li>
-                                    <li class="product-rating">
-                                        <ul class="list-unstyled">
-                                            <li class="stars">
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                                <span><i class="fa fa-star"></i></span>
-                                            </li>
-                                            <li class="total-rating">
-                                                <span>(4)</span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div><!-- Ends: .product-excerpt -->
-                        </div><!-- Ends: .product-single -->
-                    </div>
-                    <div class="more-item-btn">
-                        <a href="" class="btn btn--lg btn-secondary">More Featured Items</a>
-                    </div>
-                </div><!-- Ends: .produ-slide-area -->
-            </div>
-        </div>
-    </section><!-- ends: .featured-area -->
     <section class="latest-product section--padding">
         <div class="container">
             <div class="row">
@@ -2819,11 +2604,7 @@
                 <!-- Start Section Title -->
                 <div class="col-md-12">
                     <div class="section-title">
-                        <h1>It Works Really Easy</h1>
-                        <p>Pellentesque facilisis the ullamcorper sapien interdum magna pellentesque kequis. Phasellus
-                            condimentum
-                            eleifend kerat.
-                        </p>
+                        <h1>ご利用の流れ</h1>
                     </div>
                 </div>
                 <!-- Ends: .col-md-12/Section Title -->
@@ -2835,15 +2616,19 @@
                     <div class="row">
                         <div class="col-md-6 step-text r-padding">
                             <div>
-                                <h2>Choose Your Template</h2>
-                                <p>Pellentesque facilisis the ullamcorper sapien interdum is the magna pellentesque kequis.
-                                    Phasellus keur condimentum eleifend kerat Pellentesque facilisis the ullamcorper sapien
-                                    interdum magna pellentesque kequis. Phasellus condimen kettum eleifend kerat.</p>
+                                <h2>会員登録とシッター検索 </h2>
+                                <p>
+                                まずはどんなシッターがいるのか、シッター検索をしてみましょう。
+						実際にシッターとメッセージのやり取りをしたり予約を入れるには、無料会員登録が必要です。
+シッタープロフィール詳細を見て、あなたとパートナーにぴったりのシッターを見つけてください。
+予約申請と予約確定 条件に合うシッターが見つかれば、「仮予約」をしてください。この時点ではまだ予約は確定しておりません。
+シッターからメッセージが入りますので、必要に応じてシッターと直接やり取りしてください。
+お互いがOKとなれば、予約が確定されます。</p>
                             </div>
                         </div>
                         <div class="col-md-6 step-image l-padding">
                             <div>
-                                <img src="img/step01.png" alt="" class="img-fluid">
+                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/step1.png" alt="" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -2856,15 +2641,13 @@
                     <div class="row">
                         <div class="col-md-6 step-image r-padding">
                             <div>
-                                <img src="img/step01.png" alt="" class="img-fluid">
+                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/step2.png" alt="" class="img-fluid">
                             </div>
                         </div>
                         <div class="col-md-6 step-text l-padding">
                             <div>
-                                <h2>Add it to Shopping Cart</h2>
-                                <p>Pellentesque facilisis the ullamcorper sapien interdum is the magna pellentesque kequis.
-                                    Phasellus keur condimentum eleifend kerat Pellentesque facilisis the ullamcorper sapien
-                                    interdum magna pellentesque kequis. Phasellus condimen kettum eleifend kerat.</p>
+                                <h2>サービス当日</h2>
+                                <p>シッターがパートナーのお世話をさせて頂きます。</p>
                             </div>
                         </div>
                     </div>
@@ -2877,15 +2660,15 @@
                     <div class="row">
                         <div class="col-md-6 step-text r-padding">
                             <div>
-                                <h2>Purchase Your Product</h2>
-                                <p>Pellentesque facilisis the ullamcorper sapien interdum is the magna pellentesque kequis.
-                                    Phasellus keur condimentum eleifend kerat Pellentesque facilisis the ullamcorper sapien
-                                    interdum magna pellentesque kequis. Phasellus condimen kettum eleifend kerat.</p>
+                                <h2>レポート確認</h2>
+                                <p>お預かりが終了したのち、シッターからマイページを通じてパートナーのお預かり時の様子を記録した「サービスレポート」を提出いたします。
+								また、オーナーさまにも担当させていただいたシッターに対する評価をいただきます。
+								シッターの励みになりますので、是非ご協力お願いいたします。</p>
                             </div>
                         </div>
                         <div class="col-md-6 step-image l-padding">
                             <div>
-                                <img src="img/step01.png" alt="" class="img-fluid">
+                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/step3.png" alt="" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -3043,60 +2826,6 @@
             </div>
         </div>
     </section><!-- ends: .cta -->
-    <section class="clients-logo">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="partners">
-                        <div class="partner">
-                            <img src="img/cl01.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl02.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl03.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl04.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl02.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl03.png" alt="partner image">
-                        </div>
-                        <div class="partner">
-                            <img src="img/cl04.png" alt="partner image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- ends: .clients-logo -->
-    <section class="subscribe bgimage">
-        <div class="bg_image_holder">
-            <img src="img/subscribe-bg.png" alt="">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3 col-md-12 subscribe-inner">
-                    <div class="envelope-svg">
-                        <img src="img/svg/newsletter.svg" alt="" class="svg">
-                    </div>
-                    <p>Subscribe to get the latest themes, templates and offer information. Don't worry, we won't send
-                        spam!</p>
-                    <form action="#" class="subscribe-form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Enter your email address" required>
-                            <button type="submit" class="btn btn--sm btn-primary">Subscribe</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section><!-- ends: .subscribe -->
-    
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>

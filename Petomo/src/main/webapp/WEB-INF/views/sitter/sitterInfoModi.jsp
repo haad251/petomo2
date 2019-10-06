@@ -1,6 +1,5 @@
 <!--보류: 로딩시 기존위치 선택되게 selectbox 커스텀데이터+JS -->
 <!--유효성, 비밀번호 중복체크 -->
-<!-- 프로필사진 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -8,8 +7,8 @@
 <html>
 
 <head>
-
     <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
     $(function(){
@@ -36,7 +35,7 @@
                                             <div>
                                                 <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
                                                 <div class="img_info">
-                                                     <p class="bold">Profile Image</p>
+                                                     <p class="bold">プロフィール</p>
                                                     <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
                                                 </div>
                                             </div>
@@ -109,8 +108,6 @@
                                             </div>
                                         </div>
                                         
-                                        
-<!--                                       보류: 로딩시 기존위치 선택되게 selectbox 커스텀데이터+JS -->
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="loc1">位置1
