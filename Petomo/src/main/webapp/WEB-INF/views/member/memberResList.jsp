@@ -131,9 +131,16 @@
 										         </c:when>
 										      </c:choose>
             	                           	</td>
+            	                           	   <c:if test ="${res.res_status=='利用済み' }">
 	                                        <td class="action">
 	                                            <a href="endedService?res_id=${res.res_id}">go</a>
 	                                        </td>
+	                                        </c:if>
+	                                         <c:if test ="${res.res_status=='予約完了' }">
+	                                        <td class="action">
+	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
+	                                        </td>
+	                                        </c:if>
 	                                    </tr>
                                     </c:forEach>
                                 
