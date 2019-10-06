@@ -119,6 +119,13 @@ public class SiteController {
 	public String signupPet(){
 		return"member/signupPet";
 	}
+	@RequestMapping(value="/sitterMemberCheck")
+	public String sitterMemberChecks(String mb_id,HttpSession session,Model model){ 
+	List<HashMap<String,String>> rList = rsv.selectResAllByMb_id(mb_id);
+	model.addAttribute("resNumber",rList.size());
+	model.addAttribute("mb_id", mb_id);
+	return "sitter/sitterMemberCheck";
+	}
 	
 	
 	

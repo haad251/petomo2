@@ -44,7 +44,7 @@
     			}
     			$("#dog").html(tag);//#book 태그 밑에 tag추가
 				$("#petnumber").html(resp.length);
-
+				
     	    }
     	});
     }

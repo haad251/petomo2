@@ -44,7 +44,7 @@
     			}
     			$("#dog").html(tag);//#book 태그 밑에 tag추가
 				$("#petnumber").html(resp.length);
-
+				$("#memeberCheck").html(resp[0].mb_id);
     	    }
     	});
     }
@@ -101,8 +101,8 @@
                                         <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
              
                                     <div class="infos">
-                                        <h4>${sessionScope.sessionId}</h4>
-                                        <input type = "hidden" value = "${sessionScope.sessionId}" id = "memberId">
+                                        <h4 id = "memeberCheck"></h4>
+                                        <input type = "hidden" value = "${mb_id}" id = "memberId">
                                     </div>
                                 </div><!-- ends: .author-desc -->
                             </div><!-- ends: .col-lg-5 -->
