@@ -30,9 +30,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <script>
-$(function(){
-
-
+window.onload = function(){
 	$("#streamService").on("click",function(){
 		var streamid = "${sessionScope.streamServer}";
 		
@@ -40,14 +38,13 @@ $(function(){
 		 alert("まだストリーミング中ではありません。");
 		 return false;}
 		});
-});
+}
 
 </script>
 
  <script>
   
-  $(window).on("load",function(){
-	  
+ window.onload = function(){
 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
@@ -82,7 +79,7 @@ $(function(){
 		});
 
 		
-  });
+  }
   
 	function upNoti(notid){
 		stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 

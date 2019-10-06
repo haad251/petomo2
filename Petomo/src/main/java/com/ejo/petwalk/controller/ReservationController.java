@@ -34,15 +34,9 @@ public class ReservationController {
 	
 	@RequestMapping(value="/streamingService",method=RequestMethod.GET)
 	public String goStreamingService(Model model,String res_id) {
-		SitterVO sitter = null;
-		List<HashMap<String,String>> cList = null;
-		ReservationVO res = null;
-		res = rsv.selectOneRes(res_id); //테스트용으로 고정
-		sitter = ssv.selectOneSitter(res.getSt_id());
-		cList = rsv.selectChatAll(res.getRes_id());
-		System.out.println(res);
-		System.out.println(sitter);
-		System.out.println(cList);
+		ReservationVO res = rsv.selectOneRes(res_id);
+		SitterVO sitter = ssv.selectOneSitter(res.getSt_id());
+		List<HashMap<String,String>> cList = rsv.selectChatAll(res.getRes_id());
 		
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);
@@ -55,29 +49,28 @@ public class ReservationController {
 		rsv.insertReview(res);
 		return "redirect:/memberResList";
 	}
+	
+	
+	
+	
 	@RequestMapping(value="/endedService",method=RequestMethod.GET)
 	public String goEndedService(Model model,String res_id) {
-		SitterVO sitter = null;
-		List<HashMap<String,String>> cList = null;
-		ReservationVO res = null;
-		res = rsv.selectOneRes("8"); //테스트용으로 고정
-		sitter = ssv.selectOneSitter(res.getSt_id());
-		cList = rsv.selectChatAll(res.getRes_id());
+		ReservationVO res = rsv.selectOneRes(res_id);
+		SitterVO sitter = ssv.selectOneSitter(res.getSt_id());
+		List<HashMap<String,String>> cList = rsv.selectChatAll(res.getRes_id());
 		int ressize = rsv.selectAllRes().size(); //테스트용으로 고정
+		model.addAttribute("ressize", ressize);
+		
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);
 		model.addAttribute("res",res);
-		model.addAttribute("ressize", ressize);
 		return "res/endedService";
 	}
 	@RequestMapping(value="/sitterStreaming")
 	public String sitterStreaming(Model model,String res_id){ 
-		SitterVO sitter = null;
-		List<HashMap<String,String>> cList = null;
-		ReservationVO res = null;
-		res = rsv.selectOneRes("8"); //테스트용으로 고정
-		sitter = ssv.selectOneSitter(res.getSt_id());
-		cList = rsv.selectChatAll(res.getRes_id());
+		ReservationVO res = rsv.selectOneRes(res_id);
+		SitterVO sitter = ssv.selectOneSitter(res.getSt_id());
+		List<HashMap<String,String>> cList = rsv.selectChatAll(res.getRes_id());
 		
 		model.addAttribute("cList",cList);
 		model.addAttribute("sitter",sitter);

@@ -59,7 +59,7 @@ public class MemberController {
 		session.setAttribute("sessionId", result.getMb_id());
 		session.setAttribute("sessionName", result.getMb_name());
 		session.setAttribute("streamServer", result.getmb_streamid());
-
+		
 		FileVO file = msv.selectMemberProfileImg(result);
 		if(file==null) 	
 			session.setAttribute("sessionProfileImg", "defaultImage.png");

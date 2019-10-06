@@ -23,14 +23,11 @@ public class SocketController {
 	@Autowired
 	SitterService ssv;
 	
-	@MessageMapping("/chats/{room}")
-	@SendTo("/topic/chats/{room}")
-	public ChatVO chatin(@DestinationVariable String room, ChatVO chat) throws Exception {
-		System.out.println(room);
+	@MessageMapping("/chats/{res_id}/inChat")
+	@SendTo("/topic/chats/{res_id}")
+	public ChatVO chatin(@DestinationVariable String res_id, ChatVO chat) throws Exception {
 		System.out.println(chat);
-		
 		rsv.insertChat(chat);   //채팅 디비로 전송
-		
 		Date time = new Date();
 		SimpleDateFormat sdf2 =new SimpleDateFormat("MM/dd HH:mm");
 		String chattime2 = sdf2.format(time);

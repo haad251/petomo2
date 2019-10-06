@@ -18,13 +18,15 @@
 
   <script>
   
-  $(window).on("load",function(){
-		$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
+  $(function(){
+	  $('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 // 		소켓
-		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
+		
+		
 		stompClient.connect({}, function() { 
-			  stompClient.subscribe('/topic/chats', function(msg) { 
+			  stompClient.subscribe('/topic/chats/'+"${res.res_id}", function(msg) {
 				  var data = JSON.parse(msg.body);
 				  var str = '';
 				  if(data.chat_sender == "${sessionScope.sessionId}"){
@@ -32,35 +34,34 @@
 					  str += '<div style="display:inline-block;"><p class="s_mychat">';
 					  str += data.chat_content + '</p></div><p class="s_chatdate">';
 					  str += data.chat_date + '</p></div>';    
-				  }else {
+				  }else{
 					  str += '<div class="body">';
-					  str += '<p class="s_mychat">';
+					  str += '<p class="s_yourchat">';
 					  str += data.chat_content + '</p></div><p class="s_chatdate">';
 					  str += data.chat_date + '</p></div>';    
 				  }
 		        $("#chatForm").append(str);
 				$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 			  });
-			  
-			  
+		});
+
 			  $("#sendMessageText").keyup(function(e){
 				  if(e.keyCode == 13)  
 					  $("#sendMessageBtn").trigger('click');
 				  });
-			  
 			  $("#sendMessageBtn").click(function() {
-		    	  var sender="${sessionScope.sessionId}";
+				  var sender="${sessionScope.sessionId}";
 		    	  var content=$("#sendMessageText").val();
-		    	  var receiver="${sitter.st_id}"; 
-		    	  var res='8';      //나중에수정
+		    	  var receiver = '';
+		    	  if("${sessionScope.sessionSitter=='on'}"){
+			    	  receiver="${res.mb_id}";
+		    	  }else 
+		    		  receiver = "${res.st_id}";
+		    	  var res="${res.res_id}";
 		    	  $("#sendMessageText").val('');		     		
-		    	
-		    	  stompClient.send('/app/hello', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
+		    	  stompClient.send('/app/chats/'+res+'/inChat', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
-		});
   });
- 
-  
   
   </script>
   <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
