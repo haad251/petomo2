@@ -44,7 +44,7 @@
     			}
     			$("#dog").html(tag);//#book 태그 밑에 tag추가
 				$("#petnumber").html(resp.length);
-				
+				$("#memeberCheck").html(resp[0].mb_id);
     	    }
     	});
     }
@@ -82,13 +82,7 @@
                         </button>
                         <ul class="dashboard_menu">
                             <li class="active">
-                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール</a>
-                            </li>
-                            <li>
-                                <a href="memberResList"><span class="lnr icon-basket"></span>予約確認</a>
-                            </li>
-                            <li>
-                                <a href="signupPet"><span class="lnr icon-note"></span>ペット登録</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>プロフィール</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -107,8 +101,8 @@
                                         <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
              
                                     <div class="infos">
-                                        <h4>${sessionScope.sessionName}</h4>
-                                        <input type = "hidden" value = "${sessionScope.sessionId}" id = "memberId">
+                                        <h4 id = "memeberCheck"></h4>
+                                        <input type = "hidden" value = "${mb_id}" id = "memberId">
                                     </div>
                                 </div><!-- ends: .author-desc -->
                             </div><!-- ends: .col-lg-5 -->
@@ -118,10 +112,6 @@
                                         <li class="t_items">
                                             <span id = "petnumber"></span>
                                             <p>ペット数</p>
-                                        </li>
-                                        <li class="t_sells">
-                                            <span>${resNumber}</span>
-                                            <p>これまでの利用回数</p>
                                         </li>
                                         <li class="t_reviews">
                                <!--              <div>

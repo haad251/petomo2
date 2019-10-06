@@ -116,7 +116,7 @@
 	                                    <tr>
 	                                        <td>${res.date}</td>
 	                                        <td>${res.res_start}~${res.res_end}</td>
-	                                        <td>${res.mb_id}</td>　
+	                                        <td><a href = "sitterMemberCheck?mb_id=${res.mb_id}">${res.mb_id}</a></td>　
 	                                        <td>${res.service_name}</td>
     	                                    <td>${res.res_amount}</td>
             	                            <td>${res.res_memo}</td>
