@@ -35,9 +35,10 @@
                                 <div class="row">
                                     <div class="col-lg-6 offset-lg-3">
                                         <div class="search_box2">
-                                            <form action="#">
-                                                <input type="text" class="text_field" placeholder="Search your products...">
-                                                <button type="submit" class="search-btn btn--lg btn-primary">Search Now</button>
+                                              <form action="selectAllSitterByLoc" method = "GET">
+                                                <input type="text" class="text_field" placeholder="지역을 넣어주세요" 
+                                                name = "st_loc1" style = "width : 800px;">
+                                                <button type="submit" class="search-btn btn--lg btn-primary">검색</button>
                                             </form>
                                         </div><!-- end .search_box -->
                                     </div>

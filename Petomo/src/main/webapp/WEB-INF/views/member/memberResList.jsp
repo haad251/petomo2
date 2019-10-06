@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Member Statement</h2>
+                        <h2 class="page-title">予約確認</h2>
                         <div class="breadcrumb">
                         </div>
                     </div>
@@ -43,32 +43,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button class="menu-toggler d-md-none">
-                            <span class="icon-menu"></span> Dashboard Menu
+                            <span class="icon-menu"></span> 予約確認
                         </button>
                         <ul class="dashboard_menu">
-                            <li>
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
+                             <li>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール
+</a>
+                                  
+                            </li>
+                           <li class="active">
+                                <a href="memberResList"><span class="lnr icon-basket"></span>予約確認 </a>
                             </li>
                             <li>
-                                <a href="dashboard-setting.html"><span class="lnr icon-settings"></span>Setting</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-purchase.html"><span class="lnr icon-basket"></span>Purchase</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-add-credit.html"><span class="lnr icon-credit-card"></span>Add Credits</a>
-                            </li>
-                            <li class="active">
-                                <a href="dashboard-statement.html"><span class="lnr icon-chart"></span>Statements</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-upload.html"><span class="lnr icon-cloud-upload"></span>Upload Items</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-manage-item.html"><span class="lnr icon-note"></span>Manage Items</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-withdrawal.html"><span class="lnr icon-briefcase"></span>Withdrawals</a>
+                                <a href="signupPet"><span class="lnr icon-note"></span>ペット登録</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -81,7 +68,7 @@
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
                             <div class="dashboard__title">
-                                <h3>예약확인</h3>
+                                <h3>予約確認</h3>
                             </div>
                         </div>
                     </div><!-- ends: .col-md-12 -->
@@ -145,7 +132,7 @@
 										      </c:choose>
             	                           	</td>
 	                                        <td class="action">
-	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
+	                                            <a href="endedService?res_id=${res.res_id}">go</a>
 	                                        </td>
 	                                    </tr>
                                     </c:forEach>

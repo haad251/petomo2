@@ -48,6 +48,15 @@ public class SitterService {
 	public FileVO selectSitterProfileImg(SitterVO sitter){
 		return dao.selectSitterProfileImg(sitter);
 	}
+
+	public SitterVO duplcheck(SitterVO sitter) {
+		return dao.selectOneSitter(sitter.getSt_id());
+	}
+
+	public List<SitterVO> selectAllSitterByLoc(String st_loc1) {
+		List<SitterVO> result = dao.selectAllSitterByLoc(st_loc1);
+		return result;
+	}
 	
 	
 	

@@ -87,4 +87,17 @@ public class ReservationService {
     }
     
     
+    // 모든 리스트 불러오기
+	public List<ReservationVO> selectAllRes() {
+		// TODO Auto-generated method stub
+		return dao.selectAllRes();
+	}
+
+	public int streamingStart(ReservationVO res) {
+		return dao.insertStreamId(res);
+	}
+
+	public int StreamingEnd(ReservationVO res) {
+		return dao.deleteStreamingId(res);
+	}
 }

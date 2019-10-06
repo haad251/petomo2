@@ -19,9 +19,11 @@ public interface MemberMapper {
 	public MemberVO selectDogId(PetVO pet);
 	public int insertPet(PetVO pet);
 	public List<PetVO> selectDogByMemberId(PetVO pet);
-	
 	public int insertMemberImage(FileVO memberFile);
 	public int deleteMemberImage(MemberVO member);
 	public FileVO selectMemberProfileImg(MemberVO member);
-	
+	public int deletePet(PetVO pet);
+	public List<MemberVO> selectAllMember();
+	public String selectStreamId();
+	public int insertStreamingId();
 }

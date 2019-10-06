@@ -1,10 +1,10 @@
 package com.ejo.petwalk.vo;
 
 public class MemberVO {
-	private String mb_id, mb_pw, mb_name,mb_nickname,mb_email,mb_addr,mb_lineid,mb_status;
+	private String mb_id, mb_pw, mb_name,mb_nickname,mb_email,mb_addr,mb_lineid,mb_status,mb_streamid;
 
 	public MemberVO(String mb_id, String mb_pw, String mb_name, String mb_nickname, String mb_email, String mb_addr,
-			String mb_lineid, String mb_status) {
+			String mb_lineid, String mb_status,String mb_streamid) {
 		super();
 		this.mb_id = mb_id;
 		this.mb_pw = mb_pw;
@@ -14,6 +14,7 @@ public class MemberVO {
 		this.mb_addr = mb_addr;
 		this.mb_lineid = mb_lineid;
 		this.mb_status = mb_status;
+		this.mb_streamid = mb_streamid;
 	}
 
 	public MemberVO() {
@@ -83,6 +84,12 @@ public class MemberVO {
 
 	public void setMb_status(String mb_status) {
 		this.mb_status = mb_status;
+	}
+	public String getmb_streamid() {
+		return mb_streamid;
+	}
+	public void setmb_streamid(String mb_streamid) {
+		this.mb_streamid = mb_streamid;
 	}
 
 	@Override

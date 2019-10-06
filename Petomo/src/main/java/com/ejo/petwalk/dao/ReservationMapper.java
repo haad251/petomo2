@@ -25,6 +25,11 @@ public interface ReservationMapper {
 	/* map���� CRUD */
     public int insertLoc(LocationVO loc);
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
+	public List<ReservationVO> selectAllRes();
+
+	/*스트리밍 아이디 설정*/
+	public int insertStreamId(ReservationVO res);
+	public int deleteStreamingId(ReservationVO res);
     
     public int insertNoti(NotificationVO noti);
     public ArrayList<NotificationVO> selectNotiUnreadAll(String id);

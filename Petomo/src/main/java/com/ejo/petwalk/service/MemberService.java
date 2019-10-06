@@ -9,6 +9,7 @@ import com.ejo.petwalk.dao.MemberMapper;
 import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Service
@@ -72,5 +73,20 @@ public class MemberService {
 	public FileVO selectMemberProfileImg(MemberVO member){
 		return dao.selectMemberProfileImg(member);
 	}
+
+	public int deletePet(PetVO pet) {
+		return dao.deletePet(pet);
+	}
+
+	public List<MemberVO> selectAllMember() {
+		return dao.selectAllMember();
+	}
+
+	public String streamchck(MemberVO member) {
+		return dao.selectStreamId();
+	}
+
+
+
 
 }

@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ejo.petwalk.service.AwsS3Service;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
 import com.ejo.petwalk.vo.FileVO;
+import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
@@ -99,9 +101,14 @@ public class SitterController {
 	
 	@RequestMapping(value = "/deleteSitterImage")
 	public String deleteSitterImage (HttpSession session){
+		String sessionP = (String)session.getAttribute("sessionProfileImg");
+		String st_id = (String)session.getAttribute("sessionId");
+		
+		if(sessionP.equals("defaultImage.png")) 
+			return "redirect:/sitterInfoModi";
 		SitterVO sitter = new SitterVO();
-		sitter.setSt_id((String)session.getAttribute("sessionId"));
-		aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
+		sitter.setSt_id(st_id);
+		aws3sv.deleteObject("sitter", sessionP);
 		ssv.deleteSitterImage(sitter);
 		session.setAttribute("sessionProfileImg", "defaultImage.png");
 		return "redirect:/sitterInfoModi";
@@ -111,17 +118,19 @@ public class SitterController {
 	public String insertSitterImage (MultipartFile uploadfile,HttpSession session,Model model){
 		if (!(uploadfile.isEmpty() || uploadfile == null || uploadfile.getSize() == 0)) {
 			
-			if(session.getAttribute("sessionProfileImg")!=null) {
+			String sessionP = (String)session.getAttribute("sessionProfileImg");
+			String st_id = (String)session.getAttribute("sessionId");
+			
+			if(sessionP!=null && !sessionP.equals("defaultImage.png")) {
 				SitterVO sitter = new SitterVO();
-				sitter.setSt_id((String)session.getAttribute("sessionId"));
-				aws3sv.deleteObject("sitter", (String)session.getAttribute("sessionProfileImg"));
+				sitter.setSt_id(st_id);
+				aws3sv.deleteObject("sitter", sessionP);
 				ssv.deleteSitterImage(sitter);
 			}
 			
 			String file_org = uploadfile.getOriginalFilename();
-			Date date = new Date();
-			String file_sav = date.getTime() + file_org;
-			FileVO sitterFile = new FileVO(file_sav,file_org,"sitter",(String)session.getAttribute("sessionId")); 
+			String file_sav = st_id+".png";
+			FileVO sitterFile = new FileVO(file_sav,file_org,"sitter",st_id); 
 			ssv.insertSitterImage(sitterFile);
 			aws3sv.uploadObject(uploadfile, "sitter/"+file_sav);
 			session.setAttribute("sessionProfileImg", file_sav);
@@ -144,5 +153,9 @@ public class SitterController {
 	}
 	
 	
-	
+	@RequestMapping(value = "/duplsitterchck", method = RequestMethod.POST)
+	public @ResponseBody SitterVO duplcheck(SitterVO sitter,Model model){
+		SitterVO result = ssv.duplcheck(sitter);
+		return result;
+	}
 }

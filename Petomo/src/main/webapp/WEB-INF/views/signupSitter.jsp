@@ -4,9 +4,84 @@
 <html lang="UTF-8">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+ 	$("#register").on('click',regist);
+ 	$("#idchecking").on('click',idchecking);
+ 	$("#urId").change(function idchange(){
+ 		$("#duplchck").val("unchecked");	
+ 	});	
+ 	})
+function regist(){
+	var chckid = $("#urId").val();
+	if(chckid.length < 3 || chckid.length > 15 ){
+		alert("IDは3文字以上15文字以下です");
+		return false;
+	}
+	 if($("#duplchck").val()!="checked"){
+		alert("IDをチェックしてください");
+		return false;
+	} 
+	var password = $("#password").val();
+	var con_pass = $("#con_pass").val();
+	if(password != con_pass){
+		alert("パスワードとパスワード確認が一致しません");
+		return false;
+	}
+	if(password.length <3 || password.length > 16){
+		alert("パスワードは3文字以上15文字以下です")
+		return false;
+	}
+	var user_name = $("#user_name").val();
+	if(user_name == ''){
+	alert("名前を入力してください");
+	return false;
+	}
+	
+	var chcknickname = $("#nickname").val();
+	if(chcknickname == ''){
+		alert("ニックネームを入力してください");
+		return false;
+	}
+	
+	var chckemail = $("#email_ad").val();
+	if(chckemail ==''){
+		alert("メールアドレスを入力してくたさい");
+		return false;
+	}
+	}
+	function idchecking(){
+		
+		 var userid = $("#urId").val();
+		$.ajax({
+			url: 'duplsitterchck',
+			type: 'POST',
+			data: { 
+					'st_id':userid,
+					},
+			success: function chck(resp){
+				if(resp.length == 0){
+					$("#duplchck").val("checked");
+					alert("利用できるIDです");
+					return false;
+				}
+				else{
+				$("#duplchck").val("unchecked");
+				alert("ご入力いただいたIDはすでに登録されています。");
+				return false;
+				}
+				
+			}
+			}); 
+		}
+	
+</script>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 </head>
+
+
 
 <body class="preload">
 <jsp:include page="menuBar.jsp" /> 
@@ -17,16 +92,6 @@
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
 						<h2 class="page-title">シッター登録</h2>
-						<div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Signup</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -44,57 +109,53 @@
                             <div class="login--form">
                                 <div class="form-group">
                                     <label for="urname">ID</label>
-                                    <input id="urId" type="text" name = "st_id" class="text_field" placeholder="会員ID">
+                                <button type = "button" class = "btn btn--md register_btn btn-primary"  id = "idchecking" 
+                                 style="width: 100px; margin: 0px; font-size: 13px; padding: 0; line-height:0;height: 30px;">IDチェック</button>
+                                    <input id="urId" type="text" name = "st_id" class="text_field">
                                     <input type = "hidden" id = "duplchck" value = "unchecked">
                                 </div>
-                                 <button type = "button" class = "btn btn--md register_btn btn-primary"  id ="idchecking" >IDチェック</button>
                                 <div class="form-group">
                                     <label for="password">パスワード</label>
-                                    <input id="password" type="password" name = "st_pw" class="text_field" placeholder="パスワード">
+                                    <input id="password" type="password" name = "st_pw" class="text_field">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">パスワード (確認) </label>
-                                    <input id="con_pass" type="password" class="text_field" placeholder="パスワード (確認) ">
+                                    <input id="con_pass" type="password" class="text_field">
                                 </div>
                                   <div class="form-group">
                                     <label for="user_name">お名前</label>
-                                    <input id="user_name" type="text" name = "st_name" class="text_field" placeholder="お名前">
+                                    <input id="user_name" type="text" name = "st_name" class="text_field">
                                 </div>
                                 <div class="form-group">
                                     <label for="email_ad">メールアドレス</label>
-                                    <input id="email_ad" type="text" name = "st_email" class="text_field" placeholder="メールアドレス">
+                                    <input id="email_ad" type="text" name = "st_email" class="text_field" >
                                 </div> 
                                 <div class="form-group">
                                     <label for="email_ad">性別</label>
-                                    <input id="email_ad" type="text" name = "st_sex" class="text_field" placeholder="性別">
+                                    <input id="email_ad" type="text" name = "st_sex" class="text_field">
                                 </div>                                                            
                                 <div class="form-group">
                                     <label for="con_pass">LineID</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "st_lineid" placeholder="LineID">
+                                    <input id="con_pass" type="text" class="text_field" name = "st_lineid">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">地域１</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "st_loc1" placeholder="地域１">
+                                    <input id="con_pass" type="text" class="text_field" name = "st_loc1" >
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">地域２</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "st_loc2" placeholder="地域２">
+                                    <input id="con_pass" type="text" class="text_field" name = "st_loc2">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">紹介文</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "st_info" placeholder="紹介文">
+                                    <input id="con_pass" type="text" class="text_field" name = "st_info">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">ライセンス</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "st_license" placeholder="ライセンス">
+                                    <input id="con_pass" type="text" class="text_field" name = "st_license">
                                 </div>
                                 
                                 <button type = "submit" class="btn btn--md register_btn btn-primary" id = "register">登録</button>
-                                <div class="login_assist">
-                                    <p>アカウントをお持ちの方
-                                        <a href="login.html">ログイン</a>
-                                    </p>
-                                </div>
                             </div><!-- end .login--form -->
                         </div><!-- end .cardify -->
                     </form>

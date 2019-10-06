@@ -48,7 +48,11 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value="/signupChoose")
-	public void signupChoose(){ 
+	public void signupChoose(Model model){ 
+	int member = msv.selectAllMember().size();
+	int sitter = ssv.selectAllSitter().size();
+	model.addAttribute("memberNumber", member);
+	model.addAttribute("sitterNumber", sitter);
 	}
 	
 	@RequestMapping(value="/signupSitter")
@@ -93,7 +97,9 @@ public class SiteController {
 	
 
 	@RequestMapping(value="/memberProfile")
-	public String memberProfile(){ 
+	public String memberProfile(Model model,HttpSession session){ 
+	List<HashMap<String,String>> rList = rsv.selectResAllByMb_id((String)session.getAttribute("sessionId"));
+	model.addAttribute("resNumber",rList.size());
 	return "member/memberProfile";
 	}
 	
@@ -144,9 +150,11 @@ public class SiteController {
 	public String siterMapTest(){ 
 		return "sitter/sitterMapTest";
 	}
-	
-	
-	
-	
-	
+	@RequestMapping(value = "/selectAllSitterByLoc",method=RequestMethod.GET)
+	public String selectAllSitterByLoc(Model model,String st_loc1) {
+		List<SitterVO> result = ssv.selectAllSitterByLoc(st_loc1);
+		model.addAttribute("result", result);
+		return  "res/sitterList";
+	}
+
 }

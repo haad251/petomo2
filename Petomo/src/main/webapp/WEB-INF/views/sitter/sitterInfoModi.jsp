@@ -22,7 +22,45 @@
 
 <body class="preload">
     <jsp:include page="../menuBar.jsp" /> 
-    <jsp:include page="sitterMenuBar.jsp" /> 
+    
+<section class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-contents">
+                        <h2 class="page-title">シッターメニュー</h2>
+                    </div>
+                </div><!-- end .col-md-12 -->
+            </div><!-- end .row -->
+        </div><!-- end .container -->
+    </section><!-- ends: .breadcrumb-area -->
+    <section class="dashboard-area">
+        <div class="dashboard_menu_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="menu-toggler d-md-none">
+                            <span class="icon-menu"></span> Dashboard Menu
+                        </button>
+                        <ul class="dashboard_menu">
+                            <li>
+                                <a href="dashboard.html"><span class="lnr icon-home"></span>統計</a>
+                            </li>
+                            <li>
+                                <a href="sitterResList"><span class="lnr icon-notebook"></span>予約リスト</a>
+                            </li>
+                            <li class="active s_jfont">
+                                <a href="sitterInfoModi"><span class="lnr icon-settings"></span>マイページ</a>
+                            </li>
+                            <li style="width:200px;">
+                            </li>
+                        </ul><!-- ends: .dashboard_menu -->
+                    </div><!-- ends: .col-md-12 -->
+                </div><!-- ends: .row -->
+            </div><!-- ends: .container -->
+        </div><!-- ends: .dashboard_menu_area -->
+     </section>
+
 
         <div class="dashboard_contents section--padding">
             <div class="container">
@@ -36,12 +74,12 @@
                                                 <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
                                                 <div class="img_info">
                                                      <p class="bold">プロフィール</p>
-                                                    <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
+                                                    <p class="subtitle">PNG 100x100px</p>
                                                 </div>
                                             </div>
                                             <form action="insertSitterImage" id="insertSPI" method="POST" enctype="multipart/form-data">
                                             <label for="cover_photo" class="upload_btn">
-                                                <input type="file" id="cover_photo" name="uploadfile">
+                                                <input type="file" id="cover_photo" name="uploadfile" accept=".png">
                                                 <span id="SPIuploadBtn" class="btn btn-sm btn-primary" aria-hidden="true">アップロード</span>
                                                 <a href="deleteSitterImage" class="btn btn-sm btn-danger">削除</a>
                                             </label>
@@ -66,7 +104,7 @@
                                                 <label for="id">ID
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="text" name="st_id" class="text_field s_readonly" placeholder="ID" value="${sitter.st_id}" readonly>
+                                                <input type="text" name="st_id" class="text_field s_readonly" value="${sitter.st_id}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -74,7 +112,7 @@
                                                 <label for="name">名前
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="text" name="st_name" class="text_field s_readonly" placeholder="Name" value="${sitter.st_name}" readonly>
+                                                <input type="text" name="st_name" class="text_field s_readonly" value="${sitter.st_name}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -82,13 +120,13 @@
                                                 <label for="emailad">メールアドレス
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="text" name="st_email" class="text_field" placeholder="Email address" value="${sitter.st_email}">
+                                                <input type="text" name="st_email" class="text_field"  value="${sitter.st_email}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="sex">性別</label>
-                                                <input type="text" name="st_sex" class="text_field s_readonly" placeholder="Sex" value="${sitter.st_sex}" readonly>
+                                                <input type="text" name="st_sex" class="text_field s_readonly" value="${sitter.st_sex}" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -96,7 +134,7 @@
                                                 <label for="password">パスワード
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="password" name="st_pw" class="text_field" placeholder="Enter Password" value="${sitter.st_pw}">
+                                                <input type="password" name="st_pw" class="text_field" value="${sitter.st_pw}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -104,37 +142,17 @@
                                                 <label for="conpassword">パスワード(確認）
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="password" id="conpassword" class="text_field" placeholder="re-enter password" value="${sitter.st_pw}">
+                                                <input type="password" id="conpassword" class="text_field" value="${sitter.st_pw}">
                                             </div>
                                         </div>
                                         
-                                        <div class="col-md-6">
+                                        <div class="col-md-6" style="max-width:100%;">
                                             <div class="form-group">
-                                                <label for="loc1">位置1
+                                                <label for="loc1">住所
                                                     <sup>*</sup>
                                                 </label>
                                                 <div class="select-wrap select-wrap2">
-                                                    <select name="st_loc1" id="st_loc1" class="text_field">
-                                                        <option value="">Select one</option>
-                                                        <option value="Seoul" selected>Seoul</option>
-                                                        <option value="Tokyo">Tokyo</option>
-                                                    </select>
-                                                    <span class="lnr icon-arrow-down"></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="loc2">位置2
-                                                    <sup>*</sup>
-                                                </label>
-                                                <div class="select-wrap select-wrap2">
-                                                    <select name="st_loc2" id="st_loc2" class="text_field">
-                                                        <option value="">Select one</option>
-                                                        <option value="Kangnam" selected>Kangnam</option>
-                                                        <option value="Ueno">Ueno</option>
-                                                    </select>
-                                                    <span class="lnr icon-arrow-down"></span>
+                                                   	<input type="text" name="st_loc1" class="text_field" value="${sitter.st_loc1}">
                                                 </div>
                                             </div>
                                         </div>
@@ -143,7 +161,7 @@
                                                 <label for="license">ライセンス
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="text" name="st_license" class="text_field s_readonly" placeholder="License Number" value="${sitter.st_license}" readonly>
+                                                <input type="text" name="st_license" class="text_field s_readonly" value="${sitter.st_license}" readonly>
                                             </div>
                                         </div> 
                                 		<div class="col-md-6">
@@ -151,13 +169,13 @@
                                                 <label for="lineid">Line ID
                                                     <sup>*</sup>
                                                 </label>
-                                                <input type="text" name="st_lineid" class="text_field" placeholder="Line ID" value="${sitter.st_lineid}">
+                                                <input type="text" name="st_lineid" class="text_field"value="${sitter.st_lineid}">
                                             </div>
                                         </div>                                        
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="info">紹介文</label>
-                                                <textarea name="st_info" id="st_info" class="text_field" placeholder="Info">${sitter.st_info}</textarea>
+                                                <textarea name="st_info" id="st_info" class="text_field" >${sitter.st_info}</textarea>
                                             </div>
                                         </div>
                                     </div><!-- ends: .information_wrapper -->

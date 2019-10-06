@@ -152,4 +152,6 @@
 	FROM pet_tb
 	WHERE mb_id = #{mb_id}
 </select>
+
+
 </mapper>

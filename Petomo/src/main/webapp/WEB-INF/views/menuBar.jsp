@@ -25,10 +25,24 @@
     <link rel="stylesheet" href="vendor_assets/css/trumbowyg.min.css">
     <link rel="stylesheet" href="vendor_assets/css/venobox.css">
     <link rel="stylesheet" href="style.css">
-</head>
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script>
+$(function(){
+
+
+	$("#streamService").on("click",function(){
+		var streamid = "${sessionScope.streamServer}";
+		
+		if(streamid.length == 0){
+		 alert("まだストリーミング中ではありません。");
+		 return false;}
+		});
+});
+
+</script>
 
  <script>
   
@@ -78,9 +92,8 @@
   
   
   </script>
-
+</head>
 <body>
-    <!-- start menu-area -->
     <div class="menu-area">
         <div class="top-menu-area">
             <div class="container-fluid">
@@ -98,84 +111,85 @@
                                             <font color="red">${sessionScope.sessionId}</font>
                                 </div>
                             </div>
-                            <div class="menu-container">
-                                <div class="d_menu">
-                                    <nav class="navbar navbar-expand-lg mainmenu__menu">
-                                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
-                                            <span class="navbar-toggler-icon icon-menu"></span>
-                                        </button>
-                                        <!-- Collect the nav links, forms, and other content for toggling -->
-                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                            <ul class="navbar-nav">
-                                                <li class="has_dropdown">
-                                                    <a href="#">Home</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="introducePetomo">기업소개</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                           
+                         <div class="mobile_content ">
+                                    <span class="icon-user menu_icon"></span>
+                                    <!-- offcanvas menu -->
+                                    <div class="offcanvas-menu closed">
+                                        <span class="icon-close close_menu"></span>
+                                        
+                                         <c:if test="${sessionScope.sessionId == null }">
+	   					                  <div class="author-author__info">
+                                            <a href="login">Login</a>
+	                                      </div>
+                                        </c:if>
+                               
+                                         <c:if test="${sessionScope.sessionId!=null && sessionScope.sessionSitter!=null}">
+                                        <div class="author-author__info">
+                                            <div class="author__avatar online">
+                                            <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
+                                        </div>
+                                       
+                                        <p>${sessionScope.sessionName}</p>
+                                        </div>
+                                        <!--end /.author-author__info-->
+                                        <div class="author__notification_area">
+                                            <ul>
+                                                <li>
+                                                    <a href="notification.html">
+                                                        <div class="icon_wrap">
+                                                            <span class="icon-bell"></span>
+                                                        </div>
+                                                    </a>
                                                 </li>
-                                                <li class="has_dropdown">
-                                                    <a href="#">Sitter★</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="sitterInfoModi">정보수정</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="streamingService">채팅창</a>
-                                                            </li>
-                                                        </ul>
-                                                        <ul>
-                                                            <li>
-                                                                <a href="sitterList">시터리스트</a>
-                                                            </li>
-                                                            <li>
-                                                          		<a href="sitterResList">시터예약리스트</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li class="has_dropdown">
-                                                    <a href="all-products.html">Manager☆</a>
-                                                    <div class="dropdown dropdown--menu">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="manager">매니져마이페이지</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                                
                                             </ul>
                                         </div>
-                                        <!-- /.navbar-collapse -->
-                                    </nav>
-                                </div>
-                            </div>
-                        
+                                        <!--start .author__notification_area -->
+                                        <div class="dropdown dropdown--author">
+                                            <ul>
+                                               <li>
+                                                    <a href="sitterInfoModi" >
+                                                        <span class="icon-user"></span>マイページ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="memberResList">
+                                                        <span class="icon-home"></span>予約照会</a>
+                                                </li>
+                                                <li>
+                                                    <a href="logout">
+                                                        <span class="icon-logout"></span>ログアウト</a>
+                                                </li>
+                                                <li>
+                                                    <a href="sitterStreaming">
+                                                        <span class="icon-notebook"></span>ストリーミングサービス
+</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">
+                                                        <span class="icon-logout"></span>ログアウト</a>
+                                                </li>
+                                      
+                                            </ul>
+                                        </div>
+                                         </c:if>
+                                    </div>
+                                </div>   
+                                <!-- end /.mobile_content -->
                         
                         
                             <div class="author-menu">
-                                <!-- start .author-area -->
                                 <div class="author-area">
                                     <div class="search-wrapper">
                                         <div class="nav_right_module search_module">
-<!--                                             <span class="icon-magnifier search_trigger"></span> -->
                                             <div class="search_area">
-<!--                                                 <form action="#"> -->
-<!--                                                     <div class="input-group input-group-light"> -->
-<!--                                                         <span class="icon-left" id="basic-addon1"> -->
-<!--                                                             <i class="icon-magnifier"></i> -->
-<!--                                                         </span> -->
-<!--                                                         <input type="text" class="form-control search_field" placeholder="Type words and hit enter..."> -->
-<!--                                                     </div> -->
-<!--                                                 </form> -->
                                             </div>
                                         </div>
                                     </div>
+                                   
+                                   
                                     <div class="author__notification_area">
+                                       <c:if test="${sessionScope.sessionId != null }">
                                         <ul>
                                             <li class="has_dropdown">
                                                 <div class="icon_wrap">
@@ -202,13 +216,14 @@
                                                 </div>
                                             </li>
                                         </ul>
+                                        </c:if>
                                     </div>
                                     <!--start .author-author__info-->
                                     
                                     <!-- 비로그인시 -->
                                         <c:if test="${sessionScope.sessionId == null }">
 	   					                  <div class="author-author__info">
-                                            <a href="login">Login</a>
+                                            <a href="login">ログイン</a>
 	                                      </div>
                                         </c:if>
                                       
@@ -226,7 +241,7 @@
                                                 </div>
                                                  <div class="autor__info">
                                                     <p class="name">
-                                                       ${sessionScope.sessionName}
+                                                      <a href = "memberProfile"> ${sessionScope.sessionName}</a>
                                                     </p>
 <!--                                                     <p class="amount">$20.45</p> -->
                                                 </div> 
@@ -237,9 +252,12 @@
                                                         <span class="icon-user"></span>マイページ</a>
                                                 </li>
                                                 <li>
-                                                    <a href="dashboard.html">
+                                                    <a href="memberResList">
                                                         <span class="icon-home"></span>予約照会</a>
                                                 </li>
+                                                <li>
+                                                <a href="streamingService">
+                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>                                               
                                                 <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
@@ -278,18 +296,26 @@
                                                         <span class="icon-notebook"></span>予約リスト</a>
                                                 </li>
                                                 <li>
+                                                    <a href="sitterStreaming">
+                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>
+                                                </li>
+                                                <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
+                                            
                                             </ul>
                                         </div>
                                     </div>
                                    </c:if>
                                 
+                                
                             </div>
                         </div>
                     </div>
                 </div>
+                 <!-- author area restructured for mobile -->
+                               
                 <!-- end /.row -->
             </div>
             <!-- end /.container -->

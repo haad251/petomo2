@@ -54,8 +54,44 @@
 
 <body class="preload">
 	<jsp:include page="../menuBar.jsp" /> 
-	<jsp:include page="sitterMenuBar.jsp" /> 
-	
+<section class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumb-contents">
+                        <h2 class="page-title">シッターメニュー</h2>
+                    </div>
+                </div><!-- end .col-md-12 -->
+            </div><!-- end .row -->
+        </div><!-- end .container -->
+    </section><!-- ends: .breadcrumb-area -->
+    <section class="dashboard-area">
+        <div class="dashboard_menu_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="menu-toggler d-md-none">
+                            <span class="icon-menu"></span> Dashboard Menu
+                        </button>
+                        <ul class="dashboard_menu">
+                            <li>
+                                <a href="dashboard.html"><span class="lnr icon-home"></span>統計</a>
+                            </li>
+                            <li class="active s_jfont">
+                                <a href="sitterResList"><span class="lnr icon-notebook"></span>予約リスト</a>
+                            </li>
+                            <li>
+                                <a href="sitterInfoModi"><span class="lnr icon-settings"></span>マイページ</a>
+                            </li>
+                            <li style="width:200px;">
+                            </li>
+                        </ul><!-- ends: .dashboard_menu -->
+                    </div><!-- ends: .col-md-12 -->
+                </div><!-- ends: .row -->
+            </div><!-- ends: .container -->
+        </div><!-- ends: .dashboard_menu_area -->
+     </section>
+
         <div class="dashboard_contents dashboard_statement_area section--padding">
             <div class="container">
                 <div class="row">
@@ -111,7 +147,7 @@
 										      </c:choose>
             	                           	</td>
 	                                        <td class="action">
-	                                            <a href="streamingService?res_id=${res.res_id}">go</a>
+	                                            <a href="sitterStreaming?res_id=${res.res_id}">go</a>
 	                                        </td>
 	                                    </tr>
                                     </c:forEach>
@@ -133,7 +169,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     <h3 class="modal-title">予約情報</h3>
-                    	대충정보뿌려주기
+        
                 </div>
                		 <div class="modal-body">
 <!-- 		                <div id="res_status_form"> -->

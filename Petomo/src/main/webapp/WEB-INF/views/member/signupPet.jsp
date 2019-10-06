@@ -53,7 +53,7 @@ function regist(){
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">강아지 등록</h2>
+                        <h2 class="page-title">ペット登録</h2>
                         <div class="breadcrumb">
                            
                         </div>
@@ -72,13 +72,13 @@ function regist(){
                         </button>
                         <ul class="dashboard_menu">
                             <li>
-                                <a href="memberProfile"><span class="lnr icon-home"></span>Dashboard</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール</a>
                             </li>
                             <li>
-                                <a href="memberResList"><span class="lnr icon-basket"></span>예약 확인</a>
+                                <a href="memberResList"><span class="lnr icon-basket"></span>予約確認</a>
                             </li>
                             <li class="active">
-                                <a href="signupPet"><span class="lnr icon-note"></span>강아지 정보 작성</a>
+                                <a href="signupPet"><span class="lnr icon-note"></span>ペット登録</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -92,7 +92,7 @@ function regist(){
                     <form action = "petSignup" method= "POST">
                         <div class="cardify signup_form">
                             <div class="login--header">
-                                <h3>강아지 등록</h3>
+                                <h3>ペット登録</h3>
                             </div><!-- end .login_header -->
                             <div class="login--form">
                                 <div class="form-group">
@@ -100,36 +100,36 @@ function regist(){
                                     <input type = "hidden" value = "${sessionScope.sessionId}" name = "mb_id">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">PET NAME</label>
+                                    <label for="password">ペットネーム</label>
                                     <input id="password" type="text" name = "pet_name" class="text_field" placeholder="Enter pet name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="con_pass">PET GENDER</label>
+                                    <label for="con_pass">ペット性別</label>
                                     <input id="con_pass" type="text" class="text_field" placeholder="Pet Gender" name = "pet_sex">
                                 </div>
                                   <div class="form-group">
-                                    <label for="user_name">Pet Birth</label>
+                                    <label for="user_name">ペット誕生日</label>
                                     <input id="user_name" type="text" name = "pet_birth" class="text_field" placeholder="Enter Pet Birth">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Weight</label>
+                                    <label for="email_ad">ペット体重</label>
                                     <input id="nickname" type="text" name = "pet_weight" class="text_field" placeholder="Enter Pet Weight">
                                 </div>    
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Type</label>
+                                    <label for="email_ad">ペット種類</label>
                                     <input id="email_ad" type="text" name = "pet_type" class="text_field" placeholder="Enter Pet Type">
                                 </div> 
                                 <div class="form-group">
-                                    <label for="email_ad">Pet Breed</label>
+                                    <label for="email_ad">ペットの大きさ</label>
                                     <input id="email_ad" type="text" name = "pet_breed" class="text_field" placeholder="Enter Pet Breed">
                                 </div>                                                            
                                 <div class="form-group">
-                                    <label for="con_pass">땅콩 수확여부</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "pet_neuter" placeholder="수확은 하셨습니까?">
+                                    <label for="con_pass">中性化</label>
+                                    <input id="con_pass" type="text" class="text_field" name = "pet_neuter" placeholder="特異事項">
                                 </div>
                                 <div class="form-group">
-                                    <label for="con_pass">특이사항</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "pet_status" placeholder="특이사항이 있으면 여기에 써주세요">
+                                    <label for="con_pass">特異事項</label>
+                                    <input id="con_pass" type="text" class="text_field" name = "pet_status" placeholder="特異事項があればここに書いてください。">
                                 </div>
                                 
                                 <button type = "submit" class="btn btn--md register_btn btn-primary" id = "register">Register Now</button>

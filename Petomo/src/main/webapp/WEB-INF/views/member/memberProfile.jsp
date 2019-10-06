@@ -31,12 +31,19 @@
     				tag += '<td>'+resp[i].pet_weight+'</td>';
     				tag += '<td>'+resp[i].pet_birth+'</td>';
     				tag += '<td>'+resp[i].pet_neuter+'</td>';
-    				tag += '<td><input class="del" data-value="'+resp[i].pet_id+'" type="button" value="삭제" id = "delete" />';
-    				tag += '    <input class="update"  data-value="'+resp[i].pet_id+'" type="button" value="수정" id = "update" />';
+    				tag += '<td><form action = "deletePet" method = "post">';
+    				tag += '<input class="del" data-value="'+resp[i].pet_id+'" type="submit" value="削除" id = "delete"/>';
+    				tag += '<input type = "hidden" name = "pet_id" value = "'+resp[i].pet_id+'">';
+    				tag += '</form>';
+    				tag += '</td>';
+    				tag += '<td>';
+    				tag += '</form>';
+    				tag += '</td>';
     				tag += '</td>';
     				tag += '</tr>';
     			}
     			$("#dog").html(tag);//#book 태그 밑에 tag추가
+				$("#petnumber").html(resp.length);
 
     	    }
     	});
@@ -56,7 +63,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Member Profile</h2>
+                        <h2 class="page-title">プロフィール</h2>
                         <div class="breadcrumb">
                            
                         </div>
@@ -75,13 +82,13 @@
                         </button>
                         <ul class="dashboard_menu">
                             <li class="active">
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール</a>
                             </li>
                             <li>
-                                <a href="memberResList"><span class="lnr icon-basket"></span>예약 확인</a>
+                                <a href="memberResList"><span class="lnr icon-basket"></span>予約確認</a>
                             </li>
                             <li>
-                                <a href="signupPet"><span class="lnr icon-note"></span>강아지 정보 작성</a>
+                                <a href="signupPet"><span class="lnr icon-note"></span>ペット登録</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -97,25 +104,11 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-7">
                                 <div class="author-desc">
-                                    <img src="img/author.jpg" alt="">
+                                        <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
+             
                                     <div class="infos">
                                         <h4>${sessionScope.sessionName}</h4>
                                         <input type = "hidden" value = "${sessionScope.sessionId}" id = "memberId">
-                                        <ul>
-                                            <li>
-                                                <a href="" class="btn btn-primary btn--xs">Follow</a>
-                                            </li>
-                                            <li>
-                                                <a href="" class="btn btn-danger btn--xs" data-toggle="modal" data-target="#author-contact">
-                                                    <span class="icon-envelope-open"></span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="" class="btn btn-secondary btn--xs">
-                                                    <span class="icon-globe"></span>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div><!-- ends: .author-desc -->
                             </div><!-- ends: .col-lg-5 -->
@@ -123,12 +116,12 @@
                                 <div class="author-stats">
                                     <ul>
                                         <li class="t_items">
-                                            <span>146</span>
-                                            <p>강아지 마리수</p>
+                                            <span id = "petnumber"></span>
+                                            <p>ペット数</p>
                                         </li>
                                         <li class="t_sells">
-                                            <span>2426</span>
-                                            <p>지금까지 이용한 횟수</p>
+                                            <span>${resNumber}</span>
+                                            <p>これまでの利用回数</p>
                                         </li>
                                         <li class="t_reviews">
                                <!--              <div>
@@ -142,7 +135,6 @@
                                                 <span class="avg_r">5.0</span>
                                                 <span>(226 reviews)</span>
                                             </div> -->
-                                            <p>Author Ratings</p>
                                         </li>
                                     </ul>
                                 </div><!-- ends: .author-stats -->
@@ -156,7 +148,7 @@
                     <div class="col-md-12">
                         <div class="dashboard_title_area">
                             <div class="dashboard__title">
-                                <h3>펫 목록</h3>
+                                <h3>ペットリスト</h3>
                             </div>
                         </div>
                     </div><!-- ends: .col-md-12 -->
@@ -168,29 +160,18 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>펫 이름</th>
-                                        <th>종류</th>
-                                        <th>품종</th>
-                                        <th>성격</th>
-                                        <th>성별</th>
-                                        <th>체중</th>
-                                        <th>생일</th>
-                                        <th>중성화</th>
+                                        <th width=100>名前</th>
+                                        <th width=100>種類</th>
+                                        <th width=100>品種</th>
+                                        <th width=300>性格</th>
+                                        <th width=100>性別</th>
+                                        <th width=100>体重</th>
+                                        <th width=200>誕生日</th>
+                                        <th width=125>中性化</th>
                                     </tr>
                                 </thead>
                                 <tbody id = "dog">
-                                    <c:forEach items="${petList}" var="petList" varStatus="i">
-<tr>
-<td><c:out value="${petList.pet_name}"/></td>
-<td><c:out value="${petList.pet_type}"/></td>
-<td><c:out value="${petList.pet_breed}"/></td>
-<td><c:out value="${petList.pet_status}"/></td>
-<td><c:out value="${petList.pet_sex}"/></td>
-<td><c:out value="${petList.pet_weight}"/></td>
-<td><c:out value="${petList.pet_birth}"/></td>
-<td><c:out value="${petList.pet_neuter}"/></td>
-</tr>
-</c:forEach>
+                              
                                 </tbody>
                             </table>
                         </div><!-- ends: .statement_table -->

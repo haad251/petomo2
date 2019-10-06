@@ -15,11 +15,15 @@ $(function(){
 	$("#memberradio").on('click',function(){
  		$("#loginform").show();
  		$("#sitterloginform").hide();
+ 		$("#urId2").val('');
+ 		$("#urPw2").val('');
  	});
  	
 	$("#sitterradio").on('click',function(){
  		$("#sitterloginform").show();
  		$("#loginform").hide();
+ 		$("#urId").val('');
+ 		$("#urPw").val('');
  	});
 	 	
  	});
@@ -71,11 +75,11 @@ $(function(){
                    			 <form action="loginMember" id = "loginform" method = "POST">
                                 <div class="form-group">
                                     <label for="user_name">ID</label>
-                                    <input id="urId" type="text" class="text_field" name = "mb_id"  placeholder="Enter your username...">
+                                    <input id="urId" type="text" class="text_field" name = "mb_id" >
                                 </div>
                                 <div class="form-group">
                                     <label for="pass">パスワード</label>
-                                    <input id="urPw" type="password" class="text_field" name = "mb_pw" placeholder="Enter your password...">
+                                    <input id="urPw" type="password" class="text_field" name = "mb_pw">
                                 </div>
                                 <button type = "button" class="btn btn--md btn-primary" id="idchecking" >ログイン</button>
                                 <div class="login_assist">
@@ -90,11 +94,11 @@ $(function(){
                   			  <form action="loginSitter" id = "sitterloginform" method = "POST" style="display:none;">
                                 <div class="form-group">
                                     <label for="user_name">ID</label>
-                                    <input id="urId2" type="text" class="text_field" name = "st_id"  placeholder="Enter your username...">
+                                    <input id="urId2" type="text" class="text_field" name = "st_id" >
                                 </div>
                                 <div class="form-group">
                                     <label for="pass">パスワード</label>
-                                    <input id="urPw2" type="password" class="text_field" name = "st_pw" placeholder="Enter your password...">
+                                    <input id="urPw2" type="password" class="text_field" name = "st_pw" >
                                 </div>
                                 <button type = "button" class="btn btn--md btn-primary" id="idchecking2" >ログイン</button>
                                 <div class="login_assist">

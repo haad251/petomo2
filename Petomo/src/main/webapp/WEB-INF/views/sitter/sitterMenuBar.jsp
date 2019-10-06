@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Sitter Menu</h2>
+                        <h2 class="page-title">シッターメニュー</h2>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -31,7 +31,7 @@
                         </button>
                         <ul class="dashboard_menu">
                             <li>
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
+                                <a href="dashboard.html"><span class="lnr icon-home"></span>統計</a>
                             </li>
                             <li>
                                 <a href="sitterResList"><span class="lnr icon-notebook"></span>予約リスト</a>
@@ -56,6 +56,7 @@
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
+     </section>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

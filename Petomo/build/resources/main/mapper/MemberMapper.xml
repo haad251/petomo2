@@ -81,4 +81,70 @@
 	FROM pet_tb
 	WHERE mb_id = #{mb_id}
 </select>
+
+
+
+
+ <insert id="insertMemberImage" parameterType="FileVO">
+		INSERT INTO file_tb (file_sav,file_org,file_type,file_no)
+		VALUE(
+			#{file_sav},
+			#{file_org},
+			#{file_type},
+			#{file_no}
+		)
+ </insert>
+ 
+ <delete id="deleteMemberImage" parameterType="MemberVO">
+		DELETE 
+		FROM file_tb
+		WHERE file_type = 'member' 
+		AND file_no=#{mb_id}
+ </delete>
+ 
+   <select id="selectMemberProfileImg" parameterType="MemberVO" resultType="FileVO">
+   	    SELECT *
+		FROM file_tb
+		WHERE file_type = 'member' 
+		AND file_no=#{mb_id}
+ </select>
+ <insert id="insertPet" parameterType="PetVO">
+	insert into pet_tb(
+		mb_id
+		,pet_name
+		,pet_sex
+		,pet_birth
+		,pet_weight
+		,pet_type
+		,pet_breed
+		,pet_neuter
+		,pet_status
+	)
+	values
+	(
+		#{mb_id}
+		,#{pet_name}
+		,#{pet_sex}
+		,#{pet_birth}
+		,#{pet_weight}
+		,#{pet_type}
+		,#{pet_breed}
+		,#{pet_neuter}
+		,#{pet_status}
+	)
+</insert>
+ <delete id = "deletePet" parameterType = "PetVO">
+ 		DELETE
+		FROM pet_tb
+		WHERE pet_id = #{pet_id}
+ </delete>
+ <select id="selectAllMember" resultType = "MemberVO">
+ SELECT * 
+ FROM member_tb
+ </select>
+ 		<select id="selectStreamId" parameterType = "MemberVO" resultType = "String">
+ SELECT mb_streamid
+ FROM member_tb
+ where #{mb_id} = mb_id
+ </select>
 </mapper>

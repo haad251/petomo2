@@ -21,12 +21,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="hero__content__title">
-                                <h1><span>7,685</span> customer</h1>
-                               	<h1><span>4,512</span> pet sitter</h1>
-                                <p class="tagline">DigiPro is the most powerful, & customizable template for Easy Digital Downloads Products</p>
+                                <h1><span>${memberNumber}</span> CUSTOMER</h1>
+                               	<h1><span>${sitterNumber}</span> PETSITTER</h1>
                             </div><!-- end .hero__btn-area-->
                             <div class="search-area">
-                                <div class="row">
                                     <div class="col-lg-8 offset-lg-2">
                                             <form action  = "signupMember" method = "GET">
                                                 <span style ="float:left">

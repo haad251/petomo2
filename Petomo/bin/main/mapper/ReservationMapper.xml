@@ -76,8 +76,6 @@ values(
 		SET res_rate=#{res_rate}, res_review=#{res_review}
 		WHERE res_id=#{res_id}
  </update>
-
-
  
  <!--[Map] Location 위치 정보 인서트 -->
  <insert id="insertLoc" parameterType="LocationVO"> 
@@ -105,6 +103,10 @@ values(
 	FROM location_tb
 	WHERE res_id=#{res_id}
 </select>
+
+
+
+
 
 <insert id="insertNoti" parameterType="NotificationVO">
 	INSERT INTO notification_tb (res_id, not_receiver, not_sender, not_message, not_status, not_time)
@@ -137,4 +139,19 @@ values(
 		WHERE not_id=#{not_id}
  </update>
 
+<select id = "selectAllRes" resultType = "ReservationVO">
+	SELECT *
+	FROM reservation_tb
+</select>
+<update id = "insertStreamId" parameterType = "ReservationVO">
+	
+UPDATE member_tb 
+SET mb_streamid = #{st_id} 
+WHERE mb_id = #{mb_id}
+</update>
+<update id = "deleteStreamingId" parameterType= "ReservationVO">
+UPDATE member_tb 
+SET mb_streamid = null
+WHERE mb_id = #{mb_id}
+</update>
 </mapper>

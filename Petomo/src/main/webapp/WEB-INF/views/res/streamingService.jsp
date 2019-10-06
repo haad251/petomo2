@@ -64,14 +64,11 @@
 			  });
 		});
   });
- 
-  
-  
-  </script>
+ </script>
   <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
   <script type="text/javascript">/*비디오 스트리밍*/
- var sessionSitter = "${sessionScope.sessionId}";
-  var url = "http%3A%2F%2F203.233.196.14%3A1935%2F"+sessionSitter+"%2FmyStream%2Fplaylist.m3u8";
+ var sessionstreamServer = "${sessionScope.streamServer}";
+  var url = "http%3A%2F%2F203.233.196.14%3A1935%2F"+sessionstreamServer+"%2FmyStream%2Fplaylist.m3u8";
 WowzaPlayer.create('playerElement',
     {
     "license":"PLAY2-efNfK-A3XXW-kveHU-p3tdP-cc8Za",
@@ -87,8 +84,8 @@ WowzaPlayer.create('playerElement',
     "uiQuickRewindSeconds":"30"
     }
 );
-</script><!--여기까지 비디오 스트리밍  -->
   
+  </script>
 </head>
 
 <body class="preload">
@@ -99,10 +96,11 @@ WowzaPlayer.create('playerElement',
                 <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:40%; margin-left: 100px;">
                     <div class="item-preview" sytle="heigth:60%;">
 <!--                         스트리밍 -->
+
+<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0"></div>
                         <div class="item-prev-area">
                             <div class="preview-img-wrapper">
                          	
-<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0"></div>
 
     <div id="myElement"></div>
                             </div><!--ends: .preview-img-wrapper-->
