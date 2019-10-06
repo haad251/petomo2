@@ -111,14 +111,14 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/memberupdate", method = RequestMethod.POST)
 	public String memberupdate(MemberVO member) {
-		int result = msv.memberupdate(member);
+		msv.memberupdate(member);
 		return "redirect:/";
 	}
 	
 	
 	@RequestMapping(value = "/deleteAccount", method = RequestMethod.POST)
 	public String deleteAccount(MemberVO member) {
-		int result = msv.deleteAccount(member);
+		msv.deleteAccount(member);
 			return "redirect:/logout";
 	}
 	
@@ -134,9 +134,10 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/petSignup", method = RequestMethod.POST)
 	public String petSignup(PetVO pet) {
-		int result = msv.petSignup(pet);
+		msv.petSignup(pet);
 		return "member/memberProfile";
 	}
+	
 	@RequestMapping(value = "/dogList", method = RequestMethod.GET)
 	public @ResponseBody List<PetVO> dogList(PetVO pet) {
 		List<PetVO> list = msv.dogList(pet);

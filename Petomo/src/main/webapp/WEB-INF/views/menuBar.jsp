@@ -12,8 +12,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="DigiPro - Digital Products Marketplace ">
     <meta name="keywords" content="marketplace, easy digital download, digital product, digital, html5">
-
-
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
     <link rel="stylesheet" href="vendor_assets/css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="vendor_assets/css/animate.css">
@@ -27,28 +25,61 @@
     <link rel="stylesheet" href="vendor_assets/css/trumbowyg.min.css">
     <link rel="stylesheet" href="vendor_assets/css/venobox.css">
     <link rel="stylesheet" href="style.css">
-<!--     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-32x32.png"> -->
 </head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
  <script>
   
-//   $(window).on("load",function(){
-// 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
-// 		stompClient = Stomp.over(socket);  
-// 		stompClient.connect({}, function() { 
-// 			  stompClient.subscribe('/topic/noti', function(msg) { 
-// 				  alert("dz");
-// // 				  var data = JSON.parse(msg.body);
-// // 				  var str = '';
-// // 					  str += data.chat_date + '</p></div>';    
-// // 		        $("#chatForm").append(str);
-// 			  });
-// 		});
-//   });
+  $(window).on("load",function(){
+	  
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		stompClient = Stomp.over(socket);  
+		stompClient.connect({}, function() { 
+			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
+				var data = JSON.parse(msg.body);
+				var str = '';
+				str += '<div class="alert alert-primary" role="alert">';
+				str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
+                str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+				str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+				$("#notizone").prepend(str);
+			});
+			
+// 			초기화
+			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+				var data = JSON.parse(msg.body);
+				var str2 ='';
+				for(var i in data){
+					str2 += '<div class="alert alert-primary" role="alert">';
+					str2 += data[i].not_message+'<p class="notitime">'+data[i].not_time+'</p>';
+                    str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data[i].not_id+'">';
+					str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+				}
+				$("#notizone").html(str2);
+			});
+
+		});
+		
+		$("#notibell").mouseover(function(){
+			stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+					JSON.stringify({'id': "${sessionScope.sessionId}"}));
+		});
+
+		
+  });
+  
+	function upNoti(notid){
+		stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
+				JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
+	};
+  
+  
+  
   </script>
 
 <body>
-
     <!-- start menu-area -->
     <div class="menu-area">
         <div class="top-menu-area">
@@ -148,7 +179,7 @@
                                         <ul>
                                             <li class="has_dropdown">
                                                 <div class="icon_wrap">
-                                                    <span class="icon-bell"></span>
+                                                    <span class="icon-bell" id="notibell"></span>
                                                     <span class="notification_status noti"></span>
                                                 </div>
                                                 <div class="dropdown notification--dropdown">
@@ -156,32 +187,16 @@
                                                         <h6>通知</h6>
                                                     </div>
                                                     <div class="notifications_module">
-                                                        <div class="notification">
-                                                            <div class="notification__info">
-                                                                <div class="info_avatar">
-                                                                    <img src="img/notification_head.png" alt="">
-                                                                </div>
-                                                                <div class="info">
-                                                                    <p>
-                                                                        <span>Anderson</span> added to Favourite
-                                                                        <a href="#">Mccarther Coffee Shop</a>
-                                                                    </p>
-                                                                    <p class="time">Just now</p>
-                                                                </div>
-                                                            </div>
+                                                        <div id="notizone" class="notification">
+<!--                                                                 <div class="alert alert-primary" role="alert"> -->
+<!--                                                                 	This is default alert message box style. -->
+<!--                                                                     <p class="notitime">Just now</p> -->
+<!--                                                                     <button id="closebtn" type="button" class="closebtn close" data-dismiss="alert" aria-label="Close"> -->
+<!-- 								                                        <span class="icon-close" aria-hidden="true"></span> -->
+<!-- 								                                    </button> -->
+<!--                                                                 </div> -->
                                                             <!-- end /.notifications -->
                                                         </div>
-                                                        <!-- end /.notifications -->
-                                                         
-                                                         
-                                                         
-<!--                                                         <div class="text-center m-top-30 p-left-20 p-right-20"><a href="notification.html" class="btn btn-primary btn-md btn-block">View -->
-<!--                                                                 All</a></div> -->
-<!--                                                         end /.notifications -->
-                                                        
-                                                        
-                                                        
-                                                        
                                                     </div>
                                                     <!-- end /.dropdown -->
                                                 </div>
@@ -284,7 +299,6 @@
     <!-- end /.menu-area -->
 
 
-<!-- 스타일 스크립트 -->
 <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script> -->
     <!-- inject:js-->
 <!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->

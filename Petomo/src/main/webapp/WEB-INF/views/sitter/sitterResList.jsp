@@ -9,20 +9,38 @@
 <head>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+	  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <script>
-	$(function(){
+	$(window).on("load",function(){
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		stompClient = Stomp.over(socket);  
+		
 		$(".res_status_btn").on("click",function(){
-			var res = $(this).attr("data-res");
-			$("#hiddenRes").val(res);
+			var hiddenres = $(this).attr("data-res");
+			var hiddenmb_id = $(this).attr("data-mb_id");
+			$("#hiddenRes").val(hiddenres);
+			$("#hiddenMb").val(hiddenmb_id);
 		});
 		
 		$("#res_confirm_btn").on("click",function(){
+			var fres = $("#hiddenRes").val();
+			var mbid = $("#hiddenMb").val();;
+			var stid = "${sessionScope.sessionId}";
+			stompClient.send('/app/noti/'+mbid+'/resConfirm', {}, 
+					JSON.stringify({'res_id': fres, 'not_receiver':mbid, 'not_sender' : stid}));
 			$("#resModalForm").attr("action", "confirmReservation");
 			$("#resModalForm").submit();
 		});
 		
 		$("#res_cancel_btn").on("click",function(){
+			var fres2 = $("#hiddenRes").val();
+			var mbid2 = $("#hiddenMb").val();;
+			var stid2 = "${sessionScope.sessionId}";
+			stompClient.send('/app/noti/'+mbid2+'/resCancel', {}, 
+			JSON.stringify({'res_id': fres2, 'not_receiver':mbid2, 'not_sender' : stid2}));
 			$("#resModalForm").attr("action", "cancelReservation");
 			$("#resModalForm").submit();
 		});
@@ -71,7 +89,7 @@
 										         <c:when test = "${res.res_status=='予約待機'}">
 										           	<span class="sale">
 	            	                           			<a href="#" class="res_status_btn" data-target="#myModal2" 
-    	        	                           			data-toggle="modal" data-res="${res.res_id}"
+    	        	                           			data-toggle="modal" data-res="${res.res_id}" data-mb_id="${res.mb_id}"
     	        	                           			style="color:yellow;">${res.res_status}</a>
     	        	                           		</span>
 										         </c:when>
@@ -121,6 +139,7 @@
 <!-- 		                <div id="res_status_form"> -->
                		 		 <form id="resModalForm" method="POST"> 
                		 		 	<input type="hidden" id="hiddenRes" name="res_id" >
+               		 		 	<input type="hidden" id="hiddenMb" name="mb_id" >
 	               				 <button id="res_confirm_btn" type="button" class="btn btn-danger btn-md">予約承認</button>
     	           		   		 <button id="res_cancel_btn" class="btn modal_close" data-dismiss="modal">予約キャンセル</button>
                	   			 </form>

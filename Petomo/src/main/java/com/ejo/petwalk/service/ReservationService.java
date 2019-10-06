@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ejo.petwalk.dao.ReservationMapper;
 import com.ejo.petwalk.vo.ChatVO;
 import com.ejo.petwalk.vo.LocationVO;
+import com.ejo.petwalk.vo.NotificationVO;
 import com.ejo.petwalk.vo.ReservationVO;
 
 @Service
@@ -67,4 +68,23 @@ public class ReservationService {
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id){
     	return dao.selectLocationInfoAll(res_id);
     }
+    
+    
+    public int insertNoti(NotificationVO noti) {
+		return dao.insertNoti(noti);
+	}
+    
+    public ArrayList<NotificationVO> selectNotiUnreadAll(String id){
+    	return dao.selectNotiUnreadAll(id);
+    }
+    
+    public String selectMaxNoti(){
+    	return dao.selectMaxNoti();
+    }
+    
+    public int updateNoti(NotificationVO noti){
+    	return dao.updateNoti(noti);
+    }
+    
+    
 }

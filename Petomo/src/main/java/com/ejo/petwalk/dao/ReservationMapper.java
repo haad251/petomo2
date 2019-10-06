@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.ejo.petwalk.vo.ChatVO;
 import com.ejo.petwalk.vo.LocationVO;
+import com.ejo.petwalk.vo.NotificationVO;
 import com.ejo.petwalk.vo.ReservationVO;
 
 public interface ReservationMapper {
@@ -25,8 +26,10 @@ public interface ReservationMapper {
     public int insertLoc(LocationVO loc);
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
     
-    
-    
+    public int insertNoti(NotificationVO noti);
+    public ArrayList<NotificationVO> selectNotiUnreadAll(String id);
+    public String selectMaxNoti();
+    public int updateNoti(NotificationVO noti);
     
     
 }

@@ -1,7 +1,5 @@
 package com.ejo.petwalk.vo;
 
-import lombok.Data;
-
 //@Data
 public class ChatVO {
 	private String chat_id,res_id,chat_sender,chat_receiver,chat_content,chat_date;

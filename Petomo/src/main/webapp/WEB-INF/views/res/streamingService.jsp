@@ -23,10 +23,11 @@
   $(window).on("load",function(){
 		$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 // 		소켓
-		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+		
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
-			  stompClient.subscribe('/topic/chats/'+'${res.res_id}', function(msg) { 
+			  stompClient.subscribe('/topic/chats/'+"${res.res_id}", function(msg) { 
 				  var data = JSON.parse(msg.body);
 				  var str = '';
 				  if(data.chat_sender == "${sessionScope.sessionId}"){
@@ -51,13 +52,15 @@
 				  });
 			  
 			  $("#sendMessageBtn").click(function() {
-		    	  var sender="${sessionScope.sessionId}";
+		    	  alert(res);
+				  var sender="${sessionScope.sessionId}";
 		    	  var content=$("#sendMessageText").val();
-		    	  var receiver="${sitter.st_id}"; 
-		    	  var res='8';      //나중에수정
+		    	  if("${sessionScope.sessionSitter=='on'}"){
+			    	  var receiver="${res.mb_id}";
+		    	  }else var receiver = "${res.st_id}";
+		    	  var res="${res.res_id}";
 		    	  $("#sendMessageText").val('');		     		
-		    	
-		    	  stompClient.send('/app/chats'+'${res.res_id}', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
+		    	  stompClient.send('/app/chats/'+res, {}, JSON.stringify({'room':res, 'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
 		});
   });

@@ -128,7 +128,7 @@ public class SitterController {
 		}
 		return "redirect:/sitterInfoModi";
 	}
-
+	
 	@RequestMapping(value="/confirmReservation",method=RequestMethod.POST)
 	public String confirmReservation(ReservationVO res) {
 		res.setRes_status("予約完了");

@@ -1,19 +1,22 @@
 package com.ejo.petwalk.vo;
 
 public class NotificationVO {
-	private String not_id, mb_id, not_message, not_status, not_time;
+	private String not_id, res_id, not_receiver, not_sender, not_message, not_status, not_time;
+	
+	public NotificationVO() {
+		super();
+	}
 
-	public NotificationVO(String not_id, String mb_id, String not_message, String not_status, String not_time) {
+	public NotificationVO(String not_id, String res_id, String not_receiver, String not_sender, String not_message,
+			String not_status, String not_time) {
 		super();
 		this.not_id = not_id;
-		this.mb_id = mb_id;
+		this.res_id = res_id;
+		this.not_receiver = not_receiver;
+		this.not_sender = not_sender;
 		this.not_message = not_message;
 		this.not_status = not_status;
 		this.not_time = not_time;
-	}
-
-	public NotificationVO() {
-		super();
 	}
 
 	public String getNot_id() {
@@ -24,12 +27,28 @@ public class NotificationVO {
 		this.not_id = not_id;
 	}
 
-	public String getMb_id() {
-		return mb_id;
+	public String getRes_id() {
+		return res_id;
 	}
 
-	public void setMb_id(String mb_id) {
-		this.mb_id = mb_id;
+	public void setRes_id(String res_id) {
+		this.res_id = res_id;
+	}
+
+	public String getNot_receiver() {
+		return not_receiver;
+	}
+
+	public void setNot_receiver(String not_receiver) {
+		this.not_receiver = not_receiver;
+	}
+
+	public String getNot_sender() {
+		return not_sender;
+	}
+
+	public void setNot_sender(String not_sender) {
+		this.not_sender = not_sender;
 	}
 
 	public String getNot_message() {
@@ -58,9 +77,9 @@ public class NotificationVO {
 
 	@Override
 	public String toString() {
-		return "NotificationVO [not_id=" + not_id + ", mb_id=" + mb_id + ", not_message=" + not_message
-				+ ", not_status=" + not_status + ", not_time=" + not_time + "]";
+		return "NotificationVO [not_id=" + not_id + ", res_id=" + res_id + ", not_receiver=" + not_receiver
+				+ ", not_sender=" + not_sender + ", not_message=" + not_message + ", not_status=" + not_status
+				+ ", not_time=" + not_time + "]";
 	}
-	
-	
+
 }

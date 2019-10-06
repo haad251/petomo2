@@ -6409,17 +6409,19 @@ this file contains the style for the timline component
 
 /* Alert Styles */
 .alert {
-  padding: 18px 55px 18px 60px;
+  padding: 10px 15px 7px 45px;
   border-radius: 3px;
-  font-size: 16px;
-  margin-bottom: 30px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display:block;
   position: relative;
+  width:100%;
 }
 
 .alert:before {
   position: absolute;
   font-family: "Simple-Line-Icons";
-  left: 30px;
+  left: 15px;
   top: 18px;
 }
 
@@ -16579,6 +16581,11 @@ span.counter {
 	margin-bottom:0px;
 }
 
+p.notitime{
+	margin:0px;
+	color: #1DC9B7;
+	font-size:13px;
+}
 
 
 /* //////////////////////// */
