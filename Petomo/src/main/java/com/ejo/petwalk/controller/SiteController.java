@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ejo.petwalk.service.ManagerService;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.ServiceVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -20,6 +21,10 @@ public class SiteController {
 	
 	@Autowired
 	MemberService msv;
+	
+	@Autowired
+	ManagerService masv;
+	
 	
 	@RequestMapping(value="/")
 	public String home() {	
@@ -67,10 +72,12 @@ public class SiteController {
 		return "manager/registerService";
 	}
 	
-	@RequestMapping(value="/serviceDetail")
-	public String serviceDetail(){ 
-		return "manager/serviceDetail";
-	}
+	/*
+	 * @RequestMapping(value="/serviceDetail") 
+	 * public String serviceDetail(String service_id, Model model) throws Exception{ ServiceVO result =
+	 * masv.selectOneService(service_id); System.out.println("현재 선택된 서비스"+result);
+	 * model.addAttribute("service", result); return "manager/serviceDetail"; }
+	 */
 	
 	@RequestMapping(value="/managePetSitter")
 	public String managePetSitter(){

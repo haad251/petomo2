@@ -38,7 +38,7 @@
     				str += '<td>'+serverData[i].service_type+'</td>';
     				str += '<td>'+serverData[i].service_name+'</td>';
     				str += '<td>'+serverData[i].service_time+'</td>';
-    				str += '<td><input type="button" id="deleteBtn" class="btn btn-lg btn-danger" name="deleteBtn" data-id="'+serverData[i].service_id+'"value="Delete"></td>';
+    				str += '<td><input type="button" id="deleteBtn" class="btn btn-lg btn-danger" name="deleteBtn" data-id="'+serverData[i].service_id+'"value="削除"></td>';
     				str += '</tr>';
     				str += '</tbody>';
     				$("#serviceList").append(str);
@@ -94,6 +94,11 @@
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section>
+    
+	     <div class="go_top" style="display: block; text-align:center;">
+	       <span class="icon-arrow-up"></span>
+	     </div>
+	     
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

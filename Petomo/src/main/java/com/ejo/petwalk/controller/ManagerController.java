@@ -37,8 +37,8 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 		if(result == 0)
-			return "registerService";
-		return "manageService";
+			return "manager/registerService";
+		return "manager/manageService";
 	}
 	
 	@RequestMapping(value = "/selectAllService", method = RequestMethod.POST)
@@ -68,7 +68,7 @@ public class ManagerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "serviceDetail";
+		return "manager/serviceDetail";
 	}
 	
 	
@@ -82,7 +82,7 @@ public class ManagerController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "registerService";
+		return "manager/registerService";
 	}
 	
 	@RequestMapping(value = "/updateService", method = RequestMethod.POST)
@@ -96,9 +96,9 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 		if(result==0)
-			return "registerService";
+			return "manager/registerService";
 		else
-			return "manageService";
+			return "manager/manageService";
 	}
 	
 	

@@ -20,7 +20,7 @@
     	var todayDate = getFormatDate(date); //오늘의 날짜를 2019-10-02 형식으로 추출
     	var thisMonth = getFormatMonth(date); //오늘의 날짜를 2019-10 형식으로 추출
     	var thisYear = getFormatYear(date); //오늘의 날짜를 2019 형식으로 추출
-    	var selectedYear = document.getElementById("period_selector").value; // chart에서 선택한 연도를 담을 
+    	var selectedYear = document.getElementById("period_selector").value; // chart에서 선택한 연도를 담을 변수
     	var yearData = []; // chart.js에 넣을 데이터(연도별 매출)를 담을 배열
     	
     	
@@ -104,6 +104,7 @@
            				for (var i=0; i<resultArray.length; i++) {
            					console.log("SDY -- resultArray[" + i +"].md_addr : " + resultArray[i].md_addr);
            					
+           					
            				}
            			},
            			error : function () {
@@ -137,9 +138,9 @@
         			res_start:selectedYear
         		}
         		,success:function(serverData){
-        			var thisYearAllResCount = serverData[0];
-        			var thisYearCanResCount = serverData[1];
-        			var thisYearComResCount = serverData[2];
+        			var thisYearAllResCount = serverData[0]; //전체 예약 수
+        			var thisYearCanResCount = serverData[1]; // 취소된 예약 수
+        			var thisYearComResCount = serverData[2]; // 서비스 이용이 완료된 예약 수
         			$("#thisYearAllResCount").append(thisYearAllResCount);
         			$("#thisYearCanResCount").append(thisYearCanResCount);
         			$("#thisYearComResCount").append(thisYearComResCount);
@@ -156,15 +157,8 @@
         			res_start:selectedYear
         		}
         		,success:function(serverData){
-        			console.log("SDY -- serverData.length : " + serverData.length);
+        			console.log("serverData.length : " + serverData.length);
         			yearData = serverData;
-        			
-        			/*
-        			for(var i = 0 ; i < serverData ; i++){
-        				yearData[i] = serverData[i];
-        			}
-        			*/
-        			
         		}
         	});
         	
@@ -273,7 +267,7 @@
                     str += '<img src="img/buyr1.png" alt="Sitter Images">';
                     str += '</div>';
                     str += '<div class="title">';
-                    str += '<h6>'+serverData[i].st_name+'</h6>';
+                    str += '<h6><a href="sitterDetail?st_id='+serverData[i].st_id+'">'+serverData[i].st_name+'</a></h6>';
                     str += '<p>'+serverData[i].st_loc1+'</p>';
                     str += '</div>';
                     str += '</div>';
@@ -351,8 +345,22 @@
    <section class="dashboard-area">
         <div class="dashboard_contents p-top-100 p-bottom-70" style="padding-top:10px">
             <div class="container">
-            <div id="map-container" style="text-align: center ; margin:30px"></div>
+            <!-- <div id="map-container" style="text-align: center ; margin:30px"></div>-->
                 <div class="row">
+                   	 <div class="col-md-12" style="padding-top: 40px">
+					       <div class="dashboard_title_area">
+					          <div class="pull-left">
+					            <div class="dashboard__title">
+					               <h3>全国内統計</h3>
+					             </div>
+					          </div>
+					         </div>
+					       </div><!-- ends: .col-md-12 -->
+
+                
+                  	<div id="map-container" style="width:100%; display: block; text-align: center ; margin:30px;"></div>
+              		
+                    
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="primary"></h1>
@@ -377,8 +385,8 @@
                             <p>総収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
-                </div>
-                <div class="row">
+                <!-- </div> -->
+                <!--  <div class="row"> -->
                     <div class="col-lg-8 col-md-12" 
                    	style="flex: 0 0 50%;max-width: 50%;">
                         <div class="dashboard_module recent_sells">
@@ -480,6 +488,10 @@
             </div><!-- ends: .container -->
          </div>
     </section><!-- ends: .dashboard-area -->
+    
+     <div class="go_top" style="display: block; text-align:center;">
+	       <span class="icon-arrow-up"></span>
+	     </div>
     
     <!-- modal -->
     <div class="modal fade item_removal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">

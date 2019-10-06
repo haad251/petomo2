@@ -106,6 +106,10 @@
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section>
+    
+    <div class="go_top" style="display: block; text-align:center;">
+	       <span class="icon-arrow-up"></span>
+	     </div>
     <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>

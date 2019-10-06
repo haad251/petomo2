@@ -97,7 +97,7 @@
 					</c:if>
                             <div class="upload_modules">
                                 <div class="modules__title">
-                                    <h3>サービスの名&説明</h3>
+                                    <h3>サービスの説明</h3>
                                 </div><!-- ends: .module_title -->
                                 <div class="modules__content">
                                     <div class="form-group">
@@ -105,8 +105,8 @@
                                         <div class="select-wrap select-wrap2">
                                             <select name="service_type" id="service_type" class="text_field" >
                                             	<option value="">サービスタイプを選んでください。</option>
-                                                <option value="care">ケア</option>
-                                                <option value="walk">散歩</option>
+                                                <option value="ケア">ケア</option>
+                                                <option value="散歩">散歩</option>
                                             </select>
                                             <span class="lnr icon-arrow-down"></span>
                                         </div>

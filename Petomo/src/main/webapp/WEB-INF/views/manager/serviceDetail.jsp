@@ -5,61 +5,14 @@
 <head>
  <meta charset="UTF-8">
     <!-- viewport meta -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta charset="UTF-8">
-<title>Service Detail</title>
+	<meta charset="UTF-8">
+	<title>Service Detail</title>
 </head>
 <body>
 
     <jsp:include page="../menuBar.jsp" /> 
-    <!-- Breadcrumb Area -->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb-contents">
-                        <h2 class="page-title">Register Service</h2>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Register Service</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!-- end .col-md-12 -->
-            </div><!-- end .row -->
-        </div><!-- end .container -->
-    </section><!-- ends: .breadcrumb-area -->
-    <section class="dashboard-area">
-        <div class="dashboard_menu_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="menu-toggler d-md-none">
-                            <span class="icon-menu"></span> Dashboard Menu
-                        </button>
-                        <ul class="dashboard_menu">
-                            <li>
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <a href="/manageService"><span class="lnr icon-note"></span>Manage Service</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-withdrawal.html"><span class="lnr icon-briefcase"></span>Manage Pet Sitter</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-setting.html"><span class="lnr icon-settings"></span>Setting</a>
-                            </li>
-                        </ul><!-- ends: .dashboard_menu -->
-                    </div><!-- ends: .col-md-12 -->
-                </div><!-- ends: .row -->
-            </div><!-- ends: .container -->
-        </div><!-- ends: .dashboard_menu_area -->
+    <jsp:include page="../managerMenuBar.jsp" /> 
+        
  <section class="dashboard-area">
         <div class="dashboard_contents section--padding">
             <div class="container">
@@ -68,13 +21,16 @@
                         <div class="dashboard_title_area">
                             <div class="">
                                 <div class="dashboard__title">
-                                    <h3>Service Detail</h3>
+                                    <h3>サービスの説明</h3>
                                 </div>
                             </div>
                             <div class="ml-auto">
                             	<form action="modifyService" method="get">
                             		<input type="hidden" name="service_id" value="${service.service_id}">
-                                	<button class="btn btn-sm btn-primary">Modification</button>
+                            		<button class="btn btn--icon btn-sm btn--round btn-secondary">
+                                    <span class="icon-settings"></span>修整
+                                </button>
+                                	<!-- <button class="btn btn-sm btn-primary">修整</button> -->
                                 </form>
                             </div>
                         </div>
@@ -86,16 +42,16 @@
                                     <img src="img/logo.png" alt="">
                                 </div> -->
                                 <div class="info">
-                                    <h4>Service Info</h4>
-                                    <p>service id : ${service.service_id}</p>
+                                    <h4>サービスの情報</h4>
+                                    <p>サービスのナンバー : ${service.service_id}</p>
                                 </div>
                             </div><!-- ends: .invoice__head -->
                             <div class="invoice__meta">
                                 <div class="address">
                                     <h5 class="bold">${service.service_name}</h5>
-                                    <p>type : ${service.service_type}</p>
-                                    <p>price : ${service.service_price}</p>
-                                    <p>runtime : ${service.service_time}</p>
+                                    <p>タイプ : ${service.service_type}</p>
+                                    <p>価格 : ${service.service_price}</p>
+                                    <p>ランタイム : ${service.service_time}</p>
                                 </div>
                                 <div class="date_info">
                                     <p>${service.service_info}</p>
@@ -103,7 +59,7 @@
                             </div><!-- ends: .invoice__meta -->
                             <!-- 각 서비스의 매출 볼 수 있는 영역 만들 거임 -->
                             <div class="table-responsive invoice__detail">
-                                <table class="table">
+                                <table id="eachResIncome" class="table">
                                     <thead>
                                         <tr>
                                             <th>Reservation Number</th>
