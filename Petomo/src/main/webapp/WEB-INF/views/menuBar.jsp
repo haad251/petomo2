@@ -87,6 +87,9 @@
                                                             <li>
                                                           		<a href="sitterResList">시터예약리스트</a>
                                                             </li>
+                                                            <li>
+                                                          		<a href="complete">멤버예약리스트</a>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </li>

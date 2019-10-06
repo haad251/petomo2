@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
+import com.ejo.petwalk.vo.ReservationVO;
+import com.ejo.petwalk.vo.ServiceVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -30,7 +32,7 @@ public class SiteController {
 	public String home() {	
 		return "home";
 	}
-
+	
 	@RequestMapping(value="/introducePetomo")
 	public void introducePetomo(){ 
 	}
@@ -112,10 +114,6 @@ public class SiteController {
 	
 	
 //	res
-	@RequestMapping(value="/reservation")
-	public String reservation(){ 
-		return "res/reservation";
-	}
 	
 	@RequestMapping(value="/selectAllSitter")
 	public String selectAllSitter(){ 
@@ -140,6 +138,16 @@ public class SiteController {
 		return "sitter/sitterMapTest";
 	}
 	
+	@RequestMapping(value="/complete", method=RequestMethod.GET) 
+	  public String complete(ReservationVO res, ServiceVO sv, SitterVO svo,HttpSession session, Model model) throws Exception{ 
+		  rsv.insertReservation(res);
+		  String mb_id = (String)session.getAttribute("sessionId");
+		 
+			model.addAttribute("rList",rsv.selectResByMb_id(mb_id));
+	System.out.println(rsv.selectResByMb_id(mb_id).get(0));
+		  return "res/complete";
+	  
+	  }
 	
 	
 }

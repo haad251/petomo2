@@ -16580,7 +16580,31 @@ span.counter {
 }
 
 
+/* ////////////녹준쓰//////////// */
 
-/* //////////////////////// */
+.darkbtn{
+	background-color: #b2a2f9;
+	color: gray;
+	box-shadow: none;
+	    text-align: center;
+	border: 1px solid;
+	cursor: auto;
+	line-height: 50px;
+	display: inline-block;
+	position: relative;
+	border-color: none;	
+}
 
+.activebtn{
+	background-color: #b2a2f9;
+	color: red;
+	box-shadow: none;
+	    text-align: center;
+	border: 1px solid;
+	cursor: pointer;
+	line-height: 50px;
+	display: inline-block;
+	position: relative;
+	border-color: none;	
+}
 

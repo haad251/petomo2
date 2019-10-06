@@ -11,14 +11,14 @@
  </select>
 
 <insert id="insertChat" parameterType="ChatVO">
-	INSERT INTO chat_tb ( res_id,chat_sender,chat_receiver,chat_content,chat_date)
-	VALUES(
- 
-		#{res_id},
-		#{chat_sender},
-		#{chat_receiver},
-		#{chat_content},
-		#{chat_date}
+		INSERT INTO chat_tb ( res_id,chat_sender,chat_receiver,chat_content,chat_date)
+		VALUES(
+	 
+			#{res_id},
+			#{chat_sender},
+			#{chat_receiver},
+			#{chat_content},
+			#{chat_date}
 	)
 </insert>
 
@@ -26,19 +26,19 @@
 
 <!-- Reservation -->
 <insert id="insertReservation" parameterType="ReservationVO">
-insert into reservation_tb(st_id,service_id,mb_id,res_start,res_end,res_status,res_amount,res_review,res_rate,res_memo)
-values(
-#{st_id},
-#{service_id},
-#{mb_id},
-#{res_start},
-#{res_end},
-#{res_status},
-#{res_amount},
-#{res_review},
-#{res_rate},
-#{res_memo}
-)
+	insert into reservation_tb(st_id, service_id, mb_id, res_start, res_end, res_status, res_amount, res_review, res_rate, res_memo)
+	values(
+		#{st_id},
+		#{service_id},
+		#{mb_id},
+		#{res_start},
+		#{res_end},
+		#{res_status},
+		#{res_amount},
+		#{res_review},
+		#{res_rate},
+		#{res_memo}
+	)
 </insert>
 
 <!-- 예약번호로 예약불러오기 -->
@@ -50,20 +50,20 @@ values(
  
 <!--  시터아이디로 모든예약불러오기 -->
  <select id="selectResAllBySt_id" parameterType="String" resultType="HashMap">
- 	SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
-    res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
-	FROM reservation_tb natural join service_tb
-	WHERE reservation_tb.service_id = service_tb.service_id
-	AND st_id=#{st_id}
+ 		SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
+    		res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
+		FROM reservation_tb natural join service_tb
+		WHERE reservation_tb.service_id = service_tb.service_id
+		AND st_id=#{st_id}
 </select>
 
 <!--  멤버아이디로 모든예약불러오기 -->
  <select id="selectResAllByMb_id" parameterType="String" resultType="HashMap">
- 	SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
-    res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
-	FROM reservation_tb natural join service_tb
-	WHERE reservation_tb.service_id = service_tb.service_id
-	AND mb_id=#{mb_id}
+	 	SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
+    		res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
+		FROM reservation_tb natural join service_tb
+		WHERE reservation_tb.service_id = service_tb.service_id
+		AND mb_id=#{mb_id}
 </select>
 
  <update id="updateResStatus"  parameterType="ReservationVO">
@@ -107,4 +107,17 @@ values(
 	WHERE res_id=#{res_id}
 </select>
 
+
+
+<select id="selectResTime" parameterType="HashMap" resultType="HashMap">
+	SELECT DATE_FORMAT(res_start, '%H') as starttime, DATE_FORMAT(res_end,'%H') as endtime
+	FROM reservation_tb
+	WHERE #{selectDate} = DATE_FORMAT(res_start, '%Y-%m-%d')
+	AND st_id=#{st_id}
+</select>
+<select id = "selectResByMb_id" parameterType = "String" resultType = "ReservationVO">
+	SELECT *
+	FROM reservation_tb
+	WHERE mb_id= #{mb_id}
+</select>
 </mapper>

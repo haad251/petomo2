@@ -7,11 +7,11 @@ public class ServiceVO {
 			String service_info,String service_type) {
 		super();
 		this.service_id = service_id;
-		this.service_name = service_name;
+		this.service_name = service_name; 
 		this.service_price = service_price;
 		this.service_time = service_time;
-		this.service_info = service_info;
-		this.service_type = service_type;
+		this.service_info = service_info; 
+		this.service_type = service_type; 
 	}
 
 	public ServiceVO() {

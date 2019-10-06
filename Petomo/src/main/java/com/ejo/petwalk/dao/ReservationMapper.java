@@ -26,7 +26,8 @@ public interface ReservationMapper {
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
     
     
-    
+    public List<HashMap<String,String>> selectResTime(HashMap<String,String> hMap);
+	public List<ReservationVO> selectResByMb_id(String mb_id);
     
     
 }

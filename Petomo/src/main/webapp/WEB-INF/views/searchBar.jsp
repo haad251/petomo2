@@ -24,9 +24,9 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="hero__content__title">
+<!--                             <div class="hero__content__title">
                                 <h1>7,685 Premium Templates & Themes</h1>
-                            </div><!-- end .hero__btn-area-->
+                            </div>end .hero__btn-area -->
                             <div class="search-area">
                                 <div class="row">
                                     <div class="col-lg-6 offset-lg-3">

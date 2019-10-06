@@ -67,4 +67,16 @@ public class ReservationService {
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id){
     	return dao.selectLocationInfoAll(res_id);
     }
+    
+
+    public List<HashMap<String,String>> selectResTime(HashMap<String,String> hMap){
+    	return dao.selectResTime(hMap);
+    }
+
+	public List<ReservationVO> selectResByMb_id(String mb_id) {
+		return dao.selectResByMb_id(mb_id);
+	}
+
+    
+    
 }
