@@ -51,6 +51,13 @@
 			service_id = #{service_id}
 	</update>
 	
+	<!-- [Manager] 서비스 아이디로  예약된 목록 모두 가져오는 것-->
+	<select id="selectAllResBySerId"  parameterType="String" resultType="ReservationVO">
+      	SELECT *
+		FROM reservation_tb
+		WHERE service_id=#{service_id}
+ 	</select>
+	
 	<!-- [Manager] MangerMyPage에서 쓸 모든 예약불러오기 -->
  	<select id="selectAllRes"  resultType="ReservationVO">
       	SELECT *

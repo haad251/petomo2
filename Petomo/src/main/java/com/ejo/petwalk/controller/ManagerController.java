@@ -26,6 +26,8 @@ public class ManagerController {
 	
 	@Autowired
 	SitterService sservice;
+	
+	/* KMJ - Service에 관련된 메소드 */
 
 	@RequestMapping(value="/insertNewService",method=RequestMethod.POST)
 	public String insertNewService(ServiceVO service) {
@@ -69,6 +71,12 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 		return "manager/serviceDetail";
+	}
+	
+	@RequestMapping(value="/selectAllResBySerId", method=RequestMethod.POST)
+	public @ResponseBody List<ReservationVO> selectAllResBySerId(String service_id) throws Exception{
+		List<ReservationVO> allres = mservice.selectAllResBySerId(service_id);
+		return allres;
 	}
 	
 	
@@ -226,7 +234,7 @@ public class ManagerController {
 			if(result.get(i).getRes_status().equals("利用済み"))
 				ResCountArray[2]++;
 		}
-		System.out.println("전체 예약 수"+ResCountArray[0]+"캔슬 수 "+ResCountArray[1]+"완료 수"+ResCountArray[2]);
+		System.out.println("전체 예약 수="+ResCountArray[0]+"캔슬 수="+ResCountArray[1]+"완료 수="+ResCountArray[2]);
 		return ResCountArray;
 	}
 	

@@ -90,9 +90,10 @@
     		selectNewResList();
     	});
     	
-    	//일본 지도 클릭하면 그 지역의 이름을 바탕으로 모든 예약 데이터를 가져옴(member_tb과 reservation_tb조인해서)
+    	//일본 지도에 mouse over하면 그 지역의 이름을 바탕으로 모든 예약 데이터를 가져옴(member_tb과 reservation_tb조인해서)
         $("#map-container").japanMap({
-            onSelect : function(data){
+        	/* 클릭은onSelect */
+        	onHover : function(data){
            		// alert(data.name);		// SDY -- data.name : 일본 행정구역 이름
            		$.ajax({
            			method : "post",
@@ -103,7 +104,7 @@
            			success : function (resultArray) {
            				for (var i=0; i<resultArray.length; i++) {
            					console.log("SDY -- resultArray[" + i +"].md_addr : " + resultArray[i].md_addr);
-           					
+           				
            					
            				}
            			},

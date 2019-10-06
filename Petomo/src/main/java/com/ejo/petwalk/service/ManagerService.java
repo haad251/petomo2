@@ -40,6 +40,10 @@ public class ManagerService {
 		return mdao.updateService(service);
 	};
 	
+	public List<ReservationVO> selectAllResBySerId(String service_id) throws Exception{
+		return mdao.selectAllResBySerId(service_id);
+	}
+	
     
     /* MJ- 예약 및 매출 관련*/
 	//모든 예약 목록

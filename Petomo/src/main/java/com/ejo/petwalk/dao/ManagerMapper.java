@@ -15,6 +15,7 @@ public interface ManagerMapper {
 	public ServiceVO selectOneService(String service_id) throws Exception;
 	public int deleteOneService(String service_id) throws Exception;
 	public int updateService(ServiceVO service) throws Exception;
+	public List<ReservationVO> selectAllResBySerId(String service_id) throws Exception; // 서비스에 따른 모든 예약 목록 가져오기
 	
 	
 	/* MJ - 예약 내역 및 평균 매출관련 CRUD */
