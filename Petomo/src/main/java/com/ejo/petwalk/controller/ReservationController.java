@@ -45,6 +45,14 @@ public class ReservationController {
 	@RequestMapping(value = "/insertReview", method = RequestMethod.GET)
 	public String insertReview(Model model, ReservationVO res) {
 		rsv.insertReview(res);
+		String st_id = res.getSt_id();		
+		List<ReservationVO> list  =  rsv.selectResListBySt_id(res);
+		int totalrate = 0;
+		for(int i = 0 ; i < list.size() ; i++) {
+		totalrate += Integer.parseInt(list.get(i).getRes_rate());
+		}
+		double average = Math.round(totalrate/list.size()*10)/10;
+		
 		return "redirect:/memberResList";
 	}
 

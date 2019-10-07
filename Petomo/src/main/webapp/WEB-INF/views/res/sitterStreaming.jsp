@@ -12,9 +12,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
  
-<!--  구글맵 키 없음-->
- 
- 
   <script>
   $(function(){
 	  $('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
@@ -375,6 +372,8 @@
                            		    <button class="btn send btn--sm btn-primary" id="sendMessageBtn">Reply</button>
                      			 </div> 
                      		</div> 
+                     	<button id="streamingStart">streaming Start</button>
+                     	<button id="streamingEnt">Streaming End</button>
 						<button id="startWalking">start walking</button>
 						<button id="loc_action" name="loc_action" value="poop">poop</button>
 						<button id="loc_action" name="loc_action" value="pee">pee</button>     

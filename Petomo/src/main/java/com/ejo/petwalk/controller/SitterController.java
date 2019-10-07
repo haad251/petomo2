@@ -56,7 +56,7 @@ public class SitterController {
 		session.setAttribute("sessionId",result.getSt_id());
 		session.setAttribute("sessionName", result.getSt_name());
 		session.setAttribute("sessionSitter","on");
-		
+
 		FileVO file = ssv.selectSitterProfileImg(sitter);
 		if(file==null) 	
 			session.setAttribute("sessionProfileImg", "defaultImage.png");

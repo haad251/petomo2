@@ -108,4 +108,9 @@ public class ReservationService {
 		return dao.selectResByMb_id(mb_id);
 	}
 
+	public List<ReservationVO> selectResListBySt_id(ReservationVO res) {
+		
+		return dao.selectResListBySt_id(res);
+	}
+
 }

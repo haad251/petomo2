@@ -100,7 +100,7 @@
   </script>
   <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
   <script type="text/javascript">/*비디오 스트리밍*/
- var mediaNumber =  ${res.res_id}-${ressize}-1;
+ var mediaNumber =  ${res.res_id}-${ressize}-54;
  if(mediaNumber > -1){mediaNumber = "_"+mediaNumber;}
  else{mediaNumber = "";}
  

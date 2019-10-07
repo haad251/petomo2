@@ -161,5 +161,9 @@ WHERE mb_id = #{mb_id}
 	FROM reservation_tb
 	WHERE mb_id= #{mb_id}
 </select>
-
+<select id="selectResListBySt_id" parameterType = "ReservationVO" resultType = "ReservationVO">
+SELECT *
+FROM reservation_tb
+WHERE st_id = #{st_id}
+</select>
 </mapper>
