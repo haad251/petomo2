@@ -160,6 +160,7 @@ public class ManagerController {
 		ArrayList<ReservationVO> newResList = new ArrayList <>();
 		List<ReservationVO> result = mservice.selectAllRes();
 		Collections.reverse(result); //저장된 순서대로 가져온 예약 리스트 역순으로 바꾸기 
+		System.out.println(result);
 		for(int i = 0 ; i < result.size() ; i++) { //오류가 나는데 아마 예약 수가 5개 이하라서 그런 것 같음
 			if(i==5)
 				break;

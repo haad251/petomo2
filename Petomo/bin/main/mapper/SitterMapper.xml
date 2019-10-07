@@ -82,5 +82,31 @@
 		WHERE file_type = 'sitter' 
 		AND file_no=#{st_id}
  </select>
+ 
+ <select id="selectResBySitterId" parameterType="String" resultType="ReservationVO">
+ 	SELECT *
+ 	FROM
+ 		reservation_tb
+ 	WHERE
+ 		st_id = #{st_id}
+ </select>
+ 
+ <select id="selectDateFormatResBySitterId" parameterType="String" resultType="ReservationVO">
+ 	SELECT
+ 		res_id
+ 		,st_id
+ 		,mb_id
+ 		,DATE_FORMAT(res_start, '%Y-%m-%d') res_start
+ 		,DATE_FORMAT(res_end, '%Y-%m-%d') res_end
+ 		,res_status
+ 		,res_amount
+ 		,res_review
+ 		,res_rate
+ 		,res_memo
+ 	FROM
+ 		reservation_tb
+ 	WHERE
+ 		st_id = #{st_id}
+ </select>
 
 </mapper>

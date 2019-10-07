@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
+<html>
 <head>
-	<title>Manger Page</title>
-    <meta charset="UTF-8">
-    
-    <!-- jQuery CDN -->
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	
+	<!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
     <!-- jQuery Tooltip CDN -->
@@ -14,10 +14,9 @@
     
     <!-- chart.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    
-    <script>
-   
-    $(function(){
+	
+	<script>
+$(function(){
     	
     	var date = new Date(); //오늘의 날짜 추출하기 위한 변수
     	var todayDate = getFormatDate(date); //오늘의 날짜를 2019-10-02 형식으로 추출
@@ -25,25 +24,26 @@
     	var thisYear = getFormatYear(date); //오늘의 날짜를 2019 형식으로 추출
     	var selectedYear = document.getElementById("period_selector").value; // chart에서 선택한 연도를 담을 변수
     	var yearData = []; // chart.js에 넣을 데이터(연도별 매출)를 담을 배열
+
+    	//[완료] 최근에 예약된 목록을 가져온다.
+    	selectResBySitterId();
+    	
+    	//[완료] 최근에 등록된 리뷰 목록을 가져온다.
+    	selectNewReviewList();
     	
     	
-    	//최근에 등록한 Sitter 목록을 가져온다.
-    	selectNewSitterList();
+    	//[완료] Sitter아이디로 서비스 이용 완료된(利用済み) 모든 매출을 가져온다.
+    	selectAllResComStatusBySitterId();
     	
-    	//최근에 예약된 목록을 가져온다.
-    	selectNewResList();
-    	
-    	//서비스 이용 완료된(利用済み) 모든 매출을 가져온다.
-    	selectAllResByComStatus();
-    	
-    	// 오늘 날짜(today) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
-        selectResByDate();
-    	function selectResByDate(){
+    	//[완료] 오늘 날짜(today) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
+        selectResByDateAndSitterId();
+    	function selectResByDateAndSitterId(){
         	$.ajax({
-        		url:"selectResByDate"
+        		url:"selectResByDateAndSitterId"
         		,type:"post"
         		,data:{
-        			res_start:todayDate
+        			"res_start":todayDate,
+        			"st_id":"111"
         		}
         		,success:function(serverData){
         			$(".primary").append(serverData+"￥");
@@ -51,14 +51,15 @@
         	});
         }
     	
-    	//이번 달(Month) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
-    	selectResByMonth();
-     	function selectResByMonth(){
+    	//[완료] 이번 달(Month) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
+    	selectResByMonthAndSitterId();
+     	function selectResByMonthAndSitterId(){
         	$.ajax({
-        		url:"selectResByMonth"
+        		url:"selectResByMonthAndSitterId"
         		,type:"post"
         		,data:{
-        			res_start:thisMonth
+        			"res_start":thisMonth,
+        			"st_id":"111"
         		}
         		,success:function(serverData){
         			$(".secondary").append(serverData+"￥");
@@ -66,14 +67,15 @@
         	});
         }
      	
-     	//올해 서비스 이용 완료된(利用済み)  예약의 매출을 가져온다.
-     	selectResByYear();
-     	function selectResByYear(){
+     	//[완료] 올해 서비스 이용 완료된(利用済み)  예약의 매출을 가져온다.
+     	selectResByYearAndSitterId();
+     	function selectResByYearAndSitterId(){
         	$.ajax({
-        		url:"selectResByYear"
+        		url:"selectResByYearAndSitterId"
         		,type:"post"
         		,data:{
-        			res_start:thisYear
+        			"res_start":thisYear,
+        			"st_id":"111"
         		}
         		,success:function(serverData){
         			$(".info").append(serverData+"￥");
@@ -81,68 +83,41 @@
         	});
         }
     	
-    	//최근 시터 목록 새로고침 버튼을 누르면 최근 5개의 목록만 가져옴 
-    	$(document).on("click","#sitterListRefresh",function(){
-    		$('#mj_newRegisterSitter').html("");
-    		selectNewSitterList();
+    	//[완료] 최근 리뷰 목록의 새로고침 버튼을 누르면 최근 5개의 목록만 가져옴 
+    	$(document).on("click","#rivewListRefresh",function(){
+    		$('#mj_newRegisterReview').html("");
+    		selectNewReviewList();
     	});
     	
+    	//[완료] 최근 예약 목록의 새로고침 버튼을 누르면 최근 5개의 목록만 가져옴
     	$(document).on("click","#resListRefresh",function(){
     		$('#mj_newReservation').html("");
-    		selectNewResList();
+    		selectResBySitterId();
     	});
-    	
-    	//일본 지도에 mouse over하면 그 지역의 이름을 바탕으로 모든 예약 데이터를 가져옴(member_tb과 reservation_tb조인해서)
-        $("#map-container").japanMap({
-        	/* 클릭은onSelect */
-        	onHover : function(data){
-           		// alert(data.name);		//data.name : 일본 행정구역 이름
-           		/* var regionAllAmount;
-           		$.ajax({
-           			method : "post",
-           			url : "selectResFromAddr",
-           			data : {
-           				"address" : data.name
-           			},
-           			success : function (resultArray) {
-           				for (var i=0; i<resultArray.length; i++) {
-           					console.log("SDY -- resultArray[" + i +"].md_addr : " + resultArray[i].md_addr);
-           					regionAllAmount += resultArray[i].res_amount;
-           					document.getElementById('map-container').setAttribute('title', regionAllAmount);
-           				}
-           			},
-           			error : function () {
-           				
-           			}
-           		}); */
-           		/* var region =  data.name;
-        		document.getElementById('map-container').setAttribute('title', region); */
-            }
-        });
-    	
     	
     	
     	//기본으로 올해 예약 차트와 예약 건수 출력
-        selectResBySelectedYear(); // 올해 예약 차트 출력
-        thisYearResCount(); //예약 건수 출력
+        selectResBySelectedYearForSitter(); // 올해 예약 차트 출력
+        thisYearResCountForSitter(); //[완료]예약 건수 출력
     	
     	//차트에서 연도를 바꿀 때 마다 새로운 데이터 출력
         $(document).on("change","#period_selector",function(){
         	selectedYear = document.getElementById("period_selector").value; //그래프에서 선택한 연도
-        	selectResBySelectedYear();
+        	selectResBySelectedYearForSitter();
         	$('#thisYearAllResCount').html("");
         	$('#thisYearCanResCount').html("");
         	$('#thisYearComResCount').html("");
-        	thisYearResCount();
+        	thisYearResCountForSitter();
         }); 
     	
-    	//차트에서 연도를 바꿀 때 마다 그 해의 예약 건수에 관한 함수
-    	function thisYearResCount(){
+    	//[완료] 차트에서 연도를 바꿀 때 마다 그 해의 예약 건수에 관한 함수
+    	function thisYearResCountForSitter(){
     		$.ajax({
-        		url:"thisYearResCount"
+        		url:"thisYearResCountForSitter"
         		,type:"post"
         		,data:{
-        			res_start:selectedYear
+        			"res_start":selectedYear,
+        			"st_id":"111"
         		}
         		,success:function(serverData){
         			var thisYearAllResCount = serverData[0]; //전체 예약 수
@@ -156,12 +131,13 @@
     	}
     	
     	//차트에서 연도를 바꿀 때 마다 그 해의 예약에 관한 통계 표시
-        function selectResBySelectedYear(){
+        function selectResBySelectedYearForSitter(){
         	var selectAjax = $.ajax({
-        		url:"selectResBySelectedYear"
+        		url:"selectResBySelectedYearForSitter"
         		,type:"post"
         		,data:{
-        			res_start:selectedYear
+        			"res_start":selectedYear,
+        			"st_id":"111"
         		}
         		,success:function(serverData){
         			console.log("serverData.length : " + serverData.length);
@@ -230,11 +206,14 @@
     	
     });
    
-    //최근 리뷰 5개만 가져오는 함수
-    function selectNewResList(){
+    //최근 예약 5개만 가져오는 함수
+    function selectResBySitterId(){
     	$.ajax({
-    		url:"selectNewResList"
+    		url:"selectResBySitterId"
     		,type:"post"
+    		,data:{
+    			st_id:'111'
+    		}
     		,success:function(serverData){
     			for(var i = 0 ; i < serverData.length ; i++){
     				var str = "";
@@ -259,11 +238,14 @@
     	});
     }
     
-    //최근 등록한 시터 5개만 가져오는 함수
-    function selectNewSitterList(){
+    //최근 리뷰 5개만 가져오는 함수
+    function selectNewReviewList(){
     	$.ajax({
-    		url:"selectNewSitterList"
+    		url:"selectNewReviewList"
     		,type:"post"
+    		,data:{
+    			"st_id":"111"
+    		}
     		,success:function(serverData){
     			for(var i = 0 ; i < serverData.length ; i++){
     				var str = "";
@@ -271,30 +253,32 @@
                     str += '<div class="single_buyer single_sitter">';
                     str += '<div class="buyer__thumb_title">';
                     str += '<div class="thumb">';
-                    /* "https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${st_id}.png" */
-                    str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/"'+serverData[i].st_id+'.png alt="Sitter Images">';
+                    str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/"'+serverData[i].mb_id+'.png alt="Sitter Images">';
                     str += '</div>';
                     str += '<div class="title">';
-                    str += '<h6><a href="sitterDetail?st_id='+serverData[i].st_id+'">'+serverData[i].st_name+'</a></h6>';
-                    str += '<p>'+serverData[i].st_loc1+'</p>';
+                    str += '<h6>予約ナンバー: '+serverData[i].res_id+'</a></h6>';
+                    str += '<p>サービスナンバー:'+serverData[i].service_id+'</p>';
                     str += '</div>';
                     str += '</div>';
                     str += '<div class="price">';
-                    str += '<p>'+serverData[i].st_license+'</p>';
+                    str += '<p>'+serverData[i].res_rate+'</p>';
                     str += '</div>';
                     str += '</div>';
                     str += '</li>';
-    				$("#mj_newRegisterSitter").append(str);
+    				$("#mj_newRegisterReview").append(str);
     			}
     		}
     	});
     }
     
     //서비스 이용 완료된(利用済み) 모든 매출을 가져오는 메소드
-    function selectAllResByComStatus(){
+    function selectAllResComStatusBySitterId(){
     	$.ajax({
-    		url:"selectAllResByComStatus"
+    		url:"selectAllResComStatusBySitterId"
     		,type:"post"
+    		,data:{
+    			"st_id":"111"
+    		}
     		,success:function(serverData){
     			$(".danger").append(serverData+"￥");
     		}
@@ -307,7 +291,8 @@
     		url:"selectResByComStatusAndDate"
     		,type:"post"
     		,data:{
-    			res_start:todayDate
+    			"res_start":todayDate
+    			,"st_id":"st1"
     		}
     		,success:function(serverData){
     			$(".primary").append(serverData+"￥");
@@ -340,16 +325,15 @@
     	return year;
     }
     
-    
-    </script>
-    
-</head>
+	</script>
 
-<body class="dashboard-page preload">
-    <jsp:include page="../menuBar.jsp" /> 
-    <jsp:include page="../managerMenuBar.jsp" />
-    
-    <section class="dashboard-area">
+</head>
+<body>
+	<jsp:include page="../menuBar.jsp" />
+	<jsp:include page="sitterMenuBar.jsp" /> 
+	
+	 
+	 <section class="dashboard-area">
         <div class="dashboard_contents p-top-100 p-bottom-70" style="padding-top:10px">
             <div class="container">
             <!-- <div id="map-container" style="text-align: center ; margin:30px"></div>-->
@@ -358,15 +342,12 @@
 					       <div class="dashboard_title_area">
 					          <div class="pull-left">
 					            <div class="dashboard__title">
-					               <h3>全国内統計</h3>
+					               <h3>統計</h3>
 					             </div>
 					          </div>
 					         </div>
 					       </div><!-- ends: .col-md-12 -->
 
-                
-                  	<div id="map-container" style="width:100%; display: block; text-align: center ; margin:30px;"></div>
-                    
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="primary"></h1>
@@ -427,15 +408,15 @@
                     	style="flex: 0 0 50%;max-width: 50%;">
                         <div class="dashboard_module recent_buyers">
                             <div class="dashboard__title">
-                                <h4>最近の登録したペットシッター</h4>
+                                <h4>最近のレビュー</h4>
                                 <div class="loading">
-                                    <a id="sitterListRefresh" href="#">
+                                    <a id="rivewListRefresh" href="#">
                                         	リフレッシュ <span class="lnr icon-refresh"></span>
                                     </a>
                                 </div>
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
-                                <ul id="mj_newRegisterSitter">
+                                <ul id="mj_newRegisterReview">
                                    <!--  <li>
                                         <div class="single_buyer">
                                             <div class="buyer__thumb_title">
@@ -496,26 +477,10 @@
     </section><!-- ends: .dashboard-area -->
     
      <div class="go_top" style="display: block; text-align:center;">
-	       <span class="icon-arrow-up"></span>
-	     </div>
-    
-    <!-- modal -->
-    <div class="modal fade item_removal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h4>Please confirm the removal of the item.</h4>
-                    <div class="btns">
-                        <a href="#" class="btn btn--md btn-danger">Confirm</a>
-                        <a href="#" class="btn btn--md btn-primary" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">Cancel</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- inject:js-->
+	    <span class="icon-arrow-up"></span>
+	 </div>
+	 
+	   <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -540,10 +505,6 @@
     <script src="theme_assets/js/map.js"></script>
     <!-- endinject-->
     
-    <!-- 일본지도 관련  js-->
-    <script src="theme_assets/js/jquery.japan-map.js"></script>
-    <script src="theme_assets/js/jquery.japan-map.min.js"></script>
-    
-</body>
 
+</body>
 </html>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.SitterMapper;
 import com.ejo.petwalk.vo.FileVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Service
@@ -49,12 +50,19 @@ public class SitterService {
 		return dao.selectSitterProfileImg(sitter);
 	}
 	
-	//½ÃÅÍÀÇ È°µ¿ °¡´É ¿©ºÎ »óÅÂ ¾÷µ¥ÀÌÆ®¸¦ À§ÇÑ ¸Ş¼Òµå-Manager¿ë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ş¼Òµï¿½-Managerï¿½ï¿½
 	public int updateSitterCheck(SitterVO sitter) {
 		return dao.updateSitterCheck(sitter);
 	}
 	
+	// KMJ - Sitter ì•„ì´ë””ë¡œ ëª¨ë“  ì˜ˆì•½ ë¦¬ìŠ¤íŠ¸ ë½‘ì•„ ì˜¤ê¸°
+	public List<ReservationVO> selectResBySitterId(String st_id){
+		return dao.selectResBySitterId(st_id);
+	}
 	
-	
+	// KMJ - Sitter ì•„ì´ë””ë¡œ Date_Format í˜•íƒœë¡œ ëª¨ë“  ì˜ˆì•½ ë¦¬ìŠ¤íŠ¸ ë½‘ì•„ ì˜¤ê¸°
+	public List<ReservationVO> selectDateFormatResBySitterId(String st_id){
+		return dao.selectDateFormatResBySitterId(st_id);
+	}
 	
 }

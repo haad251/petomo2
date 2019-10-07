@@ -72,6 +72,11 @@ public class SiteController {
 		return "manager/registerService";
 	}
 	
+	@RequestMapping(value="/userMapTesting")
+	public String userMapTesting(){
+		return "userMapTesting";
+	}
+	
 	/*
 	 * @RequestMapping(value="/serviceDetail") 
 	 * public String serviceDetail(String service_id, Model model) throws Exception{ ServiceVO result =
@@ -141,6 +146,10 @@ public class SiteController {
 		return "sitter/sitterMapTest";
 	}
 	
-	
+//sitter
+	@RequestMapping(value="/sitterChartPage")
+	public String sitterChartPage(){ 
+		return "sitter/sitterChartPage";
+	}
 	
 }

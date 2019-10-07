@@ -10,64 +10,9 @@
 
 <body class="preload">
     <jsp:include page="../menuBar.jsp" /> 
-    <!-- Breadcrumb Area -->
-    <section class="breadcrumb-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="breadcrumb-contents">
-                    	<c:if test="${service.service_id == null}">
-                        <h2 class="page-title">Register Service</h2>
-                        </c:if>
-                        <c:if test="${service.service_id != null}">
-                        <h2 class="page-title">Modify Service</h2>
-                       	</c:if>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                	<c:if test="${service.service_id == null}">
-                                    <a href="#">Register Service</a>
-                                    </c:if>
-                                    <c:if test="${service.service_id != null}">
-                                    <a href="#">Modify Service</a>
-                                    </c:if>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div><!-- end .col-md-12 -->
-            </div><!-- end .row -->
-        </div><!-- end .container -->
-    </section><!-- ends: .breadcrumb-area -->
+ 	<jsp:include page="../managerMenuBar.jsp" /> 
+ 
     <section class="dashboard-area">
-        <div class="dashboard_menu_area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <button class="menu-toggler d-md-none">
-                            <span class="icon-menu"></span> Dashboard Menu
-                        </button>
-                        <ul class="dashboard_menu">
-                            <li>
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>Dashboard</a>
-                            </li>
-                            <li class="active">
-                                <a href="/manageService"><span class="lnr icon-note"></span>Manage Service</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-withdrawal.html"><span class="lnr icon-briefcase"></span>Manage Pet Sitter</a>
-                            </li>
-                            <li>
-                                <a href="dashboard-setting.html"><span class="lnr icon-settings"></span>Setting</a>
-                            </li>
-                        </ul><!-- ends: .dashboard_menu -->
-                    </div><!-- ends: .col-md-12 -->
-                </div><!-- ends: .row -->
-            </div><!-- ends: .container -->
-        </div><!-- ends: .dashboard_menu_area -->
         <div class="dashboard_contents section--padding">
             <div class="container">
                 <div class="row">

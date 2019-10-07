@@ -25,6 +25,7 @@
 	    		updateSitterCheck();
 	    		st_id = "";
 	    		st_check = "";
+	    		$("#sitterList").html("");
 	    		selectAllSitter();
 	    	});
 	    	
