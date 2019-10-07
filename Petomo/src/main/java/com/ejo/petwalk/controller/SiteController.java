@@ -160,6 +160,7 @@ public class SiteController {
 	public String selectAllSitterByLoc(Model model,String st_loc1) {
 		List<SitterVO> result = ssv.selectAllSitterByLoc(st_loc1);
 		model.addAttribute("result", result);
+		model.addAttribute("st_loc1",st_loc1);
 		return  "res/sitterList";
 	}
 
