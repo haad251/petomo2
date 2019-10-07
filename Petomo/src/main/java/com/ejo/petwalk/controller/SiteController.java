@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.ejo.petwalk.service.ManagerService;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.ReservationService;
 import com.ejo.petwalk.service.SitterService;
@@ -27,7 +28,10 @@ public class SiteController {
 	MemberService msv;
 	@Autowired
 	ReservationService rsv;
-
+	@Autowired
+	ManagerService masv;
+	
+	
 	@RequestMapping(value="/")
 	public String home() {	
 		return "home";
@@ -73,9 +77,9 @@ public class SiteController {
 		return "manager/managerMyPage";
 	}
 	
-	@RequestMapping(value="/managerService")
+	@RequestMapping(value="/manageService")
 	public String managerService(){ 
-		return "manager/managerMyPage";
+		return "manager/manageService";
 	}
 	
 	@RequestMapping(value="/registerService")
@@ -83,9 +87,21 @@ public class SiteController {
 		return "manager/registerService";
 	}
 	
-	@RequestMapping(value="/serviceDetail")
-	public String serviceDetail(){ 
-		return "manager/serviceDetail";
+	@RequestMapping(value="/userMapTesting")
+	public String userMapTesting(){
+		return "userMapTesting";
+	}
+	
+	/*
+	 * @RequestMapping(value="/serviceDetail") 
+	 * public String serviceDetail(String service_id, Model model) throws Exception{ ServiceVO result =
+	 * masv.selectOneService(service_id); System.out.println("현재 선택된 서비스"+result);
+	 * model.addAttribute("service", result); return "manager/serviceDetail"; }
+	 */
+	
+	@RequestMapping(value="/managePetSitter")
+	public String managePetSitter(){
+		return "manager/managePetSitter";
 	}
 	
 	
@@ -128,10 +144,8 @@ public class SiteController {
 	model.addAttribute("mb_id", mb_id);
 	return "sitter/sitterMemberCheck";
 	}
-	
-	
-	
-//	res
+
+	//	res
 	
 	@RequestMapping(value="/selectAllSitter")
 	public String selectAllSitter(){ 
@@ -160,6 +174,7 @@ public class SiteController {
 	public String selectAllSitterByLoc(Model model,String st_loc1) {
 		List<SitterVO> result = ssv.selectAllSitterByLoc(st_loc1);
 		model.addAttribute("result", result);
+		model.addAttribute("st_loc1",st_loc1);
 		return  "res/sitterList";
 	}
 
@@ -172,4 +187,9 @@ public class SiteController {
 		  return "res/complete";
 	  
 	  }
+//sitter
+	@RequestMapping(value="/sitterChartPage")
+	public String sitterChartPage(){ 
+		return "sitter/sitterChartPage";
+	}
 }

@@ -6162,7 +6162,9 @@ ul.nav-tabs.nav--tabs2 li a:before {
 
 .team-single figure figcaption ul.team-social {
   margin-top: 25px;
+  color:yellow;
 }
+
 
 .team-single figure figcaption ul.team-social li {
   display: inline-block;
@@ -16587,6 +16589,13 @@ p.notitime{
 	color: #1DC9B7;
 	font-size:13px;
 }
+
+.s_img_sitterList{
+	height: 150px;
+	width: 150px;
+	
+}
+
 
 /* ////////////녹준쓰//////////// */
 

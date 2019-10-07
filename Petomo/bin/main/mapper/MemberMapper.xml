@@ -76,13 +76,12 @@
 	DELETE FROM member_tb
 	WHERE mb_id = #{mb_id} AND mb_pw = #{mb_pw}
 </delete>
+
 <select id = "selectDogByMemberId" parameterType = "PetVO" resultType = "PetVO">
 	SELECT *
 	FROM pet_tb
 	WHERE mb_id = #{mb_id}
 </select>
-
-
 
 
  <insert id="insertMemberImage" parameterType="FileVO">
@@ -142,7 +141,8 @@
  SELECT * 
  FROM member_tb
  </select>
- 		<select id="selectStreamId" parameterType = "MemberVO" resultType = "String">
+ 
+<select id="selectStreamId" parameterType = "MemberVO" resultType = "String">
  SELECT mb_streamid
  FROM member_tb
  where #{mb_id} = mb_id

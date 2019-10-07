@@ -14,17 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">Author Profile</h2>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Author Profile</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <h2 class="page-title">シッターページ</h2>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -38,10 +28,9 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-7">
                                 <div class="author-desc">
-                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sitter.st_id}.png" alt="">
+                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sitter.st_id}.png" alt="" style="width:120px; height: 120px;">
                                     <div class="infos">
-                                        <h4>${sitter.st_id}</h4>
-                                        <span>${sitter.st_level}</span>
+                                        <h4>${sitter.st_name}</h4>
                                         
                                     </div>
                                 </div><!-- ends: .author-desc -->
@@ -50,7 +39,6 @@
                                 <div class="author-social social social--color--filled">
                                     <ul>
                                        <li>
-                                          <a href="reservation?st_id=${sitter.st_id}" class="btn btn-primary btn--xs">예약하기</a>
                                        </li>
                                     </ul>
                                 </div><!-- ends: .author-social -->
@@ -58,15 +46,27 @@
                             <div class="col-lg-3 order-lg-2 col-md-5 order-md-1">
                                 <div class="author-stats">
                                     <ul>
-                                        <li class="t_items">
+                                        <li class="t_items" style="margin-bottom:10px;">
                                             <span>146</span>
-                                            <p>Total Items</p>
+                                            <p>今までの予約</p>
                                         </li>
-                                        <li class="t_sells">
-                                            <span>2426</span>
-                                            <p>Total Sales</p>
+                                        <li class="t_sells" style="width:100px;">
+                                        <span >
+                                        <c:if test="${sitter.st_level=='bronze'}">
+                                    		<img style="width:40px;" src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/bronze.png" alt="">
+                                        </c:if>
+                                        <c:if test="${sitter.st_level=='silver'}">
+                                    		<img style="width:40px;" src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/silver.png" alt="">
+                                        </c:if>
+                                        <c:if test="${sitter.st_level=='gold'}">
+                                    		<img style="width:40px;" src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/gold.png" alt="">
+                                        </c:if>                                                                                
+										</span>                                        
+
                                         </li>
-                                        <li class="t_reviews">
+                                        </ul>
+                                        <ul>
+                                        <li class="t_reviews" style="margin-bottom:10px;">
                                             <div class="rating product--rating">
                                                 <span class="ratings">
                                                 	<c:if test="${'5' eq sitter.st_rate}">
@@ -113,8 +113,13 @@
                                                 	</c:if>
                                                 </span>
                                                 <span class="avg_r">${sitter.st_rate}</span>
-                                                <span>(226 reviews)</span>
                                             </div>
+                                        </li>
+
+                                    </ul>
+                                    <ul>
+                                     	<li>
+                                         <a href="reservation?st_id=${sitter.st_id}" class="btn btn--round btn-outline-primary btn-lg">予約</a>
                                         </li>
                                     </ul>
                                 </div><!-- ends: .author-stats -->
@@ -143,8 +148,8 @@
                     <div class="tab-content" id="author-tab-content">
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="author_module about_author">
-                                <h3>Hi,
-                                    <span>I am ${sitter.st_id}</span>
+                                <h3>
+                                    <span>紹介文</span>
                                 </h3>
                                 <p>${sitter.st_info}</p>
                             </div>

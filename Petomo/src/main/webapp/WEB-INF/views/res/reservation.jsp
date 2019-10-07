@@ -26,7 +26,6 @@
 		$("#resDate").change( function() { 
 			var st_id = '${sitter.st_id}';
 			var selectDate = $("#resDate").val();
-	/* 		alert(selectDate); */
 	 		var userdata = {"st_id" : st_id , "selectDate": selectDate};
 	
 			$.ajax({
@@ -34,9 +33,6 @@
 				url : "selectTimes",
 				data : userdata,
 				success : function(data) {
-					/* alert("dd"); */
-					alert(data);
-					
 					var str = '';
 					var flag = false;
 					for (var i = 9; i < 18; i++){
@@ -51,10 +47,9 @@
 							}
 						}
 						if(flag==true) continue;
-						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value);"  value="'+i+'"';
-						str += 'style="background-color: #b2a2f9; color:red; border-color: white; padding:0px; width:120px; margin-bottom:10px; margin-right:6px;">'+i+':00</button>';
+						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value); this.style.color='red';"  value="'+i+'"';
+						str += 'style="background-color: #b2a2f9; color:white; border-color: white; padding:0px; width:120px; margin-bottom:10px; margin-right:6px;">'+i+':00</button>';
 					}
-					alert(str);
 					$("#timetable").html(str);
 					}
 			});

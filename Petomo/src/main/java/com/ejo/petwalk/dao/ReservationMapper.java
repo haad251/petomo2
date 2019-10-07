@@ -22,7 +22,7 @@ public interface ReservationMapper {
     public int insertReview(ReservationVO res);
     
     
-	/* map���� CRUD */
+	/* map관련 CRUD */
     public int insertLoc(LocationVO loc);
     public ArrayList<LocationVO> selectLocationInfoAll(String res_id);
 	public List<ReservationVO> selectAllRes();
@@ -40,4 +40,5 @@ public interface ReservationMapper {
 	public List<ReservationVO> selectResByMb_id(String mb_id);
 	public List<ReservationVO> selectResListBySt_id(ReservationVO res);
     
+   
 }

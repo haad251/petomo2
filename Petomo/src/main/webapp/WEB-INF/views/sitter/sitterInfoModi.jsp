@@ -42,16 +42,16 @@
                         <button class="menu-toggler d-md-none">
                             <span class="icon-menu"></span> Dashboard Menu
                         </button>
-                        <ul class="dashboard_menu">
-                            <li>
-                                <a href="dashboard.html"><span class="lnr icon-home"></span>統計</a>
+						<ul class="dashboard_menu">
+                            <li class="active s_jfont">
+                                <a href="sitterInfoModi"><span class="lnr icon-settings"></span>マイページ</a>
                             </li>
                             <li>
                                 <a href="sitterResList"><span class="lnr icon-notebook"></span>予約リスト</a>
                             </li>
-                            <li class="active s_jfont">
-                                <a href="sitterInfoModi"><span class="lnr icon-settings"></span>マイページ</a>
-                            </li>
+                            <li>
+                                <a href="sitterChartPage"><span class="lnr icon-chart"></span>統計</a>
+                            </li >
                             <li style="width:200px;">
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
