@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ejo.petwalk.service.ManagerService;
 import com.ejo.petwalk.service.MemberService;
 import com.ejo.petwalk.service.SitterService;
-import com.ejo.petwalk.vo.ServiceVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Controller
@@ -53,6 +52,10 @@ public class SiteController {
 	
 	@RequestMapping(value="/signupSitter")
 	public void signupSitter(){ 
+	}
+	
+	@RequestMapping(value="/pricingPlans")
+	public void pricingPlans(){ 
 	}
 	
 	
