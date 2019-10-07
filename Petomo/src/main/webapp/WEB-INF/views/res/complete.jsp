@@ -35,7 +35,7 @@
 	<body class="preload">
     <jsp:include page="../menuBar.jsp" />
     
-    <!-- 파라화면 시작 -->
+    <!-- 파란화면 시작 -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -57,7 +57,7 @@
             </div><!-- end .row -->
         </div><!-- end .container -->
     </section><!-- ends: .breadcrumb-area -->
-    <!-- 파라화면 끝 -->
+    <!-- 파란화면 끝 -->
     
      <section class="dashboard-area">
         <div class="dashboard_contents section--padding">
@@ -84,6 +84,7 @@
                                             <th>StartTime</th>
                                             <th>EndTime</th>
                                             <th>Memo</th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,21 +96,14 @@
 	                                        <td>${res.res_start}</td>
     	                                    <td>${res.res_end}</td>
             	                            <td>${res.res_memo}</td>
+            	                            <th>${res.res_amount}</th>
 	                                    </tr>
-                                    
-                                        <%-- <tr>
-                                            <td>${sitter.st_id}</td>
-                                            <th>${ReservationVO.service_id}</th>
-                                            <th>${sessionScope.sessionId}</th>
-                                            <th>${ReservationVO.res_start}</th>
-                                            <th>${ReservationVO.res_end}</th>
-                                            <th>${ReservationVO.res_memo }</th>
-                                        </tr> --%>
+                                    	<c:set var="total" value="${total + res.res_amount}"/>
                                         </c:forEach>
                                     </tbody>
                                 </table>
                                 <div class="pricing_info">
-                                    <p class="bold">${res.res_amount}</p>
+                                    <p class="bold">Total Price = <c:out value="${total}"/></p>
                                 </div>
                             </div><!-- ends: .invoice_detail -->
                             <a href="/" class="btn btn-sm btn-primary">홈으로</a>

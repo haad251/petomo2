@@ -136,7 +136,6 @@
                                                 	</c:if>
                                                 </span>
                                                 <span class="avg_r">${sitter.st_rate}</span>
-                                                <span>(226 reviews)</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -172,8 +171,9 @@
                                 <p>${sitter.st_info}</p>
                             </div>
                             </div>
-                         
-                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+
+						<div class="tab-pane fade" id="reviews" role="tabpanel"
+							aria-labelledby="reviews-tab">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="thread thread_review thread_review2">
@@ -181,39 +181,42 @@
 											<li class="single-thread">
 												<div class="media">
 													<div class="media-left">
-														<a href="#"> <img class="media-object"
+														<!-- <a href="#"> <img class="media-object"
 															src="img/m1.png" alt="Commentator Avatar">
-														</a>
+														</a> -->
 													</div>
 													<div class="media-body">
-														<div class="d-flex flex-wrap">
-															<div class="">
-																<div class="media-heading">
-																	<a href="author.html">
-																		<h4>Themexylum</h4>
-																	</a> <a href="#" class="rev_item">Mini - Responsive
-																		Bootstrap Dashboard</a>
+														<c:forEach items="${rList}" var="res">
+							
+															<%-- <c:if test="${sitter.st_id eq res.st_id}"> --%>
+																<div class="d-flex flex-wrap">
+																	<div class="">
+																		<div class="media-heading">
+																			<h4>${res.mb_id}</h4>
+																		</div>
+																		<div class="rating product--rating">
+																			<ul>
+																				<li><span class="fa fa-star"></span></li>
+																				<li><span class="fa fa-star"></span></li>
+																				<li><span class="fa fa-star"></span></li>
+																				<li><span class="fa fa-star"></span></li>
+																				<li><span class="fa fa-star-half-o"></span></li>
+																			</ul>
+																		</div>
+																	</div>
 																</div>
-																<div class="rating product--rating">
-																	<ul>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star-half-o"></span></li>
-																	</ul>
-																</div>
-																<span class="review_tag">support</span>
-															</div>
-															<div class="rev_time">9 Hours Ago</div>
-														</div>
-														<p>Nunc placerat mi id nisi interdum mollis. Praesent
-															pharetra, justo ut sceleris que the mattis, leo quam
-															aliquet congue placerat mi id nisi interdum mollis.</p>
+																<p>${res.res_memo}</p>
+															<%-- </c:if> --%>
+														</c:forEach>
 													</div>
 												</div>
 											</li>
+										</ul>
+									</div>
 								</div>
+							</div>
+						</div>
+					</div>
 							</div></section><!-- ends: .author-profile-area -->
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
     <!-- inject:js-->

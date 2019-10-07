@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ejo.petwalk.dao.SitterMapper;
 import com.ejo.petwalk.vo.FileVO;
+import com.ejo.petwalk.vo.ReservationVO;
 import com.ejo.petwalk.vo.SitterVO;
 
 @Service
@@ -30,7 +31,6 @@ public class SitterService {
 	public SitterVO selectOneSitter(String st_id){
 		return dao.selectOneSitter(st_id);
 	}
-
 
 	public int insertSitterImage(FileVO sitterFile){
 		return dao.insertSitterImage(sitterFile);

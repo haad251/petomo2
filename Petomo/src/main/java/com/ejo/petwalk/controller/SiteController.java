@@ -143,7 +143,7 @@ public class SiteController {
 		  rsv.insertReservation(res);
 		  String mb_id = (String)session.getAttribute("sessionId");
 		 
-			model.addAttribute("rList",rsv.selectResByMb_id(mb_id));
+		model.addAttribute("rList",rsv.selectResByMb_id(mb_id));
 	System.out.println(rsv.selectResByMb_id(mb_id).get(0));
 		  return "res/complete";
 	  
