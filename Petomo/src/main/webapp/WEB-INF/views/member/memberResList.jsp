@@ -165,7 +165,7 @@
                 </div>
                 <!-- end /.modal-header -->
                 <div class="modal-body">
-                    <form action="insertReview">
+                    <form action="insertReview" >
                     <input type="hidden" id="hiddenResId" name="res_id" >
                         <ul>
                             <li>

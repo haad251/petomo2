@@ -45,14 +45,16 @@ public class ReservationController {
 	@RequestMapping(value = "/insertReview", method = RequestMethod.GET)
 	public String insertReview(Model model, ReservationVO res) {
 		rsv.insertReview(res);
-		String st_id = res.getSt_id();		
-		List<ReservationVO> list  =  rsv.selectResListBySt_id(res);
-		int totalrate = 0;
-		for(int i = 0 ; i < list.size() ; i++) {
-		totalrate += Integer.parseInt(list.get(i).getRes_rate());
-		}
-		double average = Math.round(totalrate/list.size()*10)/10;
-		
+		System.out.println("여기서부터 시터 에버리지 측정ㄱ ㄱㄱ"+res);
+		ReservationVO st_id = rsv.selectSitterIdByResId(res);
+		System.out.println("res를 이용해서 가져온 시터아이디" + st_id);
+		String avg = rsv.selectSitterAvg(st_id);
+		SitterVO sitter = new SitterVO();
+		sitter.setSt_id(st_id.getSt_id());
+		String sitterRate = Integer.toString((int) Math.round(Double.parseDouble(avg)));
+		sitter.setSt_rate(sitterRate);
+		rsv.setSt_rateBySt_id(sitter);
+		System.out.println(avg);
 		return "redirect:/memberResList";
 	}
 
@@ -144,4 +146,11 @@ public class ReservationController {
 			System.out.println(rsv.selectResByMb_id(mb_id).get(0));
 		  return "res/complete";
 	  }
+	  @RequestMapping(value = "/res_statusUpdate", method = RequestMethod.GET)
+		public @ResponseBody int res_statusUpdate(ReservationVO res,Model model,HttpSession session){
+		  res.setRes_status("利用済み");
+		  int result = rsv.res_statusUpdate(res);
+			
+			return result;
+		}
 }

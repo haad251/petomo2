@@ -11,29 +11,49 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
-	alert("작동?");
  	$("#register").on('click',regist);
- 	$("#idchecking").on('click',idchecking);
- 	$("#urId").change(function idchange(){
- 		$("#duplchck").val("unchecked");	
- 	});	
  	})
 function regist(){
-	var user_name = $("#user_name").val();
-	if(user_name == ''){
-	alert("이름이 비어있으면 안됩니다");
+	var petname = $("#petname").val();
+	if(petname == ''){
+	alert("名前が空いてはいけません。");
 	return false;
 	}
 	
-	var chcknickname = $("#nickname").val();
-	if(chcknickname == ''){
-		alert("닉네임을 입력해주세요");
+	var petgender = $("#petgender").val();
+	if(petgender == ''){
+		alert("ペットの性別を入力してください。");
 		return false;
 	}
 	
-	var chckemail = $("#email_ad").val();
-	if(chckemail ==''){
-		alert("이메일을 입력해주세요");
+	var pet_birth = $("#pet_birth").val();
+	if(pet_birth ==''){
+		alert("ペットの誕生日を入力してください。");
+		return false;
+	}
+	var pet_weight = $("#pet_weight").val();
+	if(pet_weight ==''){
+		alert("ペットの体重を入力してください。");
+		return false;
+	}
+	var pet_type = $("#pet_type").val();
+	if(pet_type ==''){
+		alert("ペットの種類を入力してください。");
+		return false;
+	}
+	var pet_breed = $("#pet_breed").val();
+	if(pet_breed ==''){
+		alert("ペットの大きさを入力してください。");
+		return false;
+	}
+	var pet_neuter = $("#pet_neuter").val();
+	if(pet_neuter ==''){
+		alert("ペットの中性化可否を入力してください。");
+		return false;
+	}
+	var pet_status = $("#pet_status").val();
+	if(pet_status ==''){
+		alert("ペットの特異事項を入力してください。");
 		return false;
 	}
 	}
@@ -96,40 +116,39 @@ function regist(){
                             </div><!-- end .login_header -->
                             <div class="login--form">
                                 <div class="form-group">
-                                    <input type = "hidden" id = "duplchck" value = "checked">
                                     <input type = "hidden" value = "${sessionScope.sessionId}" name = "mb_id">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">ペットネーム</label>
-                                    <input id="password" type="text" name = "pet_name" class="text_field" placeholder="Enter pet name">
+                                    <input id="petname" type="text" name = "pet_name" class="text_field" placeholder="Enter pet name">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">ペット性別</label>
-                                    <input id="con_pass" type="text" class="text_field" placeholder="Pet Gender" name = "pet_sex">
+                                    <input id="petgender" type="text" class="text_field" placeholder="Pet Gender" name = "pet_sex">
                                 </div>
                                   <div class="form-group">
                                     <label for="user_name">ペット誕生日</label>
-                                    <input id="user_name" type="text" name = "pet_birth" class="text_field" placeholder="Enter Pet Birth">
+                                    <input id="pet_birth" type="text" name = "pet_birth" class="text_field" placeholder="Enter Pet Birth">
                                 </div>
                                 <div class="form-group">
                                     <label for="email_ad">ペット体重</label>
-                                    <input id="nickname" type="text" name = "pet_weight" class="text_field" placeholder="Enter Pet Weight">
+                                    <input id="pet_weight" type="text" name = "pet_weight" class="text_field" placeholder="Enter Pet Weight">
                                 </div>    
                                 <div class="form-group">
                                     <label for="email_ad">ペット種類</label>
-                                    <input id="email_ad" type="text" name = "pet_type" class="text_field" placeholder="Enter Pet Type">
+                                    <input id="pet_type" type="text" name = "pet_type" class="text_field" placeholder="Enter Pet Type">
                                 </div> 
                                 <div class="form-group">
                                     <label for="email_ad">ペットの大きさ</label>
-                                    <input id="email_ad" type="text" name = "pet_breed" class="text_field" placeholder="Enter Pet Breed">
+                                    <input id="pet_breed" type="text" name = "pet_breed" class="text_field" placeholder="Enter Pet Breed">
                                 </div>                                                            
                                 <div class="form-group">
                                     <label for="con_pass">中性化</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "pet_neuter" placeholder="特異事項">
+                                    <input id="pet_neuter" type="text" class="text_field" name = "pet_neuter" placeholder="特異事項">
                                 </div>
                                 <div class="form-group">
                                     <label for="con_pass">特異事項</label>
-                                    <input id="con_pass" type="text" class="text_field" name = "pet_status" placeholder="特異事項があればここに書いてください。">
+                                    <input id="pet_status" type="text" class="text_field" name = "pet_status" placeholder="特異事項があればここに書いてください。">
                                 </div>
                                 
                                 <button type = "submit" class="btn btn--md register_btn btn-primary" id = "register">Register Now</button>

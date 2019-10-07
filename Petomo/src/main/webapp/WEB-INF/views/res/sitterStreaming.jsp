@@ -116,13 +116,24 @@
 			});
 		$("#streamingEnd").on("click",function(){
 			var memberid = "${res.mb_id}";
+			var resid = "${res.res_id}";
 			$.ajax({
 				url: 'streamingEnd',
 				type: 'GET',
 				data:{
 					"mb_id" : memberid
 					},
-				success: function startStream(resp){
+				success: function endingStream(resp){
+					
+				}
+				}); 
+		 	$.ajax({
+				url: 'res_statusUpdate',
+				type: 'GET',
+				data:{
+					"res_id" : resid
+					},
+				success: function endStream(resp){
 					if(resp.length == 0){
 						alert("エラー発生");
 						return false;
@@ -132,9 +143,13 @@
 						return false;
 					}
 				}
-				}); 
+				});  
+			 
 		
-			});
+		
+		
+		
+		});
 	});
   /* 여기까지 스트리밍 시작및 스트리밍 종료 버튼 스크립트 */
   </script>
@@ -373,7 +388,7 @@
                      			 </div> 
                      		</div> 
                      	<button id="streamingStart">streaming Start</button>
-                     	<button id="streamingEnt">Streaming End</button>
+                     	<button id="streamingEnd">Streaming End</button>
 						<button id="startWalking">start walking</button>
 						<button id="loc_action" name="loc_action" value="poop">poop</button>
 						<button id="loc_action" name="loc_action" value="pee">pee</button>     

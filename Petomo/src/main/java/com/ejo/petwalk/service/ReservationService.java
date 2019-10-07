@@ -12,6 +12,7 @@ import com.ejo.petwalk.vo.ChatVO;
 import com.ejo.petwalk.vo.LocationVO;
 import com.ejo.petwalk.vo.NotificationVO;
 import com.ejo.petwalk.vo.ReservationVO;
+import com.ejo.petwalk.vo.SitterVO;
 
 @Service
 public class ReservationService {
@@ -110,6 +111,22 @@ public class ReservationService {
 	public List<ReservationVO> selectResListBySt_id(ReservationVO res) {
 		
 		return dao.selectResListBySt_id(res);
+	}
+
+	public int setSt_rateBySt_id(SitterVO sitter) {
+		return dao.setSt_rateBySt_id(sitter);
+	}
+
+	public int res_statusUpdate(ReservationVO res) {
+		return dao.res_statusUpdate(res);
+	}
+
+	public String selectSitterAvg(ReservationVO res) {
+		return dao.selectSitterAvg(res);
+	}
+
+	public ReservationVO selectSitterIdByResId(ReservationVO res) {
+		return dao.selectSitterIdByResId(res);
 	}
 
 }

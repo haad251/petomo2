@@ -166,4 +166,24 @@ SELECT *
 FROM reservation_tb
 WHERE st_id = #{st_id}
 </select>
+<update id = "setSt_rateBySt_id" parameterType = "SitterVO">
+UPDATE sitter_tb 
+SET st_rate = #{st_rate}
+WHERE st_id = #{st_id}
+</update>
+<update id = "res_statusUpdate" parameterType = "ReservationVO">
+UPDATE reservation_tb
+SET res_status = #{res_status}
+WHERE res_id = #{res_id}
+</update>
+<select id = "selectSitterAvg" parameterType = "ReservationVO" resultType = "String">
+SELECT AVG(res_rate) as st_rate
+FROM reservation_tb
+WHERE st_id = #{st_id} and res_rate is not null
+</select>
+<select id ="selectSitterIdByResId" parameterType = "ReservationVO" resultType = "ReservationVO">
+SELECT st_id
+FROM reservation_tb
+WHERE res_id = #{res_id}
+</select>
 </mapper>

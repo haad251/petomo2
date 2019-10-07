@@ -95,6 +95,8 @@ public class SitterController {
 	public String sitterResList (HttpSession session,Model model){
 		 List<HashMap<String,String>> rList = rsv.selectResAllBySt_id((String)session.getAttribute("sessionId"));
 		System.out.println(rList);
+		for(int i = 0 ; i<rList.size(); i++)
+			System.out.println(rList.get(i));
 		model.addAttribute("rList",rList);
 		return "sitter/sitterResList";
 	}

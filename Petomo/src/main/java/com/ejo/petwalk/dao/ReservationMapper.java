@@ -8,6 +8,7 @@ import com.ejo.petwalk.vo.ChatVO;
 import com.ejo.petwalk.vo.LocationVO;
 import com.ejo.petwalk.vo.NotificationVO;
 import com.ejo.petwalk.vo.ReservationVO;
+import com.ejo.petwalk.vo.SitterVO;
 
 public interface ReservationMapper {
     public int insertChat(ChatVO chat);
@@ -39,6 +40,10 @@ public interface ReservationMapper {
     public List<HashMap<String,String>> selectResTime(HashMap<String,String> hMap);
 	public List<ReservationVO> selectResByMb_id(String mb_id);
 	public List<ReservationVO> selectResListBySt_id(ReservationVO res);
+	public int setSt_rateBySt_id(SitterVO sitter);
+	public int res_statusUpdate(ReservationVO res);
+	public String selectSitterAvg(ReservationVO res);
+	public ReservationVO selectSitterIdByResId(ReservationVO res);
     
    
 }

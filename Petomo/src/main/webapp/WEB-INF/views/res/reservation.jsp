@@ -47,7 +47,7 @@
 							}
 						}
 						if(flag==true) continue;
-						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value); this.style.color='red';"  value="'+i+'"';
+						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value); this.style.color=\'red\';"  value="'+i+'"';
 						str += 'style="background-color: #b2a2f9; color:white; border-color: white; padding:0px; width:120px; margin-bottom:10px; margin-right:6px;">'+i+':00</button>';
 					}
 					$("#timetable").html(str);
@@ -58,6 +58,7 @@
 	});
 	
 	function dateSelect(dateval) {
+		$(".selectbtn").css('color', 'white');
 		$("#res_start_input").val($("#resDate").val());
 		var res_end = Number(dateval) + 1;
 		res_end += ":00";
