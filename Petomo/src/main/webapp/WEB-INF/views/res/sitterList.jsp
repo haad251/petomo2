@@ -19,7 +19,6 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="product-single latest-single">
 						<div class="product-thumb">
-							<div class="s-promotion">-40%</div>
 							<figure>
 								<img src="img/product1.png" alt="" class="img-fluid">
 								<figcaption>
@@ -33,18 +32,9 @@
 						<!-- Ends: .product-thumb -->
 						<div class="product-excerpt">
 							<h5>
-								<a href="goSitterDetail?st_id=${SitterVO.st_id }"> ${SitterVO.st_id}</a>
+								<a href="sitterDetail?st_id=${SitterVO.st_id }"> ${SitterVO.st_id}</a>
 							</h5>
-							<ul class="titlebtm">
-								<li><img class="auth-img" src="img/auth-img.png"
-									alt="author image">
-									<p>
-										<a href="#">Theme-Valley</a>
-									</p></li>
-								<li class="product_cat">in <a href="#">WordPress</a>
-								</li>
-							</ul>
-							<ul class="product-facts clearfix">
+							<!-- <ul class="product-facts clearfix">
 								<li class="price">$24</li>
 								<li class="sells"><span class="icon-basket"></span>141</li>
 								<li class="goFavorite"><span class="icon-heart"
@@ -58,7 +48,7 @@
 										<li><span class="rate_disabled"></span></li>
 									</ul>
 								</li>
-							</ul>
+							</ul> -->
 						</div>
 						<!-- Ends: .product-excerpt -->
 					</div>

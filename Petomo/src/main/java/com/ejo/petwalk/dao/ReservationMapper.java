@@ -36,5 +36,7 @@ public interface ReservationMapper {
     public String selectMaxNoti();
     public int updateNoti(NotificationVO noti);
     
+    public List<HashMap<String,String>> selectResTime(HashMap<String,String> hMap);
+	public List<ReservationVO> selectResByMb_id(String mb_id);
     
 }

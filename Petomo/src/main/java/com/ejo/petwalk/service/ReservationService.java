@@ -69,7 +69,6 @@ public class ReservationService {
     	return dao.selectLocationInfoAll(res_id);
     }
     
-    
     public int insertNoti(NotificationVO noti) {
 		return dao.insertNoti(noti);
 	}
@@ -100,4 +99,13 @@ public class ReservationService {
 	public int StreamingEnd(ReservationVO res) {
 		return dao.deleteStreamingId(res);
 	}
+
+    public List<HashMap<String,String>> selectResTime(HashMap<String,String> hMap){
+    	return dao.selectResTime(hMap);
+    }
+
+	public List<ReservationVO> selectResByMb_id(String mb_id) {
+		return dao.selectResByMb_id(mb_id);
+	}
+
 }

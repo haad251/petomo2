@@ -5,9 +5,41 @@ public class ReservationVO {
 					res_amount,res_review,res_rate,res_memo;
 
 	public ReservationVO(String res_id, String st_id, String service_id, String mb_id, String res_start, String res_end,
-			 String res_status, String res_amount, String res_review, String res_rate,
-			String res_memo) {
+			 String res_status, String res_amount, String res_review, String res_rate, String res_memo) {
 		super();
+		
+		/*
+		 * name="time"
+		 * 
+		 * sitter
+		 * 
+		 * 여러 서비스 리스트 service_id, service_name, service_price, service_time,
+		 * service_info,service_type
+		 * 
+		 * for sList돌리고 var=sv <option custom tag data-service_id=sv.service_id
+		 * data-price=sv.service_price select활성화 /for
+		 * 
+		 * 셀렉트에서 service_name(무슨무슨 코스)를 고르면
+		 * 
+		 * price * 멍멍수 = 전체가격 * 등급 sitter.st_level = 최종가격 res_price 서비스 id 보내줘야되고
+		 * start시간 + service_time = res_end 
+		 * status는 "予約待機" 리뷰 레이트는 null 메모 쓰고		 
+		 * bronze = 0.9 silver = 1 gold = 1.1
+		 * 
+		 * 1. 메모쓰기 2. 강아지 수 3. 서비스 선택(임의로 8?)
+		 * 
+		 * insertReservation(ReservationVO res , ServiceVO sv) ServiceVO newsv =
+		 * msv.selectOneService(sv.get서비스아이디); res에 메모, 강아지수, 시작시간, 끝시간(시작+newsv.get시간)
+		 * , 시터아이디, 멤버아이디 rsv.insertReservation(newsv);
+		 * 
+		 * 
+		 * 전체 서비스를 불러오되 셀렉트박스에 서비스이름이 표시되는데 선택값은 service_id
+		 * 
+		 * 서비스, 메모, 강아지수, 시작시간, 총예약시간(서비스_time), 시터아이디, 멤버아이디 > 시작시간 + 총예약시간 해서 res_end에
+		 * 세팅해주기
+		 */
+				
+				
 		this.res_id = res_id;
 		this.st_id = st_id;
 		this.service_id = service_id;

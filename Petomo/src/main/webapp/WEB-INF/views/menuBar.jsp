@@ -7,6 +7,7 @@
 <meta charset="UTR-8">
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+    
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,25 +28,24 @@
     <link rel="stylesheet" href="style.css">
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script>
-window.onload = function(){
-	$("#streamService").on("click",function(){
-		var streamid = "${sessionScope.streamServer}";
-		
-		if(streamid.length == 0){
-		 alert("まだストリーミング中ではありません。");
-		 return false;}
-		});
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
+<script>
+// $(function () {
+// 	$("#streamService").on("click",function(){
+// 		var streamid = "${sessionScope.streamServer}";
+		
+// 		if(streamid.length == 0){
+// 		 alert("まだストリーミング中ではありません。");
+// 		 return false;}
+// 		});
+// });
 </script>
 
  <script>
-  
- window.onload = function(){
-		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
+ $(function () {
+		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
 			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
@@ -53,7 +53,7 @@ window.onload = function(){
 				var str = '';
 				str += '<div class="alert alert-primary" role="alert">';
 				str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
-                str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
 				str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
 				$("#notizone").prepend(str);
 			});
@@ -70,21 +70,20 @@ window.onload = function(){
 				}
 				$("#notizone").html(str2);
 			});
-
-		});
 		
 		$("#notibell").mouseover(function(){
 			stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
 					JSON.stringify({'id': "${sessionScope.sessionId}"}));
 		});
-
 		
-  }
+  });
   
+ 
 	function upNoti(notid){
 		stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
 				JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
-	};
+	}
+});
   
   
   
@@ -126,7 +125,6 @@ window.onload = function(){
                                             <div class="author__avatar online">
                                             <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
                                         </div>
-                                       
                                         <p>${sessionScope.sessionName}</p>
                                         </div>
                                         <!--end /.author-author__info-->
@@ -150,20 +148,11 @@ window.onload = function(){
                                                         <span class="icon-user"></span>マイページ</a>
                                                 </li>
                                                 <li>
-                                                    <a href="memberResList">
+                                                    <a href="sitterResList">
                                                         <span class="icon-home"></span>予約照会</a>
                                                 </li>
                                                 <li>
                                                     <a href="logout">
-                                                        <span class="icon-logout"></span>ログアウト</a>
-                                                </li>
-                                                <li>
-                                                    <a href="sitterStreaming">
-                                                        <span class="icon-notebook"></span>ストリーミングサービス
-</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
                                       
@@ -174,7 +163,6 @@ window.onload = function(){
                                 </div>   
                                 <!-- end /.mobile_content -->
                         
-                        
                             <div class="author-menu">
                                 <div class="author-area">
                                     <div class="search-wrapper">
@@ -183,15 +171,13 @@ window.onload = function(){
                                             </div>
                                         </div>
                                     </div>
-                                   
-                                   
                                     <div class="author__notification_area">
                                        <c:if test="${sessionScope.sessionId != null }">
                                         <ul>
                                             <li class="has_dropdown">
                                                 <div class="icon_wrap">
                                                     <span class="icon-bell" id="notibell"></span>
-                                                    <span class="notification_status noti"></span>
+<!--                                                     <span class="notification_status noti"></span> -->
                                                 </div>
                                                 <div class="dropdown notification--dropdown">
                                                     <div class="dropdown_module_header">
@@ -199,17 +185,8 @@ window.onload = function(){
                                                     </div>
                                                     <div class="notifications_module">
                                                         <div id="notizone" class="notification">
-<!--                                                                 <div class="alert alert-primary" role="alert"> -->
-<!--                                                                 	This is default alert message box style. -->
-<!--                                                                     <p class="notitime">Just now</p> -->
-<!--                                                                     <button id="closebtn" type="button" class="closebtn close" data-dismiss="alert" aria-label="Close"> -->
-<!-- 								                                        <span class="icon-close" aria-hidden="true"></span> -->
-<!-- 								                                    </button> -->
-<!--                                                                 </div> -->
-                                                            <!-- end /.notifications -->
                                                         </div>
                                                     </div>
-                                                    <!-- end /.dropdown -->
                                                 </div>
                                             </li>
                                         </ul>
@@ -253,9 +230,6 @@ window.onload = function(){
                                                         <span class="icon-home"></span>予約照会</a>
                                                 </li>
                                                 <li>
-                                                <a href="streamingService">
-                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>                                               
-                                                <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
@@ -293,10 +267,6 @@ window.onload = function(){
                                                         <span class="icon-notebook"></span>予約リスト</a>
                                                 </li>
                                                 <li>
-                                                    <a href="sitterStreaming">
-                                                        <span class="icon-notebook"></span>ストリーミングサービス</a>
-                                                </li>
-                                                <li>
                                                     <a href="logout">
                                                         <span class="icon-logout"></span>ログアウト</a>
                                                 </li>
@@ -312,7 +282,6 @@ window.onload = function(){
                     </div>
                 </div>
                  <!-- author area restructured for mobile -->
-                               
                 <!-- end /.row -->
             </div>
             <!-- end /.container -->
@@ -321,9 +290,6 @@ window.onload = function(){
     </div>
     <!-- end /.menu-area -->
 
-
-<!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script> -->
-    <!-- inject:js-->
 <!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->
 <!--     <script src="vendor_assets/js/jquery/uikit.min.js"></script> -->
 <!--     <script src="vendor_assets/js/bootstrap/popper.js"></script> -->
@@ -346,10 +312,6 @@ window.onload = function(){
 <!--     <script src="theme_assets/js/dashboard.js"></script> -->
 <!--     <script src="theme_assets/js/main.js"></script> -->
 <!--     <script src="theme_assets/js/map.js"></script> -->
-    <!-- endinject-->
-
-
 
 </body>
 </html>
-

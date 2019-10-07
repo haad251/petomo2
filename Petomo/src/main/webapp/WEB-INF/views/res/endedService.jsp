@@ -43,6 +43,34 @@
 		        $("#chatForm").append(str);
 				$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 			  });
+			  
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str = '';
+					str += '<div class="alert alert-primary" role="alert">';
+					str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
+	                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+					str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					$("#notizone").prepend(str);
+				});
+				
+//	 			초기화
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str2 ='';
+					for(var i in data){
+						str2 += '<div class="alert alert-primary" role="alert">';
+						str2 += data[i].not_message+'<p class="notitime">'+data[i].not_time+'</p>';
+	                    str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data[i].not_id+'">';
+						str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					}
+					$("#notizone").html(str2);
+				});
+			
+			$("#notibell").mouseover(function(){
+				stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+						JSON.stringify({'id': "${sessionScope.sessionId}"}));
+			});
 		});
 
 			  $("#sendMessageText").keyup(function(e){
@@ -61,6 +89,12 @@
 		    	  $("#sendMessageText").val('');		     		
 		    	  stompClient.send('/app/chats/'+res+'/inChat', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
+			  
+			  function upNoti(notid){
+					stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
+							JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
+				}
+			  
   });
   
   </script>

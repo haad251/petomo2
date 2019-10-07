@@ -1,8 +1,3 @@
-<!-- 해야할거
-자기아이디 오른쪽정렬, 창 사이즈 줄이기 , css수정, 프로필사진 위에만 넣기?
-채팅 받아올때 로케이션이랑 연동하기>매퍼 hashmap 수정,행동은 아이콘 넣기 등
--->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,21 +6,22 @@
 
 <html>
 <head>
-<meta charset="UTF-8">
+    <title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-
+ 
+<!--  구글맵 키 없음-->
+ 
+ 
   <script>
-  
   $(function(){
 	  $('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 // 		소켓
 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
-		
-		
-		stompClient.connect({}, function() { 
+		stompClient.connect({}, function() {
 			  stompClient.subscribe('/topic/chats/'+"${res.res_id}", function(msg) {
 				  var data = JSON.parse(msg.body);
 				  var str = '';
@@ -43,6 +39,35 @@
 		        $("#chatForm").append(str);
 				$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 			  });
+			  
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str = '';
+					str += '<div class="alert alert-primary" role="alert">';
+					str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
+	                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+					str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					$("#notizone").prepend(str);
+				});
+				
+//	 			초기화
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str2 ='';
+					for(var i in data){
+						str2 += '<div class="alert alert-primary" role="alert">';
+						str2 += data[i].not_message+'<p class="notitime">'+data[i].not_time+'</p>';
+	                    str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data[i].not_id+'">';
+						str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					}
+					$("#notizone").html(str2);
+				});
+			
+			$("#notibell").mouseover(function(){
+				stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+						JSON.stringify({'id': "${sessionScope.sessionId}"}));
+			});
+			
 		});
 
 			  $("#sendMessageText").keyup(function(e){
@@ -61,12 +86,16 @@
 		    	  $("#sendMessageText").val('');		     		
 		    	  stompClient.send('/app/chats/'+res+'/inChat', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
+			  
+			  $("#notibell").mouseover(function(){
+					stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+							JSON.stringify({'id': "${sessionScope.sessionId}"}));
+				});
+			  
   });
   
 /* 스트리밍 시작 및 스트리밍 종료 버튼 스크립트 */ 
   $(function(){
-
-
 		$("#streamingStart").on("click",function(){
 			var memberid = "${res.mb_id}";
 			$.ajax({
@@ -315,7 +344,7 @@
 </head>
 
 <body class="preload">
-	<jsp:include page="../menuBar.jsp" /> 
+<jsp:include page="../menuBarNo.jsp" /> 
 <section class="single-product-desc">
         <div class="container">
             <div class="row">
@@ -352,15 +381,11 @@
 						<button id="loc_action" name="loc_action" value="meetFriends">meet friends</button>     
 						<button id="loc_action" name="loc_action" value="water">water</button>
 						<button id="stopWalking">stop walking</button>
-<!-- 							구글맵 키 넣는곳					 -->
-
 						<div id="map" style= "height:280px; width:344px;"></div>
                 </div><!-- ends: .col-md-4 -->
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section><!-- ends: .single-product-desc -->
-    
-<!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>

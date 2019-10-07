@@ -152,7 +152,6 @@ public class SitterController {
 		return "redirect:/sitterResList";
 	}
 	
-	
 	@RequestMapping(value = "/duplsitterchck", method = RequestMethod.POST)
 	public @ResponseBody SitterVO duplcheck(SitterVO sitter,Model model){
 		SitterVO result = ssv.duplcheck(sitter);

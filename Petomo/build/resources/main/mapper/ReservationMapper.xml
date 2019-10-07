@@ -76,8 +76,6 @@ values(
 		SET res_rate=#{res_rate}, res_review=#{res_review}
 		WHERE res_id=#{res_id}
  </update>
-
-
  
  <!--[Map] Location 위치 정보 인서트 -->
  <insert id="insertLoc" parameterType="LocationVO"> 

@@ -10,15 +10,17 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-  
+<!-- 구글맵 API키 없음 -->
+
+
   <script>
+  var socket =new SockJS('/websocket');
+  stompClient = Stomp.over(socket);  
+  
   $(function(){
 	  $('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
-// 		소켓
 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
-		
-		
 		stompClient.connect({}, function() { 
 			  stompClient.subscribe('/topic/chats/'+"${res.res_id}", function(msg) {
 				  var data = JSON.parse(msg.body);
@@ -36,7 +38,39 @@
 				  }
 		        $("#chatForm").append(str);
 				$('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
+			  
 			  });
+			  
+			  stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str = '';
+					str += '<div class="alert alert-primary" role="alert">';
+					str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
+	                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+					str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					$("#notizone").prepend(str);
+				});
+				
+//	 			초기화
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+					var data = JSON.parse(msg.body);
+					var str2 ='';
+					for(var i in data){
+						str2 += '<div class="alert alert-primary" role="alert">';
+						str2 += data[i].not_message+'<p class="notitime">'+data[i].not_time+'</p>';
+	                    str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data[i].not_id+'">';
+						str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+					}
+					$("#notizone").html(str2);
+				});
+			
+			$("#notibell").mouseover(function(){
+				stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+						JSON.stringify({'id': "${sessionScope.sessionId}"}));
+			});
+			  
+			  
+			  
 		});
 
 			  $("#sendMessageText").keyup(function(e){
@@ -55,6 +89,11 @@
 		    	  $("#sendMessageText").val('');		     		
 		    	  stompClient.send('/app/chats/'+res+'/inChat', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
+
+			  function upNoti(notid){
+					stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
+							JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
+				}
   });
  </script>
  
@@ -277,7 +316,7 @@ WowzaPlayer.create('playerElement',
 </head>
 
 <body class="preload">
-	<jsp:include page="../menuBar.jsp" /> 
+	<jsp:include page="../menuBarNo.jsp" /> 
 	<section class="single-product-desc">
         <div class="container">
             <div class="row">
@@ -337,9 +376,12 @@ WowzaPlayer.create('playerElement',
         </div><!-- ends: .container -->
     </section><!-- ends: .single-product-desc -->
     
-<!-- 구글맵 키 넣는곳	  -->
-
-
+<!--     <button id="startWalking">start walking</button> -->
+<!-- 	<button id="loc_action" name="loc_action" value="poop">poop</button> -->
+<!-- 	<button id="loc_action" name="loc_action" value="pee">pee</button>      -->
+<!-- 	<button id="loc_action" name="loc_action" value="meetFriends">meet friends</button>      -->
+<!-- 	<button id="loc_action" name="loc_action" value="water">water</button> -->
+<!-- 	<button id="stopWalking">stop walking</button> -->
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>

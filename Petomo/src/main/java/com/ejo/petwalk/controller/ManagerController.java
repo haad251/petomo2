@@ -40,6 +40,13 @@ public class ManagerController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/selectOneService", method = RequestMethod.POST)
+	public @ResponseBody ServiceVO selectOneService(String service_id) throws Exception {
+		ServiceVO result = mservice.selectOneService(service_id);
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value = "/deleteOneService", method = RequestMethod.POST)
 	public @ResponseBody String boardDetail(String service_id) throws Exception {
 		int result = 0 ;

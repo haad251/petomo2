@@ -4,26 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
         <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 </head>
 <body class="preload">
     <jsp:include page="../menuBar.jsp" /> 
-    <!-- 파랑이 시작 -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title"> ${sitter.st_id}번 님의 정보</h2>
+                        <h2 class="page-title">Author Profile</h2>
                         <div class="breadcrumb">
                             <ul>
                                 <li>
                                     <a href="#">Home</a>
                                 </li>
                                 <li class="active">
-                                    <a href="#">Single Product</a>
+                                    <a href="#">Author Profile</a>
                                 </li>
                             </ul>
                         </div>
@@ -31,433 +29,193 @@
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
         </div><!-- end .container -->
-    </section>
-	<section class="single-product-desc">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 col-md-12">
-					<div class="item-preview">
-						<img src="img/single2.jpg" alt="" class="img-fluid">
-						<div class="item-preview--excerpt">
-							<div class="item-preview--action">
-								<div class="action-btns">
-									<a href="#" class="btn btn--lg btn-primary">Live Preview</a> <a
-										href="goFavorite" class="btn btn--lg btn--icon btn-outline-primary">
-										<span class="lnr icon-heart"></span>Add To Favorites
-									</a>
-								</div>
-							</div>
-							<!-- ends: .item-preview--action -->
-							<div class="item-preview--activity">
-								<div class="activity-single">
-									<p>
-										<span class="icon-cloud-download"></span> Total Downloads
-									</p>
-									<p>2451</p>
-								</div>
-								<div class="activity-single">
-									<p>
-										<span class="icon-heart"></span> Favorities
-									</p>
-									<p>452</p>
-								</div>
-								<div class="activity-single">
-									<p>
-										<span class="icon-eye"></span>Views
-									</p>
-									<p>3425</p>
-								</div>
-							</div>
-							<!-- Ends: .item-activity -->
-						</div>
-					</div>
-					<!-- ends: .item-preview-->
-					<div class="item-info">
-						<div class="item-navigation">
-							<ul class="nav nav-tabs" role="tablist">
-								<li><a href="#product-details" class="active" id="tab1"
-									aria-controls="product-details" role="tab" data-toggle="tab"
-									aria-selected="true"> <span class="icon icon-docs"></span>
-										Item Details
-								</a></li>
-								<li><a href="#product-comment" id="tab2"
-									aria-controls="product-comment" role="tab" data-toggle="tab">
-										<span class="icon icon-bubbles"></span> Comments
-								</a></li>
-							</ul>
-						</div>
-						<!-- ends: .item-navigation -->
-						<div class="tab-content">
-							<div class="fade show tab-pane product-tab active"
-								id="product-details" role="tabpanel" aria-labelledby="tab1">
-								<div class="tab-content-wrapper">
-									<h3>Landing Page Details</h3>
-									<p class="p-bottom-30">
-										Nunc placerat mi id nisi interdum mollis. Praesent pharetra,
-										justo ut scelerisque the mattis, leo quam aliquet congue
-										placerat mi id nisi interdum mollis. Praesent pharetra, justo
-										ut scel erisque the mattis, leo quam aliquet congue justo ut
-										scelerisque. Praesent pharetra, justo ut scelerisque the
-										mattis, leo quam aliquet congue justo ut scelerisque. <br>
-										<br>justo ut scel erisque the mattis, leo quam aliquet
-										congue justo ut scelerisque. Praesent pharetra, justo ut
-										scelerisque the mattis, leo quam aliquet congue justo ut
-										scelerisque. leo quam aliquet congue placerat mi id nisi
-										interdum mollis. Praesent pharetra.
-									</p>
-								</div>
-							</div>
-							<!-- ends: .tab-content -->
-							<div class="fade tab-pane product-tab" id="product-comment"
-								role="tabpanel" aria-labelledby="tab2">
-								<div class="thread">
-									<ul class="media-list thread-list">
-										<li class="single-thread">
-											<div class="media">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m1.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<div>
-														<div class="media-heading">
-															<a href="author.html">
-																<h4>Themexylum</h4>
-															</a> <span>9 Hours Ago</span>
-														</div>
-														<a href="#" class="reply-link">Reply</a>
+    </section><!-- ends: .breadcrumb-area -->
+    <section class="author-profile-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="author-profile">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-7">
+                                <div class="author-desc">
+                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sitter.st_id}.png" alt="">
+                                    <div class="infos">
+                                        <h4>${sitter.st_id}</h4>
+                                        <span>${sitter.st_level}</span>
+                                        
+                                    </div>
+                                </div><!-- ends: .author-desc -->
+                            </div><!-- ends: .col-lg-5 -->
+                            <div class="col-lg-4 order-lg-1 col-md-12 order-md-2">
+                                <div class="author-social social social--color--filled">
+                                    <ul>
+                                       <li>
+                                          <a href="reservation?st_id=${sitter.st_id}" class="btn btn-primary btn--xs">예약하기</a>
+                                       </li>
+                                    </ul>
+                                </div><!-- ends: .author-social -->
+                            </div><!-- ends: .col-lg-3 -->
+                            <div class="col-lg-3 order-lg-2 col-md-5 order-md-1">
+                                <div class="author-stats">
+                                    <ul>
+                                        <li class="t_items">
+                                            <span>146</span>
+                                            <p>Total Items</p>
+                                        </li>
+                                        <li class="t_sells">
+                                            <span>2426</span>
+                                            <p>Total Sales</p>
+                                        </li>
+                                        <li class="t_reviews">
+                                            <div class="rating product--rating">
+                                                <span class="ratings">
+                                                	<c:if test="${'5' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>                                                		 
+                                                	</c:if>
+                                                	<c:if test="${'4' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star-o"></i>                                                		 
+                                                	</c:if>
+                                                	<c:if test="${'3' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star-o"></i>  
+                                                		 <i class="fa fa-star-o"></i>                                                  		 
+                                                	</c:if>
+                                                	<c:if test="${'2' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star-o"></i>  
+                                                		 <i class="fa fa-star-o"></i>  
+                                                		 <i class="fa fa-star-o"></i>                                                 		 
+                                                	</c:if>
+                                                	<c:if test="${'1' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star"></i>
+                                                		 <i class="fa fa-star-o"></i>  
+                                                		 <i class="fa fa-star-o"></i>  
+                                                		 <i class="fa fa-star-o"></i>
+                                                		 <i class="fa fa-star-o"></i>                                                		 
+                                                	</c:if>
+                                                	<c:if test="${'0' eq sitter.st_rate}">
+                                                		 <i class="fa fa-star-o"></i>
+                                                		 <i class="fa fa-star-o"></i>
+                                                		 <i class="fa fa-star-o"></i>
+                                                		 <i class="fa fa-star-o"></i>
+                                                		 <i class="fa fa-star-o"></i>                                                		 
+                                                	</c:if>
+                                                </span>
+                                                <span class="avg_r">${sitter.st_rate}</span>
+                                                <span>(226 reviews)</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div><!-- ends: .author-stats -->
+                            </div><!-- ends: .col-lg-4 -->
+                        </div>
+                    </div>
+                </div><!-- ends: .col-lg-12 -->
+                <div class="col-md-12 author-info-tabs">
+                    <ul class="nav nav-tabs" id="author-tab" role="tablist">
+                        <li>
+                            <a class="active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
+                        </li>
+                        <!-- <li>
+                            <a id="items-tab" data-toggle="tab" href="#items" role="tab" aria-controls="items" aria-selected="false">Author Items</a>
+                        </li> -->
+                        <li>
+                            <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                        </li>
+                       <!--  <li>
+                            <a id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers</a>
+                        </li>
+                        <li>
+                            <a id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="false">Following</a>
+                        </li> -->
+                    </ul><!-- Ends: .nav-tabs -->
+                    <div class="tab-content" id="author-tab-content">
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <div class="author_module about_author">
+                                <h3>Hi,
+                                    <span>I am ${sitter.st_id}</span>
+                                </h3>
+                                <p>${sitter.st_info}</p>
+                            </div>
+                            </div>
+                         
+                        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="thread thread_review thread_review2">
+										<ul class="media-list thread-list">
+											<li class="single-thread">
+												<div class="media">
+													<div class="media-left">
+														<a href="#"> <img class="media-object"
+															src="img/m1.png" alt="Commentator Avatar">
+														</a>
 													</div>
-													<p>Nunc placerat mi id nisi interdum mollis. Praesent
-														pharetra, justo ut sceleris que the mattis, leo quam
-														aliquet congue placerat mi id nisi interdum mollis.</p>
-												</div>
-											</div>
-											<!-- ends: .media --> <!-- nested comment markup / replies -->
-											<ul class="children">
-												<li class="single-thread depth-2">
-													<div class="media">
-														<div class="media-left">
-															<a href="#"> <img class="media-object"
-																src="img/m2.png" alt="Commentator Avatar">
-															</a>
-														</div>
-														<div class="media-body">
-															<div class="media-heading">
-																<h4>AazzTech</h4>
-																<span>6 Hours Ago</span>
+													<div class="media-body">
+														<div class="d-flex flex-wrap">
+															<div class="">
+																<div class="media-heading">
+																	<a href="author.html">
+																		<h4>Themexylum</h4>
+																	</a> <a href="#" class="rev_item">Mini - Responsive
+																		Bootstrap Dashboard</a>
+																</div>
+																<div class="rating product--rating">
+																	<ul>
+																		<li><span class="fa fa-star"></span></li>
+																		<li><span class="fa fa-star"></span></li>
+																		<li><span class="fa fa-star"></span></li>
+																		<li><span class="fa fa-star"></span></li>
+																		<li><span class="fa fa-star-half-o"></span></li>
+																	</ul>
+																</div>
+																<span class="review_tag">support</span>
 															</div>
-															<span class="comment-tag author">Author</span>
-															<p>Nunc placerat mi id nisi interdum mollis. Praesent
-																pharetra, justo ut sceleris que the mattis, leo quam
-																aliquet congue placerat mi id nisi interdum mollis.</p>
+															<div class="rev_time">9 Hours Ago</div>
 														</div>
+														<p>Nunc placerat mi id nisi interdum mollis. Praesent
+															pharetra, justo ut sceleris que the mattis, leo quam
+															aliquet congue placerat mi id nisi interdum mollis.</p>
 													</div>
-												</li>
-												<li class="single-thread depth-2">
-													<div class="media">
-														<div class="media-left">
-															<a href="#"> <img class="media-object"
-																src="img/m1.png" alt="Commentator Avatar">
-															</a>
-														</div>
-														<div class="media-body">
-															<div class="media-heading">
-																<h4>Themexylum</h4>
-																<span>9 Hours Ago</span>
-															</div>
-															<p>Nunc placerat mi id nisi interdum mollis. Praesent
-																pharetra, justo ut sceleris que the mattis, leo quam
-																aliquet congue placerat mi id nisi interdum mollis.</p>
-														</div>
-													</div>
-												</li>
-											</ul>
-											<!-- ends: .children --> <!-- comment reply -->
-											<div class="media depth-2 reply-comment">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m2.png"
-														alt="Commentator Avatar">
-													</a>
 												</div>
-												<div class="media-body">
-													<form action="#" class="comment-reply-form">
-														<textarea class="bla" name="reply-comment"
-															placeholder="Write your comment..."></textarea>
-														<button class="btn btn--md btn-primary">Post
-															Comment</button>
-													</form>
-												</div>
-											</div>
-											<!-- comment reply -->
-										</li>
-										<!-- ends: .single-thread-->
-										<li class="single-thread">
-											<div class="media">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m2.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<div>
-														<div class="media-heading">
-															<a href="author.html">
-																<h4>EchoTheme</h4>
-															</a> <span>9 Hours Ago</span>
-														</div>
-														<a href="#" class="reply-link">Reply</a>
-													</div>
-													<p>Nunc placerat mi id nisi interdum mollis. Praesent
-														pharetra, justo ut sceleris que the mattis, leo quam
-														aliquet congue placerat mi id nisi interdum mollis.</p>
-												</div>
-											</div>
-											<!-- ends: .media --> <!-- nested comment markup / replies -->
-											<!-- comment reply -->
-											<div class="media depth-2 reply-comment">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m2.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<form action="#" class="comment-reply-form">
-														<textarea class="bla" name="reply-comment"
-															placeholder="Write your comment..."></textarea>
-														<button class="btn btn--md btn-primary">Post
-															Comment</button>
-													</form>
-												</div>
-											</div>
-											<!-- comment reply -->
-										</li>
-										<!-- ends: .single-thread-->
-										<li class="single-thread">
-											<div class="media">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m3.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<div>
-														<div class="media-heading">
-															<a href="author.html">
-																<h4>SnazzyTheme</h4>
-															</a> <span>9 Hours Ago</span>
-														</div>
-														<a href="#" class="reply-link">Reply</a>
-													</div>
-													<p>Nunc placerat mi id nisi interdum mollis. Praesent
-														pharetra, justo ut sceleris que the mattis, leo quam
-														aliquet congue placerat mi id nisi interdum mollis.</p>
-												</div>
-											</div>
-											<!-- ends: .media --> <!-- nested comment markup / replies -->
-											<!-- comment reply -->
-											<div class="media depth-2 reply-comment">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m2.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<form action="#" class="comment-reply-form">
-														<textarea class="bla" name="reply-comment"
-															placeholder="Write your comment..."></textarea>
-														<button class="btn btn--md btn-primary">Post
-															Comment</button>
-													</form>
-												</div>
-											</div>
-											<!-- comment reply -->
-										</li>
-										<!-- ends: .single-thread-->
-										<li class="single-thread">
-											<div class="media">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m4.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<div>
-														<div class="media-heading">
-															<a href="author.html">
-																<h4>ThemeValley</h4>
-															</a> <span>9 Hours Ago</span>
-														</div>
-														<a href="#" class="reply-link">Reply</a>
-													</div>
-													<p>Nunc placerat mi id nisi interdum mollis. Praesent
-														pharetra, justo ut sceleris que the mattis, leo quam
-														aliquet congue placerat mi id nisi interdum mollis.</p>
-												</div>
-											</div>
-											<!-- ends: .media --> <!-- nested comment markup / replies -->
-											<!-- comment reply -->
-											<div class="media depth-2 reply-comment">
-												<div class="media-left">
-													<a href="#"> <img class="media-object" src="img/m2.png"
-														alt="Commentator Avatar">
-													</a>
-												</div>
-												<div class="media-body">
-													<form action="#" class="comment-reply-form">
-														<textarea class="bla" name="reply-comment"
-															placeholder="Write your comment..."></textarea>
-														<button class="btn btn--md btn-primary">Post
-															Comment</button>
-													</form>
-												</div>
-											</div>
-											<!-- comment reply -->
-										</li>
-										<!-- ends: .single-thread-->
-									</ul>
-									<!-- ends: .media-list -->
-									<!-- Start Pagination -->
-									<nav class="pagination-default">
-										<ul class="pagination">
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Previous"> <span aria-hidden="true"><i
-														class="fa fa-long-arrow-left"></i></span> <span class="sr-only">Previous</span>
-											</a></li>
-											<li class="page-item active"><a class="page-link"
-												href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item disabled"><a class="page-link"
-												href="#">...</a></li>
-											<li class="page-item"><a class="page-link" href="#">10</a></li>
-											<li class="page-item"><a class="page-link" href="#"
-												aria-label="Next"> <span aria-hidden="true"><i
-														class="fa fa-long-arrow-right"></i></span> <span class="sr-only">Next</span>
-											</a></li>
-										</ul>
-									</nav>
-									<!-- Ends: .pagination-default -->
-									<div class="comment-form-area">
-										<h4>Leave a comment</h4>
-										<div class="media comment-form">
-											<div class="media-left">
-												<a href="#"> <img class="media-object" src="img/m7.png"
-													alt="Commentator Avatar">
-												</a>
-											</div>
-											<div class="media-body">
-												<form action="#" class="comment-reply-form">
-													<textarea name="reply-comment"
-														placeholder="Write your comment..."></textarea>
-													<button class="btn btn--sm btn-primary">Post
-														Comment</button>
-												</form>
-											</div>
-										</div>
-										<!-- ends: .comment-form -->
-									</div>
-									<!-- ends: .comment-form-area -->
+											</li>
 								</div>
-								<!-- ends: .comments -->
-							</div>
-							<!-- ends: .product-comment -->
-						</div>
-						<!-- ends: .tab-content -->
-					</div>
-					<!-- ends: .item-info -->
-				</div>
-				<!-- ends: .col-md-8 -->
-				<div class="col-lg-4 col-md-12">
-					<aside class="sidebar sidebar--single-product">
-						<div class="sidebar-card card-pricing">
-							<div class="price border-none">
-								<h1>
-									<sup>$</sup> <span>00.00</span>
-								</h1>
-							</div>
-							<div class="purchase-button">
-								<a href="goReservation" class="btn btn--lg btn-primary">예약하기</a>
-							</div>
-						</div>
-						<!-- ends: .sidebar--card -->
-						<div class="sidebar-card card--product-infos">
-							<div class="card-title">
-								<h4>Product Information</h4>
-							</div>
-							<ul class="infos">
-								<li>
-									<p class="data-label">Released</p>
-									<p class="info">16 June 2015</p>
-								</li>
-								<li>
-									<p class="data-label">Updated</p>
-									<p class="info">28 July 2016</p>
-								</li>
-								<li>
-									<p class="data-label">Version</p>
-									<p class="info">1.2</p>
-								</li>
-								<li>
-									<p class="data-label">Category</p>
-									<p class="info">Corporate & Business</p>
-								</li>
-								<li>
-									<p class="data-label">Layout</p>
-									<p class="info">Responsive</p>
-								</li>
-								<li>
-									<p class="data-label">Retina Ready</p>
-									<p class="info">No</p>
-								</li>
-								<li>
-									<p class="data-label">Files Included</p>
-									<p class="info">Html, CSS, JavaScript</p>
-								</li>
-								<li>
-									<p class="data-label">Browser</p>
-									<p class="info">IE10, IE11, Firefox, Safari, Opera, Chrome5</p>
-								</li>
-								<li>
-									<p class="data-label">Bootstrap</p>
-									<p class="info">Bootstrap 4</p>
-								</li>
-								<li>
-									<p class="data-label">Tags</p>
-									<p class="info">
-										<a href="#">business</a>, <a href="#">template</a>, <a
-											href="#">onepage</a>, <a href="#">creative</a>, <a href="#">responsive</a>,
-										<a href="#">corporate</a>, <a href="#">Bootstrap3</a>, <a
-											href="#">html5</a>
-									</p>
-								</li>
-							</ul>
-							<!-- ends: .infos -->
-						</div>
-						<!-- ends: .card--product-infos -->
-						<div class="sidebar-card social-share-card">
-							<p>Social Share:</p>
-							<ul class="list-unstyled">
-								<li><a href=""> <i class="fa fa-facebook"></i>
-								</a></li>
-								<li><a href=""> <i class="fa fa-twitter"></i>
-								</a></li>
-								<li><a href=""> <i class="fa fa-google-plus"></i>
-								</a></li>
-								<li><a href=""> <i class="fa fa-pinterest"></i>
-								</a></li>
-							</ul>
-						</div>
-						<!-- Ends: .social-share-card -->
-					</aside>
-					<!-- ends: .sidebar -->
-				</div>
-				<!-- ends: .col-md-4 -->
-			</div>
-			<!-- ends: .row -->
-		</div>
-		<!-- ends: .container -->
-	</section>
-	<!-- ends: .single-product-desc -->
-</body>
+							</div></section><!-- ends: .author-profile-area -->
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
+    <!-- inject:js-->
+    <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
+    <script src="vendor_assets/js/jquery/uikit.min.js"></script>
+    <script src="vendor_assets/js/bootstrap/popper.js"></script>
+    <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
+    <script src="vendor_assets/js/chart.bundle.min.js"></script>
+    <script src="vendor_assets/js/grid.min.js"></script>
+    <script src="vendor_assets/js/jquery-ui.min.js"></script>
+    <script src="vendor_assets/js/jquery.barrating.min.js"></script>
+    <script src="vendor_assets/js/jquery.countdown.min.js"></script>
+    <script src="vendor_assets/js/jquery.counterup.min.js"></script>
+    <script src="vendor_assets/js/jquery.easing1.3.js"></script>
+    <script src="vendor_assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="vendor_assets/js/owl.carousel.min.js"></script>
+    <script src="vendor_assets/js/select2.full.min.js"></script>
+    <script src="vendor_assets/js/slick.min.js"></script>
+    <script src="vendor_assets/js/tether.min.js"></script>
+    <script src="vendor_assets/js/trumbowyg.min.js"></script>
+    <script src="vendor_assets/js/venobox.min.js"></script>
+    <script src="vendor_assets/js/waypoints.min.js"></script>
+    <script src="theme_assets/js/dashboard.js"></script>
+    <script src="theme_assets/js/main.js"></script>
+    <script src="theme_assets/js/map.js"></script>
+    <!-- endinject-->
+   </body>
 </html>
