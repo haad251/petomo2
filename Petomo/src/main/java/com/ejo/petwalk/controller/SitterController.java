@@ -28,10 +28,8 @@ public class SitterController {
 
 	@Autowired
 	SitterService ssv;
-
 	@Autowired
 	AwsS3Service aws3sv;
-	
 	@Autowired
 	ReservationService rsv;
 	
@@ -68,7 +66,6 @@ public class SitterController {
 	
 	@RequestMapping(value = "/sitterSignup" , method = RequestMethod.POST)
 	public String sitterSignup (HttpSession session,Model model,SitterVO sitter) throws Exception{
-		System.out.println(sitter);
 		int result = ssv.insertSitter(sitter);
 		if(result == 1) {
 			session.setAttribute("sessionId", sitter.getSt_id());
@@ -94,7 +91,6 @@ public class SitterController {
 	@RequestMapping(value = "/sitterResList")
 	public String sitterResList (HttpSession session,Model model){
 		 List<HashMap<String,String>> rList = rsv.selectResAllBySt_id((String)session.getAttribute("sessionId"));
-		System.out.println(rList);
 		model.addAttribute("rList",rList);
 		return "sitter/sitterResList";
 	}
@@ -157,6 +153,9 @@ public class SitterController {
 		SitterVO result = ssv.duplcheck(sitter);
 		return result;
 	}
+	
+	
+	
 	
 	//KMJ-[Sitter] 통계용 메서드 모음
 	
@@ -243,7 +242,6 @@ public class SitterController {
 	//그 해(chart에서 선택한 연도)의 예약 수, 예약 취소 수, 서비스 이용 완료된 예약 수
 	@RequestMapping(value="/thisYearResCountForSitter", method=RequestMethod.POST)
 	public @ResponseBody int[] thisYearResCountForSitter(String st_id,String res_start){
-		System.out.println(res_start);
 		int [] ResCountArray = new int[3]; 
 		//index 0 => 그 해 저체 예약 수 
 		//index 1 =>그 해 전체 예약 취소 수
@@ -259,7 +257,6 @@ public class SitterController {
 			if(eachResYear.equals(res_start) && result.get(i).getRes_status().equals("利用済み"))
 				ResCountArray[2]++;
 		}
-		System.out.println("전체 예약 수="+ResCountArray[0]+"캔슬 수="+ResCountArray[1]+"완료 수="+ResCountArray[2]);
 		return ResCountArray;
 	}
 	
@@ -288,7 +285,6 @@ public class SitterController {
 		}
 		
 		for(int i = 0 ; i < resMonthCountData.length ; i++) {
-			System.out.println(resMonthCountData[i]);
 		}
 		return resMonthCountData;
 	}

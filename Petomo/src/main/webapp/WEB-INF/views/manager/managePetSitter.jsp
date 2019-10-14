@@ -7,15 +7,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
-	    
 	    var st_id = ""
 	    var st_check = "" ; //활동 가능 여부 변경을 위한 변수
 	    var location; //지역별 펫 시터 목록을 보기 위한 변수
-	    
 	    $(function(){
-	    	
 	    	selectAllSitter();
-	    	
 			$(document).on("click","#activityBtn",function(){
 	    		st_id =$(this).attr("data-id");
 	    		st_check = $(this).attr("data-check");
@@ -27,9 +23,7 @@
 	    		$("#sitterList").html("");
 	    		selectAllSitter();
 	    	});
-	    	
 	    });
-	    
 	    function selectAllSitter(){
 	    	$.ajax({
 	    		url:"selectAllSitter"
@@ -56,7 +50,6 @@
 	    		}
 	    	});
 	    }
-	    
 	    function updateSitterCheck(){
 	    	$.ajax({
 	    		url:"updateSitterCheck"
@@ -74,18 +67,13 @@
 	    		
 	    	});
 	    }
-	    
-	  
 	</script>
 </head>
-
 <body class="preload">
     <jsp:include page="../menuBar.jsp" />
     <jsp:include page="../managerMenuBar.jsp" /> 
   
-     
     <section class="p-top-100 p-bottom-70 bgcolor">
-  
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -96,8 +84,6 @@
                             </div>
                             <div class="table-responsive">
                                 <table id="sitterList" class="table withdraw__table">
-                                   
-                                   
                                 </table>
                             </div>
                         </div>
@@ -106,11 +92,9 @@
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section>
-    
     <div class="go_top" style="display: block; text-align:center;">
 	       <span class="icon-arrow-up"></span>
 	     </div>
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -132,8 +116,5 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
-
 </body>
 </html>

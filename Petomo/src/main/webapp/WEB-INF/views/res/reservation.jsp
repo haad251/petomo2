@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
@@ -12,7 +11,6 @@
 <script>
 	$(function() {
 		init();
-		price();
 		var selectbtn = '';
 		$("#resDate").datepicker({
 			constrainInput : true,
@@ -20,6 +18,11 @@
 			autoSize : true,
 			altFormat : "yy-MM-dd",
 			dateFormat : "yy-mm-dd",
+		});
+		
+		$("#selectService").change( function() {
+			var sprice = $('option:selected', this).attr("data-price");
+			price(sprice);
 		});
 		
 		
@@ -47,25 +50,23 @@
 							}
 						}
 						if(flag==true) continue;
-						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value); this.style.color='red';"  value="'+i+'"';
+						else str += '<button type="button" class="selectbtn btn btn-lg btn-light" onclick="dateSelect(this.value); this.style.color=\'red\';"  value="'+i+'"';
 						str += 'style="background-color: #b2a2f9; color:white; border-color: white; padding:0px; width:120px; margin-bottom:10px; margin-right:6px;">'+i+':00</button>';
 					}
 					$("#timetable").html(str);
 					}
 			});
 		}); 
-		
 	});
 	
 	function dateSelect(dateval) {
+		$(".selectbtn").css('color', 'white');
 		$("#res_start_input").val($("#resDate").val());
 		var res_end = Number(dateval) + 1;
 		res_end += ":00";
 		dateval += ":00";
-		alert(dateval);
 		var timeval = $("#resDate").val();
 		var timestart = timeval+" "+ dateval;
-		
 		var timeend = timeval+" "+res_end;
 		$("#res_end_input").val(timeend);
 		$("#res_start_input").val(timestart);
@@ -81,26 +82,21 @@
 		$("#timetable").html(str);
 	}
 	
-	function price(){
-		var st_level = '${sitter.st_level}';		
+	function price(sprice){
+		var st_level = '${sitter.st_level}';	
 		var str='';
 		if(st_level=="bronze" ||st_level=="Bronze"){
-			str = Number(0.9) * Number(10000);
+			str = Number(0.9) * parseInt(sprice) ;
 		}else if(st_level=="silver"||st_level=="Silver"){
-				str = Number(10000);
-			}else if(st_level=="gold"||st_level=="Gold"){
-				str = Number(1.1) * Number(10000);
+				str = parseInt(sprice);
+		}else if(st_level=="gold"||st_level=="Gold"){
+				str = Number(1.1) *parseInt(sprice);
 		}
 			$("#res_amount").val(str);
 	}
 	
-	
-
-	
 </script>
-
 </head>
-
 
 <body class="preload">
     <jsp:include page="../menuBar.jsp" />
@@ -109,17 +105,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="breadcrumb-contents">
-                        <h2 class="page-title">결제화면</h2>
-                        <div class="breadcrumb">
-                            <ul>
-                                <li>
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="active">
-                                    <a href="#">Checkout</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <h2 class="page-title">予約</h2>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
@@ -129,106 +115,58 @@
     <form action="insertReservation" class="reservation_form" method="post">
         <div class="dashboard_contents">
             <div class="container">
-<!--                 	<input type="hidden" name="service_id" value="8"> -->
                 	<input type="hidden" name="st_id" value="${sitter.st_id}">
                 	<input type="hidden" name="mb_id" value="${sessionScope.sessionId}">
                 	<input type="hidden" name="res_start" id="res_start_input">
                 	<input type="hidden" name="res_status" value="予約待機"> 
                 	<input type="hidden" name="res_amount" id="res_amount"> 
                 	<input type="hidden" name="res_end" id="res_end_input">
-<!--                 <input type="hidden" name="service_price" value="30000"> -->
-                	
                     <div class="row">
                         <div class="col-lg-6 col-md-12" 
                         style="max-width: 100%;flex: 0 0 100%;">
                             <div class="information_module">
                                 <div class="toggle_title">
-                                    <h4>결제 정보</h4>
+                                    <h4>予約フォーム</h4>
                                 </div>
-                                
-                                
                                 <div class="information__set">
                                     <div class="information_wrapper form--fields">
                                         <div class="row">
-<!-- 											왼쪽 달력-->
 											<div class="col-md-6">
 													<div class="input_with_icon">
-														<input type="text" id="resDate" placeholder="From" >
+														<input type="text" id="resDate" placeholder="From" autocomplete="off" />
 														<span class="icon-calendar"></span>
 													</div>
-<!-- 												</form> -->
 											</div>
-<!-- 											시간표뜨는곳 -->
 											<div class="col-md-6" id="timetable">
-<%-- 												<c:forEach items="${timeList}" var="time"> --%>
-<!-- 													<button type="button" class="btn btn-lg btn-light"  -->
-<!-- 													style="background-color: #b2a2f9; color:gray; border-color: white; cursor: auto; padding:0px;  -->
-<%-- 													width:120px; margin-bottom:10px; margin-right:6px;">${time}:00</button> --%>
-<%-- 												</c:forEach> --%>
 											</div>
                                         </div><!-- ends: .row -->
-                                        
-                                        
                                         <div class="row">
 	                                         <div class="col-lg-6 col-md-12"> 
-   	    		                                  <!-- xdddd -->
 												<div class="">
-													<label for="authbio">메모</label>
+													<label for="authbio">メモ</label>
 													<textarea name="res_memo" id="authbio" class="text_field"
-														placeholder="comment"></textarea>
+														placeholder="シッターへのメッセージ"></textarea>
 												</div>
-												<div class="shortcode_modules">
-													<div class="modules__content">
+												</div>
+												</div>
 														<div class="row">
 															<div class="col-md-3">
-																<div class="inline">
-<!-- 																	강아지 수 -->
-<!-- 																	<input type="number" max="3" name="res_amount"><br> -->
-																	서비스
-																	<input type="number" max="10" name="service_id"><br>
-																	
-<!-- 																	<a href="#" id="drop2" -->
-<!-- 																		class="dropdown-toggle btn btn-outline-primary btn-md" -->
-<!-- 																		data-toggle="dropdown" aria-haspopup="true" -->
-<!-- 																		aria-expanded="true"> 강아지 수 </a> -->
-<!-- 																	<ul  -->
-<!-- 																		class="custom_dropdown messaging_dropdown dropdown-menu" -->
-<!-- 																		aria-labelledby="drop2"> -->
-<!-- 																		<li><a href="#"> <span class=""></span>1 -->
-<!-- 																		</a></li> -->
-<!-- 																		<li><a href="#"> <span class=""></span>2 -->
-<!-- 																		</a></li> -->
-<!-- 																		<li><a href="#"> <span class=""></span>3 -->
-<!-- 																		</a></li>		 -->
-<!-- 																	</ul> -->
-<!-- 																	<a href="#" id="drop3" -->
-<!-- 																		class="dropdown-toggle btn btn-outline-primary btn-md" -->
-<!-- 																		data-toggle="dropdown" aria-haspopup="true" -->
-<!-- 																		aria-expanded="true"> 서비스 </a> -->
-<!-- 																	<ul  -->
-<!-- 																		class="custom_dropdown messaging_dropdown dropdown-menu" -->
-<!-- 																		aria-labelledby="drop3"> -->
-<!-- 																		<li><a href="#"> <span class=""></span>서비스1 -->
-<!-- 																		</a></li> -->
-<!-- 																		<li><a href="#"> <span class=""></span>ㅅㅄ2 -->
-<!-- 																		</a></li> -->
-<!-- 																		<li><a href="#"> <span class=""></span>ㅅㅄ3 -->
-<!-- 																		</a></li> -->
-<!-- 																		</ul> -->
-																		<button type="button" class="btn btn-lg btn-light" value="${sitter.st_level}" style="background-color: white; color:gray; border-color: white; cursor: auto; padding:0px; width:120px; margin-bottom:10px; margin-right:6px;">${sitter.st_level}</button>
-																	
-																</div>
+																	サービス
+																	<select id="selectService" name="service_id">
+																		<c:forEach items="${sList}" var="service">
+																			<option value="${service.service_id}" data-price="${service.service_price}">${service.service_name}</option>
+																		</c:forEach>
+																	</select>
 															</div>
 														</div>
-													</div>
-
-
-													<button type="submit" class="btn btn--md btn-primary">예약</button>
+											<div class="row">
+												<div class="shortcode_modules">
+													<div class="modules__content">
+													<button type="submit" class="btn btn--md btn-primary">予約</button>
 												</div>
-
+											</div>
 											</div><!-- end .information__set -->
                             </div><!-- end .information_module -->
-                        </div>
                         </div>
                         </div>
                         </div>
@@ -237,8 +175,6 @@
         </div><!-- ends: .dashboard_contents -->
       </form><!-- ends: form -->
     </section><!-- ends: .dashboard-area -->
-    
-        <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -261,7 +197,5 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
-    
 </body>
 </html>

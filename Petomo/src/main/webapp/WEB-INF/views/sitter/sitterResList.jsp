@@ -5,7 +5,6 @@
     
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
@@ -14,9 +13,43 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 <script>
-	$(window).on("load",function(){
+	$(function(){
 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
+	
+		stompClient.connect({}, function() { 
+			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
+				var data = JSON.parse(msg.body);
+				var str = '';
+				str += '<div class="alert alert-primary" role="alert">';
+				str += data.not_message+'<p class="notitime">'+data.not_time+'</p>';
+                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
+				str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+				$("#notizone").prepend(str);
+				$("#notiOn").html('<span class="notification_status noti"></span>');
+			});
+				
+			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+				var data = JSON.parse(msg.body);
+				var str2 ='';
+				for(var i in data){
+					str2 += '<div class="alert alert-primary" role="alert">';
+					str2 += data[i].not_message+'<p class="notitime">'+data[i].not_time+'</p>';
+                    str2 += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data[i].not_id+'">';
+					str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
+				}
+				$("#notizone").html(str2);
+				if(data.length==0) 
+					$("#notiOn").html('');
+				else $("#notiOn").html('<span class="notification_status noti"></span>');
+			});
+			
+			
+		});
+			$("#notibell").mouseover(function(){
+				stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
+						JSON.stringify({'id': "${sessionScope.sessionId}"}));
+			});
 		
 		$(".res_status_btn").on("click",function(){
 			var hiddenres = $(this).attr("data-res");
@@ -24,6 +57,7 @@
 			$("#hiddenRes").val(hiddenres);
 			$("#hiddenMb").val(hiddenmb_id);
 		});
+		
 		
 		$("#res_confirm_btn").on("click",function(){
 			var fres = $("#hiddenRes").val();
@@ -44,16 +78,19 @@
 			$("#resModalForm").attr("action", "cancelReservation");
 			$("#resModalForm").submit();
 		});
-		
-		
 	});
+	
+	function upNoti(notid){
+		stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
+				JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
+	}
 </script>
     
     
 </head>
 
 <body class="preload">
-	<jsp:include page="../menuBar.jsp" /> 
+	<jsp:include page="../menuBarNo.jsp" /> 
 <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -97,7 +134,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="statement_table table-responsive">
-                            <table class="table">
+                            <table class="table" style="text-align:center;">
+                            		<colgroup>
+                            			<col width="7%;">
+										<col width="10%;">
+										<col width="13%;">
+										<col width="10%;">
+										<col width="10%;">
+										<col width="30%;">
+										<col width="10%;">
+										<col width="10%;">
+									</colgroup>
                                 <thead>
                                     <tr>
                                         <th>日付</th>
@@ -146,9 +193,16 @@
 										         </c:when>										         
 										      </c:choose>
             	                           	</td>
+      　   　       	            	        		 <c:if test ="${res.res_status=='利用済み' }">
+	                                        <td class="action">
+	                                            <a href="endedService?res_id=${res.res_id}">go</a>
+	                                        </td>
+	                                        </c:if>
+	                                         <c:if test ="${res.res_status=='予約完了' }">
 	                                        <td class="action">
 	                                            <a href="sitterStreaming?res_id=${res.res_id}">go</a>
 	                                        </td>
+	                                        </c:if>            	                           	
 	                                    </tr>
                                     </c:forEach>
                                 
@@ -159,8 +213,8 @@
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
-    
-      <!-- Modal Delete -->
+
+
     <div class="modal fade delete_modal" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2">
         <div class="modal-dialog modal modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -168,25 +222,21 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h3 class="modal-title">予約情報</h3>
+                    <h3 class="modal-title">予約確認</h3>
         
                 </div>
                		 <div class="modal-body">
-<!-- 		                <div id="res_status_form"> -->
                		 		 <form id="resModalForm" method="POST"> 
                		 		 	<input type="hidden" id="hiddenRes" name="res_id" >
                		 		 	<input type="hidden" id="hiddenMb" name="mb_id" >
 	               				 <button id="res_confirm_btn" type="button" class="btn btn-danger btn-md">予約承認</button>
     	           		   		 <button id="res_cancel_btn" class="btn modal_close" data-dismiss="modal">予約キャンセル</button>
                	   			 </form>
-<!--         		       	</div> -->
                		 </div>
-                <!-- end /.modal-body -->
             </div>
         </div>
     </div>
     
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -208,7 +258,5 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 </html>

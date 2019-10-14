@@ -7,9 +7,7 @@
     <meta charset="UTF-8">
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
-    
 </head>
-
 <body class="preload">
     <jsp:include page="../menuBar.jsp" /> 
  	<jsp:include page="../managerMenuBar.jsp" /> 
@@ -103,7 +101,6 @@
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard-area -->
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -125,8 +122,6 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

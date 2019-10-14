@@ -6,11 +6,8 @@
  <meta charset="UTF-8">
         <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
-	 <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
     <script>
-    
      $(function(){
     	 var service_id = $("#service_id").attr("value");
     	 selectAllResBySerId();
@@ -60,15 +57,11 @@
     	     	});
     	     }
      });
-     
     </script>
->>>>>>> refs/remotes/origin/jeong2
 </head>
 <body>
-
     <jsp:include page="../menuBar.jsp" /> 
     <jsp:include page="../managerMenuBar.jsp" /> 
-        
  <section class="dashboard-area">
         <div class="dashboard_contents section--padding">
             <div class="container">
@@ -121,28 +114,6 @@
                             <!-- 각 서비스의 매출 볼 수 있는 영역 만들 거임 -->
                             <div class="table-responsive invoice__detail">
                                 <table id="ReservationList" class="table">
-                                    <!-- <thead>
-                                        <tr>
-                                            <th>Reservation Number</th>
-                                            <th>The sitter in charge</th>
-                                            <th>Member</th>
-                                            <th>Status</th>
-                                            <th>Date</th>
-                                            <th>Rate</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>03 Jul 2017</td>
-                                            <td class="author">AazzTech</td>
-                                            <td class="detail">
-                                                <a href="#">Multipurpose Blog Template</a>
-                                            </td>
-                                            <td>Regular</td>
-                                            <td>$30</td>
-                                            <td>$30</td>
-                                        </tr>
-                                    </tbody> -->
                                 </table>
                                 <div class="pricing_info">
                                 	<p>総額</p>
@@ -162,13 +133,10 @@
     <div class="go_top" style="display: block; text-align:center;">
 	   <span class="icon-arrow-up"></span>
 	</div>
-	     
-	<!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
-    <!-- <script src="vendor_assets/js/chart.bundle.min.js"></script>-->
     <script src="vendor_assets/js/grid.min.js"></script>
     <script src="vendor_assets/js/jquery-ui.min.js"></script>
     <script src="vendor_assets/js/jquery.barrating.min.js"></script>
@@ -186,6 +154,5 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 </html>

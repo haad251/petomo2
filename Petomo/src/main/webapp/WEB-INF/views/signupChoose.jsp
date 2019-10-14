@@ -38,15 +38,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--start .search-area -->
                         </div><!-- end .col-md-12 -->
                     </div>
                 </div>
             </div><!-- end .contact_wrapper -->
         </div><!-- end hero-content -->
     </section><!-- ends: .hero-area -->
-    
-    <!-- inject:js-->
+
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -69,7 +67,6 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

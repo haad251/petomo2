@@ -5326,7 +5326,7 @@ changing this file will result on change of menu containing modifier class .menu
 }
 
 .sidebar-card .card-title, .item-preview .card-title {
-  padding: 30px;
+  padding: 20px 30px 20px 30px;
   border-bottom: 1px solid #ebedf2;
 }
 
@@ -6162,7 +6162,9 @@ ul.nav-tabs.nav--tabs2 li a:before {
 
 .team-single figure figcaption ul.team-social {
   margin-top: 25px;
+  color:yellow;
 }
+
 
 .team-single figure figcaption ul.team-social li {
   display: inline-block;
@@ -11461,7 +11463,7 @@ this file contains style for different social sharing option and icon style
   height: 100%;
   width: 100%;
   content: '';
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.4);
   top: 0;
   left: 0;
 }
@@ -13341,7 +13343,7 @@ span.counter {
   left: 0;
   top: 0;
   width: 100%;
-  background: rgba(18, 21, 25, 0.8);
+  background: rgba(18, 21, 25, 0.4);
   opacity: 0.8;
 }
 
@@ -13700,10 +13702,7 @@ span.counter {
   margin-top: 30px;
 }
 
-#map {
- height: 300px;
-width: 481px;
-}
+
 
 /***************************************
        Start Order Confirmation
@@ -16528,9 +16527,6 @@ width: 481px;
   }
 }
 
-/*# sourceMappingURL=maps/style.css.map */
-
-
 /* /////////승은쓰////////// */
 
 .s_readonly{
@@ -16544,7 +16540,7 @@ width: 481px;
 
 #chatForm{
 	overflow-y:auto;
-	height:500px;
+	height:380px;
 }
 
 
@@ -16588,7 +16584,59 @@ p.notitime{
 	font-size:13px;
 }
 
+.s_img_sitterList{
+	height: 150px;
+	width: 150px;
+}
 
-/* //////////////////////// */
+.s_chathead{
+	margin-bottom: 20px;
+	max-width:100%;
+}
 
+.s_img_chatsitter{
+	height: 70px;
+	width: 70px;
+	display:inline-block;
+}
+
+#map {
+ height: 280px;
+width: 481px;
+}
+
+#padmap {
+ height: 300px;
+width:  481px;
+}
+
+
+
+/* ////////////녹준쓰//////////// */
+
+.darkbtn{
+	background-color: #b2a2f9;
+	color: gray;
+	box-shadow: none;
+	    text-align: center;
+	border: 1px solid;
+	cursor: auto;
+	line-height: 50px;
+	display: inline-block;
+	position: relative;
+	border-color: none;	
+}
+
+.activebtn{
+	background-color: #b2a2f9;
+	color: red;
+	box-shadow: none;
+	    text-align: center;
+	border: 1px solid;
+	cursor: pointer;
+	line-height: 50px;
+	display: inline-block;
+	position: relative;
+	border-color: none;	
+}
 

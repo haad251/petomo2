@@ -8,6 +8,15 @@
     <meta charset="UTF-8">
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	var size = ${result.size()};
+	if(size==0)
+		$("#noresult").html("<h3>検索結果がありません。</h3>")
+});
+</script>
+
 </head>
 
 <body class="preload">
@@ -28,8 +37,8 @@
                                 <div class="row">
                                     <div class="col-lg-6 offset-lg-3">
                                         <div class="search_box2">
-                                            <form action="#">
-                                                <input type="text" class="text_field" placeholder="地域名" value="st_loc1">
+                                            <form action="selectAllSitterByLoc">
+                                                <input type="text" class="text_field" placeholder="地域名"  name="st_loc1" value="${st_loc1}">
                                                 <button type="submit" class="search-btn btn--lg btn-primary">検索</button>
                                             </form>
                                         </div><!-- end .search_box -->
@@ -44,18 +53,17 @@
         </div><!-- end hero-content -->
     </section><!-- ends: .hero-area -->
     
-    
-    
     <section class="bgcolor p-top-100 p-bottom-40">
         <div class="shortcode_wrapper">
             <div class="container">
                 <div class="row">
+                	<div id="noresult"></div>
                     <c:forEach items="${result}" var="SitterVO">
 							<div class="col-lg-3 col-md-6">
 			                        <div class="team-single">
 			                            <figure>
 			                            	<div class="s_img_sitterList">
-			                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${SitterVO.st_id}.png" alt="" class="img-fluid rounded-circle s_img_sitterList">
+			                                <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${SitterVO.st_id}.png" alt="" class="s_img_sitterList img-fluid rounded-circle ">
 			                                </div>
 			                                <figcaption>
 			                                    <h5><a href="sitterDetail?st_id=${SitterVO.st_id}"> ${SitterVO.st_name}</a></h5>
@@ -63,9 +71,6 @@
 			                                    <div style="height: 40px; width:195px;">
 			                                    <span style="font-size:12px;">${SitterVO.st_loc1}</span>
 			                                    </div>
-			                                    
-<%-- 			                                   
- <span class="member-title"><a href="sitterDetail?st_id=${SitterVO.st_id}">予約</a></span> --%>
 			                                    <ul class="list-unstyled team-social">
 			                                        <li class="t_reviews">
                                             <div class="rating product--rating">
@@ -125,7 +130,6 @@
             </div><!-- end .container -->
         </div><!-- ends: .shortcode_wrapper -->
      </section>
-     
 	<script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>

@@ -24,7 +24,6 @@ public class MapController {
 		
 		@RequestMapping(value="/setWalkingLoc",method=RequestMethod.POST)
 		public @ResponseBody int setWalkingLoc(LocationVO loc) {
-			System.out.println(loc);
 			int result = 0 ;
 			try {
 				result = rservice.insertLoc(loc);
@@ -34,12 +33,15 @@ public class MapController {
 			return result;  
 		}
 		
+		
+		
+		
+		
 		@RequestMapping(value="/allLocData",method=RequestMethod.POST)
 		public @ResponseBody ArrayList<LocationVO> setWalkingLoc(String res_id) {
 			ArrayList<LocationVO> result = null;
 			try {
 				result = rservice.selectLocationInfoAll(res_id);
-				System.out.println(result);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

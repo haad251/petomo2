@@ -20,7 +20,6 @@ import com.ejo.petwalk.vo.FileVO;
 import com.ejo.petwalk.vo.MemberVO;
 import com.ejo.petwalk.vo.PetVO;
 import com.ejo.petwalk.vo.SitterVO;
- 
 
 @Controller
 public class MemberController {
@@ -99,8 +98,6 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/idpwchck", method = RequestMethod.POST)
 	public @ResponseBody String idpwchck(MemberVO member,SitterVO sitter,Model model){
-		System.out.println(member);
-		System.out.println(sitter);
 		String result = "";
 		if(member!=null) {
 			if(msv.idpwchck(member)!=null) 
@@ -201,7 +198,6 @@ public class MemberController {
 	
 	@RequestMapping(value = "/deletePet", method = RequestMethod.POST)
 	public String deletePet(PetVO pet) {
-		System.out.println(pet.getPet_id());
 		int result = msv.deletePet(pet);
 		return "member/memberProfile";
 	}
@@ -209,7 +205,7 @@ public class MemberController {
 	@RequestMapping(value = "/streamchck", method = RequestMethod.GET)
 	public @ResponseBody String streamchck(MemberVO member) {
 			String resp = msv.streamchck(member);
-			return resp;
+		return resp;
 	}
 	
 }

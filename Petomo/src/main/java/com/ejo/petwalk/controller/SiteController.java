@@ -92,21 +92,12 @@ public class SiteController {
 		return "userMapTesting";
 	}
 	
-	/*
-	 * @RequestMapping(value="/serviceDetail") 
-	 * public String serviceDetail(String service_id, Model model) throws Exception{ ServiceVO result =
-	 * masv.selectOneService(service_id); System.out.println("현재 선택된 서비스"+result);
-	 * model.addAttribute("service", result); return "manager/serviceDetail"; }
-	 */
-	
 	@RequestMapping(value="/managePetSitter")
 	public String managePetSitter(){
 		return "manager/managePetSitter";
 	}
 	
 	
-//	member
-
 	
 	@RequestMapping(value="/memberInfo", method=RequestMethod.GET)
 	public String memberInfo(){ 
@@ -128,7 +119,6 @@ public class SiteController {
 	@RequestMapping(value="/memberResList")
 	public String memberResList(HttpSession session,Model model){
 		List<HashMap<String,String>> rList = rsv.selectResAllByMb_id((String)session.getAttribute("sessionId"));
-		System.out.println(rList);
 		model.addAttribute("rList",rList);
 		return"member/memberResList";
 	}
@@ -145,16 +135,17 @@ public class SiteController {
 	return "sitter/sitterMemberCheck";
 	}
 
-	//	res
-	
 	@RequestMapping(value="/selectAllSitter")
 	public String selectAllSitter(){ 
 		return "res/selectAllSitter";
 	}
 	
 	@RequestMapping(value="/sitterDetail")
-	public String sitterDetail(SitterVO st_id, Model model){ 
+	public String sitterDetail(SitterVO st_id, Model model){
+		List<HashMap<String, String>> rList = rsv.selectResAllBySt_id(st_id.getSt_id());
 		model.addAttribute("sitter", ssv.selectOneSitter(st_id.getSt_id()));
+		model.addAttribute("rList",rList);
+		model.addAttribute("rCount",rList.size());
 		return "res/sitterDetail";
 	}
 	 
@@ -178,16 +169,6 @@ public class SiteController {
 		return  "res/sitterList";
 	}
 
-	@RequestMapping(value="/complete", method=RequestMethod.GET) 
-	  public String complete(ReservationVO res, ServiceVO sv, SitterVO svo,HttpSession session, Model model) throws Exception{ 
-		  rsv.insertReservation(res);
-		  String mb_id = (String)session.getAttribute("sessionId");
-			model.addAttribute("rList",rsv.selectResByMb_id(mb_id));
-			System.out.println(rsv.selectResByMb_id(mb_id).get(0));
-		  return "res/complete";
-	  
-	  }
-//sitter
 	@RequestMapping(value="/sitterChartPage")
 	public String sitterChartPage(){ 
 		return "sitter/sitterChartPage";

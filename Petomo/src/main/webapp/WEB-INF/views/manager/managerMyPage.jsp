@@ -5,20 +5,12 @@
 <head>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
-    
-    <!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
-    <!-- jQuery Tooltip CDN -->
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    
-    <!-- chart.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    
     <script>
    
     $(function(){
-    	
     	var date = new Date(); //오늘의 날짜 추출하기 위한 변수
     	var todayDate = getFormatDate(date); //오늘의 날짜를 2019-10-02 형식으로 추출
     	var thisMonth = getFormatMonth(date); //오늘의 날짜를 2019-10 형식으로 추출
@@ -26,16 +18,12 @@
     	var selectedYear = document.getElementById("period_selector").value; // chart에서 선택한 연도를 담을 변수
     	var yearData = []; // chart.js에 넣을 데이터(연도별 매출)를 담을 배열
     	
-    	
     	//최근에 등록한 Sitter 목록을 가져온다.
     	selectNewSitterList();
-    	
     	//최근에 예약된 목록을 가져온다.
     	selectNewResList();
-    	
     	//서비스 이용 완료된(利用済み) 모든 매출을 가져온다.
     	selectAllResByComStatus();
-    	
     	// 오늘 날짜(today) 서비스 이용 완료된(利用済み) 예약의 매출을 가져온다.
         selectResByDate();
     	function selectResByDate(){
@@ -119,8 +107,6 @@
         		document.getElementById('map-container').setAttribute('title', region); */
             }
         });
-    	
-    	
     	
     	//기본으로 올해 예약 차트와 예약 건수 출력
         selectResBySelectedYear(); // 올해 예약 차트 출력
@@ -223,11 +209,7 @@
                 	}
                 });
         	});
-        	
-        	
         }
-    	
-    	
     });
    
     //최근 리뷰 5개만 가져오는 함수
@@ -272,7 +254,7 @@
                     str += '<div class="buyer__thumb_title">';
                     str += '<div class="thumb">';
                     /* "https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${st_id}.png" */
-                    str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/"'+serverData[i].st_id+'.png alt="Sitter Images">';
+//                     str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/'+serverData[i].st_id+'.png" alt="Sitter Images">';
                     str += '</div>';
                     str += '<div class="title">';
                     str += '<h6><a href="sitterDetail?st_id='+serverData[i].st_id+'">'+serverData[i].st_name+'</a></h6>';
@@ -289,7 +271,6 @@
     		}
     	});
     }
-    
     //서비스 이용 완료된(利用済み) 모든 매출을 가져오는 메소드
     function selectAllResByComStatus(){
     	$.ajax({
@@ -339,17 +320,12 @@
     	var year = date.getFullYear(); //yyyy 
     	return year;
     }
-    
-    
     </script>
->>>>>>> refs/remotes/origin/jeong2
-    
 </head>
 
 <body class="dashboard-page preload">
     <jsp:include page="../menuBar.jsp" /> 
     <jsp:include page="../managerMenuBar.jsp" />
-    
     <section class="dashboard-area">
         <div class="dashboard_contents p-top-100 p-bottom-70" style="padding-top:10px">
             <div class="container">
@@ -364,10 +340,6 @@
 					          </div>
 					         </div>
 					       </div><!-- ends: .col-md-12 -->
-
-                
-                  	<div id="map-container" style="width:100%; display: block; text-align: center ; margin:30px;"></div>
-                    
                     <div class="col-lg-3 col-sm-6">
                         <div class="author-info author-info--dashboard">
                             <h1 class="primary"></h1>
@@ -392,8 +364,6 @@
                             <p>総収入</p>
                         </div>
                     </div><!-- end .col-lg-3 -->
-                <!-- </div> -->
-                <!--  <div class="row"> -->
                     <div class="col-lg-8 col-md-12" 
                    	style="flex: 0 0 50%;max-width: 50%;">
                         <div class="dashboard_module recent_sells">
@@ -405,21 +375,6 @@
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
                                 <ul id="mj_newReservation">
-                                    <!-- <li>
-                                        <div class="single_sell">
-                                            <div class="single_sell__thumb-title">
-                                                <div class="prod_title">
-                                                    <h6>Finance and Consulting Business Theme</h6>
-                                                    <div class="category">
-                                                        <span>Wordpress</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ammount">
-                                                <p>$34.25</p>
-                                            </div>
-                                        </div>
-                                    </li> -->
                                 </ul>
                             </div><!-- ends: .dashboard__content -->
                         </div><!-- ends: .dashboard_module -->
@@ -437,22 +392,6 @@
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
                                 <ul id="mj_newRegisterSitter">
-                                   <!--  <li>
-                                        <div class="single_buyer">
-                                            <div class="buyer__thumb_title">
-                                                <div class="thumb">
-                                                    <img src="img/buyr1.png" alt="Buyer Images">
-                                                </div>
-                                                <div class="title">
-                                                    <h6>James Anderson</h6>
-                                                    <p>United States</p>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <p>$29</p>
-                                            </div>
-                                        </div>
-                                    </li> -->
                                 </ul>
                             </div><!-- ends: .dashboard__content -->
                         </div><!-- ends: .dashboard_module -->
@@ -468,7 +407,6 @@
                                         <option value="2018">2018</option>
                                         <option value="2017">2017</option>
                                     </select>
-                                    <!-- <span class="lnr icon-arrow-down"></span> -->
                                 </div>
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
@@ -487,7 +425,6 @@
                                         <p>今年の<span>利用済み</span>総数</p>
                                     </div>
                                 </div>
-                                
                             </div><!-- ends: .dashboard__content -->
                         </div><!-- ends: .statistics_module -->
                     </div><!-- ends: .col-md-12 -->
@@ -495,12 +432,9 @@
             </div><!-- ends: .container -->
          </div>
     </section><!-- ends: .dashboard-area -->
-    
      <div class="go_top" style="display: block; text-align:center;">
 	       <span class="icon-arrow-up"></span>
 	     </div>
-    
-    <!-- modal -->
     <div class="modal fade item_removal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -516,12 +450,10 @@
             </div>
         </div>
     </div>
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
-    <!-- <script src="vendor_assets/js/chart.bundle.min.js"></script>-->
     <script src="vendor_assets/js/grid.min.js"></script>
     <script src="vendor_assets/js/jquery-ui.min.js"></script>
     <script src="vendor_assets/js/jquery.barrating.min.js"></script>
@@ -538,10 +470,6 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
-    
-    <!-- 일본지도 관련  js-->
     <script src="theme_assets/js/jquery.japan-map.js"></script>
     <script src="theme_assets/js/jquery.japan-map.min.js"></script>
     

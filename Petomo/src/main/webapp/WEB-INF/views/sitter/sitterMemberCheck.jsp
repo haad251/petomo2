@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype HTML>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Petomo</title>
@@ -11,7 +10,7 @@
        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script>
     $(function(){
-   	init();
+   		init();
 	});
     function init() {
     var memberId = $("#memberId").val();
@@ -42,22 +41,17 @@
     				tag += '</td>';
     				tag += '</tr>';
     			}
-    			$("#dog").html(tag);//#book 태그 밑에 tag추가
+    			$("#dog").html(tag);
 				$("#petnumber").html(resp.length);
 				$("#memeberCheck").html(resp[0].mb_id);
     	    }
     	});
     }
-    
-		
-		
-		
     </script>
 </head>
 
 <body class="preload">
    <jsp:include page="../menuBar.jsp" /> 
-    <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -65,24 +59,22 @@
                     <div class="breadcrumb-contents">
                         <h2 class="page-title">プロフィール</h2>
                         <div class="breadcrumb">
-                           
                         </div>
                     </div>
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
         </div><!-- end .container -->
-        
     </section><!-- ends: .breadcrumb-area -->
       <div class="dashboard_menu_area">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <button class="menu-toggler d-md-none">
-                            <span class="icon-menu"></span> Dashboard Menu
+                            <span class="icon-menu"></span>
                         </button>
                         <ul class="dashboard_menu">
                             <li class="active">
-                                <a href="memberProfile"><span class="lnr icon-home"></span>プロフィール</a>
+                                <a href="memberProfile"><span class="lnr icon-home"></span>メンバープロフィール</a>
                             </li>
                         </ul><!-- ends: .dashboard_menu -->
                     </div><!-- ends: .col-md-12 -->
@@ -98,7 +90,7 @@
                         <div class="row">
                             <div class="col-lg-5 col-md-7">
                                 <div class="author-desc">
-                                        <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
+                                        <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${mb_id}" alt="Author profile area" height="100px" width="100px">
              
                                     <div class="infos">
                                         <h4 id = "memeberCheck"></h4>
@@ -114,17 +106,6 @@
                                             <p>ペット数</p>
                                         </li>
                                         <li class="t_reviews">
-                               <!--              <div>
-                                                <span class="ratings">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                                <span class="avg_r">5.0</span>
-                                                <span>(226 reviews)</span>
-                                            </div> -->
                                         </li>
                                     </ul>
                                 </div><!-- ends: .author-stats -->
@@ -169,8 +150,6 @@
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
     </section><!-- ends: .author-profile-area -->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -193,7 +172,6 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

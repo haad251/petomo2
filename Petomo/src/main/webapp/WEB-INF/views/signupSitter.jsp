@@ -3,7 +3,8 @@
 <!doctype HTML>
 <html lang="UTF-8">
 <head>
-    <meta charset="UTF-8">
+ 	<title>Petomo</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
@@ -72,7 +73,7 @@ function regist(){
 				return false;
 				}
 				
-			}
+				}
 			}); 
 		}
 	
@@ -80,7 +81,6 @@ function regist(){
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 </head>
-
 
 
 <body class="preload">
@@ -164,7 +164,6 @@ function regist(){
         </div><!-- end .container -->
     </section><!-- ends: .signup_area -->
   
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -187,7 +186,6 @@ function regist(){
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

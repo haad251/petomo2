@@ -6,11 +6,8 @@
 	<title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
   
-	<!-- jQuery CDN -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- jQuery Tooltip CDN -->
    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!-- chart.js CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script>
 $(function(){
@@ -196,11 +193,7 @@ $(function(){
                 	}
                 });
         	});
-        	
-        	
         }
-    	
-    	
     });
    
     //최근 예약 5개만 가져오는 함수
@@ -250,7 +243,7 @@ $(function(){
                     str += '<div class="single_buyer single_sitter">';
                     str += '<div class="buyer__thumb_title">';
                     str += '<div class="thumb">';
-                    str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/"'+serverData[i].mb_id+'.png alt="Sitter Images">';
+//                     str += '<img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/"'+serverData[i].mb_id+'.png alt="Sitter Images">';
                     str += '</div>';
                     str += '<div class="title">';
                     str += '<h6>予約ナンバー: '+serverData[i].res_id+'</a></h6>';
@@ -416,21 +409,6 @@ $(function(){
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
                                 <ul id="mj_newReservation">
-                                    <!-- <li>
-                                        <div class="single_sell">
-                                            <div class="single_sell__thumb-title">
-                                                <div class="prod_title">
-                                                    <h6>Finance and Consulting Business Theme</h6>
-                                                    <div class="category">
-                                                        <span>Wordpress</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="ammount">
-                                                <p>$34.25</p>
-                                            </div>
-                                        </div>
-                                    </li> -->
                                 </ul>
                             </div><!-- ends: .dashboard__content -->
                         </div><!-- ends: .dashboard_module -->
@@ -448,22 +426,6 @@ $(function(){
                             </div><!-- ends: .dashboard__title -->
                             <div class="dashboard__content">
                                 <ul id="mj_newRegisterReview">
-                                   <!--  <li>
-                                        <div class="single_buyer">
-                                            <div class="buyer__thumb_title">
-                                                <div class="thumb">
-                                                    <img src="img/buyr1.png" alt="Buyer Images">
-                                                </div>
-                                                <div class="title">
-                                                    <h6>James Anderson</h6>
-                                                    <p>United States</p>
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <p>$29</p>
-                                            </div>
-                                        </div>
-                                    </li> -->
                                 </ul>
                             </div><!-- ends: .dashboard__content -->
                         </div><!-- ends: .dashboard_module -->

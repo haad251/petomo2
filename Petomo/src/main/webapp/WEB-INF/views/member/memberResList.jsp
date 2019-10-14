@@ -9,7 +9,6 @@
         <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
 <script>
 	$(function(){
 		$(".res_review_btn").on("click",function(){
@@ -23,7 +22,6 @@
 
 <body class="preload">
 	<jsp:include page="../menuBar.jsp" />
-    <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -48,8 +46,7 @@
                         <ul class="dashboard_menu">
                              <li>
                                 <a href="memberProfile"><span class="lnr icon-home"></span>マイプロフィール
-</a>
-                                  
+								</a>
                             </li>
                            <li class="active">
                                 <a href="memberResList"><span class="lnr icon-basket"></span>予約確認 </a>
@@ -73,7 +70,6 @@
                         </div>
                     </div><!-- ends: .col-md-12 -->
                 </div><!-- ends: .row -->
-               
                 <div class="row">
                     <div class="col-md-12">
                         <div class="statement_table table-responsive">
@@ -152,8 +148,6 @@
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard-area -->
-    
-    <!-- Modal Rating -->
     <div class="modal fade rating_modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="rating_modal">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -163,7 +157,6 @@
                     </button>
                     <h3 class="modal-title" id="rating_modal">レビューを作成</h3>
                 </div>
-                <!-- end /.modal-header -->
                 <div class="modal-body">
                     <form action="insertReview">
                     <input type="hidden" id="hiddenResId" name="res_id" >
@@ -194,11 +187,6 @@
             </div>
         </div>
     </div>
-    
-    
-    
-    
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>

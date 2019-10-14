@@ -11,12 +11,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 <!-- 구글맵 API키 없음 -->
-
+	 <script src="https://maps.googleapis.com/maps/api/js?key=(KEYHERE)&callback=initMap"async defer></script>
 
   <script>
-  var socket =new SockJS('/websocket');
-  stompClient = Stomp.over(socket);  
-  
   $(function(){
 	  $('#chatForm').scrollTop($('#chatForm').prop('scrollHeight'));
 		var socket = new SockJS('/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
@@ -49,9 +46,8 @@
 	                str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
 					str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
 					$("#notizone").prepend(str);
+					$("#notiOn").html('<span class="notification_status noti"></span>');
 				});
-				
-//	 			초기화
 				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
 					var data = JSON.parse(msg.body);
 					var str2 ='';
@@ -62,16 +58,23 @@
 						str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
 					}
 					$("#notizone").html(str2);
+					if(data.length==0) 
+						$("#notiOn").html('');
+					else $("#notiOn").html('<span class="notification_status noti"></span>');
 				});
-			
+				
+	 			  stompClient.subscribe('/topic/location/'+"${res.res_id}", function(msg) {
+	 				allLocData();			  
+	 				
+	 			  });
+				
+		});
+		
 			$("#notibell").mouseover(function(){
 				stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
 						JSON.stringify({'id': "${sessionScope.sessionId}"}));
 			});
-			  
-			  
-			  
-		});
+
 
 			  $("#sendMessageText").keyup(function(e){
 				  if(e.keyCode == 13)  
@@ -90,11 +93,11 @@
 		    	  stompClient.send('/app/chats/'+res+'/inChat', {}, JSON.stringify({'res_id':res,'chat_sender':sender,'chat_receiver':receiver, 'chat_content':content}));
 			  });
 
+  });
 			  function upNoti(notid){
 					stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
 							JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
 				}
-  });
  </script>
  
   <script type="text/javascript" src="//player.wowza.com/player/latest/wowzaplayer.min.js"></script>
@@ -119,39 +122,23 @@ WowzaPlayer.create('playerElement',
   </script>
   
   <script>
-	
   var map, infoWindow;
   var markerPosition;
-  var action = "nothing"; // 버튼이 눌릴때 action 값 생성 기본은 아무것도 하지 않은
-  var currLat=.0; //현재 위도(Latitude)
-  var currLng=.0; // 현재 경도 (Longitude)
-  var historyLoc = new Array(); // 지금까지의 경로를 polyline으로 그리기 위한 배열s
+  var lastLat=.0; //마지막 위도(Latitude)
+  var lastLng=.0; //마지막 경도 (Longitude)   
+	var historyLoc = new Array(); // 지금까지의 경로를 polyline으로 그리기 위한 배열s
   var watchID;
+  var pos;
+  var image = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/location.png';   
+  var nowmarker;
   
   $(function(){
   
-      //시터 - 화면을 로딩하자마자 본인의 위치가 파악가능
-      //고객 - 본인의 위치가 아닌 돌봄이 이뤄지고 있는 장소를 중심으로 봐야한다.
-      
-	  $(document).on("click","#loc_action",function(){
-		  loc_action = $(this).attr("value");
-		  action = loc_action;
-		  alert(currLat); //작동 잘 되는지 확인
-		  alert(action);
-		  setLocData(); //현재 위치와 action을 ajax로 DB에 넣기
-	  });
 	
-	  $(document).on("click","#stopWalking",function(){
-		  alert("동작중");
-		  setLocData();
-		  stopWatch();
-	  });
-
 	  initMap(); // 지도 부르기
 	  
   });
 
-  // 구글 초기 지도 (시터 입장)  - watchPosition으로 자동으로 위치가 변경됨
 	function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -34.397, lng: 150.644},
@@ -161,70 +148,7 @@ WowzaPlayer.create('playerElement',
       
       // 모든 지도 데이터 가져와서 마크 찍어주기
       allLocData();
-      
-      
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-      	watchID =  navigator.geolocation.watchPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          
-          //실시간으로 바뀌는 위치를 반영(action이나 start, stop버튼 누를때 위치 확인)
-          currLat = position.coords.latitude; 
-          currLng = position.coords.longitude;
-          
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('현재 위치!'); //예약한 회원의 강아지 프로필 사진이 보이도록 하면 좋을듯
-          infoWindow.open(map);
-          
-          map.setCenter(pos);
-          map.panTo(
-        		  
-        		  
-        		  
-        		  
-        		  pos); //실시간 위치에 따른 지도 이동
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-      }
-    }
-
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
-      infoWindow.open(map);
-      
    }
-  
-	
-	// 위치 정보를 DB에 넣음
-	function setLocData(){
-		$.ajax({
-			url:"setWalkingLoc"
-			,type:"post"
-			,data:{
-				loc_lat:currLat
-				,loc_long:currLng
-				,res_id:"${res.res_id}"
-				,loc_action:action
-			}
-			,success:function(serverData){
-				if(serverData == 1){
-					alert("현재 위치 정보가 저장되었습니다.");
-				}
-				else
-					alert("현재 위치 정보가 저장 실패되었습니다.");
-			}
-		});
-	}
 	
 	//DB에 저장된 모든 지역 정보 불러와서 지도 전체에 마크랑 패스 찍어주기
 	function allLocData(){
@@ -232,12 +156,19 @@ WowzaPlayer.create('playerElement',
 			url:"allLocData"
 			,type:"post"
 			,data:{
-				res_id:"${res.res_id}"
+				res_id:'${res.res_id}'
 			}
 			,success:function(serverData){
+				
+				lastLat = Number(serverData[serverData.length-1].loc_lat);
+				lastLng = Number(serverData[serverData.length-1].loc_long);
+				console.log(lastLat);
+				pos = {
+		                lat: lastLat,
+		                lng: lastLng
+		        };
+				
 				for(var i = 0 ; i < serverData.length ; i++){
-
-					
 					//마크를 찍기위한 경도 , 위도
 					var hisLatLng = new google.maps.LatLng(serverData[i].loc_lat, serverData[i].loc_long);
 					
@@ -254,24 +185,21 @@ WowzaPlayer.create('playerElement',
 				        strokeOpacity: 0.8,
 				        strokeWeight: 2
 				     });
-				      
 					walkingPath.setMap(map);
-					
 				
 					//각 action별 icon이 있는 파일 표시를 위한 변수 명명
 					var urlRoot ;
 					
 					if(serverData[i].loc_action == "poop")
 						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/poop.png';
-					else if(serverData[i].loc_action == "pee")
-						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/pee.png';
-					else if(serverData[i].loc_action == "meetFriends")
-						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/meetFriends.png';
+					else if(serverData[i].loc_action == "food")
+						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/food.png';
+					else if(serverData[i].loc_action == "play")
+						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/play.png';
 					else if(serverData[i].loc_action == "water")
 						urlRoot = 'https://scitpet.s3.ap-northeast-2.amazonaws.com/main/water.png';
 					else
 						urlRoot = "none"; //action을 하지 않을 ""nothing" 상태에서는 어떻게 할지는 조금 더 생각해봐야할듯
-					
 					
 					// action에 따른 마크 그려주기
 					var marker = new google.maps.Marker({
@@ -280,39 +208,34 @@ WowzaPlayer.create('playerElement',
 						,title : serverData[i].loc_action
 						,icon: {
 							url : urlRoot,
-							scaledSize: new google.maps.Size(50, 50), // scaled size
+							scaledSize: new google.maps.Size(45, 45), // scaled size
 						    origin: new google.maps.Point(0,0), // origin
 						    anchor: new google.maps.Point(0, 0) // anchor
 						}
 					});
-					
-				
 				}
-		        
+				
 				// 패스 데이터 잘 들어 갔는지 확인
 				console.log(historyLoc);
-				
-			
+	            nowmarker = new google.maps.Marker({
+                    position: {
+		                lat: lastLat,
+		                lng: lastLng
+		       				 },
+                    map: map,
+                    icon: 
+	                    {
+	    					url : image,
+	    					scaledSize: new google.maps.Size(45, 45), // scaled size
+	    				}
+                });  
+            	nowmarker.setMap(map);
+			    map.setCenter(pos);
+			    map.panTo(pos);
 			}
 		});
 	}
-	
-	// 실시간 위치 추적 중단
-	function stopWatch() {
-	  console.log(watchID);
-	  if (watchID != null) {
-        navigator.geolocation.clearWatch(watchID);
-        watchID = null;
-        
-        if (infoWindow != null) {
-      	  infoWindow.close();
-        }
-    }
-	  console.log(watchID);
-	}
-    </script>
-  
-  
+  </script>
 </head>
 
 <body class="preload">
@@ -322,26 +245,24 @@ WowzaPlayer.create('playerElement',
             <div class="row">
                 <div class="col-lg-8 col-md-12" style="flex: 0 0 60%; max-width:45%; margin-left: 50px;">
                     <div class="item-preview" sytle="heigth:60%;">
-						<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0">
-					
-						</div>
-<!--                         <div class="item-prev-area"> -->
-<!--                             <div class="preview-img-wrapper"> -->
-<!-- 							    <div id="myElement"> -->
-<!-- 							    </div> -->
-<!--                             </div>ends: .preview-img-wrapper -->
-<!--                         </div>Ends: .item-prev-area -->
-                        
+						<div id="playerElement" style="width:65; height:0; padding:0 0 65% 0"></div>
                         <div class="item-preview">
                         	    <div id="map">
                         	    </div>
                         </div>
                     </div><!-- ends: .item-preview-->
                 </div><!-- ends: .col-md-8 -->
-                
                 <div class="col-lg-4 col-md-12" style="flex: 0 0 40%; max-width:40%;">
                     <aside class="sidebar sidebar--single-product">
                         <div class="sidebar-card card-pricing">
+	                        <div class="s_chathead">
+	                    	 <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${res.st_id}.png" 
+	                    	 alt="" class="s_img_chatsitter img-fluid rounded-circle ">
+                            <div style="display:inline-block; margin-top:10px;">
+                            <h4 >${res.st_id}</h4>
+                            	<p class="subtitle">予約日 ${res.res_start}</p>
+	                        </div>
+	                        </div>
 	                        <div class="chat_area--conversation" >
 			                 	<div class="conversation" id="chatForm">
 			                        <c:forEach items="${cList}" var="chat">
@@ -362,7 +283,6 @@ WowzaPlayer.create('playerElement',
 			                        </c:forEach>
 			                	</div> 
 	                        </div><!-- ends: .chat_area--conversation -->
-	                        
 	                     	  <div class="message_composer">
                            		<div class="btns">
                        				<input type="text" id="sendMessageText" style="width: 70%; border:1px solid #515ef4;">
@@ -375,13 +295,6 @@ WowzaPlayer.create('playerElement',
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section><!-- ends: .single-product-desc -->
-    
-<!--     <button id="startWalking">start walking</button> -->
-<!-- 	<button id="loc_action" name="loc_action" value="poop">poop</button> -->
-<!-- 	<button id="loc_action" name="loc_action" value="pee">pee</button>      -->
-<!-- 	<button id="loc_action" name="loc_action" value="meetFriends">meet friends</button>      -->
-<!-- 	<button id="loc_action" name="loc_action" value="water">water</button> -->
-<!-- 	<button id="stopWalking">stop walking</button> -->
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script>
@@ -402,7 +315,6 @@ WowzaPlayer.create('playerElement',
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
     <!-- endinject-->
 </body>
 

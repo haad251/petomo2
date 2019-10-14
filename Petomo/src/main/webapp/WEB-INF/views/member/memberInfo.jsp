@@ -11,8 +11,6 @@
 <script>
 $(function(){
  	$("#confirm").on('click',update);
- 	
- 	
  	$("#cover_photo").change(function(){
 	 		$("#insertMPI").submit();
 	});
@@ -51,8 +49,6 @@ function update(){
 
 <body class="preload">
        <jsp:include page="../menuBar.jsp" /> 
-   
-    <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -84,10 +80,7 @@ function update(){
                 </div><!-- ends: .row -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
-        
-        
-        
-        
+
         
         <div class="dashboard_contents section--padding">
             <div class="container">
@@ -101,7 +94,7 @@ function update(){
                                                 <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="Author profile area" height="100px" width="100px">
                                                 <div class="img_info">
                                                      <p class="bold">Profile Image</p>
-                                                    <p class="subtitle">JPG, GIF or PNG 100x100 px</p>
+                                                    <p class="subtitle">PNG 100x100 px</p>
                                                 </div>
                                             </div>
                                             <form action="insertMemberImage" id="insertMPI" method="POST" enctype="multipart/form-data">
@@ -116,7 +109,6 @@ function update(){
                                 </div>
                             </div><!-- ends: .information_module -->
                         </div><!-- ends: .col-md-12 -->
-                    
                     
                         <div class="col-md-12">
            			 <form action="memberupdate" class="setting_form" method = "POST" id = "update">
@@ -177,7 +169,6 @@ function update(){
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     </section><!-- ends: .dashboard_purchase -->
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -200,8 +191,5 @@ function update(){
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
-
-
 </body>
 </html>

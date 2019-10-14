@@ -8,5 +8,4 @@ public class myRestController {
 	@ExceptionHandler(Exception.class)
 	public Object nullex(Exception e)
 	{ System.err.println(e.getClass()); return "error"; }
-
 }

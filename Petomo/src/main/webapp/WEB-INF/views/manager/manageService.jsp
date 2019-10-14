@@ -7,16 +7,12 @@
     <meta charset="UTF-8">
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-    
     var service_id = 0; 
     
     $(function(){
-    	
     	selectAllService();
-    	
 		$(document).on("click","#deleteBtn",function(){
     		service_id =$(this).attr("data-id");
     		deleteOneService();
@@ -65,7 +61,6 @@
     	});
     }
     
-  
     </script>
 </head>
 
@@ -86,8 +81,6 @@
                             </div>
                             <div class="table-responsive">
                                 <table id="serviceList" class="table withdraw__table">
-                                   
-                                   
                                 </table>
                             </div>
                         </div>
@@ -96,12 +89,10 @@
             </div><!-- ends: .row -->
         </div><!-- ends: .container -->
     </section>
-    
 	     <div class="go_top" style="display: block; text-align:center;">
 	       <span class="icon-arrow-up"></span>
 	     </div>
 	     
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -123,8 +114,6 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

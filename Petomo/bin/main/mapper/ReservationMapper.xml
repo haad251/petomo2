@@ -41,18 +41,19 @@
 
 <!-- 예약번호로 예약불러오기 -->
  <select id="selectOneRes"  parameterType="String" resultType="ReservationVO">
-      	SELECT *
+      	SELECT res_id, st_id, service_id, mb_id, DATE_FORMAT(res_start, '%Y-%c-%e %H:%i') as res_start, res_end, res_status, res_amount, res_review, res_rate, res_memo
 		FROM reservation_tb
 		WHERE res_id=#{res_id}
  </select>
  
 <!--  시터아이디로 모든예약불러오기 -->
  <select id="selectResAllBySt_id" parameterType="String" resultType="HashMap">
- 		SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start, '%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
+ 		SELECT res_id,st_id,service_id,mb_id,DATE_FORMAT(res_start,'%H:%i') as res_start,DATE_FORMAT(res_end, '%H:%i') as res_end,
     		res_status,res_amount,res_review,res_rate,res_memo,DATE_FORMAT(res_start, '%m/%d') as date,service_name
 		FROM reservation_tb natural join service_tb
 		WHERE reservation_tb.service_id = service_tb.service_id
 		AND st_id=#{st_id}
+		ORDER BY res_id DESC
 </select>
 
 <!--  멤버아이디로 모든예약불러오기 -->
@@ -62,6 +63,7 @@
 		FROM reservation_tb natural join service_tb
 		WHERE reservation_tb.service_id = service_tb.service_id
 		AND mb_id=#{mb_id}
+		ORDER BY res_id DESC
 </select>
 
  <update id="updateResStatus"  parameterType="ReservationVO">
@@ -156,10 +158,32 @@ WHERE mb_id = #{mb_id}
 	WHERE #{selectDate} = DATE_FORMAT(res_start, '%Y-%m-%d')
 	AND st_id=#{st_id}
 </select>
+
 <select id = "selectResByMb_id" parameterType = "String" resultType = "ReservationVO">
-	SELECT *
-	FROM reservation_tb
-	WHERE mb_id= #{mb_id}
+   SELECT res_id, st_id, service_id, mb_id, DATE_FORMAT(res_start, '%Y-%c-%e %H:%i')as res_start, DATE_FORMAT(res_end, '%Y-%c-%e %H:%i')as res_end, res_status, res_amount, res_review, res_rate, res_memo
+   FROM reservation_tb
+   WHERE mb_id= #{mb_id}
+   ORDER BY res_id DESC
 </select>
 
+<update id = "res_statusUpdate" parameterType = "ReservationVO">
+UPDATE reservation_tb
+SET res_status = #{res_status}
+WHERE res_id = #{res_id}
+</update>
+<select id = "selectSitterAvg" parameterType = "ReservationVO" resultType = "String">
+SELECT AVG(res_rate) as st_rate
+FROM reservation_tb
+WHERE st_id = #{st_id} and res_rate is not null
+</select>
+<select id ="selectSitterIdByResId" parameterType = "ReservationVO" resultType = "ReservationVO">
+SELECT st_id
+FROM reservation_tb
+WHERE res_id = #{res_id}
+</select>
+<update id = "setSt_rateBySt_id" parameterType = "SitterVO">
+UPDATE sitter_tb 
+SET st_rate = #{st_rate}
+WHERE st_id = #{st_id}
+</update>
 </mapper>

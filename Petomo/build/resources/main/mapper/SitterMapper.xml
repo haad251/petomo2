@@ -28,6 +28,18 @@
  		SELECT * FROM sitter_tb;
  </select>
  
+ <!--  Manager이 시터의 활동을 허가 또는 금지 시키는 것-->
+ <update id="updateSitterCheck" parameterType="SitterVO">
+ 		UPDATE sitter_tb
+ 		<if test='st_check=="N"'>
+		SET st_check="Y"
+		</if>
+		<if test='st_check=="Y"'>
+		SET st_check="N"
+		</if>
+		WHERE st_id=#{st_id}
+ </update>
+ 
  <insert id="insertSitterImage" parameterType="FileVO">
 		INSERT INTO file_tb (file_sav,file_org,file_type,file_no)
 		VALUE(
@@ -69,6 +81,32 @@
 		FROM file_tb
 		WHERE file_type = 'sitter' 
 		AND file_no=#{st_id}
+ </select>
+ 
+ <select id="selectResBySitterId" parameterType="String" resultType="ReservationVO">
+ 	SELECT *
+ 	FROM
+ 		reservation_tb
+ 	WHERE
+ 		st_id = #{st_id}
+ </select>
+ 
+ <select id="selectDateFormatResBySitterId" parameterType="String" resultType="ReservationVO">
+ 	SELECT
+ 		res_id
+ 		,st_id
+ 		,mb_id
+ 		,DATE_FORMAT(res_start, '%Y-%m-%d') res_start
+ 		,DATE_FORMAT(res_end, '%Y-%m-%d') res_end
+ 		,res_status
+ 		,res_amount
+ 		,res_review
+ 		,res_rate
+ 		,res_memo
+ 	FROM
+ 		reservation_tb
+ 	WHERE
+ 		st_id = #{st_id}
  </select>
 
 <select id="selectAllSitterByLoc" resultType="SitterVO">

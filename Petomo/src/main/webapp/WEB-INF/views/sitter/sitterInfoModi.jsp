@@ -1,11 +1,8 @@
-<!--보류: 로딩시 기존위치 선택되게 selectbox 커스텀데이터+JS -->
-<!--유효성, 비밀번호 중복체크 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
@@ -17,12 +14,9 @@
     	});
     });
 </script>
-    
 </head>
-
 <body class="preload">
     <jsp:include page="../menuBar.jsp" /> 
-    
 <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -89,8 +83,6 @@
                                 </div>
                             </div><!-- ends: .information_module -->
                         </div><!-- ends: .col-md-12 -->
-                       
-<!--                        <form action="updateSitter" class="setting_form" method="POST"> -->
                       <form action="updateSitter" class="setting_form" method="POST" enctype="multipart/form-data">
                         <div class="col-md-12">
                             <div class="information_module">
@@ -190,12 +182,8 @@
                         </div><!-- ends: .col-md-12 -->
                   </form>
                     </div><!-- ends: .row -->
-                <!-- end /form -->
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
-<!--     </section>ends: .dashboard-area      -->
-     
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -218,8 +206,6 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
-    
 </body>
 
 </html>

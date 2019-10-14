@@ -11,7 +11,7 @@
        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script>
     $(function(){
-   	init();
+ 	  	init();
 	});
     function init() {
     var memberId = $("#memberId").val();
@@ -42,22 +42,18 @@
     				tag += '</td>';
     				tag += '</tr>';
     			}
-    			$("#dog").html(tag);//#book 태그 밑에 tag추가
+    			$("#dog").html(tag);
 				$("#petnumber").html(resp.length);
 				
     	    }
     	});
     }
     
-		
-		
-		
     </script>
 </head>
 
 <body class="preload">
    <jsp:include page="../menuBar.jsp" /> 
-    <!-- Breadcrumb Area -->
     <section class="breadcrumb-area">
         <div class="container">
             <div class="row">
@@ -71,7 +67,6 @@
                 </div><!-- end .col-md-12 -->
             </div><!-- end .row -->
         </div><!-- end .container -->
-        
     </section><!-- ends: .breadcrumb-area -->
       <div class="dashboard_menu_area">
             <div class="container">
@@ -96,7 +91,6 @@
             </div><!-- ends: .container -->
         </div><!-- ends: .dashboard_menu_area -->
     <section class="author-profile-area">
-    
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -124,17 +118,6 @@
                                             <p>これまでの利用回数</p>
                                         </li>
                                         <li class="t_reviews">
-                               <!--              <div>
-                                                <span class="ratings">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                                                <span class="avg_r">5.0</span>
-                                                <span>(226 reviews)</span>
-                                            </div> -->
                                         </li>
                                     </ul>
                                 </div><!-- ends: .author-stats -->
@@ -153,7 +136,6 @@
                         </div>
                     </div><!-- ends: .col-md-12 -->
                 </div><!-- ends: .row -->
-               
                 <div class="row">
                     <div class="col-md-12">
                         <div class="statement_table table-responsive">
@@ -171,7 +153,6 @@
                                     </tr>
                                 </thead>
                                 <tbody id = "dog">
-                              
                                 </tbody>
                             </table>
                         </div><!-- ends: .statement_table -->
@@ -180,7 +161,6 @@
             </div><!-- ends: .container -->
     </section><!-- ends: .author-profile-area -->
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -203,7 +183,6 @@
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
 </body>
 
 </html>

@@ -31,7 +31,6 @@
                                     <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/sitter/${sitter.st_id}.png" alt="" style="width:120px; height: 120px;">
                                     <div class="infos">
                                         <h4>${sitter.st_name}</h4>
-                                        
                                     </div>
                                 </div><!-- ends: .author-desc -->
                             </div><!-- ends: .col-lg-5 -->
@@ -47,7 +46,7 @@
                                 <div class="author-stats">
                                     <ul>
                                         <li class="t_items" style="margin-bottom:10px;">
-                                            <span>146</span>
+                                            <span>${rCount}</span>
                                             <p>今までの予約</p>
                                         </li>
                                         <li class="t_sells" style="width:100px;">
@@ -62,7 +61,6 @@
                                     		<img style="width:40px;" src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/gold.png" alt="">
                                         </c:if>                                                                                
 										</span>                                        
-
                                         </li>
                                         </ul>
                                         <ul>
@@ -132,20 +130,11 @@
                         <li>
                             <a class="active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
                         </li>
-                        <!-- <li>
-                            <a id="items-tab" data-toggle="tab" href="#items" role="tab" aria-controls="items" aria-selected="false">Author Items</a>
-                        </li> -->
                         <li>
                             <a id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
                         </li>
-                       <!--  <li>
-                            <a id="followers-tab" data-toggle="tab" href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers</a>
-                        </li>
-                        <li>
-                            <a id="following-tab" data-toggle="tab" href="#following" role="tab" aria-controls="following" aria-selected="false">Following</a>
-                        </li> -->
                     </ul><!-- Ends: .nav-tabs -->
-                    <div class="tab-content" id="author-tab-content">
+					<div class="tab-content" id="author-tab-content">
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="author_module about_author">
                                 <h3>
@@ -153,52 +142,71 @@
                                 </h3>
                                 <p>${sitter.st_info}</p>
                             </div>
-                            </div>
-                         
+                         </div>
                         <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="thread thread_review thread_review2">
-										<ul class="media-list thread-list">
-											<li class="single-thread">
-												<div class="media">
-													<div class="media-left">
-														<a href="#"> <img class="media-object"
-															src="img/m1.png" alt="Commentator Avatar">
-														</a>
-													</div>
-													<div class="media-body">
-														<div class="d-flex flex-wrap">
-															<div class="">
-																<div class="media-heading">
-																	<a href="author.html">
-																		<h4>Themexylum</h4>
-																	</a> <a href="#" class="rev_item">Mini - Responsive
-																		Bootstrap Dashboard</a>
-																</div>
-																<div class="rating product--rating">
-																	<ul>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star"></span></li>
-																		<li><span class="fa fa-star-half-o"></span></li>
-																	</ul>
-																</div>
-																<span class="review_tag">support</span>
-															</div>
-															<div class="rev_time">9 Hours Ago</div>
-														</div>
-														<p>Nunc placerat mi id nisi interdum mollis. Praesent
-															pharetra, justo ut sceleris que the mattis, leo quam
-															aliquet congue placerat mi id nisi interdum mollis.</p>
-													</div>
-												</div>
-											</li>
-								</div>
-							</div></section><!-- ends: .author-profile-area -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="product-title-area">
+                                    </div><!-- ends: .product-title-area -->
+                                    <div class="thread thread_review thread_review2">
+                                        <ul class="media-list thread-list">
+                                            <c:forEach items="${rList}" var="res">
+                                           	 	<c:if test="${res.res_review!=null}">
+		                                            <li class="single-thread">
+		                                                <div class="media">
+		                                                    <div class="media-left">
+		                                                        <a href="#">
+		                                                            <img class="media-object" style="height: 70px; width:70px;"
+		                                                            src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${res.mb_id}.png">
+		                                                        </a>
+		                                                    </div>
+		                                                    <div class="media-body">
+		                                                        <div class="d-flex flex-wrap">
+		                                                            <div class="">
+		                                                                <div class="media-heading">
+		                                                                    <a href="author.html">
+		                                                                        <h4>${res.mb_id}</h4>
+		                                                                    </a>
+		                                                                </div>
+		                                                                <div class="rating product--rating">
+		                                                                    <ul>
+		                                                                        <li>
+		                                                                            <span class="fa fa-star"></span>
+		                                                                        </li>
+		                                                                        <li>
+		                                                                            <span class="fa fa-star"></span>
+		                                                                        </li>
+		                                                                        <li>
+		                                                                            <span class="fa fa-star"></span>
+		                                                                        </li>
+		                                                                        <li>
+		                                                                            <span class="fa fa-star"></span>
+		                                                                        </li>
+		                                                                        <li>
+		                                                                            <span class="fa fa-star-half-o"></span>
+		                                                                        </li>
+		                                                                    </ul>
+		                                                                </div>
+		                                                            </div>
+		                                                        </div>
+		                                                        <p>${res.res_review}</p>
+		                                                    </div>
+		                                                </div>
+		                                            </li>
+	                                            </c:if>
+                                            </c:forEach>
+                                        </ul><!-- ends: .media-list -->
+                                    </div><!-- ends: .comments -->
+                                </div><!-- ends: .col-md-12 -->
+                        </div><!-- Ends: reviews-tab -->
+                        <!-- Ends: followers-tab -->
+                    </div><!-- ends: .tab-content -->
+                </div><!-- Ends: .author-info-tabs -->
+            </div>
+        </div>
+        </div>
+    </section><!-- ends: .author-profile-area -->
         <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
-    <!-- inject:js-->
     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
     <script src="vendor_assets/js/jquery/uikit.min.js"></script>
     <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -220,7 +228,5 @@
     <script src="vendor_assets/js/waypoints.min.js"></script>
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
-    <script src="theme_assets/js/map.js"></script>
-    <!-- endinject-->
    </body>
 </html>

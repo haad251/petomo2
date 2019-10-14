@@ -7,7 +7,6 @@
 <meta charset="UTR-8">
     <title>Petomo</title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/favicon.png">
-    
     <!-- viewport meta -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,23 +30,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
-<script>
-// $(function () {
-// 	$("#streamService").on("click",function(){
-// 		var streamid = "${sessionScope.streamServer}";
-		
-// 		if(streamid.length == 0){
-// 		 alert("まだストリーミング中ではありません。");
-// 		 return false;}
-// 		});
-// });
-</script>
-
  <script>
  $(function () {
 		var socket = new SockJS('/petomo/websocket');   //서버에 올릴때는 /petomo/websocket!!!!
 		stompClient = Stomp.over(socket);  
 		stompClient.connect({}, function() { 
+			
 			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}", function(msg) { 
 				var data = JSON.parse(msg.body);
 				var str = '';
@@ -56,10 +44,9 @@
                 str += '<button type="button" onclick="upNoti(this.value)" class="close" data-dismiss="alert" aria-label="Close" value="'+data.not_id+'">';
 				str += '<span class="icon-close" aria-hidden="true"></span></button></div>';
 				$("#notizone").prepend(str);
+				$("#notiOn").html('<span class="notification_status noti"></span>');
 			});
-			
-// 			초기화
-			stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
+				stompClient.subscribe('/topic/noti/'+"${sessionScope.sessionId}"+'/selectNoti', function(msg) { 
 				var data = JSON.parse(msg.body);
 				var str2 ='';
 				for(var i in data){
@@ -69,23 +56,21 @@
 					str2 += '<span class="icon-close" aria-hidden="true"></span></button></div>';
 				}
 				$("#notizone").html(str2);
+				if(data.length==0) 
+					$("#notiOn").html('');
+				else $("#notiOn").html('<span class="notification_status noti"></span>');
 			});
 		
 		$("#notibell").mouseover(function(){
 			stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/selectNoti', {}, 
 					JSON.stringify({'id': "${sessionScope.sessionId}"}));
 		});
-		
   });
-  
- 
+});
 	function upNoti(notid){
 		stompClient.send('/app/noti/'+"${sessionScope.sessionId}"+'/upNoti', {}, 
 				JSON.stringify({'id': "${sessionScope.sessionId}" , 'not_id' : notid }));
 	}
-});
-  
-  
   
   </script>
 </head>
@@ -98,22 +83,15 @@
                         <div class="menu-fullwidth">
                             <div class="logo-wrapper">
                                 <div class="logo logo-top">
-                                    <a href="/">
+                                    <a href="/petomo/">
                                     <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo_small.png"
 											alt="logo image" class="img-fluid" height="50px" width="50px"></a>
-                                		<br><a href="memberLogin">mb1</a>
-                                            <a href="sitterLoginTest">st1</a>
-                                            <a href="logout">out</a>
-                                            <font color="red">${sessionScope.sessionId}</font>
                                 </div>
                             </div>
-                           
                          <div class="mobile_content ">
                                     <span class="icon-user menu_icon"></span>
-                                    <!-- offcanvas menu -->
                                     <div class="offcanvas-menu closed">
                                         <span class="icon-close close_menu"></span>
-                                        
                                          <c:if test="${sessionScope.sessionId == null }">
 	   					                  <div class="author-author__info">
                                             <a href="login">Login</a>
@@ -177,7 +155,9 @@
                                             <li class="has_dropdown">
                                                 <div class="icon_wrap">
                                                     <span class="icon-bell" id="notibell"></span>
+                                                    <div id="notiOn">
 <!--                                                     <span class="notification_status noti"></span> -->
+													</div>
                                                 </div>
                                                 <div class="dropdown notification--dropdown">
                                                     <div class="dropdown_module_header">
@@ -202,7 +182,7 @@
                                         </c:if>
                                       
 <!--                                     멤버로그인 -->
-                                   <c:if test="${sessionScope.sessionId!=null && sessionScope.sessionSitter==null}">
+                                   <c:if test="${sessionScope.sessionId!=null && sessionScope.sessionId!='manager' && sessionScope.sessionSitter==null}">
                                      <div class="author-author__info has_dropdown">
                                         <div class="author__avatar online">
                                             <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/member/${sessionScope.sessionProfileImg}" alt="user avatar" class="rounded-circle">
@@ -275,43 +255,57 @@
                                         </div>
                                     </div>
                                    </c:if>
+                                   
+                                   
+<!--                                    매니저 로그인 -->
+                                <c:if test="${sessionScope.sessionId=='manager'}">
+                                     <div class="author-author__info has_dropdown">
+                                        <div class="author__avatar online">
+                                            <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo.png" alt="user avatar" class="rounded-circle">
+                                        </div>
+                                        <div class="dropdown dropdown--author">
+                                            <div class="author-credits d-flex">
+                                                <div class="author__avatar">
+                                                    <img src="https://scitpet.s3.ap-northeast-2.amazonaws.com/main/logo.png" alt="user avatar" class="rounded-circle">
+                                                </div>
+                                                 <div class="autor__info">
+                                                    <p class="name">
+                                                       ${sessionScope.sessionName}
+                                                    </p>
+<!--                                                     <p class="amount">$20.45</p> -->
+                                                </div> 
+                                            </div>
+                                            <ul>
+                                            	<li>
+                                                    <a href="managerMyPage">
+                                                        <span class="icon-notebook"></span>マネジャー マイページ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="managePetSitter">
+                                                        <span class="icon-user"></span>ペッシッター管理</a>
+                                                </li>
+                                               	<li>
+                                                    <a href=manageService>
+                                                        <span class="icon-notebook"></span>サービス管理</a>
+                                                </li>                                               
+                                                <li>
+                                                    <a href="logout">
+                                                        <span class="icon-logout"></span>ログアウト</a>
+                                                </li>
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                   </c:if>
                                 
                                 
                             </div>
                         </div>
                     </div>
                 </div>
-                 <!-- author area restructured for mobile -->
-                <!-- end /.row -->
             </div>
-            <!-- end /.container -->
         </div>
-        <!-- end  -->
     </div>
-    <!-- end /.menu-area -->
-
-<!--     <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery/uikit.min.js"></script> -->
-<!--     <script src="vendor_assets/js/bootstrap/popper.js"></script> -->
-<!--     <script src="vendor_assets/js/bootstrap/bootstrap.min.js"></script> -->
-<!--     <script src="vendor_assets/js/chart.bundle.min.js"></script> -->
-<!--     <script src="vendor_assets/js/grid.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery-ui.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery.barrating.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery.countdown.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery.counterup.min.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery.easing1.3.js"></script> -->
-<!--     <script src="vendor_assets/js/jquery.magnific-popup.min.js"></script> -->
-<!--     <script src="vendor_assets/js/owl.carousel.min.js"></script> -->
-<!--     <script src="vendor_assets/js/select2.full.min.js"></script> -->
-<!--     <script src="vendor_assets/js/slick.min.js"></script> -->
-<!--     <script src="vendor_assets/js/tether.min.js"></script> -->
-<!--     <script src="vendor_assets/js/trumbowyg.min.js"></script> -->
-<!--     <script src="vendor_assets/js/venobox.min.js"></script> -->
-<!--     <script src="vendor_assets/js/waypoints.min.js"></script> -->
-<!--     <script src="theme_assets/js/dashboard.js"></script> -->
-<!--     <script src="theme_assets/js/main.js"></script> -->
-<!--     <script src="theme_assets/js/map.js"></script> -->
 
 </body>
 </html>
